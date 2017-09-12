@@ -34,7 +34,14 @@ module.exports = {
     modules: [
       path.join(__dirname, 'src'),
       'node_modules'
-    ]
+    ],
+    alias: {
+      util: path.join(__dirname, '/node_modules/foundation-sites/scss/util/_util.scss')
+    }
+  },
+  externals: {
+    jQuery: 'jQuery',
+    foundation: 'Foundation'
   },
   module: {
     loaders: [

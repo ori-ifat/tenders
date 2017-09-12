@@ -1,33 +1,134 @@
-@import '../../node_modules/normalize.css/normalize.css';
-//
-@import '../common/style/theme';
-//@import url(https://fonts.googleapis.com/css?family=Heebo:100,400,500);
-body,
-html {
-    height: 100%;
-    margin: 0;
-    padding: 0;
-    //font-family: 'Open Sans', sans-serif;
-    font-family: 'Heebo', sans-serif;
-    font-size: 14px;
-    direction: rtl;
-    color: $black;
-    overflow-y: scroll;
-}
-* {
-    box-sizing: border-box;
-    &:focus {
-        outline: none;
-    }
-}
-h1 {
-    margin: 0;
-}
-a {
-    text-decoration: none;
-    color: inherit;
+@charset 'utf-8';
+
+@import '_settings.scss';
+//@import 'foundation';
+@import '../../node_modules/foundation-sites/scss/foundation.scss';
+@import '../../node_modules/motion-ui/motion-ui.scss';
+
+@include foundation-global-styles;
+@include foundation-grid;
+// @include foundation-flex-grid;
+@include foundation-xy-grid-classes;
+@include foundation-typography;
+@include foundation-button;
+@include foundation-forms;
+// @include foundation-range-input;
+@include foundation-accordion;
+@include foundation-accordion-menu;
+@include foundation-badge;
+@include foundation-breadcrumbs;
+@include foundation-button-group;
+@include foundation-callout;
+@include foundation-card;
+@include foundation-close-button;
+@include foundation-menu;
+@include foundation-menu-icon;
+@include foundation-drilldown-menu;
+@include foundation-dropdown;
+@include foundation-dropdown-menu;
+@include foundation-responsive-embed;
+@include foundation-label;
+@include foundation-media-object;
+// @include foundation-off-canvas;
+@include foundation-orbit;
+@include foundation-pagination;
+@include foundation-progress-bar;
+// @include foundation-progress-element;
+// @include foundation-progress-element;
+// @include foundation-meter-element;
+@include foundation-slider;
+@include foundation-sticky;
+@include foundation-reveal;
+@include foundation-switch;
+@include foundation-table;
+@include foundation-tabs;
+@include foundation-thumbnail;
+@include foundation-title-bar;
+@include foundation-tooltip;
+@include foundation-top-bar;
+@include foundation-visibility-classes;
+@include foundation-float-classes;
+@include foundation-flex-classes;
+// @include foundation-prototype-classes;
+@include motion-ui-transitions;
+@include motion-ui-animations;
+
+body, html {
+	font-family: 'Heebo', sans-serif;
+	background-color: #f9f9f9;
 }
 
-:global .popover-content{
+h1,h2, h3, h4, h5, h6 {
+	font-family: 'Rubik', sans-serif;
+}
 
+/*checkbox*/
+
+/* shared between both checkbox and radio */
+
+.radio label, .checkbox label {
+    padding-left: 25px;
+}
+
+.checkbox input[type="checkbox"] {
+    margin: 1.125rem 0 0 0;
+
+    position: relative;
+
+}
+
+.radio input[type="radio"], .radio-inline input[type="radio"], .checkbox input[type="checkbox"], .checkbox-inline input[type="checkbox"] {
+    -webkit-appearance: none;
+    /*margin-left: -25px;*/
+}
+
+.radio input[type="radio"]:after, .radio-inline input[type="radio"]:after, .checkbox input[type="checkbox"]:after, .checkbox-inline input[type="checkbox"]:after {
+    border-color: rgba(0, 0, 0, 0.54);
+}
+
+.radio input[type="radio"]:disabled:after, .radio-inline input[type="radio"]:disabled:after, .checkbox input[type="checkbox"]:disabled:after, .checkbox-inline input[type="checkbox"]:disabled:after {
+    border-color: rgba(0, 0, 0, 0.26);
+}
+
+.radio input[type="radio"]:focus, .radio-inline input[type="radio"]:focus, .checkbox input[type="checkbox"]:focus, .checkbox-inline input[type="checkbox"]:focus {
+    outline: none;
+}
+
+/* checkbox */
+
+
+.checkbox input[type="checkbox"]:after, .checkbox-inline input[type="checkbox"]:after {
+    border: 2px solid #D7D7D7;
+    border-radius: 2px;
+    content: '';
+    display: block;
+    height: 18px;
+    transition: 240ms;
+    width: 18px;
+    background: #fff;
+}
+
+.checkbox input[type="checkbox"]:checked:before, .checkbox-inline input[type="checkbox"]:checked:before {
+    -webkit-transform: rotate(45deg);
+    transform: rotate(45deg);
+    position: absolute;
+    left: 6px;
+    top: 1px;
+    display: table;
+    width: 6px;
+    height: 12px;
+    border: 2px solid #45C85F;
+    border-top: 0;
+    border-left: 0;
+    content: '';
+}
+
+.checkbox input[type="checkbox"]:checked:after, .checkbox-inline input[type="checkbox"]:checked:after {
+    background-color: #fff;
+    border-color: #fff;
+}
+
+.checkbox input[type="checkbox"]:disabled:checked:after, .checkbox-inline input[type="checkbox"]:disabled:checked:after {
+    background-color: rgba(0, 0, 0, 0.26);
+    border-color: transparent;
 }
