@@ -1,9 +1,9 @@
 @charset 'utf-8';
 
-@import '_settings.scss';
-//@import 'foundation';
-@import '../../node_modules/foundation-sites/scss/foundation.scss';
-@import '../../node_modules/motion-ui/motion-ui.scss';
+//@import '~common/style/_settings.scss';
+//@import 'foundation'; //** move to global scope
+@import '../../bower_components/foundation-sites/assets/foundation.scss';
+@import '../../bower_components/motion-ui/motion-ui.scss';
 
 @include foundation-global-styles;
 @include foundation-grid;

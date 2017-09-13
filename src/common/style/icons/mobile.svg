@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="90px" height="90px" viewBox="0 0 90 90" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 43.1 (39012) - http://www.bohemiancoding.com/sketch -->
+    <title>Group 21</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <rect id="path-1" x="65.4377817" y="0" width="40" height="67" rx="4"></rect>
+    </defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Home" transform="translate(-974.000000, -1126.000000)">
+            <g id="Group-16" transform="translate(157.000000, 1048.000000)">
+                <g id="Group-15" transform="translate(750.000000, 90.000000)">
+                    <g id="Group-5">
+                        <g id="Group-3" transform="translate(30.000000, 0.000000)">
+                            <g id="Rectangle-6">
+                                <use fill="#FFFFFF" fill-rule="evenodd" xlink:href="#path-1"></use>
+                                <rect stroke="#3ECB5B" stroke-width="2" x="66.4377817" y="1" width="38" height="65" rx="4"></rect>
+                            </g>
+                            <circle id="Oval" fill="#3ECB5B" cx="86" cy="57" r="4"></circle>
+                            <path d="M67.6051045,57 L103.765991,57" id="Line" stroke="#3ECB5B" stroke-width="2" stroke-linecap="square"></path>
+                        </g>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

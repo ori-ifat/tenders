@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="100px" height="100px" viewBox="0 0 100 100" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 43.1 (39012) - http://www.bohemiancoding.com/sketch -->
+    <title>constraction</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Symbols" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="constraction" stroke="#44C960">
+            <g id="Page-1" transform="translate(-21.000000, 30.000000)">
+                <path d="M41.3128,46.9087347 C36.8342,46.9087347 32.126,45.9737143 27.7174,44.2092857 C21.4888,41.6999388 16.0526,37.5852857 12.4112,32.6130612 L12.1102,32.2004694 L12.1102,25.6708163 L9.25,25.5609796 L2.572,22.8826531 L11.2352,1.02795918 L17.2342,3.43310204 C24.4372,-0.516795918 34.828,-0.732244898 44.075,2.98108163 C53.3934,6.72116327 60.6622,13.9225102 63.227,21.8927143 L69.0398,24.2246327 L60.3668,46.0793265 L54.5582,43.7516327 C50.7964,45.8202245 46.2352,46.9087347 41.3128,46.9087347 Z" id="Fill-13" stroke-width="2"></path>
+                <path d="M103,55.9966488 C103,57.6553538 101.651184,59 99.9942017,59 L92,59 L92,58 C90.2015579,56.0877245 87.9381053,54.787451 85,55 C82.9721263,54.787451 80.7086737,56.0877245 79,58 L79,59 L70,59 L70,21 L88.9986131,21 C90.6562333,21 92.5606145,22.2231588 93.2511303,23.7297389 L103,45 L103,55.9966488 Z" id="Fill-15" stroke-width="2"></path>
+                <ellipse id="Oval" stroke-width="2" cx="14.4" cy="61.9591837" rx="7" ry="7.04081633"></ellipse>
+                <ellipse id="Oval-Copy" stroke-width="2" cx="35.4" cy="61.9591837" rx="7" ry="7.04081633"></ellipse>
+                <ellipse id="Oval-Copy-2" stroke-width="2" cx="85.8" cy="61.9591837" rx="7" ry="7.04081633"></ellipse>
+                <path d="M44.6,4.2244898 L28.5,42.9489796" id="Line" stroke-width="2" stroke-linecap="square"></path>
+                <path d="M70,59 L42,59 L42,58 C40.5777645,56.1296325 38.2940765,54.8480701 36,55 C33.3015683,54.8480701 31.0234742,56.1296325 30,58 L29,59 L21,59 L21,58 C19.5029468,56.1296325 17.2248527,54.8480701 15,55 C12.2267506,54.8480701 9.94865648,56.1296325 9,58 L8,59 L0,59 L0,50 L70,50 L70,59 Z" id="Fill-16" stroke-width="2"></path>
+                <polygon id="Fill-17" stroke-width="2" points="102 43 76 43 76 27 95 27"></polygon>
+                <path d="M91.5,29.5 L86.9723074,34.0276926" id="Line" stroke-linecap="square"></path>
+                <path d="M88.5,29.5 L83.9723074,34.0276926" id="Line-Copy" stroke-linecap="square"></path>
+            </g>
+        </g>
+    </g>
+</svg>

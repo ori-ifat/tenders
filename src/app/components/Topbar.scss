@@ -1,12 +1,132 @@
+@import '~common/style/_settings.scss';
+// Header
 
-.header {
-  width: 0;
-  margin: 0 auto;
-  font-size: 25px;
-  padding-top: 16px;
+// small and down
+@media screen and (max-width: 39.9375em) {
+	.top-navigation {
+		display: block;
+	    position: absolute;
+	    background: rgb(249, 249, 249);
+	    padding: 2rem 0 0px !important;
+        top: 2.6rem;
+        width: 100%;
+	}
+
+	#logo {
+
+	}
+
+	.top-bar, .top-bar ul {
+		padding: 0;
+	}
+
+	#top_nav {
+		padding-top: 2rem;
+		position: absolute;
+	    width: 100%;
+	    img{
+	    	padding-left: 1rem;
+	    }
+	}
+
+
+	.nav_icon_container {
+		position: absolute;
+	    left: 0rem;
+	    padding: 0.3rem 0.5rem;
+	    z-index: 10;
+	    top: -2rem;
+	}
+
+	.menu > li > a {
+		padding: 1.125rem 1rem !important;
+		border-top: 1px solid #ddd !important;;
+	}
+
+	.menu > li:last-child > a {
+
+		border-bottom: 1px solid #ddd;
+	}
+
+	ul.top-navigation:after {
+		content: "";
+		bottom: 0;
+		height: 24px;
+		display: block;
+		width: 100%;
+		background: linear-gradient(to bottom, rgba(51, 51, 51, 0.44) 0%, rgba(68, 68, 68, 0) 100%)
+	}
+
+	.top-navigation .button {
+		text-align: right;
+		background: #f9f9f9;
+		border-left-color: #fff;
+		border-right-color: #fff;
+	}
 }
 
-.nav-link {
-  width: 100px;
-  float: left;
+@media screen and (min-width: 40em) {
+	#top_nav {
+		justify-content: flex-end;
+		padding-top: 1rem;
+		img{
+			padding-left: 1rem;
+		}
+	}
+
+}
+
+
+
+
+.top-navigation .button {
+	border-radius: 3px;
+	border: 1px solid #44C960;
+    background-color: #f9f9f9;
+    color: #44C960 !important;
+    font-size: 1rem;
+    font-weight: 500;
+}
+
+.button:hover {
+	background-color: #44C960;
+    color: #fff !important;
+}
+
+#header {
+	padding: 1rem 0 0 0;
+}
+
+#logo {
+
+}
+
+
+.divider {
+	height: 0.25rem;
+	background-color: #red;
+}
+
+.top-bar {
+	padding: 1rem 0 1.125rem 0;
+	background: #f9f9f9;
+}
+
+.top-bar, .top-bar ul {
+
+	background:#f9f9f9 !important;
+}
+
+.menu > li > a {
+	color: #444;
+	padding: 0.5rem 1rem 0.6rem 1rem;
+}
+
+.menu > li > a:hover {
+	color: #44C960;
+}
+
+.top-bar-left {
+	float: left;
+	width: auto;
 }
