@@ -2,8 +2,8 @@
 
 @import '~common/style/_settings.scss';
 //@import 'foundation'; //** move to global scope
-@import '../../bower_components/foundation-sites/assets/foundation-rtl.scss';
-@import '../../bower_components/motion-ui/motion-ui.scss';
+@import '../../node_modules/foundation-sites/assets/foundation-rtl.scss';
+@import '../../node_modules/motion-ui/motion-ui.scss';
 
 @include foundation-global-styles;
 @include foundation-grid;
