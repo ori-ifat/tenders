@@ -11,7 +11,7 @@ export default class Search extends Component {
 
   render() {
     return (
-      <div styleName="search-div">
+      <div styleName="search-div" >
         Search - Component
       </div>
     )
