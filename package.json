@@ -78,6 +78,8 @@
     "material-ui": "^0.19.1",
     "mobx": "^3.2.2",
     "mobx-react": "^4.2.2",
+    "mobx-react-router": "^4.0.1",
+    "node-polyglot": "^2.2.2",
     "normalize.css": "^7.0.0",
     "prop-types": "^15.5.10",
     "querystring": "^0.2.0",
@@ -85,7 +87,9 @@
     "react-dom": "^15.6.1",
     "react-inlinesvg": "^0.6.2",
     "react-notify-toast": "^0.3.2",
+    "react-polyglot": "^0.2.3",
     "react-router": "^4.2.0",
+    "react-router-dom": "^4.2.2",
     "react-select": "^1.0.0-rc.5",
     "react-tap-event-plugin": "^2.0.1",
     "whatwg-fetch": "^2.0.3"
