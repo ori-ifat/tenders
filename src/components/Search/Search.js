@@ -11,7 +11,7 @@ export default class Search extends Component {
 
   render() {
     return (
-      <div style={{marginTop: '50px'}}>
+      <div styleName="search-div">
         Search - Component
       </div>
     )

@@ -75,6 +75,12 @@ module.exports = {
         test: /\.css$/,
         use: ['style-loader', 'css-loader']
       },
+      // **IMPORTANT** This is needed so that each foundation js file required by
+      // foundation-webpack has access to the jQuery object
+      {
+        test: /foundation\/js\//,
+        loader: 'imports-loader?jQuery=jquery'
+      },
       {
         test: /\.json$/,
         loaders: ['json']
@@ -135,7 +141,8 @@ function getEntryPoints() {
     ? [
       'eventsource-polyfill', // necessary for hot reloading with IE
       'webpack-hot-middleware/client',
-      paths.appEntry
+      paths.appEntry,
+      `foundation-sites-loader!${__dirname}/foundation-sites.config.js`
     ]
     : [paths.appEntry]
 }

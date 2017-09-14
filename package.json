@@ -73,6 +73,7 @@
     "babel-eslint": "^7.2.3",
     "classnames": "^2.2.5",
     "es6-promise": "^4.1.1",
+    "foundation-sites": "^6.4.3",
     "history": "^4.7.2",
     "material-ui": "^0.19.1",
     "mobx": "^3.2.2",

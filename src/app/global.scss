@@ -1,8 +1,8 @@
 @charset 'utf-8';
 
-//@import '~common/style/_settings.scss';
+@import '~common/style/_settings.scss';
 //@import 'foundation'; //** move to global scope
-@import '../../bower_components/foundation-sites/assets/foundation.scss';
+@import '../../bower_components/foundation-sites/assets/foundation-rtl.scss';
 @import '../../bower_components/motion-ui/motion-ui.scss';
 
 @include foundation-global-styles;
