@@ -3,6 +3,7 @@ const webpack = require('webpack')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const CleanWebpackPlugin = require('clean-webpack-plugin')
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
+const BabelWebpackPlugin = require('babel-minify-webpack-plugin')
 const autoprefixer = require('autoprefixer')
 const relpath = path.join.bind(path, __dirname)
 
@@ -30,7 +31,6 @@ module.exports = {
   },
   plugins: getPlugins(),
   resolve: {
-    //root: paths.src
     modules: [
       path.join(__dirname, 'src'),
       'node_modules'
@@ -45,15 +45,6 @@ module.exports = {
   },
   module: {
     loaders: [
-      /*{
-        test: /\.css$/,
-        loader: 'style-loader!css-loader'
-      },
-      {
-        test: /\.s?css/,
-        loader: getStyleLoaders(),
-        include: paths.src
-      },*/
       {
         test: /\.scss$/,
         use: ExtractTextPlugin.extract({
@@ -83,14 +74,13 @@ module.exports = {
       },
       {
         test: /\.json$/,
-        loaders: ['json']
+        loaders: ['json-loader']
       }, {
         test: /\.jsx?$/,
         loaders: ['babel-loader'],
         include: paths.src
       }, {
         test: /\.yaml$/,
-        //loader: 'yaml-loader',
         use: [
           {
             loader: 'yaml-loader'
@@ -108,8 +98,7 @@ module.exports = {
         loader: 'expose?Perf'
       }
     ]
-  }//,
-  //postcss: [autoprefixer({ browsers: ['last 2 versions'] })]
+  }
 }
 
 function getSourceMap() {
@@ -120,14 +109,7 @@ function getSourceMap() {
     isDevelopmentServer ? 'eval-source-map' :
       'source-map'
 }
-/*
-function getStyleLoaders() {
-  const sass = `sass?includePaths[]=${paths.src}&includePaths[]=${paths.lib}`
 
-  return isProductionCode //false //isProductionCode
-    ? ExtractTextPlugin.extract('style', ['css?modules&importLoaders=1', 'postcss', sass].join('!')) //
-    : ['style?sourceMap', 'css?modules&importLoaders=1&localIdentName=[path]_[name]_[local]_[hash:base64:5]', 'postcss?sourceMap', `${sass}&sourceMap`].join('!')
-} */
 function getStyleLoaders() {
   const sass = `sass-loader?includePaths[]=${paths.src}&includePaths[]=${paths.lib}`
 
@@ -144,7 +126,8 @@ function getEntryPoints() {
       paths.appEntry,
       `foundation-sites-loader!${__dirname}/foundation-sites.config.js`
     ]
-    : [paths.appEntry]
+    : [paths.appEntry,
+      `foundation-sites-loader!${__dirname}/foundation-sites.config.js`]  //without that, foundation will not work on production dist
 }
 
 function getPlugins() {
@@ -174,11 +157,12 @@ function getPlugins() {
     plugins = plugins.concat([
       new ExtractTextPlugin('[name].[hash].css', { allChunks: true }),
       //new webpack.optimize.OccurenceOrderPlugin()
-      new webpack.optimize.UglifyJsPlugin({
-        compressor: {
-          warnings: false
-        }
-      })
+      new BabelWebpackPlugin()
+      //new webpack.optimize.UglifyJsPlugin({
+      //  compressor: {
+      //    warnings: false
+      //  }
+      //})  //not working because of foundation.js es6 wont transpile, dont know why
     ])
   }
 

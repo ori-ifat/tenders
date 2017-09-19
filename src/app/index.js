@@ -5,7 +5,8 @@ import { render } from 'react-dom'
 import { AppContainer } from 'react-hot-loader'
 import { Provider } from 'mobx-react'
 import * as stores from 'stores'
-import Foundation from '../../lib/foundation'
+import Foundation from 'lib/foundation' //import the foundation library to the app - top level
+import 'lib/foundationInit'   //initialize the foundation library with document.ready (occurs after all components are mounted)
 
 function mount() {
   const App = require('./components/App').default
