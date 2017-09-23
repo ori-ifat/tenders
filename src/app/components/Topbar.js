@@ -48,13 +48,13 @@ export default class Topbar extends Component {
               <div styleName="nav_icon_container" data-responsive-toggle="top_nav" data-hide-for="medium">
                 <button type="button" data-toggle="top_nav"><img src={navIconSrc} alt="" /></button>
               </div>
-              <ul styleName="vertical dropdown medium-horizontal menu" id="top_nav" data-dropdown-menu>
+              <ul styleName="vertical dropdown menu medium-horizontal" id="top_nav" data-dropdown-menu data-disable-hover="true" data-click-open="true" >
                 {navbar.map((nav, index) =>
                   <li key={index}><a onClick={this.navigate(`${nav.link}`)}>{t(`nav.${nav.title}`)}</a></li>
                 ) }
                 <li>
                   <a href="#"><img src={userSrc} alt="" />{t('nav.fakeUser')}</a>
-                  <ul styleName="menu">
+                  <ul styleName="menu" data-dropdown-menu>
                     <li><a onClick={this.navigate('logout')}>{t('nav.logout')}</a></li>
                   </ul>
                 </li>

@@ -74,6 +74,12 @@
 		}
 	}
 
+
+.is-dropdown-submenu-parent.opens-right > .is-dropdown-submenu {
+		left: 0;
+		top: 100%;
+	}
+
 }
 
 

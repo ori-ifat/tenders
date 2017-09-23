@@ -11,8 +11,12 @@ export default class Search extends Component {
 
   render() {
     return (
-      <div styleName="search-div" >
-        Search - Component
+      <div styleName="row">
+        <div styleName="large-12">
+          <div styleName="search-div" >
+            Search - Component
+          </div>
+        </div>
       </div>
     )
   }
