@@ -5,6 +5,7 @@ import { Router } from 'react-router'
 import { I18n } from 'react-polyglot'
 import { inject, observer } from 'mobx-react'
 import '../global.scss'
+import 'react-select/dist/react-select.css'
 
 @inject('translationsStore')
 @observer

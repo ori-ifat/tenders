@@ -89,3 +89,14 @@ export async function getData(id) {
   )*/
   return apiFetch('Tender/GetTop5', {searchParams: {InstalledProducID: id}})
 }
+
+export function autocomplete(query) {
+  if (!query) {
+    return new Promise((resolve) => resolve())
+  }
+  return apiFetch('Search/AutoComplete', {
+    searchParams: {
+      query
+    }
+  })
+}

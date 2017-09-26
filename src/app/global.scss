@@ -132,3 +132,156 @@ h1,h2, h3, h4, h5, h6 {
     background-color: rgba(0, 0, 0, 0.26);
     border-color: transparent;
 }
+
+:global {
+
+    .Select {
+        .Select-control {
+            background-color: transparent !important;
+            border: none !important;
+            border-bottom: 1px solid #cacaca !important;
+            border-radius: 0 !important;
+            box-shadow: none !important;
+            cursor: pointer !important;
+            padding-bottom: 3px;
+            height: 100% !important;
+            color: inherit;
+            &:hover {
+                border-color: #fefefe !important;
+            }
+            .Select-value {
+                background-color: #cacaca !important;
+                color: inherit !important;
+                border: inherit !important;
+                border-radius: 4px !important;
+                direction: ltr;
+                padding: 3px 5px 3px 3px;
+                font-size: 16px;
+                span {
+                    border: inherit !important;
+                    line-height: 16px !important;
+                    color: $black;
+                }
+                .Select-value-icon {
+                    border: inherit !important;
+                    padding: 0 3px 4px;
+                    font-size: 20px;
+                    font-weight: 100;
+                }
+                .Select-value-label {
+                    direction: rtl;
+                    border: inherit !important;
+                    padding: 0 3px;
+                    white-space: pre; /* added for firefox */
+                }
+            }
+            .Select-input {
+                margin-right: 10px;
+                color: inherit;
+                input {
+                    color: inherit;
+                    line-height: inherit;
+                }
+            }
+            .Select-arrow {
+                /*background-image: url('../common/style/icons/Plus.svg');
+                background-repeat: no-repeat;
+                background-size: cover;*/
+                height: 16px;
+                width: 16px;
+                border: none;
+                margin-top: 5px;
+            }
+            .Select-placeholder {
+                color:$black;
+            }
+        }
+        .Select-menu-outer {
+            color: white !important;
+            border-radius: 0 !important;
+            box-shadow: 0 2px 10px $black !important;
+            border: none !important;
+            max-height: 380px;
+            .Select-menu {
+                .Select-option {
+                    border-radius: 0 !important;
+                    padding: 8px 20px !important;
+                    &.is-focused {
+                        /*background-color: #fefefe !important;
+                        color: white !important;*/
+                    }
+                    font-size: 16px;
+                }
+                max-height: 380px;
+            }
+
+            .Select-noresults {
+              margin-right: 25px;
+            }
+        }
+        &.search-select {
+            > .Select-control {
+                border: none !important;
+                padding: 0 25px 0 15px !important;
+                .Select-placeholder {
+                    /*display: none;*/
+                    margin-right: 25px;
+                }
+                .Select-value {
+                    margin-top: 2px !important;
+                }
+                .Select-arrow {
+                    display: none;
+                }
+            }
+            .Select-menu-outer {
+                margin-top: 10px;
+                /*max-height: 380px*/
+                @media (max-height: 768px) {
+                  /* a fix for low resolution users - make height of suggestions smaller */
+                  max-height: 280px !important;
+                }
+                max-height: none;
+                padding: 8px 0;
+                .Select-menu {
+                    .Select-option {
+                        padding: 0 !important;
+                        & > div {
+                            padding: 8px 20px;
+                        }
+                        .separate-line {
+                            border-bottom: 1px solid $black;
+                            margin: 8px 0;
+                            height: 0 !important;
+                            padding: 0 !important;
+                        }
+                        .type {
+                            margin: 0 10px;
+                            color: $black;
+                            font-size: 14px;
+                            font-weight: normal;
+                        }
+                        font-size: 16px;
+                    }
+                    /*max-height: 380px*/
+                    @media (max-height: 768px) {
+                      /* a fix for low resolution users - make height of suggestions smaller */
+                      max-height: 280px !important;
+                    }
+                    max-height: none;
+                    padding: 8px 0;
+                }
+            }
+        }
+        &.is-loading {
+            .Select-arrow-zone {
+                display: none;
+            }
+        }
+        &.is-selected-all {
+            .Select-arrow-zone {
+                display: none;
+            }
+        }
+    }
+}

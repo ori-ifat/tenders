@@ -1,0 +1,36 @@
+@import '~app/global.scss';
+
+//#searchbox {
+.select-searchbox {
+	font-size: 20px;
+	color: $black; /*#545955*/
+	letter-spacing: -0.5px;
+	padding: 1.5rem 3.5rem 1.6rem 1rem;
+	background: url('common/style/icons/icon_search.png') no-repeat scroll center right;
+	//margin: 0;
+	//border: 0px solid #DEDEDE;
+  display: block;
+  box-sizing: border-box;
+  width: 100%;
+  height: 2.4375rem;
+  margin: 0 0 1rem;
+  //padding: 0.5rem;
+  border: 1px solid #cacaca;
+  border-radius: 2px;
+  background-color: #fefefe;
+  box-shadow: none;
+  font-family: inherit;
+  font-weight: normal;
+  line-height: 1.5;
+  transition: box-shadow 0.5s, border-color 0.25s ease-in-out;
+  -webkit-appearance: none;
+  overflow: visible;
+}
+
+#searchbox_wrapper {
+	background-color: #FFFFFF;
+	border: 2px solid #DEDEDE;
+	border-radius: 4px;
+	position: relative;
+	margin-top: 2.5rem;
+}
