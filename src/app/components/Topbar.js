@@ -41,7 +41,9 @@ export default class Topbar extends Component {
         <nav styleName="column row">
           <div styleName="top-bar">
             <div styleName="top-bar-right">
-              <img src={logoSrc} alt={t('nav.logoAlt')} id="logo" />
+              <a onClick={this.navigate('/')}>
+                <img src={logoSrc} alt={t('nav.logoAlt')} id="logo" />
+              </a>
             </div>
 
             <div styleName="top-bar-left" style={{position: 'relative'}}>

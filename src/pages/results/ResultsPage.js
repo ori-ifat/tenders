@@ -8,7 +8,7 @@ export default class Results extends Component {
 
 
   componentWillMount = () => {
-    console.log('results page')
+    //console.log('results page')
   }
   //componentWillReceiveProps = (nextProps, nextState) => {};
 

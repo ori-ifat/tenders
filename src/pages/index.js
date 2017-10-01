@@ -22,7 +22,7 @@ class Pages extends React.Component {
           <Route path="/search">
             {this.ensureAuthentication(SearchPage)}
           </Route>
-          <Route path="/results/:sorting/:query">
+          <Route path="/results/:sort/:tags">
             {this.ensureAuthentication(ResultsPage)}
           </Route>
           <Route>

@@ -81,6 +81,7 @@ export function createUrl(relUrl, searchParams = {}, isApi = true) {
   return url
 }
 
+//TEST get data
 export async function getData(id) {
   /*return Promise.resolve(
     [
@@ -97,6 +98,45 @@ export function autocomplete(query) {
   return apiFetch('Search/AutoComplete', {
     searchParams: {
       query
+    }
+  })
+}
+
+export async function search({tags, filters, page, pageSize, sort}) {
+
+  const [filtersMeta, resultsPage] = await Promise.all([
+    fetchFilters({ tags, filters }),
+    fetchResultsPage({ tags, filters, page, pageSize, sort })
+  ])
+  return { filtersMeta, resultsPage }
+}
+
+function fetchFilters({tags, filters}) {
+  /*return apiFetch('MainSearch/GetFilters', {
+    searchParams: {
+      topic,
+      filters,
+      tags
+    }
+  })*/
+  return Promise.resolve([]) //debug
+}
+
+function fetchResultsPage({tags, filters, page, pageSize, sort}) {
+
+  return apiFetch('Search/ResultPage', {
+    searchParams: {
+      tags,
+      page,
+      pageSize,
+      sort,
+      filters
+    }
+  }).then(res => {
+    return {
+      total: res.info.count,
+      page: res.info.page,
+      data: res.data
     }
   })
 }
