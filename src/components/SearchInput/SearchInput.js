@@ -2,31 +2,25 @@ import React, {Component} from 'react'
 import CSSModules from 'react-css-modules'
 import styles from './SearchInput.scss'
 import {translate} from 'react-polyglot'
-import {inject, observer} from 'mobx-react'
+import {inject /*, observer*/} from 'mobx-react'
 import Select from 'react-select'
-import {observable, toJS} from 'mobx'
+//import {observable, toJS} from 'mobx'
 import {autocomplete} from 'common/services/apiService'
-
-const options = [
-  { value: 'one', label: 'One' },
-  { value: 'two', label: 'Two' },
-  { value: 'three', label: 'Three' }
-]
 
 @translate()
 @inject('translationsStore')
-//@inject('routingStore')
+@inject('routingStore')
 //@observer
 @CSSModules(styles, { allowMultiple: true })
 export default class SearchInput extends Component {
 
   //@observable selectedValues
   state = {
-    selectedValues: []
+    selectedValues: []  //for some reason, not working with @observable...
   }
 
   componentWillMount = () => {
-    console.log('searchinput component')
+    //console.log('searchinput component')
     //this.loadResults(this.props)
   }
 
@@ -81,42 +75,23 @@ export default class SearchInput extends Component {
   }
 
   onSearch = () => {
-    console.log('search committed', this.state.selectedValues)
+    const {selectedValues} = this.state
+    const { routingStore, sort } = this.props
+    //console.log('search committed', selectedValues)
+    const payload = JSON.stringify(selectedValues)
+    routingStore.push(`/results/${sort}/${payload}`)
   }
 
   render() {
     //const selectedValues = toJS(this.selectedValues)
     const {selectedValues} = this.state
-    //console.log(selectedValues)
     const {t} = this.props
-    /*
-    <Select
-      name="searchbox"
-      multi={true}
-      cache={false}
-      clearable={false}
-      options={options}
-      onChange={this.onChange}
-      value={selectedValues}
-    />
-    <Select.Async
-      name="searchbox"
-      multi={true}
-      cache={false}
-      clearable={false}
-      loadOptions={this.getOptions}
-      onChange={this.onChange}
-      value={selectedValues}
-      labelKey={'Name'}
-      valueKey={'ID'}
-    />
-    */
+
     return (
       <form>
         <div styleName="row">
           <div styleName="medium-12 columns">
             <div id="searchbox_wrapper">
-              {/*<input type="text" id="searchbox" placeholder={t('search.placeHolder')} />*/}
               <Select.Async
                 styleName="select-searchbox"
                 className="search-select"

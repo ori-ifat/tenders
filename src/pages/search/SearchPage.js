@@ -8,7 +8,7 @@ export default class Search extends Component {
 
 
   componentWillMount = () => {
-    console.log('search page')
+    //console.log('search page')
   }
   //componentWillReceiveProps = (nextProps, nextState) => {};
 
