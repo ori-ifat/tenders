@@ -6,7 +6,7 @@ import SearchInput from 'components/SearchInput'
 import {inject} from 'mobx-react'
 
 @inject('routingStore')
-@CSSModules(styles)
+@CSSModules(styles, { allowMultiple: true })
 export default class Search extends Component {
 
   componentWillMount = () => {
