@@ -136,21 +136,22 @@ h1,h2, h3, h4, h5, h6 {
 :global {
 
     .Select {
+        background-color: #fff !important;
+        border: 2px solid $light-gray;
+        border-radius: 4px;
+        transition: all 0.25s;
+        &.is-focused {
+            border: 2px solid $green;
+        }
         .Select-control {
             background-color: transparent !important;
-            border: none !important;
-            border-bottom: 1px solid #cacaca !important;
             border-radius: 0 !important;
-            box-shadow: none !important;
             cursor: pointer !important;
-            padding-bottom: 3px;
-            height: 100% !important;
             color: inherit;
-            &:hover {
-                border-color: #fefefe !important;
-            }
+            padding: 0 rem-calc(60) 0 15px !important;
+            box-shadow: none !important;
             .Select-value {
-                background-color: #cacaca !important;
+                background-color: $xlight-gray !important;
                 color: inherit !important;
                 border: inherit !important;
                 border-radius: 4px !important;
@@ -176,11 +177,16 @@ h1,h2, h3, h4, h5, h6 {
                 }
             }
             .Select-input {
-                margin-right: 10px;
-                color: inherit;
+				font-size: 1.25rem;
+                color: $black;
                 input {
                     color: inherit;
                     line-height: inherit;
+					padding: 0;
+                    outline-width: 0;
+                }
+                input:focus {
+                    outline-width: 0;
                 }
             }
             .Select-arrow {
@@ -193,24 +199,31 @@ h1,h2, h3, h4, h5, h6 {
                 margin-top: 5px;
             }
             .Select-placeholder {
-                color:$black;
+                color:$dark-gray;
+                right: rem-calc(60);
+                padding: 0;
+                
             }
         }
         .Select-menu-outer {
             color: white !important;
             border-radius: 0 !important;
-            box-shadow: 0 2px 10px $black !important;
-            border: none !important;
+            box-shadow: 0px 3px 6px 0px rgba(0,0,0,0.2);
+            overflow: hidden;
+            margin-top: 0.5rem;
             max-height: 380px;
             .Select-menu {
                 .Select-option {
                     border-radius: 0 !important;
-                    padding: 8px 20px !important;
+                    padding: 0.5rem rem-calc(60) 0.5rem rem-calc(60) !important;
                     &.is-focused {
-                        /*background-color: #fefefe !important;
-                        color: white !important;*/
+                        background-color: $xlight-gray !important;
+                        color: $black !important;
                     }
                     font-size: 16px;
+                    span.type {
+                        color: $light_gray;
+                    }
                 }
                 max-height: 380px;
             }
@@ -222,10 +235,9 @@ h1,h2, h3, h4, h5, h6 {
         &.search-select {
             > .Select-control {
                 border: none !important;
-                padding: 0 25px 0 15px !important;
+                padding: 0 rem-calc(60) 0 15px !important;
                 .Select-placeholder {
-                    /*display: none;*/
-                    margin-right: 25px;
+                    color: $dark-gray;
                 }
                 .Select-value {
                     margin-top: 2px !important;
@@ -235,7 +247,7 @@ h1,h2, h3, h4, h5, h6 {
                 }
             }
             .Select-menu-outer {
-                margin-top: 10px;
+                margin-top: 0px;
                 /*max-height: 380px*/
                 @media (max-height: 768px) {
                   /* a fix for low resolution users - make height of suggestions smaller */

@@ -7,7 +7,7 @@ import {inject, observer} from 'mobx-react'
 
 @inject('routingStore')
 //@observer
-@CSSModules(styles)
+@CSSModules(styles, { allowMultiple: true })
 export default class Search extends Component {
 
   componentWillMount = () => {
@@ -18,7 +18,7 @@ export default class Search extends Component {
     const {routingStore: {location}} = this.props
     return (
       <div styleName="row">
-        <div styleName="large-12">
+        <div styleName="column large-12">
           <div styleName="search-div" >
             <SearchInput location={location} />
             {/*<Test />*/}
