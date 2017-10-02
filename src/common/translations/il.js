@@ -28,5 +28,17 @@ export default {
     publisher: 'מפרסם',
     city_partial: 'בערים',
     city_partial_text: '%{text}'
+  },
+  results: {
+    title: 'הזדמנויות עיסקיות נמצאו',
+    selectAll: 'בחר הכל',
+    sortBy: 'מיין לפי',
+    infoDate: 'תאריך הזנה',
+    endDate: 'תאריך הגשה',
+    noData: 'אין תוצאות להצגה'
+  },
+  tender: {
+    publishedAt: 'פורסם ב',
+    addToFav: 'הוסף למועדפים'
   }
 }

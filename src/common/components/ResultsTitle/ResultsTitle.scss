@@ -1,0 +1,10 @@
+@import '~app/global.scss';
+
+.results_summery {
+	margin-top: 4rem;
+	font-size: 2.5rem;
+	color: $black;
+	span {
+		font-size: 2.15rem;
+	}
+}

@@ -1,0 +1,62 @@
+@import '~app/global.scss';
+
+.tender_summery {
+	position: relative;
+	margin-top: 1.5rem;
+	background: #FFFFFF;
+	border: 1px solid transparent;
+	box-shadow: 1px 1px 2px 0 rgba(0,0,0,0.20);
+	transition: all 0.25s;
+}
+
+.checkbox_continer {
+	width: rem-calc(40);
+	height: 100%;
+	background-color: $xlight-gray;
+	position: absolute;
+	display: flex;
+    justify-content: center;
+    transition: all 0.25s;
+}
+
+.tender_txt_wraper {
+	margin: 0.75rem 3.5rem 1rem 2rem;
+	h3 {
+		font-size: 1.25rem;
+		color: $black;
+		line-height: 1.75rem;
+		font-weight: 500;
+	}
+	p {
+		font-family: 'Heebo', sans-serif;
+		font-size: rem-calc(15);
+	}
+	span {
+		font-size: rem-calc(14);
+		color: $dark-gray;
+	}
+	span.divider {
+		padding: 0 0.25rem;
+	}
+}
+
+.tender_action_wraper {
+	padding: 1rem 1rem 0 0;
+	border-right: 1px solid $light-gray;
+	height: 100%;
+	li {
+		margin-bottom: 0.25rem;
+	}
+	img {
+		vertical-align: middle;
+		margin-left: 0.5rem;
+	}
+	a {
+		color: $dark-gray;
+		font-size: rem-calc(15);
+	}
+}
+
+.tender_desc p:last-child {
+	margin-bottom: 0;
+}
