@@ -6,6 +6,7 @@ import {search} from 'common/services/apiService'
 const serializeTags = ({ID, Name, ResType}) => {
   return {
     id: ID,
+    Name,
     type: ResType
   }
 }
@@ -13,7 +14,7 @@ const serializeTags = ({ID, Name, ResType}) => {
 class Search {
   @observable filters = [];
   @observable tags = [];
-  @observable sort = 'infoDate'
+  @observable sort = 'publishDate'
   @observable resultsLoading = false
   @observable hasMoreResults = true
   @observable request = {};

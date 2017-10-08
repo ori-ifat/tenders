@@ -26,8 +26,8 @@ export default {
     subsubject: 'נושא',
     tendertype: 'סוג',
     publisher: 'מפרסם',
-    city_partial: 'בערים',
-    city_partial_text: '%{text}'
+    tender_partial: 'בטקסט של מכרז',
+    tender_partial_text: '%{text}'
   },
   results: {
     title: 'הזדמנויות עיסקיות נמצאו',

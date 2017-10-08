@@ -29,11 +29,11 @@ export default class Results extends Component {
 
   render() {
 
-    const {searchStore: {resultsLoading, resultsCount}} = this.props
+    const {searchStore: {resultsLoading, resultsCount, tags}} = this.props
 
     return (
       <div style={{marginTop: '50px'}}>
-        <SearchInput />
+        <SearchInput tags={tags} />
         {resultsLoading && <div>Loading...</div>}
         {resultsCount == 0 && !resultsLoading && <NoData />}
         {resultsCount > 0 &&
