@@ -33,8 +33,8 @@ export default {
     title: 'הזדמנויות עיסקיות נמצאו',
     selectAll: 'בחר הכל',
     sortBy: 'מיין לפי',
-    infoDate: 'תאריך הזנה',
-    endDate: 'תאריך הגשה',
+    infoDate: 'תאריך הגשה',
+    publishDate: 'תאריך פרסום',
     noData: 'אין תוצאות להצגה'
   },
   tender: {

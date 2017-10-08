@@ -36,7 +36,11 @@ export default class ResultsItem extends React.Component {
               <div className="tender_meta">
                 <span>{t('tender.publishedAt')}: {publishDate}</span>
                 <span styleName="divider">•</span>
-                <span>{t('tender.publishedAt')}: {publishDate}</span>
+                <span>{item.Publisher}</span>
+                <span styleName="divider">•</span>
+                <span>{item.TenderType}</span>
+                <span styleName="divider">•</span>
+                <span>#{item.TenderID}</span>               
               </div>
             </div>
 

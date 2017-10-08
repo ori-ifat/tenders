@@ -19,7 +19,7 @@ export default class Search extends Component {
       <div styleName="row">
         <div styleName="column large-12">
           <div styleName="search-div" >
-            <SearchInput sort="infoDate" />
+            <SearchInput />
             {/*<Test />*/}
           </div>
         </div>

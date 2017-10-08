@@ -3,16 +3,36 @@ import { inject, observer } from 'mobx-react'
 import { translate } from 'react-polyglot'
 import CSSModules from 'react-css-modules'
 import styles from './ResultsActions.scss'
+import FoundationHelper from 'lib/FoundationHelper'
 
 @translate()
 @inject('searchStore')
+@inject('routingStore')
 @CSSModules(styles, { allowMultiple: true })
 @observer
 export default class ResultsActions extends React.Component {
 
+  state = {
+    sort: 'publishDate'
+  }
+
+  componentWillMount() {
+    const { searchStore } = this.props
+    this.setState({ sort: searchStore.sort })
+  }
+
+  changeSort = (sort) => {
+    const { searchStore, routingStore } = this.props
+    //console.log('search committed', selectedValues)
+    const payload = JSON.stringify(searchStore.tags)
+    routingStore.push(`/results/${sort}/${payload}`)
+  }
+
   render() {
-    const { t, sort } = this.props
-    const sortBy = sort && sort == 'infoDate' ? t('results.infoDate') : t('results.endDate')
+    const { t, loading } = this.props
+    const { sort } = this.state
+    const sortBy = sort && sort == 'publishDate' ? t('results.publishDate') : t('results.infoDate')
+    !loading && FoundationHelper.initElement('sort')
 
     return (
       <div styleName="select_all">
@@ -28,8 +48,8 @@ export default class ResultsActions extends React.Component {
               <li>
                 <a href="#">{t('results.sortBy')}: {sortBy}</a>
                 <ul styleName="menu">
-                  <li><a href="#">{t('results.infoDate')}</a></li>
-                  <li><a href="#">{t('results.endDate')}</a></li>
+                  <li><a onClick={() => this.changeSort('publishDate')}>{t('results.publishDate')}</a></li>
+                  <li><a onClick={() => this.changeSort('infoDate')}>{t('results.infoDate')}</a></li>
                 </ul>
               </li>
             </ul>

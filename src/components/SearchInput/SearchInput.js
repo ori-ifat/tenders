@@ -76,7 +76,8 @@ export default class SearchInput extends Component {
 
   onSearch = () => {
     const {selectedValues} = this.state
-    const { routingStore, sort } = this.props
+    const { routingStore } = this.props
+    const sort = 'publishDate'  //default sort
     //console.log('search committed', selectedValues)
     const payload = JSON.stringify(selectedValues)
     routingStore.push(`/results/${sort}/${payload}`)

@@ -39,7 +39,7 @@ class Search {
 
   @action.bound
   applySort(sort) {
-    if (['infoDate', 'endDate'].includes(sort)) {
+    if (['infoDate', 'publishDate'].includes(sort)) {
       this.sort = sort
     } else {
       //implement error handle
@@ -90,7 +90,7 @@ class Search {
         sort: this.serializedSort
       }
       this.request = await search(searchParams)
-      
+
       const {resultsPage: {data, total}} = this.request
       if (data.length > 0) {
         this.lastResultsPage++

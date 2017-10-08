@@ -29,12 +29,13 @@ export default class Results extends Component {
 
   render() {
 
-    const {searchStore: {resultsCount}} = this.props
+    const {searchStore: {resultsLoading, resultsCount}} = this.props
 
     return (
       <div style={{marginTop: '50px'}}>
-        <SearchInput sort="infoDate" />
-        {resultsCount == 0 && <NoData />}
+        <SearchInput />
+        {resultsLoading && <div>Loading...</div>}
+        {resultsCount == 0 && !resultsLoading && <NoData />}
         {resultsCount > 0 &&
           <div>
             <ResultsTitle />
@@ -44,7 +45,7 @@ export default class Results extends Component {
               </div>
               <div styleName="columns large-9">
                 <hr />
-                <ResultsActions sort="infoDate" />
+                <ResultsActions loading={resultsLoading} />
                 <ResultsList />
               </div>
             </div>
