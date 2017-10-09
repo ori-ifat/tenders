@@ -1,12 +1,16 @@
 import { action, computed, observable, toJS } from 'mobx'
 import isObject from 'lodash/isObject'
 import map from 'lodash/map'
+import filter from 'lodash/filter'
+import moment from 'moment'
 import {search} from 'common/services/apiService'
 
 const serializeTags = ({ID, Name, ResType}) => {
-  return {
+  return ResType.indexOf('_partial') > -1 ? {
+    id: Name,
+    type: ResType
+  } : {
     id: ID,
-    Name,
     type: ResType
   }
 }
@@ -36,6 +40,21 @@ class Search {
     let sort = toJS(this.sort)
     sort = [{field: sort, isAscending: false}]  //implement sort direction - from ui
     return JSON.stringify(sort)
+  }
+
+  @computed
+  get serializedFilters() {
+    const tags = toJS(this.tags)
+    let filters = toJS(this.filters)
+    const reduced = filter(tags, tag => {
+      return tag.ResType ==  'tender_partial'
+    })
+    //add date filter if partial search was done, or no tags have beed added (empty search)    
+    if (reduced.length > 0 || (tags.length == 0 && filters.length == 0)) {
+      const dateBack = moment().subtract(1, 'days').format('YYYY-MM-DD')
+      filters = [{field:'infodate', values:[dateBack]}]
+    }
+    return filters
   }
 
   @action.bound
@@ -85,7 +104,7 @@ class Search {
       this.resultsLoading = true
       const searchParams = {
         tags: this.serializedTags,
-        filters: toJS(this.filters),
+        filters: this.serializedFilters,  //toJS(this.filters),
         page: this.lastResultsPage + 1,
         pageSize: 10,
         sort: this.serializedSort
