@@ -23,14 +23,9 @@ import NoData from 'components/NoData'
 @observer
 export default class Results extends Component {
 
-  componentWillMount() {
-    //console.log('results component', searchStore.sort, toJS(searchStore.tags))
-  }
-
   render() {
 
     const {searchStore: {resultsLoading, resultsCount, tags}} = this.props
-
     return (
       <div style={{marginTop: '50px'}}>
         <SearchInput tags={tags} />
@@ -45,7 +40,7 @@ export default class Results extends Component {
               </div>
               <div styleName="columns large-9">
                 <hr />
-                <ResultsActions loading={resultsLoading} />
+                <ResultsActions />
                 <ResultsList />
               </div>
             </div>

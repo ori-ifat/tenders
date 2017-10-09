@@ -4,7 +4,7 @@ import { translate } from 'react-polyglot'
 import CSSModules from 'react-css-modules'
 import styles from './ResultsList.scss'
 import InfiniteScroll from 'react-infinite-scroller'
-import ResultsItem from 'common/components/ResultsItem'
+import Record from 'common/components/Record'
 
 @translate()
 @inject('searchStore')
@@ -20,7 +20,7 @@ export default class ResultsList extends React.Component {
     const { resultsPageSize, resultsLoading, results, hasMoreResults } = searchStore
 
     const items = results.map((item, index) =>
-      <ResultsItem key={index} item={item} />
+      <Record key={index} item={item} />
     )
 
     return (

@@ -19,6 +19,10 @@ export default class ResultsActions extends React.Component {
   componentWillMount() {
     const { searchStore } = this.props
     this.setState({ sort: searchStore.sort })
+    setTimeout(() => {
+      //allow element to be created.
+      FoundationHelper.initElement('sort')
+    }, 200)
   }
 
   changeSort = (sort) => {
@@ -29,10 +33,9 @@ export default class ResultsActions extends React.Component {
   }
 
   render() {
-    const { t, loading } = this.props
+    const { t } = this.props
     const { sort } = this.state
     const sortBy = sort && sort == 'publishDate' ? t('results.publishDate') : t('results.infoDate')
-    !loading && FoundationHelper.initElement('sort')
 
     return (
       <div styleName="select_all">

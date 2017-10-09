@@ -45,14 +45,15 @@ class Search {
   @computed
   get serializedFilters() {
     const tags = toJS(this.tags)
-    let filters = toJS(this.filters)
+    let filters = toJS(this.filters)  //[{values:[129], field:'city'}, {values:[40046], field:'publisher'}] //test
     const reduced = filter(tags, tag => {
       return tag.ResType ==  'tender_partial'
     })
-    //add date filter if partial search was done, or no tags have beed added (empty search)    
+    //add date filter if partial search was done, or no tags have beed added (empty search)
     if (reduced.length > 0 || (tags.length == 0 && filters.length == 0)) {
-      const dateBack = moment().subtract(1, 'days').format('YYYY-MM-DD')
-      filters = [{field:'infodate', values:[dateBack]}]
+      const dateBack = moment().subtract(7, 'days').format('YYYY-MM-DD')
+      filters = [...filters, {field:'publishdate', values:[dateBack]}]
+      //console.log('filters', filters)
     }
     return filters
   }

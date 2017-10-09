@@ -1,5 +1,5 @@
 import React from 'react'
-import { inject, observer } from 'mobx-react'
+import { observer } from 'mobx-react'
 import { translate } from 'react-polyglot'
 import CSSModules from 'react-css-modules'
 import styles from './ResultsItem.scss'
@@ -10,13 +10,12 @@ const timeSrc = req('./Time.svg')
 const favSrc = req('./fav.svg')
 
 @translate()
-@inject('searchStore')
 @CSSModules(styles, { allowMultiple: true })
 @observer
 export default class ResultsItem extends React.Component {
 
   render() {
-    const { item, t } = this.props
+    const { item, onClick, t } = this.props
     const publishDate = moment(item.PublishDate).format('DD-MM-YYYY')
 
     return (
@@ -29,7 +28,7 @@ export default class ResultsItem extends React.Component {
               </div>
             </div>
             <div styleName="tender_txt_wraper">
-              <h3>{item.Title}</h3>
+              <h3 onClick={onClick} style={{cursor: 'pointer'}}>{item.Title}</h3>
               <div styleName="tender_desc">
                 <p>{item.Text}</p>
               </div>
@@ -40,7 +39,7 @@ export default class ResultsItem extends React.Component {
                 <span styleName="divider">•</span>
                 <span>{item.TenderType}</span>
                 <span styleName="divider">•</span>
-                <span>#{item.TenderID}</span>               
+                <span>#{item.TenderID}</span>
               </div>
             </div>
 

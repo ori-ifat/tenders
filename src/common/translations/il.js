@@ -27,7 +27,9 @@ export default {
     tendertype: 'סוג',
     publisher: 'מפרסם',
     tender_partial: 'בטקסט של מכרז',
-    tender_partial_text: '%{text}'
+    tender_partial_text: '%{text}',
+    publisher_partial: 'בטקסט של מפרסם',
+    publisher_partial_text: '%{text}'
   },
   results: {
     title: 'הזדמנויות עיסקיות נמצאו',
