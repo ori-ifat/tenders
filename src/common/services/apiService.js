@@ -140,3 +140,20 @@ function fetchResultsPage({tags, filters, page, pageSize, sort}) {
     }
   })
 }
+
+export async function getLastTenders(lastSeenTenderID, installedProductID) {
+  return apiFetch('Tender/GetLastTenders', {searchParams: {
+    LastSeenTenderID: lastSeenTenderID,
+    InstalledProducID: installedProductID
+  }})
+}
+
+export function getBanners() {
+  return apiFetch('Lookup/GetBanners')
+}
+
+export async function getMoreTenders(installedProductID) {
+  return apiFetch('Tender/GetTop5', {searchParams: {
+    InstalledProducID: installedProductID
+  }})
+}

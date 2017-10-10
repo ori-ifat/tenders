@@ -1,5 +1,5 @@
 import React from 'react'
-import { inject, observer } from 'mobx-react'
+import { observer } from 'mobx-react'
 import { translate } from 'react-polyglot'
 import CSSModules from 'react-css-modules'
 import styles from './ResultsList.scss'
@@ -7,17 +7,13 @@ import InfiniteScroll from 'react-infinite-scroller'
 import Record from 'common/components/Record'
 
 @translate()
-@inject('searchStore')
 @CSSModules(styles)
 @observer
 export default class ResultsList extends React.Component {
 
-  //<div key={index} style={{height: '150px', border: 'magenta solid 1px'}}> {results[index].Title}</div>
-  /*<div key={index} style={{height: '150px', border: 'magenta solid 1px'}}> {item.Title}</div>*/
-
   render() {
-    const { t, searchStore } = this.props
-    const { resultsPageSize, resultsLoading, results, hasMoreResults } = searchStore
+    const { t, store, loadMore } = this.props
+    const { resultsPageSize, resultsLoading, results, hasMoreResults } = store
 
     const items = results.map((item, index) =>
       <Record key={index} item={item} />
@@ -26,7 +22,7 @@ export default class ResultsList extends React.Component {
     return (
       <InfiniteScroll
         pageStart={0}
-        loadMore={searchStore.loadNextResults}
+        loadMore={loadMore}
         hasMore={hasMoreResults}
         loader={<div>Loading...</div>}
       >

@@ -6,8 +6,8 @@ import { whenRouted } from 'common/utils/withRouteHooks'
 import { withRouter } from 'react-router'
 import { searchStore } from 'stores'
 import SearchInput from 'components/SearchInput'
-import ResultsTitle from 'common/components/ResultsTitle'
-import ResultsActions from 'common/components/ResultsActions'
+import ResultsTitle from './ResultsTitle'
+import ResultsActions from './ResultsActions'
 import ResultsList from 'common/components/ResultsList'
 import NoData from 'components/NoData'
 
@@ -25,7 +25,7 @@ export default class Results extends Component {
 
   render() {
 
-    const {searchStore: {resultsLoading, resultsCount, tags}} = this.props
+    const {searchStore, searchStore: {resultsLoading, resultsCount, tags}} = this.props
     return (
       <div style={{marginTop: '50px'}}>
         <SearchInput tags={tags} />
@@ -41,7 +41,7 @@ export default class Results extends Component {
               <div styleName="columns large-9">
                 <hr />
                 <ResultsActions />
-                <ResultsList />
+                <ResultsList store={searchStore} loadMore={searchStore.loadNextResults} />
               </div>
             </div>
           </div>

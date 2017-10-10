@@ -3,6 +3,7 @@ import { Redirect, Route, Switch } from 'react-router-dom'
 import Topbar from 'app/components/Topbar'
 import SearchPage from 'pages/search'
 import ResultsPage from 'pages/results'
+import HomePage from 'pages/home'
 import NotFound404 from 'pages/notFound404'
 
 class Pages extends React.Component {
@@ -17,7 +18,10 @@ class Pages extends React.Component {
         <Topbar />
         <Switch>
           <Route exact path="/">
-            <Redirect to="/search" />
+            <Redirect to="/home" />
+          </Route>
+          <Route path="/home">
+            {this.ensureAuthentication(HomePage)}
           </Route>
           <Route path="/search">
             {this.ensureAuthentication(SearchPage)}

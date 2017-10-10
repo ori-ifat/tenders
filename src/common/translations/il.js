@@ -18,6 +18,11 @@ export default {
     test: 'טסט',
     search: 'חיפוש'
   },
+  home: {
+    greet: 'שלום שימי,',
+    title: 'מצאנו לך %{count} הזדמנויות עסקיות חדשות',
+    moreTenders: 'מכרזים נוספים עבורך:'
+  },
   search: {
     placeHolder: 'חפש לפי קטגוריה או מפרסם או שם המכרז',
     noResults: 'אין תוצאות להצגה',

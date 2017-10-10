@@ -5,16 +5,10 @@ import SearchInput from 'components/SearchInput'
 //import Test from 'components/Test'
 import {inject} from 'mobx-react'
 
-@inject('routingStore')
 @CSSModules(styles, { allowMultiple: true })
 export default class Search extends Component {
 
-  componentWillMount = () => {
-    //console.log('search component')
-  }
-
   render() {
-    const {routingStore: {location}} = this.props
     return (
       <div styleName="row">
         <div styleName="column large-12">
