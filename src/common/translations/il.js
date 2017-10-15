@@ -46,6 +46,7 @@ export default {
   },
   tender: {
     publishedAt: 'פורסם ב',
-    addToFav: 'הוסף למועדפים'
+    addToFav: 'הוסף למועדפים',
+    noDate: 'לא ידוע'
   }
 }

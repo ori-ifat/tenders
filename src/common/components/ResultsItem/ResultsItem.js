@@ -16,7 +16,7 @@ export default class ResultsItem extends React.Component {
 
   render() {
     const { item, onClick, t } = this.props
-    const publishDate = moment(item.PublishDate).format('DD-MM-YYYY')
+    const publishDate = item.PublishDate != null ? moment(item.PublishDate).format('DD-MM-YYYY') : t('tender.noDate')
 
     return (
       <div styleName="tender_summery">
@@ -30,7 +30,7 @@ export default class ResultsItem extends React.Component {
             <div styleName="tender_txt_wraper">
               <h3 onClick={onClick} style={{cursor: 'pointer'}}>{item.Title}</h3>
               <div styleName="tender_desc">
-                <p>{item.Text}</p>
+                <p>{item.Summery}</p>
               </div>
               <div className="tender_meta">
                 <span>{t('tender.publishedAt')}: {publishDate}</span>
