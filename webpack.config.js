@@ -70,16 +70,24 @@ module.exports = {
       // foundation-webpack has access to the jQuery object
       {
         test: /foundation\/js\//,
-        loader: 'imports-loader?jQuery=jquery'
+        loader: 'imports-loader?jQuery=jquery',
+        include: paths.src
       },
       {
         test: /\.json$/,
         loaders: ['json-loader']
       }, {
+        test: /\.js$/,
+        use: 'babel-loader',
+        include: [
+          paths.src,
+          path.resolve(__dirname, 'node_modules/foundation-sites')  //needed for production - for IE mainly
+        ]
+      }, /*{
         test: /\.jsx?$/,
         loaders: ['babel-loader'],
         include: paths.src
-      }, {
+      },*/ {
         test: /\.yaml$/,
         use: [
           {
@@ -92,10 +100,6 @@ module.exports = {
         test: /\.(png|gif|jpg|jpeg|eot|otf|woff|ttf|svg)?$/,
         loaders: ['url-loader'],
         include: paths.src
-      },
-      {
-        test: require.resolve('react-addons-perf'),
-        loader: 'expose?Perf'
       }
     ]
   }
@@ -110,31 +114,27 @@ function getSourceMap() {
       'source-map'
 }
 
-function getStyleLoaders() {
-  const sass = `sass-loader?includePaths[]=${paths.src}&includePaths[]=${paths.lib}`
-
-  return isProductionCode
-    ? ExtractTextPlugin.extract('style-loader', ['css-loader?modules&importLoaders=1', 'postcss-loader', sass].join('!')) //
-    : ['style-loader?sourceMap', 'css-loader?modules&importLoaders=1&localIdentName=[path]_[name]_[local]_[hash:base64:5]', 'postcss-loader?sourceMap', `${sass}&sourceMap`].join('!')
-}
-
 function getEntryPoints() {
   return isDevelopmentServer
     ? [
+      'babel-polyfill',
       'eventsource-polyfill', // necessary for hot reloading with IE
       'webpack-hot-middleware/client',
       paths.appEntry,
       `foundation-sites-loader!${__dirname}/foundation-sites.config.js`
     ]
-    : [paths.appEntry,
-      `foundation-sites-loader!${__dirname}/foundation-sites.config.js`]  //without that, foundation will not work on production dist
+    : [
+      'babel-polyfill',
+      paths.appEntry,
+      `foundation-sites-loader!${__dirname}/foundation-sites.config.js`  //without that, foundation will not work on production dist
+    ]
 }
 
 function getPlugins() {
 
   let plugins = [
     new CleanWebpackPlugin(paths.dist),
-    new webpack.NoErrorsPlugin(),
+    new webpack.NoEmitOnErrorsPlugin(),
     new HtmlWebpackPlugin({
       template: `html-loader!${paths.indexHtml}`,
       inject: true
