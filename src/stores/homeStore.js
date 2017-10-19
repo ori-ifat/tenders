@@ -15,8 +15,7 @@ class Home {
     if (!this.resultsLoading) {
       this.resultsLoading = true
       const lastSeenTenderID = 7736041  //implementation needed - get lastSeenTenderID of logged customer
-      const installedProductID = 112585 //implementation needed - get installedProductID from logged customer
-      this.request = await getLastTenders(lastSeenTenderID, installedProductID)
+      this.request = await getLastTenders(lastSeenTenderID)
 
       const data = this.request
 
@@ -34,12 +33,11 @@ class Home {
   @action.bound
   async loadMoreTenders() {
     this.resultsLoading = true
-    const installedProductID = 112585 //implementation needed - get installedProductID from logged customer
-    this.requestMore = await getMoreTenders(installedProductID)
+    this.requestMore = await getMoreTenders()
 
     const data = this.requestMore
     this.resultsMore = [...data.map(d => ({ ...d, key: d.TenderID }))]
-    this.resultsLoading = false    
+    this.resultsLoading = false
   }
 }
 

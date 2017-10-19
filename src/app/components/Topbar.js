@@ -23,8 +23,15 @@ const navbar = [  {
 @translate()
 @inject('translationsStore')
 @inject('routingStore')
+@inject('accountStore')
 @CSSModules(styles, { allowMultiple: true })
 export default class Topbar extends Component {
+
+  componentWillMount() {
+    const { accountStore: { loadProfile} } = this.props
+    //this will extend the expiry of userData cookie. need to check if this is the right place to do it ...
+    loadProfile()
+  }
 
   navigate = route => () => {
     const { routingStore: { push, location: { pathname: path } } } = this.props

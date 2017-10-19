@@ -7,9 +7,7 @@ import ResultsComponent from 'components/Results'
 export default class Results extends Component {
 
 
-  componentWillMount = () => {
-    //console.log('results page')
-  }
+  //componentWillMount() {}
   //componentWillReceiveProps = (nextProps, nextState) => {};
 
   render(){

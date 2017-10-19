@@ -1,4 +1,5 @@
 import React from 'react'
+import { object, func, bool } from 'prop-types'
 import { observer } from 'mobx-react'
 import CSSModules from 'react-css-modules'
 import styles from './Record.scss'
@@ -9,6 +10,12 @@ import ResultsItemDetails from 'common/components/ResultsItemDetails'
 @observer
 export default class Record extends React.Component {
   /* wrapper for item with\without details */
+  static propTypes = {
+    item: object,
+    onCheck: func,
+    checked: bool
+  }
+
   state = {
     selected: false
   }
@@ -24,13 +31,18 @@ export default class Record extends React.Component {
   }
 
   render() {
-    const { item } = this.props
+    const { item, onCheck, checked } = this.props
     const { selected } = this.state
-
+    
     return (
       <div>
         {!selected &&
-          <ResultsItem item={item} onClick={this.viewDetails} />
+          <ResultsItem
+            item={item}
+            onClick={this.viewDetails}
+            onCheck={onCheck}
+            checked={checked}
+          />
         }
         {selected &&
           <ResultsItemDetails item={item} onClose={this.closeDetails} />

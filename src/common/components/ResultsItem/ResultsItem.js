@@ -1,9 +1,13 @@
 import React from 'react'
+import { object, func, bool } from 'prop-types'
 import { observer } from 'mobx-react'
+import {observable, toJS} from 'mobx'
 import { translate } from 'react-polyglot'
 import CSSModules from 'react-css-modules'
 import styles from './ResultsItem.scss'
 import moment from 'moment'
+import Checkbox from 'common/components/Checkbox'
+
 
 const req = require.context('common/style/icons/', false)
 const timeSrc = req('./Time.svg')
@@ -13,20 +17,22 @@ const favSrc = req('./fav.svg')
 @CSSModules(styles, { allowMultiple: true })
 @observer
 export default class ResultsItem extends React.Component {
+  static propTypes = {
+    item: object,
+    onClick: func,
+    onCheck: func,
+    checked: bool
+  }
 
   render() {
-    const { item, onClick, t } = this.props
+    const { item, onClick, onCheck, checked, t } = this.props
     const publishDate = item.PublishDate != null ? moment(item.PublishDate).format('DD-MM-YYYY') : t('tender.noDate')
-
+    const tenderStyle = checked ? 'tender_summery checked' : 'tender_summery'
     return (
-      <div styleName="tender_summery">
+      <div styleName={tenderStyle}>
         <div styleName="grid-x">
           <div styleName="small-9 cell">
-            <div styleName="checkbox_continer">
-              <div styleName="checkbox">
-                <input type="checkbox" className="checkbox_tender"/>
-              </div>
-            </div>
+            {onCheck && <Checkbox checked={checked} value={item.TenderID} onChange={onCheck} />}
             <div styleName="tender_txt_wraper">
               <h3 onClick={onClick} style={{cursor: 'pointer'}}>{item.Title}</h3>
               <div styleName="tender_desc">

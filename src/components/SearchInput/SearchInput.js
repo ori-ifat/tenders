@@ -1,4 +1,5 @@
 import React, {Component} from 'react'
+import { array } from 'prop-types'
 import CSSModules from 'react-css-modules'
 import styles from './SearchInput.scss'
 import {translate} from 'react-polyglot'
@@ -13,13 +14,16 @@ import {autocomplete} from 'common/services/apiService'
 @observer
 @CSSModules(styles, { allowMultiple: true })
 export default class SearchInput extends Component {
+  static propTypes = {
+    tags: array
+  }
 
   @observable selectedValues =[]
   /*state = {
     selectedValues: []
   }*/
 
-  componentWillMount = () => {
+  componentWillMount() {
     const {tags} = this.props
     if (tags) this.selectedValues = tags
   }
@@ -71,6 +75,8 @@ export default class SearchInput extends Component {
   onInputKeyDown = (e) => {
     if (e.keyCode === 13) {
       //ori s setTimeout to solve a bug, when search is committed before Select actually chose an item ...
+      //e.preventDefault()  //fucks up the search.
+      e.stopPropagation()
       setTimeout(() => {
         this.onSearch()
       }, 150) //to allow action to complete

@@ -21,7 +21,8 @@ export default {
   home: {
     greet: 'שלום שימי,',
     title: 'מצאנו לך %{count} הזדמנויות עסקיות חדשות',
-    moreTenders: 'מכרזים נוספים עבורך:'
+    moreTenders: 'מכרזים נוספים עבורך:',
+    noResults: 'לא נמצאו עבורך הזדמנויות עסקיות חדשות'
   },
   search: {
     placeHolder: 'חפש לפי קטגוריה או מפרסם או שם המכרז',
@@ -48,5 +49,11 @@ export default {
     publishedAt: 'פורסם ב',
     addToFav: 'הוסף למועדפים',
     noDate: 'לא ידוע'
+  },
+  toolbar: {
+    selectedTenders: 'מכרזים נבחרו',
+    email: 'שלח במייל',
+    print: 'הדפס',
+    fav: 'הוסף למועדפים'
   }
 }

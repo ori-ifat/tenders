@@ -9,6 +9,28 @@
 	transition: all 0.25s;
 }
 
+.tender_summery.checked {
+	border: 1px solid $green;
+	/*> div > div > div {
+		.checkbox_continer {
+			background-color: $green !important;
+		}
+	}*/
+	input[type="checkbox"]:after {
+		border: 2px solid #ffffff !important;
+	}
+}
+
+.tender_summery:hover {
+	// border: 1px solid $green;
+	& .checkbox_continer {
+		background-color: #D7F5DD;
+	}
+	input[type="checkbox"]:after {
+		border: 2px solid $green;
+	}
+}
+
 .checkbox_continer {
 	width: rem-calc(40);
 	height: 100%;

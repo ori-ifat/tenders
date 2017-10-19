@@ -1,0 +1,16 @@
+@import '~app/global.scss';
+
+.checkbox_continer {
+	width: rem-calc(40);
+	height: 100%;
+	background-color: $xlight-gray;
+	position: absolute;
+	display: flex;
+  justify-content: center;
+  transition: all 0.25s;
+}
+
+.checked {
+	/* nesting did not work ... :( */
+	background-color: $green !important;
+}

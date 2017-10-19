@@ -21,7 +21,7 @@ export default class HomeTitle extends React.Component {
           {!resultsLoading &&
             <div>
               <h5 styleName="user-greet">{t('home.greet')}</h5>
-              <h1 styleName="results_summery">{t('home.title', {count})}</h1>
+              <h1 styleName="results_summery">{resultsCount > 0 ? t('home.title', {count}) : t('home.noResults')}</h1>
             </div>
           }
           {resultsLoading &&

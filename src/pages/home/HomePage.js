@@ -7,8 +7,8 @@ import HomeComponent from 'components/Home'
 export default class Home extends Component {
 
 
-  //componentWillMount = () => {}
-  
+  //componentWillMount() {}
+
   //componentWillReceiveProps = (nextProps, nextState) => {};
 
   render(){

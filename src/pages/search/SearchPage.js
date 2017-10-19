@@ -7,9 +7,7 @@ import SearchComponent from 'components/Search'
 export default class Search extends Component {
 
 
-  componentWillMount = () => {
-    //console.log('search page')
-  }
+  //componentWillMount() {}
   //componentWillReceiveProps = (nextProps, nextState) => {};
 
   render(){

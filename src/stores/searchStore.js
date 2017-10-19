@@ -51,8 +51,8 @@ class Search {
     })
     //add date filter if partial search was done, or no tags have beed added (empty search)
     if (reduced.length > 0 || (tags.length == 0 && filters.length == 0)) {
-      const dateBack = moment().subtract(7, 'days').format('YYYY-MM-DD')
-      filters = [...filters, {field:'publishdate', values:[dateBack]}]
+      const dateBack = moment().subtract(1, 'years').format('YYYY-MM-DD')
+      filters = [...filters, {field:'inputdate', values:[dateBack]}]
       //console.log('filters', filters)
     }
     return filters
