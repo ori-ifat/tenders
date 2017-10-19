@@ -28,12 +28,24 @@ export default class ResultsItem extends React.Component {
     const { item, onClick, onCheck, checked, t } = this.props
     const publishDate = item.PublishDate != null ? moment(item.PublishDate).format('DD-MM-YYYY') : t('tender.noDate')
     const tenderStyle = checked ? 'tender_summery checked' : 'tender_summery'
+    //infoDate
+    const twoDaysLeft = moment(item.InfoDate) > moment() && moment(item.InfoDate) < moment().add(2, 'days')
+    const oneDayLeft = moment(item.InfoDate) > moment() && moment(item.InfoDate) < moment().add(1, 'days')
+    //tourDate
+    const twoDaysLeftTour = moment(item.TourDate) > moment() && moment(item.TourDate) < moment().add(2, 'days')
+    const oneDayLeftTour = moment(item.TourDate) > moment() && moment(item.TourDate) < moment().add(1, 'days')
+
     return (
       <div styleName={tenderStyle}>
         <div styleName="grid-x">
           <div styleName="small-9 cell">
             {onCheck && <Checkbox checked={checked} value={item.TenderID} onChange={onCheck} />}
             <div styleName="tender_txt_wraper">
+              {item.TenderType == t('tender.exclusive') && <span styleName="label">{t('tender.exclusive')}</span>}
+              {twoDaysLeft && !oneDayLeft && <span styleName="label alert">{t('tender.twoDaysLeft')}</span>}
+              {oneDayLeft && <span styleName="label alert">{t('tender.oneDayLeft')}</span>}
+              {twoDaysLeftTour && !oneDayLeftTour && <span styleName="label alert">{t('tender.twoDaysLeftTour')}</span>}
+              {oneDayLeftTour && <span styleName="label alert">{t('tender.oneDayLeftTour')}</span>}
               <h3 onClick={onClick} style={{cursor: 'pointer'}}>{item.Title}</h3>
               <div styleName="tender_desc">
                 <p>{item.Summery}</p>

@@ -9,6 +9,17 @@
 	transition: all 0.25s;
 }
 
+.label {
+	font-family: 'Rubik', sans-serif !important;
+	font-weight: 500;
+	color: #fff !important;
+	padding: rem-calc(3) rem-calc(8);
+	& .alert {
+    background: #EE274A;
+    color: #fefefe;
+	}
+}
+
 .tender_summery.checked {
 	border: 1px solid $green;
 	/*> div > div > div {

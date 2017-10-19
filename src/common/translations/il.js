@@ -48,7 +48,12 @@ export default {
   tender: {
     publishedAt: 'פורסם ב',
     addToFav: 'הוסף למועדפים',
-    noDate: 'לא ידוע'
+    noDate: 'לא ידוע',
+    exclusive: 'בלעדי',
+    twoDaysLeft: 'הגשה בעוד יומיים',
+    oneDayLeft: 'הגשה בעוד יום',
+    twoDaysLeftTour: 'סיור קבלנים בעוד יומיים',
+    oneDayLeftTour: 'סיור קבלנים בעוד יום'
   },
   toolbar: {
     selectedTenders: 'מכרזים נבחרו',
