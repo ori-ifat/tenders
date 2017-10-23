@@ -1,14 +1,16 @@
 import React from 'react'
-import { array } from 'prop-types'
+import { array, object } from 'prop-types'
 import { observer } from 'mobx-react'
 import { translate } from 'react-polyglot'
+import remove from 'lodash/remove'
+import find from 'lodash/find'
 import CSSModules from 'react-css-modules'
 import styles from './Toolbar.scss'
 
 const req = require.context('common/style/icons/', false)
 const emailSrc = req('./mail.png')
 const printSrc = req('./print.svg')
-const actionFavSrv = req('./action_fav.svg')
+const actionFavSrc = req('./action_fav.svg')
 
 @translate()
 @CSSModules(styles, {allowMultiple: true})
@@ -16,7 +18,7 @@ const actionFavSrv = req('./action_fav.svg')
 export default class Toolbar extends React.Component {
 
   static propTypes = {
-    checkedItems: array
+    checkedItems: object
   }
 
   email = () => {
@@ -29,6 +31,28 @@ export default class Toolbar extends React.Component {
 
   addFavorites = () => {
     console.log('addFavorites', this.props.checkedItems)
+    const {checkedItems} = this.props
+    const itemsToAdd = []
+    //fill the items that will be sent to api
+    checkedItems.map(item => {
+      if (!item.IsFavorite) itemsToAdd.push(item.TenderID)
+    })
+    //iterate over the relevant items, and change IsFavorite state on original array
+    itemsToAdd.map(tenderID => {
+      const found = find(checkedItems, item => {
+        return item.TenderID == tenderID
+      })
+      if (found) {
+        //if item is in checkedItems array, need to update its fav state
+        remove(checkedItems, item => {
+          return item.TenderID === tenderID
+        })
+        //add the item again with new fav state
+        checkedItems.push({ TenderID: tenderID, IsFavorite: true })
+      }
+    })
+    //implement: call api with items and add action
+    console.log(checkedItems, itemsToAdd)
   }
 
   render() {
@@ -50,7 +74,7 @@ export default class Toolbar extends React.Component {
                 <ul styleName="menu align-left">
                   <li><a onClick={this.email}><img src={emailSrc} alt={t('toolbar.email')} /></a></li>
                   <li><a onClick={this.print}><img src={printSrc} alt={t('toolbar.print')} /></a></li>
-                  <li><a onClick={this.addFavorites}><img src={actionFavSrv} alt={t('toolbar.fav')} /></a></li>
+                  <li><a onClick={this.addFavorites}><img src={actionFavSrc} alt={t('toolbar.fav')} /></a></li>
                 </ul>
               </div>
 

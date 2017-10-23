@@ -13,6 +13,7 @@ import HomeTitle from './HomeTitle'
 import HomeList from './HomeList'
 import Toolbar from 'common/components/Toolbar'
 import remove from 'lodash/remove'
+import find from 'lodash/find'
 
 @translate()
 @withRouter
@@ -37,15 +38,34 @@ export default class Home extends Component {
     this.checkedItems = []
   }
 
-  onCheck = (checked, value) => {
+  onCheck = (checked, value, isFavorite) => {
     if (checked) {
-      const item = { TenderID: value }
-      if (!this.checkedItems.includes(item)) this.checkedItems.push(item)
+      const found = find(this.checkedItems, item => {
+        return item.TenderID == value
+      })      
+      if (!found) this.checkedItems.push({ TenderID: value, IsFavorite: isFavorite == 1 })
     }
     else {
       remove(this.checkedItems, item => {
         return item.TenderID === value
       })
+    }
+  }
+
+  onFav = (tenderID, add) => {
+    console.log('onFav', tenderID, add)
+    //implement: call api with item and relevant action (add\!add)
+    const found = find(this.checkedItems, item => {
+      return item.TenderID == tenderID && item.IsFavorite != add
+    })
+    if (found) {
+      //if item is in checkedItems array, need to update its fav state
+      remove(this.checkedItems, item => {
+        return item.TenderID === tenderID
+      })
+      //add the item again with new fav state
+      this.checkedItems.push({ TenderID: tenderID, IsFavorite: add })
+      //console.log('onFav', toJS(this.checkedItems))
     }
   }
 
@@ -62,7 +82,8 @@ export default class Home extends Component {
               <HomeList
                 items={homeStore.results}
                 onCheck={this.onCheck}
-                checkedItems={toJS(this.checkedItems)}
+                onFav={this.onFav}
+                checkedItems={this.checkedItems}
               />
               <Banner banner={toJS(homeStore.banner)} />
               <h6 styleName="more-tenders-title">{t('home.moreTenders')}</h6>
@@ -70,7 +91,7 @@ export default class Home extends Component {
             </div>
           </div>
         </div>
-        <Toolbar checkedItems={toJS(this.checkedItems)} />
+        <Toolbar checkedItems={this.checkedItems} />
       </div>
     )
   }

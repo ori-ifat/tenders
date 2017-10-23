@@ -12,6 +12,7 @@ import Checkbox from 'common/components/Checkbox'
 const req = require.context('common/style/icons/', false)
 const timeSrc = req('./Time.svg')
 const favSrc = req('./fav.svg')
+const favActSrc = req('./action_fav.svg')
 
 @translate()
 @CSSModules(styles, { allowMultiple: true })
@@ -21,11 +22,34 @@ export default class ResultsItem extends React.Component {
     item: object,
     onClick: func,
     onCheck: func,
-    checked: bool
+    onFav: func,
+    checked: bool,
+    fav: bool
+  }
+
+  @observable IsFavorite = false
+
+  componentWillMount() {
+    //set favorite state from props
+    this.IsFavorite = this.props.fav
+  }
+
+  componentWillReceiveProps(nextProps, nextState) {
+    //set favorite state from nextProps - ex. when Toolbar changes the item fav state
+    if (this.IsFavorite !== nextProps.fav) this.IsFavorite = nextProps.fav
+  }
+
+  addFav = () => {
+    const { item, onFav } = this.props
+    //callee + local fav state
+    onFav(item.TenderID, !this.IsFavorite)
+    this.IsFavorite = !this.IsFavorite
   }
 
   render() {
-    const { item, onClick, onCheck, checked, t } = this.props
+    const { item, onClick, onCheck, onFav, checked, fav, t } = this.props
+    const cbItem = Object.assign({}, item, {IsFavorite: this.IsFavorite}) //merge this.IsFavorite to current item
+
     const publishDate = item.PublishDate != null ? moment(item.PublishDate).format('DD-MM-YYYY') : t('tender.noDate')
     const tenderStyle = checked ? 'tender_summery checked' : 'tender_summery'
     //infoDate
@@ -39,7 +63,7 @@ export default class ResultsItem extends React.Component {
       <div styleName={tenderStyle}>
         <div styleName="grid-x">
           <div styleName="small-9 cell">
-            {onCheck && <Checkbox checked={checked} value={item.TenderID} onChange={onCheck} />}
+            {onCheck && <Checkbox checked={checked} item={cbItem} onChange={onCheck} />}
             <div styleName="tender_txt_wraper">
               {item.TenderType == t('tender.exclusive') && <span styleName="label">{t('tender.exclusive')}</span>}
               {twoDaysLeft && !oneDayLeft && <span styleName="label alert">{t('tender.twoDaysLeft')}</span>}
@@ -66,7 +90,12 @@ export default class ResultsItem extends React.Component {
             <div styleName="tender_action_wraper">
               <ul styleName="no-bullet">
                 <li><a href="#"><img src={timeSrc} alt="" />24.8.2017</a></li>
-                <li><a href="#"><img src={favSrc} alt="" />{t('tender.addToFav')}</a></li>
+                {onFav &&
+                  <li>
+                    <a onClick={this.addFav}>
+                      <img src={this.IsFavorite ? favActSrc : favSrc} alt="" />{this.IsFavorite ? t('tender.removeFromFav') : t('tender.addToFav')}
+                    </a>
+                  </li>}
               </ul>
             </div>
           </div>

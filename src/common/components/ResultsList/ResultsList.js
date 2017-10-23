@@ -6,6 +6,7 @@ import CSSModules from 'react-css-modules'
 import styles from './ResultsList.scss'
 import InfiniteScroll from 'react-infinite-scroller'
 import Record from 'common/components/Record'
+import find from 'lodash/find'
 
 @translate()
 @CSSModules(styles)
@@ -16,7 +17,8 @@ export default class ResultsList extends React.Component {
     store: object,
     loadMore: func,
     onCheck: func,
-    checkedItems: array
+    onFav: func,
+    checkedItems: object
   }
 
   render() {
@@ -24,14 +26,20 @@ export default class ResultsList extends React.Component {
     const { resultsPageSize, resultsLoading, results, hasMoreResults } = store
 
     const items = results.map((item, index) => {
-      //const tender = {TenderID: item.TenderID}
-      //includes does not work, dont know why ...
-      const checked = this.props.checkedItems.filter(chk => chk.TenderID == item.TenderID).length > 0
+      //const checked = this.props.checkedItems.filter(chk => chk.TenderID == item.TenderID).length > 0
+      const found = find(this.props.checkedItems, chk => {
+        return chk.TenderID == item.TenderID
+      })
+      
+      const checked = found ? true : false
+      const fav = found ? found.IsFavorite : false
       return <Record
         key={index}
         item={item}
         onCheck={this.props.onCheck}
+        onFav={this.props.onFav}
         checked={checked}
+        fav={fav}
       />
     }, this)
 

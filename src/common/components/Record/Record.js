@@ -13,7 +13,9 @@ export default class Record extends React.Component {
   static propTypes = {
     item: object,
     onCheck: func,
-    checked: bool
+    onFav: func,
+    checked: bool,
+    fav: bool
   }
 
   state = {
@@ -31,9 +33,9 @@ export default class Record extends React.Component {
   }
 
   render() {
-    const { item, onCheck, checked } = this.props
+    const { item, onCheck, onFav, checked, fav } = this.props
     const { selected } = this.state
-    
+
     return (
       <div>
         {!selected &&
@@ -41,7 +43,9 @@ export default class Record extends React.Component {
             item={item}
             onClick={this.viewDetails}
             onCheck={onCheck}
+            onFav={onFav}
             checked={checked}
+            fav={fav}
           />
         }
         {selected &&

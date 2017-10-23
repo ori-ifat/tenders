@@ -1,5 +1,5 @@
 import React from 'react'
-import { bool, number, func } from 'prop-types'
+import { bool, object, func } from 'prop-types'
 import { observer } from 'mobx-react'
 import {observable, toJS} from 'mobx'
 import CSSModules from 'react-css-modules'
@@ -11,7 +11,7 @@ export default class Checkbox extends React.Component {
 
   static propTypes = {
     checked: bool,
-    value: number,
+    item: object,
     onChange: func
   }
 
@@ -25,13 +25,13 @@ export default class Checkbox extends React.Component {
 
   onCheck = e => {
     e.stopPropagation()
-    const {value, onChange} = this.props
+    const {item, onChange} = this.props
     this.checked = e.target.checked
-    onChange(e.target.checked, value)
+    onChange(e.target.checked, item.TenderID, item.IsFavorite)
   }
 
   render() {
-    const {value} = this.props
+    const {item} = this.props
     const {checked} = this.checked
     const cbStyle = this.checked ? 'checkbox_continer checked' : 'checkbox_continer'
 
@@ -41,7 +41,7 @@ export default class Checkbox extends React.Component {
           <input type="checkbox"
             className="checkbox_tender"
             checked={checked}
-            value={value}
+            value={item.TenderID}
             onChange={this.onCheck} />
         </div>
       </div>

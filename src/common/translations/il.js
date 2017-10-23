@@ -48,6 +48,7 @@ export default {
   tender: {
     publishedAt: 'פורסם ב',
     addToFav: 'הוסף למועדפים',
+    removeFromFav: 'הסר ממועדפים',
     noDate: 'לא ידוע',
     exclusive: 'בלעדי',
     twoDaysLeft: 'הגשה בעוד יומיים',

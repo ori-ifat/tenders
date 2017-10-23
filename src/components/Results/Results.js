@@ -13,6 +13,7 @@ import ResultsList from 'common/components/ResultsList'
 import Toolbar from 'common/components/Toolbar'
 import NoData from 'components/NoData'
 import remove from 'lodash/remove'
+import find from 'lodash/find'
 
 @withRouter
 @whenRouted(({ params: { sort, tags } }) => {
@@ -37,15 +38,36 @@ export default class Results extends Component {
     this.checkedItems = []
   }
 
-  onCheck = (checked, value) => {
+  onCheck = (checked, value, isFavorite) => {
+    //note duplicate code with home.js . implement: util
     if (checked) {
-      const item = { TenderID: value }
-      if (!this.checkedItems.includes(item)) this.checkedItems.push(item)
+      const found = find(this.checkedItems, item => {
+        return item.TenderID == value
+      })
+      if (!found) this.checkedItems.push({ TenderID: value, IsFavorite: isFavorite })
     }
     else {
       remove(this.checkedItems, item => {
         return item.TenderID === value
       })
+    }
+    //console.log(this.checkedItems)
+  }
+
+  onFav = (tenderID, add) => {
+    console.log('onFav', tenderID, add)
+    //implement: call api with item and relevant action (add\!add)
+    const found = find(this.checkedItems, item => {
+      return item.TenderID == tenderID && item.IsFavorite != add
+    })
+    if (found) {
+      //if item is in checkedItems array, need to update its fav state
+      remove(this.checkedItems, item => {
+        return item.TenderID === tenderID
+      })
+      //add the item again with new fav state
+      this.checkedItems.push({ TenderID: tenderID, IsFavorite: add })
+      //console.log('onFav', toJS(this.checkedItems))
     }
   }
 
@@ -71,10 +93,11 @@ export default class Results extends Component {
                   store={searchStore}
                   loadMore={searchStore.loadNextResults}
                   onCheck={this.onCheck}
-                  checkedItems={toJS(this.checkedItems)} />
+                  onFav={this.onFav}
+                  checkedItems={this.checkedItems} />
               </div>
             </div>
-            <Toolbar checkedItems={toJS(this.checkedItems)} />
+            <Toolbar checkedItems={this.checkedItems} />
           </div>
         }
       </div>
