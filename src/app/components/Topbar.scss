@@ -1,4 +1,5 @@
 @import '~app/global.scss';	/* NOTE need to import that on every scss file, because of CSSModules isolation */
+/* NOTE #2: if only settings are needed, import '~common/style/_settings.scss' instead. this will drasticlly improve css size */
 // Header
 
 // small and down

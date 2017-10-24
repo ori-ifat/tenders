@@ -3,7 +3,7 @@ const webpack = require('webpack')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const CleanWebpackPlugin = require('clean-webpack-plugin')
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
-const BabelWebpackPlugin = require('babel-minify-webpack-plugin')
+//const BabelWebpackPlugin = require('babel-minify-webpack-plugin')
 const autoprefixer = require('autoprefixer')
 const relpath = path.join.bind(path, __dirname)
 
@@ -157,12 +157,12 @@ function getPlugins() {
     plugins = plugins.concat([
       new ExtractTextPlugin('[name].[hash].css', { allChunks: true }),
       //new webpack.optimize.OccurenceOrderPlugin()
-      new BabelWebpackPlugin()
-      //new webpack.optimize.UglifyJsPlugin({
-      //  compressor: {
-      //    warnings: false
-      //  }
-      //})  //not working because of foundation.js es6 wont transpile, dont know why
+      //new BabelWebpackPlugin()  //use that if es6 problems will prevent UglifyJsPlugin from working
+      new webpack.optimize.UglifyJsPlugin({
+        compressor: {
+          warnings: false
+        }
+      })
     ])
   }
 
