@@ -1,8 +1,6 @@
 import React, {Component} from 'react'
 import {inject, observer} from 'mobx-react'
 import {observable, toJS} from 'mobx'
-import CSSModules from 'react-css-modules'
-import styles from './results.scss'
 import { whenRouted } from 'common/utils/withRouteHooks'
 import { withRouter } from 'react-router'
 import { searchStore } from 'stores'
@@ -12,8 +10,10 @@ import ResultsActions from './ResultsActions'
 import ResultsList from 'common/components/ResultsList'
 import Toolbar from 'common/components/Toolbar'
 import NoData from 'components/NoData'
-import remove from 'lodash/remove'
-import find from 'lodash/find'
+import {setCheckedStatus, setFavStatus} from 'common/utils/util'
+import {addToFavorites, clearCache} from 'common/services/apiService'
+import CSSModules from 'react-css-modules'
+import styles from './results.scss'
 
 @withRouter
 @whenRouted(({ params: { sort, tags } }) => {
@@ -39,36 +39,19 @@ export default class Results extends Component {
   }
 
   onCheck = (checked, value, isFavorite) => {
-    //note duplicate code with home.js . implement: util
-    if (checked) {
-      const found = find(this.checkedItems, item => {
-        return item.TenderID == value
-      })
-      if (!found) this.checkedItems.push({ TenderID: value, IsFavorite: isFavorite })
-    }
-    else {
-      remove(this.checkedItems, item => {
-        return item.TenderID === value
-      })
-    }
-    //console.log(this.checkedItems)
+    console.log('onCheck', checked, value, isFavorite)
+    setCheckedStatus(this.checkedItems, checked, value, isFavorite)
+    console.log(this.checkedItems)
   }
 
   onFav = (tenderID, add) => {
-    console.log('onFav', tenderID, add)
-    //implement: call api with item and relevant action (add\!add)
-    const found = find(this.checkedItems, item => {
-      return item.TenderID == tenderID && item.IsFavorite != add
-    })
-    if (found) {
-      //if item is in checkedItems array, need to update its fav state
-      remove(this.checkedItems, item => {
-        return item.TenderID === tenderID
-      })
-      //add the item again with new fav state
-      this.checkedItems.push({ TenderID: tenderID, IsFavorite: add })
-      //console.log('onFav', toJS(this.checkedItems))
-    }
+    //console.log('onFav', tenderID, add)
+    //call api with item and relevant action (add\!add)
+    const action = add ? 'Favorite_add' : 'Favorite_del'
+    addToFavorites(action, [tenderID])
+    clearCache()
+    setFavStatus(this.checkedItems, tenderID, add)
+    //console.log(this.checkedItems)
   }
 
   render() {

@@ -28,7 +28,7 @@ export default class HomeList extends React.Component {
             return chk.TenderID == item.TenderID
           })
           const checked = found ? true : false
-          const fav = found ? found.IsFavorite : false
+          const fav = found ? found.IsFavorite : item.IsFavorite
           return <Record
             key={index}
             item={item}

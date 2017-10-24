@@ -81,6 +81,10 @@ export function createUrl(relUrl, searchParams = {}, isApi = true) {
   return url
 }
 
+export function clearCache() {
+  cache.clear()
+}
+
 //TEST get data
 export async function getData(id) {
   /*return Promise.resolve(
@@ -157,4 +161,11 @@ export async function getMoreTenders() {
 
 export function me() {
   return apiFetch('Account/Me')
+}
+
+export function addToFavorites(action, infoList) {
+  return apiFetch('Favorites/AddRemoveFavorite', {searchParams: {
+    Action: action,
+    InfoList: infoList
+  }}, true)
 }

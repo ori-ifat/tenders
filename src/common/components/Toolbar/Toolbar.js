@@ -4,6 +4,7 @@ import { observer } from 'mobx-react'
 import { translate } from 'react-polyglot'
 import remove from 'lodash/remove'
 import find from 'lodash/find'
+import {addToFavorites, clearCache} from 'common/services/apiService'
 import CSSModules from 'react-css-modules'
 import styles from './Toolbar.scss'
 
@@ -30,7 +31,7 @@ export default class Toolbar extends React.Component {
   }
 
   addFavorites = () => {
-    console.log('addFavorites', this.props.checkedItems)
+    //console.log('addFavorites', this.props.checkedItems)
     const {checkedItems} = this.props
     const itemsToAdd = []
     //fill the items that will be sent to api
@@ -38,6 +39,7 @@ export default class Toolbar extends React.Component {
       if (!item.IsFavorite) itemsToAdd.push(item.TenderID)
     })
     //iterate over the relevant items, and change IsFavorite state on original array
+    //(this will cause the list to re-render, and show fav state on ResultsItem)
     itemsToAdd.map(tenderID => {
       const found = find(checkedItems, item => {
         return item.TenderID == tenderID
@@ -51,8 +53,10 @@ export default class Toolbar extends React.Component {
         checkedItems.push({ TenderID: tenderID, IsFavorite: true })
       }
     })
-    //implement: call api with items and add action
-    console.log(checkedItems, itemsToAdd)
+    //call api with items and add action
+    addToFavorites('Favorite_add', itemsToAdd)
+    clearCache()
+    //console.log(checkedItems, itemsToAdd)
   }
 
   render() {

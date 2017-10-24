@@ -1,6 +1,4 @@
 import React, {Component} from 'react'
-import CSSModules from 'react-css-modules'
-import styles from './home.scss'
 import SearchInput from 'components/SearchInput'
 import Test from 'components/Test'
 import {inject, observer} from 'mobx-react'
@@ -12,8 +10,10 @@ import { translate } from 'react-polyglot'
 import HomeTitle from './HomeTitle'
 import HomeList from './HomeList'
 import Toolbar from 'common/components/Toolbar'
-import remove from 'lodash/remove'
-import find from 'lodash/find'
+import {setCheckedStatus, setFavStatus} from 'common/utils/util'
+import {addToFavorites, clearCache} from 'common/services/apiService'
+import CSSModules from 'react-css-modules'
+import styles from './home.scss'
 
 @translate()
 @withRouter
@@ -39,34 +39,19 @@ export default class Home extends Component {
   }
 
   onCheck = (checked, value, isFavorite) => {
-    if (checked) {
-      const found = find(this.checkedItems, item => {
-        return item.TenderID == value
-      })      
-      if (!found) this.checkedItems.push({ TenderID: value, IsFavorite: isFavorite == 1 })
-    }
-    else {
-      remove(this.checkedItems, item => {
-        return item.TenderID === value
-      })
-    }
+    console.log('onCheck', checked, value, isFavorite)
+    setCheckedStatus(this.checkedItems, checked, value, isFavorite)
+    console.log(this.checkedItems)
   }
 
   onFav = (tenderID, add) => {
-    console.log('onFav', tenderID, add)
-    //implement: call api with item and relevant action (add\!add)
-    const found = find(this.checkedItems, item => {
-      return item.TenderID == tenderID && item.IsFavorite != add
-    })
-    if (found) {
-      //if item is in checkedItems array, need to update its fav state
-      remove(this.checkedItems, item => {
-        return item.TenderID === tenderID
-      })
-      //add the item again with new fav state
-      this.checkedItems.push({ TenderID: tenderID, IsFavorite: add })
-      //console.log('onFav', toJS(this.checkedItems))
-    }
+    //console.log('onFav', tenderID, add)
+    //call api with item and relevant action (add\!add)
+    const action = add ? 'Favorite_add' : 'Favorite_del'
+    addToFavorites(action, [tenderID])
+    clearCache()
+    setFavStatus(this.checkedItems, tenderID, add)
+    //console.log(this.checkedItems)
   }
 
   render() {
@@ -87,7 +72,10 @@ export default class Home extends Component {
               />
               <Banner banner={toJS(homeStore.banner)} />
               <h6 styleName="more-tenders-title">{t('home.moreTenders')}</h6>
-              <HomeList items={homeStore.resultsMore} />
+              <HomeList
+                items={homeStore.resultsMore}
+                onFav={this.onFav}
+              />
             </div>
           </div>
         </div>
