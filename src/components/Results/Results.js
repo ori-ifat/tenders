@@ -9,6 +9,7 @@ import ResultsTitle from './ResultsTitle'
 import ResultsActions from './ResultsActions'
 import ResultsList from 'common/components/ResultsList'
 import Toolbar from 'common/components/Toolbar'
+import ResultsItemDetails from 'common/components/ResultsItemDetails'
 import NoData from 'components/NoData'
 import {setCheckedStatus, setFavStatus} from 'common/utils/util'
 import {addToFavorites, clearCache} from 'common/services/apiService'
@@ -28,6 +29,7 @@ import styles from './results.scss'
 export default class Results extends Component {
 
   @observable checkedItems = []
+  @observable selectedTender = -1
 
   componentWillMount() {
     //console.log('mount')
@@ -54,6 +56,17 @@ export default class Results extends Component {
     //console.log(this.checkedItems)
   }
 
+  viewDetails = (tenderID) => {
+    //this.setState({selected: true})
+    //const { item: { TenderID } } = this.props
+    console.log('TenderID', tenderID)
+    this.selectedTender = tenderID
+  }
+
+  closeDetails = () => {
+    this.selectedTender = -1
+  }
+
   render() {
 
     const {searchStore, searchStore: {resultsLoading, resultsCount, tags}} = this.props
@@ -77,10 +90,16 @@ export default class Results extends Component {
                   loadMore={searchStore.loadNextResults}
                   onCheck={this.onCheck}
                   onFav={this.onFav}
+                  viewDetails={this.viewDetails}
                   checkedItems={this.checkedItems} />
               </div>
             </div>
             <Toolbar checkedItems={this.checkedItems} />
+            {this.selectedTender > -1 &&
+              <ResultsItemDetails
+                itemID={this.selectedTender}
+                onClose={this.closeDetails}
+              />}
           </div>
         }
       </div>

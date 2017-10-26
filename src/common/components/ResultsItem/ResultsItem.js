@@ -70,7 +70,7 @@ export default class ResultsItem extends React.Component {
               {oneDayLeft && <span styleName="label alert">{t('tender.oneDayLeft')}</span>}
               {twoDaysLeftTour && !oneDayLeftTour && <span styleName="label alert">{t('tender.twoDaysLeftTour')}</span>}
               {oneDayLeftTour && <span styleName="label alert">{t('tender.oneDayLeftTour')}</span>}
-              <h3 onClick={onClick} style={{cursor: 'pointer'}}>{item.Title}</h3>
+              <h3 onClick={() => onClick(item.TenderID)} style={{cursor: 'pointer'}}>{item.Title}</h3>
               <div styleName="tender_desc">
                 <p>{item.Summery}</p>
               </div>

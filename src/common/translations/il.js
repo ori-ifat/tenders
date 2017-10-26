@@ -54,7 +54,10 @@ export default {
     twoDaysLeft: 'הגשה בעוד יומיים',
     oneDayLeft: 'הגשה בעוד יום',
     twoDaysLeftTour: 'סיור קבלנים בעוד יומיים',
-    oneDayLeftTour: 'סיור קבלנים בעוד יום'
+    oneDayLeftTour: 'סיור קבלנים בעוד יום',
+    publisher: 'המפרסם',
+    delivery: 'הגשה',
+    details: 'פרטים'
   },
   toolbar: {
     selectedTenders: 'מכרזים נבחרו',

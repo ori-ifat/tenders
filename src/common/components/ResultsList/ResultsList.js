@@ -5,7 +5,8 @@ import { translate } from 'react-polyglot'
 import CSSModules from 'react-css-modules'
 import styles from './ResultsList.scss'
 import InfiniteScroll from 'react-infinite-scroller'
-import Record from 'common/components/Record'
+//import Record from 'common/components/Record'
+import ResultsItem from 'common/components/ResultsItem'
 import find from 'lodash/find'
 
 @translate()
@@ -18,6 +19,7 @@ export default class ResultsList extends React.Component {
     loadMore: func,
     onCheck: func,
     onFav: func,
+    viewDetails: func,
     checkedItems: object
   }
 
@@ -33,9 +35,18 @@ export default class ResultsList extends React.Component {
 
       const checked = found ? true : false
       const fav = found ? found.IsFavorite : item.IsFavorite
-      return <Record
+      /*return <Record
         key={index}
         item={item}
+        onCheck={this.props.onCheck}
+        onFav={this.props.onFav}
+        checked={checked}
+        fav={fav}
+      />*/
+      return <ResultsItem
+        key={index}
+        item={item}
+        onClick={this.props.viewDetails}
         onCheck={this.props.onCheck}
         onFav={this.props.onFav}
         checked={checked}

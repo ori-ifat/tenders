@@ -1,1 +1,51 @@
 @import '~app/global.scss';
+
+:global {
+  .react-viewer-footer {
+    display: none;
+  }
+
+  .modal-body {
+    font-size: 14px;
+  }
+}
+
+.view-details-wrapper {
+/*  position: absolute;
+  left: 20px;
+  width: 1000px;
+  height: 800px;
+  z-index: 1000;*/
+  background-color: whitesmoke;
+}
+
+.item_title {
+	/*margin-top: 4rem;*/
+	margin-top: 0;
+	font-size: 2.5rem;
+	color: $black;
+	span {
+		font-size: 2.15rem;
+	}
+}
+
+.clearfix {
+  overflow: auto;
+  zoom: 1;
+}
+
+.table-right {
+  width: 20%;
+  float:right;
+}
+
+.table-left {
+  width: 60%;
+  float:left;
+}
+
+.table-left-end {
+  width: 20%;
+  height:500px;
+  float:left;
+}

@@ -99,7 +99,9 @@ module.exports = {
       {
         test: /\.(png|gif|jpg|jpeg|eot|otf|woff|ttf|svg)?$/,
         loaders: ['url-loader'],
-        include: paths.src
+        include: [paths.src,
+          path.resolve(__dirname, 'node_modules/react-viewer/dist')
+        ]
       }
     ]
   }

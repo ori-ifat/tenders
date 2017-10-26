@@ -6,7 +6,11 @@ class Account {
   @observable me = {};
   @action.bound
   async loadProfile() {
-    this.me = await me()
+    //this.me = await me()
+    await me().then(profile => {
+      this.me = profile
+      console.log('Me', this.me)
+    })
   }
 }
 
