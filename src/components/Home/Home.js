@@ -10,6 +10,7 @@ import { translate } from 'react-polyglot'
 import HomeTitle from './HomeTitle'
 import HomeList from './HomeList'
 import Toolbar from 'common/components/Toolbar'
+import ResultsItemDetails from 'common/components/ResultsItemDetails'
 import {setCheckedStatus, setFavStatus} from 'common/utils/util'
 import {addToFavorites, clearCache} from 'common/services/apiService'
 import CSSModules from 'react-css-modules'
@@ -28,6 +29,7 @@ import styles from './home.scss'
 export default class Home extends Component {
 
   @observable checkedItems = []
+  @observable selectedTender = -1
 
   componentWillMount() {
     //console.log('mount')
@@ -54,6 +56,17 @@ export default class Home extends Component {
     //console.log(this.checkedItems)
   }
 
+  viewDetails = (tenderID) => {
+    //this.setState({selected: true})
+    //const { item: { TenderID } } = this.props
+    console.log('TenderID', tenderID)
+    this.selectedTender = tenderID
+  }
+
+  closeDetails = () => {
+    this.selectedTender = -1
+  }
+
   render() {
     const { homeStore, t } = this.props
 
@@ -68,18 +81,25 @@ export default class Home extends Component {
                 items={homeStore.results}
                 onCheck={this.onCheck}
                 onFav={this.onFav}
+                viewDetails={this.viewDetails}
                 checkedItems={this.checkedItems}
               />
               <Banner banner={toJS(homeStore.banner)} />
               <h6 styleName="more-tenders-title">{t('home.moreTenders')}</h6>
               <HomeList
                 items={homeStore.resultsMore}
+                viewDetails={this.viewDetails}
                 onFav={this.onFav}
               />
             </div>
           </div>
         </div>
         <Toolbar checkedItems={this.checkedItems} />
+        {this.selectedTender > -1 &&
+          <ResultsItemDetails
+            itemID={this.selectedTender}
+            onClose={this.closeDetails}
+          />}
       </div>
     )
   }

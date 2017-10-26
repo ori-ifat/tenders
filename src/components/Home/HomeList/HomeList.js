@@ -1,7 +1,8 @@
 import React from 'react'
 import { object, func, array } from 'prop-types'
 import { observer } from 'mobx-react'
-import Record from 'common/components/Record'
+//import Record from 'common/components/Record'
+import ResultsItem from 'common/components/ResultsItem'
 import find from 'lodash/find'
 import CSSModules from 'react-css-modules'
 import styles from './HomeList.scss'
@@ -17,23 +18,32 @@ export default class HomeList extends React.Component {
   }
 
   render() {
-    const { items, onCheck, onFav, checkedItems, t } = this.props
+    const { items, /*onCheck, onFav,*/ checkedItems, t } = this.props
 
     return (
       <div style={{marginBottom: '30px'}}>
         {items.map((item, index) => {
-          const { checkedItems, onCheck } = this.props
+          const { checkedItems /*, onCheck*/ } = this.props
           //const checked = checkedItems && checkedItems.filter(chk => chk.TenderID == item.TenderID).length > 0
           const found = find(checkedItems, chk => {
             return chk.TenderID == item.TenderID
           })
           const checked = found ? true : false
           const fav = found ? found.IsFavorite : item.IsFavorite
-          return <Record
+          /*return <Record
             key={index}
             item={item}
             onCheck={onCheck}
             onFav={onFav}
+            checked={checked}
+            fav={fav}
+          />*/
+          return <ResultsItem
+            key={index}
+            item={item}
+            onClick={this.props.viewDetails}
+            onCheck={this.props.onCheck}
+            onFav={this.props.onFav}
             checked={checked}
             fav={fav}
           />
