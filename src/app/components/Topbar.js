@@ -31,17 +31,11 @@ const navbar = [  {
 export default class Topbar extends Component {
 
   componentWillMount() {
-    setTimeout(() => {
-      //allow element to be created.
-      FoundationHelper.initElement('logout')
-    }, 200)
+    //console.log('mount')
   }
 
   componentWillReceiveProps(nextProps) {
-    setTimeout(() => {
-      //allow element to be created.
-      FoundationHelper.initElement('logout')
-    }, 200)
+    //console.log('receive')
   }
 
   navigate = route => () => {
@@ -58,6 +52,12 @@ export default class Topbar extends Component {
       accountStore.login('r314g', 'r314g', true)
       clearCache()
       this.navigate('/')
+      /* //not working. :(
+      setTimeout(() => {
+        //allow element to be created.
+        //console.log('init')
+        FoundationHelper.initElement('top_nav')
+      }, 200)*/
     }
   }
 
@@ -73,26 +73,26 @@ export default class Topbar extends Component {
 
     return (
       <div styleName="header">
-        <nav styleName="column row">
-          <div styleName="top-bar">
-            <div styleName="top-bar-right">
+        <nav className="column row">
+          <div className="top-bar" styleName="top-bar">
+            <div className="top-bar-right">
               <a onClick={this.navigate('/')}>
                 <img src={logoSrc} alt={t('nav.logoAlt')} id="logo" />
               </a>
             </div>
 
-            <div styleName="top-bar-left" style={{position: 'relative'}}>
+            <div className="top-bar-left" styleName="top-bar-left" style={{position: 'relative'}}>
               <div styleName="nav_icon_container" data-responsive-toggle="top_nav" data-hide-for="medium">
                 <button type="button" data-toggle="top_nav"><img src={navIconSrc} alt="" /></button>
               </div>
-              <ul styleName="dropdown vertical medium-horizontal menu" id="top_nav" data-dropdown-menu>
+              <ul className="dropdown vertical medium-horizontal menu" styleName="menu" id="top_nav" data-dropdown-menu>
                 {navbar.map((nav, index) =>
                   <li key={index}><a onClick={this.navigate(`${nav.link}`)}>{t(`nav.${nav.title}`)}</a></li>
                 ) }
                 <li styleName="">
                   <a onClick={this.login}><img src={userSrc} alt="" />{accountStore.profile ? accountStore.profile.userName : t('nav.pleaseLog')}</a>
                   {accountStore.profile &&
-                  <ul id="logout" styleName="submenu menu vertical" data-dropdown-menu>
+                  <ul id="logout" className="submenu menu vertical" styleName="menu" data-dropdown-menu>
                     <li><a onClick={this.logout}>{t('nav.logout')}</a></li>
                   </ul>}
                 </li>

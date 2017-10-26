@@ -53,8 +53,8 @@ export default class ResultsItemDetails extends React.Component {
     //for scroll pos of item
     const divTop = document.documentElement.scrollTop ? document.documentElement.scrollTop : document.body.scrollTop
     return (
-      <div styleName="reveal-overlay" style={{display: 'block'}}>
-        <div styleName="reveal" style={{display: 'block'}}>
+      <div className="reveal-overlay" style={{display: 'block'}}>
+        <div className="reveal" style={{display: 'block'}}>
           {/*<div>{item.TenderID} <a onClick={onClose}>close</a></div>*/}
           {!itemStore.resultsLoading &&
             <div styleName="view-details-wrapper" style={{top: (divTop + 10)}}>

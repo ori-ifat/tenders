@@ -64,18 +64,18 @@ export default class Toolbar extends React.Component {
     const toolBarStyle = checkedItems.length > 0 ? 'action_bar active' : 'action_bar'
     return (
       <div id="action_bar" styleName={toolBarStyle} >
-        <div styleName="grid-container">
+        <div className="grid-container">
 
           <div styleName="action_bar_wraper">
 
-            <div styleName="grid-x">
+            <div className="grid-x">
 
-              <div styleName="small-9 cell">
+              <div className="small-9 cell">
                 <span>{checkedItems.length} {t('toolbar.selectedTenders')}</span>
               </div>
 
-              <div styleName="small-3 cell">
-                <ul styleName="menu align-left">
+              <div className="small-3 cell">
+                <ul className="menu align-left" styleName="align-left">
                   <li><a onClick={this.email}><img src={emailSrc} alt={t('toolbar.email')} /></a></li>
                   <li><a onClick={this.print}><img src={printSrc} alt={t('toolbar.print')} /></a></li>
                   <li><a onClick={this.addFavorites}><img src={actionFavSrc} alt={t('toolbar.fav')} /></a></li>

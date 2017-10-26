@@ -15,13 +15,13 @@ class Account {
     //this.me = await me()
     me().then(profile => {
       this.profile = profile
-      console.log('Me', this.profile)
+      //console.log('Me', this.profile)
     })
   }
 
   @action.bound
   login(userName, password, rememberMe) {
-    return new Promise((resolve, reject) => {    
+    return new Promise((resolve, reject) => {
       login(userName, password, rememberMe).then(profile => {
         this.profile = profile
         console.log('login', this.profile)

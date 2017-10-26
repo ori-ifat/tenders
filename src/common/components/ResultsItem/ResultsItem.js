@@ -61,8 +61,8 @@ export default class ResultsItem extends React.Component {
 
     return (
       <div styleName={tenderStyle}>
-        <div styleName="grid-x">
-          <div styleName="small-9 cell">
+        <div className="grid-x">
+          <div className="small-9 cell">
             {onCheck && <Checkbox checked={checked} item={cbItem} onChange={onCheck} />}
             <div styleName="tender_txt_wraper">
               {item.TenderType == t('tender.exclusive') && <span styleName="label">{t('tender.exclusive')}</span>}
@@ -86,9 +86,9 @@ export default class ResultsItem extends React.Component {
             </div>
 
           </div>
-          <div styleName="small-3 cell">
+          <div className="small-3 cell">
             <div styleName="tender_action_wraper">
-              <ul styleName="no-bullet">
+              <ul className="no-bullet">
                 <li><a href="#"><img src={timeSrc} alt="" />24.8.2017</a></li>
                 {onFav &&
                   <li>

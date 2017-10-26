@@ -39,18 +39,18 @@ export default class ResultsActions extends React.Component {
 
     return (
       <div styleName="select_all">
-        <div styleName="grid-x">
-          <div styleName="small-6 cell">
+        <div className="grid-x">
+          <div className="small-6 cell">
             {/*<div styleName="checkbox">
               <input type="checkbox" />
               <label>{t('results.selectAll')}</label>
             </div>*/}
           </div>
-          <div styleName="small-6 cell">
-            <ul styleName="dropdown menu align-left sort" id="sort" data-dropdown-menu data-disable-hover="true" data-click-open="true">
+          <div className="small-6 cell">
+            <ul className="dropdown menu align-left sort" styleName="sort" id="sort" data-dropdown-menu data-disable-hover="true" data-click-open="true">
               <li>
                 <a href="#">{t('results.sortBy')}: {sortBy}</a>
-                <ul styleName="menu">
+                <ul className="menu">
                   <li><a onClick={() => this.changeSort('publishDate')}>{t('results.publishDate')}</a></li>
                   <li><a onClick={() => this.changeSort('infoDate')}>{t('results.infoDate')}</a></li>
                 </ul>

@@ -72,8 +72,8 @@ export default class Home extends Component {
 
     return (
       <div>
-        <div styleName="row">
-          <div styleName="column large-12">
+        <div className="row">
+          <div className="column large-12">
             <div styleName="search-div" >
               <SearchInput />
               {<HomeTitle />}

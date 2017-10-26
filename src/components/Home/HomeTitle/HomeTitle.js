@@ -18,8 +18,8 @@ export default class HomeTitle extends React.Component {
     const user = profile ? profile.userName : ''
 
     return (
-      <div styleName="row">
-        <div styleName="large-12 columns">
+      <div className="row">
+        <div className="large-12 columns">
           {!resultsLoading &&
             <div>
               <h5 styleName="user-greet">{t('home.greet', {user})}</h5>

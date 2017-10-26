@@ -37,7 +37,7 @@ export default class Checkbox extends React.Component {
 
     return (
       <div styleName={cbStyle}>
-        <div styleName="checkbox">
+        <div className="checkbox">
           <input type="checkbox"
             className="checkbox_tender"
             checked={checked}

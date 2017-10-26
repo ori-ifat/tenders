@@ -78,11 +78,11 @@ export default class Results extends Component {
         {resultsCount > 0 &&
           <div>
             <ResultsTitle />
-            <div styleName="row">
-              <div styleName="columns large-3">
+            <div className="row">
+              <div className="columns large-3">
                 <hr />
               </div>
-              <div styleName="columns large-9">
+              <div className="columns large-9">
                 <hr />
                 <ResultsActions />
                 <ResultsList

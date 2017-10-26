@@ -15,8 +15,8 @@ export default class ResultsTitle extends React.Component {
     const { resultsLoading, resultsCount } = searchStore
 
     return (
-      <div styleName="row">
-        <div styleName="large-12 columns">
+      <div className="row">
+        <div className="large-12 columns">
           {!resultsLoading &&
             <h1 styleName="results_summery"><span>{resultsCount}</span> {t('results.title')} </h1>
           }

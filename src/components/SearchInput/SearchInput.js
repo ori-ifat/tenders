@@ -98,8 +98,8 @@ export default class SearchInput extends Component {
     const {t} = this.props
 
     return (
-      <div styleName="row">
-        <div styleName="medium-12 columns">
+      <div className="row">
+        <div className="medium-12 columns">
           <div id="searchbox_wrapper">
             <Select.Async
               styleName="select-searchbox"

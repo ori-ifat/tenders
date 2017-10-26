@@ -10,8 +10,8 @@ export default class Search extends Component {
 
   render() {
     return (
-      <div styleName="row">
-        <div styleName="column large-12">
+      <div className="row">
+        <div className="column large-12">
           <div styleName="search-div" >
             <SearchInput />
             {/*<Test />*/}
