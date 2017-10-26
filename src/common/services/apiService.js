@@ -149,6 +149,14 @@ export function me() {
   return apiFetch('Account/Me')
 }
 
+export function login(userName, password, rememberMe) {
+  return apiFetch('Account/Login', {body: {userName, password, rememberMe}, method: 'POST' }, true)
+}
+
+export function logout() {
+  return apiFetch('Account/Logout', {}, true)
+}
+
 export async function getLastTenders(lastSeenTenderID) {
   return apiFetch('Tender/GetLastTenders', {searchParams: {
     LastSeenTenderID: lastSeenTenderID

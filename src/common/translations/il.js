@@ -14,12 +14,13 @@ export default {
     contactus: 'צור קשר',
     publish: 'פרסם מכרז',
     fakeUser: 'ורד קמין',
+    pleaseLog: 'התחבר',
     logout: 'התנתק',
     test: 'טסט',
     search: 'חיפוש'
   },
   home: {
-    greet: 'שלום שימי,',
+    greet: 'שלום %{user},',
     title: 'מצאנו לך %{count} הזדמנויות עסקיות חדשות',
     moreTenders: 'מכרזים נוספים עבורך:',
     noResults: 'לא נמצאו עבורך הזדמנויות עסקיות חדשות'
