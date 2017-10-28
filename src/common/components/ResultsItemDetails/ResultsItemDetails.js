@@ -54,34 +54,69 @@ export default class ResultsItemDetails extends React.Component {
     const divTop = document.documentElement.scrollTop ? document.documentElement.scrollTop : document.body.scrollTop
     return (
       <div className="reveal-overlay" style={{display: 'block'}}>
-        <div className="reveal" style={{display: 'block'}}>
+        <div className="reveal large" style={{display: 'block'}}>
           {/*<div>{item.TenderID} <a onClick={onClose}>close</a></div>*/}
           {!itemStore.resultsLoading &&
             <div styleName="view-details-wrapper" style={{top: (divTop + 10)}}>
-              {item.TenderType == t('tender.exclusive') && <span styleName="label">{t('tender.exclusive')}</span>}
-              {twoDaysLeft && !oneDayLeft && <span styleName="label alert">{t('tender.twoDaysLeft')}</span>}
-              {oneDayLeft && <span styleName="label alert">{t('tender.oneDayLeft')}</span>}
-              {twoDaysLeftTour && !oneDayLeftTour && <span styleName="label alert">{t('tender.twoDaysLeftTour')}</span>}
-              {oneDayLeftTour && <span styleName="label alert">{t('tender.oneDayLeftTour')}</span>}
-              <h1 styleName="item_title">{item.Title}</h1>
-              <h6>{t('tender.publishedAt')}: {publishDate} &middot; {item.TenderType} &middot; {item.TenderID}</h6>
-              <hr />
-              <div styleName="clearfix">
-                <div styleName="table-left-end"><a onClick={this.showViewer}><img src={thumbSrc} /></a></div>
-                <div styleName="table-right">{t('tender.publisher')}
-                </div>
-                <div styleName="table-left">{item.Publisher}
-                </div>
-                <div styleName="table-right">{t('tender.delivery')}
-                </div>
-                <div styleName="table-left">{infoDate}
-                </div>
-                <div styleName="table-right">{t('tender.details')}
-                </div>
-                <div styleName="table-left">{item.Summery}
+              <div className="grid-x">
+                <div className="large-12 cell">
+                  {item.TenderType == t('tender.exclusive') && <span styleName="label">{t('tender.exclusive')}</span>}
+                  {twoDaysLeft && !oneDayLeft && <span styleName="label alert">{t('tender.twoDaysLeft')}</span>}
+                  {oneDayLeft && <span styleName="label alert">{t('tender.oneDayLeft')}</span>}
+                  {twoDaysLeftTour && !oneDayLeftTour && <span styleName="label alert">{t('tender.twoDaysLeftTour')}</span>}
+                  {oneDayLeftTour && <span styleName="label alert">{t('tender.oneDayLeftTour')}</span>}
+                  <h1 styleName="item_title">{item.Title}</h1>
+                  <h6 styleName="item_meta">{t('tender.publishedAt')}: {publishDate} &middot; {item.TenderType} &middot; {item.TenderID}</h6>
+                  <hr />
                 </div>
               </div>
-              <a onClick={onClose}>close</a>
+
+              <div className="grid-x" styleName="tender_data">
+                <div className="large-9 cell">
+                    <div className="grid-x">
+                      <div className="medium-3 cell"> 
+                        <div styleName="item_lable">{t('tender.publisher')}</div>
+                      </div>
+                      <div className="medium-9 cell">
+                      <div styleName="item_key">{item.Publisher} </div>
+                      </div>
+                    </div>
+
+                    <div className="grid-x">
+                      <div className="medium-3 cell">
+                        <div styleName="item_lable">{t('tender.publisher')} </div>
+                      </div>
+                      <div className="medium-9 cell">
+                        <div styleName="item_key">{infoDate}</div>
+                      </div>
+                    </div>
+
+                    <div className="grid-x">
+                      <div className="medium-3 cell">
+                        <div styleName="item_lable">{t('tender.details')} </div>
+                      </div>
+                      <div className="medium-9 cell">
+                        <div styleName="item_key">{item.Summery}</div>
+                      </div>
+                    </div>
+
+                </div>
+                <div className="large-3 cell">
+                  <a onClick={this.showViewer}><img styleName="thender_thumb"  src={thumbSrc} /></a>
+                  <ul className="no-bullet" styleName="tender_actions">
+                    <li><a>למסמכי המכרז</a></li>
+                    <li><a>הדפסה</a></li>
+                    <li><a>שלח במייל</a></li>
+                    <li><a>צור התראה</a></li>
+                  </ul>
+                </div>
+                
+
+              </div>
+              <button className="close-button" data-close aria-label="Close modal" type="button" onClick={onClose}>
+                  <span aria-hidden="true">&times;</span>
+              </button>
+              
               {this.showImage &&
                 <div style={{position: 'absolute', left: 0, top: 0, width: '400px'}}>
                   <a style={{backgroundColor: 'magenta'}} onClick={this.closeViewer}>((X))</a>

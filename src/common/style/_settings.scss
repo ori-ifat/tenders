@@ -338,7 +338,7 @@ $card-margin-bottom: $global-margin;
 // 15. Close Button
 // ----------------
 
-$closebutton-position: right top;
+$closebutton-position: left top;
 $closebutton-offset-horizontal: (
   small: 0.66rem,
   medium: 1rem,
@@ -735,7 +735,7 @@ $reveal-padding: $global-padding;
 $reveal-border: 1px solid $medium-gray;
 $reveal-radius: $global-radius;
 $reveal-zindex: 1005;
-$reveal-overlay-background: rgba($black, 0.45);
+$reveal-overlay-background: rgba(#000, 0.6);
 
 // 48. Slider
 // ----------
