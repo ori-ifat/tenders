@@ -7,46 +7,82 @@
   }
 
   .modal-body {
-    font-size: 14px;
+    
   }
 }
 
-.view-details-wrapper {
-/*  position: absolute;
-  left: 20px;
-  width: 1000px;
-  height: 800px;
-  z-index: 1000;*/
-  background-color: whitesmoke;
+.item_lable {
+  padding: 0.5rem;
+  background-color: #EAEAEA;
+  height: 100%;
+  border-bottom: 1px solid #fff;
 }
+
+.item_key {
+  padding: 0.5rem 1rem 0.5rem 3rem;
+}
+
+.item_meta {
+  font-family: 'Heebo', sans-serif;
+  margin-bottom: 1rem;
+  color: $dark-gray;
+}
+
+.view-details-wrapper {
+  padding:0.5rem 1.5rem;
+}
+
+ul.tender_actions {
+  margin-top: 1rem;
+  li {
+    padding: 0.5rem;
+    border-bottom: 1px solid $light-gray;
+    a {
+      color: $dark-gray;
+    }
+  }
+
+}
+
+
 
 .item_title {
 	/*margin-top: 4rem;*/
 	margin-top: 0;
-	font-size: 2.5rem;
+  margin-bottom: 0.5rem;
+  margin-left: 1rem;
+	font-size: 2rem;
+  font-weight: 500;
+  line-height: 1.125;
 	color: $black;
+  
 	span {
 		font-size: 2.15rem;
 	}
 }
 
-.clearfix {
-  overflow: auto;
-  zoom: 1;
+.thender_thumb {
+  width: 100%;
 }
 
-.table-right {
-  width: 20%;
-  float:right;
-}
 
-.table-left {
-  width: 60%;
-  float:left;
+
+
+
+
+
+
+
+.tender_data {
+  margin-top: 1.5rem;
 }
 
 .table-left-end {
   width: 20%;
-  height:500px;
-  float:left;
 }
+
+.view-details-wrapper {
+  background-color: #fff;
+}
+
+
