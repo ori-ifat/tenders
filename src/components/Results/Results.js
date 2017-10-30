@@ -11,8 +11,9 @@ import ResultsList from 'common/components/ResultsList'
 import Toolbar from 'common/components/Toolbar'
 import ResultsItemDetails from 'common/components/ResultsItemDetails'
 import NoData from 'components/NoData'
-import {setCheckedStatus, setFavStatus} from 'common/utils/util'
+import {setCheckedStatus, setFavStatus, getImageUrl} from 'common/utils/util'
 import {addToFavorites, clearCache} from 'common/services/apiService'
+import ImageView from 'common/components/ImageView'
 import CSSModules from 'react-css-modules'
 import styles from './results.scss'
 
@@ -30,6 +31,9 @@ export default class Results extends Component {
 
   @observable checkedItems = []
   @observable selectedTender = -1
+  @observable showImage = false
+  @observable imageUrl = ''
+  @observable imageTitle = ''
 
   componentWillMount() {
     //console.log('mount')
@@ -41,9 +45,9 @@ export default class Results extends Component {
   }
 
   onCheck = (checked, value, isFavorite) => {
-    console.log('onCheck', checked, value, isFavorite)
+    //console.log('onCheck', checked, value, isFavorite)
     setCheckedStatus(this.checkedItems, checked, value, isFavorite)
-    console.log(this.checkedItems)
+    //console.log(this.checkedItems)
   }
 
   onFav = (tenderID, add) => {
@@ -65,6 +69,19 @@ export default class Results extends Component {
 
   closeDetails = () => {
     this.selectedTender = -1
+  }
+
+  showViewer = (fileName, title) => {
+    const url = getImageUrl(fileName)
+    this.imageUrl = url
+    this.imageTitle = title
+    this.showImage = true
+    document.body.style.overflowY = 'hidden'
+  }
+
+  closeViewer = () => {
+    this.showImage = false
+    document.body.style.overflowY = 'visible'
   }
 
   render() {
@@ -95,11 +112,19 @@ export default class Results extends Component {
               </div>
             </div>
             <Toolbar checkedItems={this.checkedItems} />
-            {this.selectedTender > -1 &&
+            {this.selectedTender > -1 && !this.showImage &&
               <ResultsItemDetails
                 itemID={this.selectedTender}
                 onClose={this.closeDetails}
+                showViewer={this.showViewer}
               />}
+            {this.selectedTender > -1 && this.showImage &&
+              <ImageView
+                onClose={this.closeViewer}
+                url={this.imageUrl}
+                title={this.imageTitle}
+              />
+            }
           </div>
         }
       </div>

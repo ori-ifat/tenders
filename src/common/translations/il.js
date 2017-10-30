@@ -57,8 +57,16 @@ export default {
     twoDaysLeftTour: 'סיור קבלנים בעוד יומיים',
     oneDayLeftTour: 'סיור קבלנים בעוד יום',
     publisher: 'המפרסם',
-    delivery: 'הגשה',
-    details: 'פרטים'
+    delivery: 'מועד ההגשה',
+    tourDetails: 'סיור קבלנים',
+    tenderConditions: 'תנאי סף למכרז',
+    subSubjects: 'סיווגים',
+    details: 'פרטים',
+    links: 'מסמכים מקושרים למכרז',
+    toTenderDetails: 'למסמכי המכרז',
+    print: 'הדפסה',
+    email: 'שלח במייל',
+    remind: 'צור התראה'
   },
   toolbar: {
     selectedTenders: 'מכרזים נבחרו',

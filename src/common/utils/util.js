@@ -28,3 +28,12 @@ export function setFavStatus(checkedItems, tenderID, add) {
     checkedItems.push({ TenderID: tenderID, IsFavorite: add })
   }
 }
+
+export function getImageUrl(fileName) {
+  const cleanFileName = fileName.replace(/\\/g, '/').replace(/\/\/int_fs\/Clips/g, '')
+  const url = cleanFileName.indexOf('ColorClp') > -1 || cleanFileName.indexOf('ClipsPdf') > -1 ?
+    `http://www.ifatmediasite.com/CustomerMedia/ClipsImages${cleanFileName}` :
+    ''
+  console.log('getImageUrl', url)
+  return url
+}

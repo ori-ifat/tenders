@@ -3,7 +3,8 @@ import { inject, observer } from 'mobx-react'
 import {observable, toJS} from 'mobx'
 import { translate } from 'react-polyglot'
 import moment from 'moment'
-import ImageViewer from 'common/components/ImageViewer'
+import ImageView from 'common/components/ImageView'
+import Row from './Row'
 import CSSModules from 'react-css-modules'
 import styles from './ResultsItemDetails.scss'
 
@@ -16,8 +17,6 @@ const thumbSrc = req('./thumb.jpg')
 @observer
 export default class ResultsItemDetails extends React.Component {
 
-  @observable showImage = false
-
   componentWillMount() {
     const {itemStore, itemID} = this.props
     itemStore.loadTender(itemID)
@@ -26,14 +25,6 @@ export default class ResultsItemDetails extends React.Component {
   componentWillReceiveProps(nextProps, nextState) {
     const {itemStore, itemID} = nextProps
     itemStore.loadTender(itemID)
-  }
-
-  showViewer = () => {
-    this.showImage = true
-  }
-
-  closeViewer = () => {
-    this.showImage = false
   }
 
   render() {
@@ -50,12 +41,13 @@ export default class ResultsItemDetails extends React.Component {
     //tourDate
     const twoDaysLeftTour = moment(item.TourDate) > moment() && moment(item.TourDate) < moment().add(2, 'days')
     const oneDayLeftTour = moment(item.TourDate) > moment() && moment(item.TourDate) < moment().add(1, 'days')
+    //fileName
+    const fileName = item.File ? item.File.FileName : ''
     //for scroll pos of item
     const divTop = document.documentElement.scrollTop ? document.documentElement.scrollTop : document.body.scrollTop
     return (
       <div className="reveal-overlay" style={{display: 'block'}}>
         <div className="reveal large" style={{display: 'block'}}>
-          {/*<div>{item.TenderID} <a onClick={onClose}>close</a></div>*/}
           {!itemStore.resultsLoading &&
             <div styleName="view-details-wrapper" style={{top: (divTop + 10)}}>
               <div className="grid-x">
@@ -73,58 +65,51 @@ export default class ResultsItemDetails extends React.Component {
 
               <div className="grid-x" styleName="tender_data">
                 <div className="large-9 cell">
-                    <div className="grid-x">
-                      <div className="medium-3 cell"> 
-                        <div styleName="item_lable">{t('tender.publisher')}</div>
+                  <Row label={t('tender.publisher')} data={item.Publisher} />
+                  <Row label={t('tender.delivery')} data={infoDate} />
+                  <Row label={t('tender.details')} data={item.Summery} />
+                  {
+                    item.TourDetails &&
+                    <Row label={t('tender.tourDetails')} data={item.TourDetails} />
+                  }
+                  {
+                    item.TenderConditions &&
+                    <Row label={t('tender.tenderConditions')} data={item.TenderConditions} />
+                  }
+                  {
+                    item.SubSubjects &&
+                    <Row label={t('tender.subSubjects')} data={item.SubSubjects} />
+                  }
+                  {
+                    item.TD.length > 0 &&
+                    <Row label={t('tender.links')} data="&nbsp;" />
+                  }
+                  {
+                    item.TD.map((link, index) => <div key={index}>
+                      <div className="grid-x">
+                        <div className="medium-3 cell">
+                          &nbsp;
+                        </div>
+                        <div className="medium-9 cell">
+                          <div styleName="item_key"><a href={link.DucuentLink} target="_blank">{link.DucuentName}</a></div>
+                        </div>
                       </div>
-                      <div className="medium-9 cell">
-                      <div styleName="item_key">{item.Publisher} </div>
-                      </div>
-                    </div>
-
-                    <div className="grid-x">
-                      <div className="medium-3 cell">
-                        <div styleName="item_lable">{t('tender.publisher')} </div>
-                      </div>
-                      <div className="medium-9 cell">
-                        <div styleName="item_key">{infoDate}</div>
-                      </div>
-                    </div>
-
-                    <div className="grid-x">
-                      <div className="medium-3 cell">
-                        <div styleName="item_lable">{t('tender.details')} </div>
-                      </div>
-                      <div className="medium-9 cell">
-                        <div styleName="item_key">{item.Summery}</div>
-                      </div>
-                    </div>
-
+                    </div>)
+                  }
                 </div>
                 <div className="large-3 cell">
-                  <a onClick={this.showViewer}><img styleName="thender_thumb"  src={thumbSrc} /></a>
+                  {fileName != '' && <a onClick={() => this.props.showViewer(fileName, item.Title)}><img styleName="thender_thumb"  src={thumbSrc} /></a>}
                   <ul className="no-bullet" styleName="tender_actions">
-                    <li><a>למסמכי המכרז</a></li>
-                    <li><a>הדפסה</a></li>
-                    <li><a>שלח במייל</a></li>
-                    <li><a>צור התראה</a></li>
+                    <li><a>{t('tender.toTenderDetails')}</a></li>
+                    <li><a>{t('tender.print')}</a></li>
+                    <li><a>{t('tender.email')}</a></li>
+                    <li><a>{t('tender.remind')}</a></li>
                   </ul>
                 </div>
-                
-
               </div>
               <button className="close-button" data-close aria-label="Close modal" type="button" onClick={onClose}>
-                  <span aria-hidden="true">&times;</span>
+                <span aria-hidden="true">&times;</span>
               </button>
-              
-              {this.showImage &&
-                <div style={{position: 'absolute', left: 0, top: 0, width: '400px'}}>
-                  <a style={{backgroundColor: 'magenta'}} onClick={this.closeViewer}>((X))</a>
-                  <div style={{position: 'absolute', left: 0, top: 0, width: '300px'}}>
-                    <ImageViewer top={(divTop + 10)} />
-                  </div>
-                </div>
-              }
             </div>
           }
           {itemStore.resultsLoading && <div>Loading...</div>}

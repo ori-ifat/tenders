@@ -1,16 +1,6 @@
 //@import '~app/global.scss';
 @import '~common/style/_settings.scss';
 
-:global {
-  .react-viewer-footer {
-    display: none;
-  }
-
-  .modal-body {
-    
-  }
-}
-
 .item_lable {
   padding: 0.5rem;
   background-color: #EAEAEA;
@@ -55,7 +45,7 @@ ul.tender_actions {
   font-weight: 500;
   line-height: 1.125;
 	color: $black;
-  
+
 	span {
 		font-size: 2.15rem;
 	}
@@ -84,5 +74,3 @@ ul.tender_actions {
 .view-details-wrapper {
   background-color: #fff;
 }
-
-
