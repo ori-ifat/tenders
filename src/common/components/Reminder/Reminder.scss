@@ -1,0 +1,29 @@
+.clearfix {
+  overflow: auto;
+  zoom: 1;
+}
+
+.date {
+  float: right;
+  width: 50%;
+  padding-left: 5px;
+}
+
+.time {
+  float: left;
+  width: 50%
+}
+
+.button-container {
+  text-align: left;
+}
+
+.button-cancel {
+  margin-left: 30px;
+}
+
+.button-submit {
+  background-color: #34b44f;
+  color: white;
+  padding: 7px;
+}

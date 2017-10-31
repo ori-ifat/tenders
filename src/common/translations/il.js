@@ -66,7 +66,8 @@ export default {
     toTenderDetails: 'למסמכי המכרז',
     print: 'הדפסה',
     email: 'שלח במייל',
-    remind: 'צור התראה'
+    remind: 'צור התראה',
+    addReminder: 'הוסף תזכורת'
   },
   toolbar: {
     selectedTenders: 'מכרזים נבחרו',
@@ -75,5 +76,15 @@ export default {
     fav: 'הוסף למועדפים',
     emailSubject: 'משלוח עבורך מיפעת מכרזים',
     emailBody: 'לצפיה במכרזים, לחצו כאן: http://www.tenders.co.il/DistAgent/DistAgent.aspx?uid=%{uid}'
+  },
+  reminder: {
+    title: 'הוספת תזכורת',
+    subject: 'נושא',
+    date: 'תאריך',
+    time: 'שעה',
+    delivery: 'הגשה ב-%{dateVal}',
+    remark: 'הערה',
+    cancel: 'בטל',
+    submit: 'שמור תזכורת'
   }
 }

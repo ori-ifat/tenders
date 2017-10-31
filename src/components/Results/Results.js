@@ -7,9 +7,10 @@ import { searchStore } from 'stores'
 import SearchInput from 'components/SearchInput'
 import ResultsTitle from './ResultsTitle'
 import ResultsActions from './ResultsActions'
-import ResultsList from 'common/components/ResultsList'
+import ResultsList from './ResultsList'
 import Toolbar from 'common/components/Toolbar'
 import ResultsItemDetails from 'common/components/ResultsItemDetails'
+import Reminder from 'common/components/Reminder'
 import NoData from 'components/NoData'
 import {setCheckedStatus, setFavStatus, getImageUrl} from 'common/utils/util'
 import {addToFavorites, clearCache} from 'common/services/apiService'
@@ -34,6 +35,9 @@ export default class Results extends Component {
   @observable showImage = false
   @observable imageUrl = ''
   @observable imageTitle = ''
+  @observable reminderItem = -1
+  @observable reminderTitle = ''
+  @observable reminderDate = null
 
   componentWillMount() {
     //console.log('mount')
@@ -88,6 +92,18 @@ export default class Results extends Component {
     document.body.style.overflowY = 'visible'
   }
 
+  addReminder = (tenderID, title, date) => {
+    this.reminderItem = tenderID
+    this.reminderTitle = title
+    this.reminderDate = date
+  }
+
+  cancelReminder = () => {
+    this.reminderItem = -1
+    this.reminderTitle = ''
+    this.reminderDate = null
+  }
+
   render() {
 
     const {searchStore, searchStore: {resultsLoading, resultsCount, tags}} = this.props
@@ -112,6 +128,7 @@ export default class Results extends Component {
                   onCheck={this.onCheck}
                   onFav={this.onFav}
                   viewDetails={this.viewDetails}
+                  addReminder={this.addReminder}
                   checkedItems={this.checkedItems} />
               </div>
             </div>
@@ -130,6 +147,14 @@ export default class Results extends Component {
                 onClose={this.closeViewer}
                 url={this.imageUrl}
                 title={this.imageTitle}
+              />
+            }
+            {this.reminderItem > -1 &&
+              <Reminder
+                tenderID={this.reminderItem}
+                onCancel={this.cancelReminder}
+                title={this.reminderTitle}
+                date={this.reminderDate}
               />
             }
           </div>

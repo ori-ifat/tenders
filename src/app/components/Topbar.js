@@ -70,7 +70,7 @@ export default class Topbar extends Component {
 
   render() {
     const {accountStore, t} = this.props
-
+    const loginLabel = accountStore.profile ? decodeURIComponent(accountStore.profile.contactName) : t('nav.pleaseLog')
     return (
       <div styleName="header">
         <nav className="column row">
@@ -90,7 +90,7 @@ export default class Topbar extends Component {
                   <li key={index}><a onClick={this.navigate(`${nav.link}`)}>{t(`nav.${nav.title}`)}</a></li>
                 ) }
                 <li styleName="">
-                  <a onClick={this.login}><img src={userSrc} alt="" />{accountStore.profile ? accountStore.profile.userName : t('nav.pleaseLog')}</a>
+                  <a onClick={this.login}><img src={userSrc} alt="" />{loginLabel}</a>
                   {accountStore.profile &&
                   <ul id="logout" className="submenu menu vertical" styleName="menu" data-dropdown-menu>
                     <li><a onClick={this.logout}>{t('nav.logout')}</a></li>

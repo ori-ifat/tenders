@@ -11,6 +11,7 @@ import HomeTitle from './HomeTitle'
 import HomeList from './HomeList'
 import Toolbar from 'common/components/Toolbar'
 import ResultsItemDetails from 'common/components/ResultsItemDetails'
+import Reminder from 'common/components/Reminder'
 import {setCheckedStatus, setFavStatus, getImageUrl} from 'common/utils/util'
 import {addToFavorites, clearCache} from 'common/services/apiService'
 import ImageView from 'common/components/ImageView'
@@ -34,6 +35,9 @@ export default class Home extends Component {
   @observable showImage = false
   @observable imageUrl = ''
   @observable imageTitle = ''
+  @observable reminderItem = -1
+  @observable reminderTitle = ''
+  @observable reminderDate = null
 
   componentWillMount() {
     //console.log('mount')
@@ -88,6 +92,18 @@ export default class Home extends Component {
     document.body.style.overflowY = 'visible'
   }
 
+  addReminder = (tenderID, title, date) => {
+    this.reminderItem = tenderID
+    this.reminderTitle = title
+    this.reminderDate = date
+  }
+
+  cancelReminder = () => {
+    this.reminderItem = -1
+    this.reminderTitle = ''
+    this.reminderDate = null
+  }
+
   render() {
     const { homeStore, t } = this.props
 
@@ -97,13 +113,14 @@ export default class Home extends Component {
           <div className="column large-12">
             <div styleName="search-div" >
               <SearchInput />
-              {<HomeTitle />}
+              <HomeTitle />
               <HomeList
                 items={homeStore.results}
                 onCheck={this.onCheck}
                 onFav={this.onFav}
                 viewDetails={this.viewDetails}
                 checkedItems={this.checkedItems}
+                addReminder={this.addReminder}
               />
               <Banner banner={toJS(homeStore.banner)} />
               <h6 styleName="more-tenders-title">{t('home.moreTenders')}</h6>
@@ -130,6 +147,14 @@ export default class Home extends Component {
             onClose={this.closeViewer}
             url={this.imageUrl}
             title={this.imageTitle}
+          />
+        }
+        {this.reminderItem > -1 &&
+          <Reminder
+            tenderID={this.reminderItem}
+            onCancel={this.cancelReminder}
+            title={this.reminderTitle}
+            date={this.reminderDate}
           />
         }
       </div>

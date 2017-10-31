@@ -23,6 +23,7 @@ export default class ResultsItem extends React.Component {
     onClick: func,
     onCheck: func,
     onFav: func,
+    addReminder: func,
     checked: bool,
     fav: bool
   }
@@ -47,7 +48,7 @@ export default class ResultsItem extends React.Component {
   }
 
   render() {
-    const { item, onClick, onCheck, checked, onFav, t } = this.props
+    const { item, onClick, onCheck, checked, onFav, addReminder, t } = this.props
     const cbItem = Object.assign({}, item, {IsFavorite: this.IsFavorite}) //merge this.IsFavorite to current item
 
     const publishDate = item.PublishDate != null ? moment(item.PublishDate).format('DD-MM-YYYY') : t('tender.noDate')
@@ -89,7 +90,10 @@ export default class ResultsItem extends React.Component {
           <div className="small-3 cell">
             <div styleName="tender_action_wraper">
               <ul className="no-bullet">
-                <li><a href="#"><img src={timeSrc} alt="" />24.8.2017</a></li>
+                <li><a onClick={() => addReminder(item.TenderID, item.Title, item.InfoDate)}><img src={timeSrc} alt="" />
+                  {item.ReminderDate ?
+                    moment(item.ReminderDate).format('DD-MM-YYYY') :
+                    t('tender.addReminder')}</a></li>
                 {onFav &&
                   <li>
                     <a onClick={this.addFav}>

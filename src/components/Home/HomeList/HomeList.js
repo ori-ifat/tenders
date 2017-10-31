@@ -13,6 +13,7 @@ export default class HomeList extends React.Component {
     item: object,
     onCheck: func,
     onFav: func,
+    addReminder: func,
     checkedItems: object
   }
 
@@ -22,7 +23,7 @@ export default class HomeList extends React.Component {
     return (
       <div style={{marginBottom: '30px'}}>
         {items.map((item, index) => {
-          const { checkedItems } = this.props          
+          const { checkedItems } = this.props
           const found = find(checkedItems, chk => {
             return chk.TenderID == item.TenderID
           })
@@ -35,6 +36,7 @@ export default class HomeList extends React.Component {
             onClick={this.props.viewDetails}
             onCheck={this.props.onCheck}
             onFav={this.props.onFav}
+            addReminder={this.props.addReminder}
             checked={checked}
             fav={fav}
           />

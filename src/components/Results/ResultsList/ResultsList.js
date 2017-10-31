@@ -19,14 +19,15 @@ export default class ResultsList extends React.Component {
     onCheck: func,
     onFav: func,
     viewDetails: func,
+    addReminder: func,
     checkedItems: object
   }
 
   render() {
-    const { t, store, loadMore, onCheck, checkedItems } = this.props
+    const { t, store, loadMore, checkedItems } = this.props
     const { resultsPageSize, resultsLoading, results, hasMoreResults } = store
 
-    const items = results.map((item, index) => {      
+    const items = results.map((item, index) => {
       const found = find(this.props.checkedItems, chk => {
         return chk.TenderID == item.TenderID
       })
@@ -40,6 +41,7 @@ export default class ResultsList extends React.Component {
         onClick={this.props.viewDetails}
         onCheck={this.props.onCheck}
         onFav={this.props.onFav}
+        addReminder={this.props.addReminder}
         checked={checked}
         fav={fav}
       />
