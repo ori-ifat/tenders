@@ -1,10 +1,10 @@
 import React from 'react'
-import { array, object } from 'prop-types'
+import { array, object, func } from 'prop-types'
 import { observer } from 'mobx-react'
 import { translate } from 'react-polyglot'
 import remove from 'lodash/remove'
 import find from 'lodash/find'
-import {addToFavorites, clearCache} from 'common/services/apiService'
+import {createUrl, addToFavorites, getEmailData, clearCache} from 'common/services/apiService'
 import CSSModules from 'react-css-modules'
 import styles from './Toolbar.scss'
 
@@ -13,31 +13,50 @@ const emailSrc = req('./mail.png')
 const printSrc = req('./print.svg')
 const actionFavSrc = req('./action_fav.svg')
 
+const extractItems = (checkedItems) => {
+  const itemsToAdd = []
+  checkedItems.map(item => {
+    itemsToAdd.push(item.TenderID)
+  })
+  return itemsToAdd
+}
+
 @translate()
 @CSSModules(styles, {allowMultiple: true})
 @observer
 export default class Toolbar extends React.Component {
 
   static propTypes = {
-    checkedItems: object
+    checkedItems: object,
+    onClose: func
   }
 
   email = () => {
-    console.log('email', this.props.checkedItems)
+    //console.log('email', this.props.checkedItems)
+    const {checkedItems, onClose, t} = this.props
+    const itemsToAdd = extractItems(checkedItems)
+    getEmailData(itemsToAdd).then(uid =>
+      //console.log('email', uid)
+      location.href = `mailto:someone@email.com?subject=${t('toolbar.emailSubject')}&body=${encodeURIComponent(t('toolbar.emailBody', {uid}))}`
+    )
+    onClose()
   }
 
   print = () => {
-    console.log('print', this.props.checkedItems)
+    //console.log('print', this.props.checkedItems)
+    const {checkedItems, onClose} = this.props
+    const itemsToAdd = extractItems(checkedItems)
+    window.open(createUrl('Export/ExportData', {
+      ExportType: 1,
+      InfoList: itemsToAdd
+    }, false), '_blank')
+    onClose()
   }
 
   addFavorites = () => {
     //console.log('addFavorites', this.props.checkedItems)
-    const {checkedItems} = this.props
-    const itemsToAdd = []
-    //fill the items that will be sent to api
-    checkedItems.map(item => {
-      if (!item.IsFavorite) itemsToAdd.push(item.TenderID)
-    })
+    const {checkedItems, onClose} = this.props
+    const itemsToAdd = extractItems(checkedItems)
     //iterate over the relevant items, and change IsFavorite state on original array
     //(this will cause the list to re-render, and show fav state on ResultsItem)
     itemsToAdd.map(tenderID => {
@@ -56,6 +75,7 @@ export default class Toolbar extends React.Component {
     //call api with items and add action
     addToFavorites('Favorite_add', itemsToAdd)
     clearCache()
+    onClose()
     //console.log(checkedItems, itemsToAdd)
   }
 

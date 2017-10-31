@@ -19,8 +19,11 @@ export default class Checkbox extends React.Component {
 
   componentWillMount() {
     const {checked} = this.props
-    //console.log('mount', checked)
     this.checked = checked
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if (this.checked !== nextProps.checked) this.checked = nextProps.checked
   }
 
   onCheck = e => {
@@ -32,7 +35,6 @@ export default class Checkbox extends React.Component {
 
   render() {
     const {item} = this.props
-    const {checked} = this.checked
     const cbStyle = this.checked ? 'checkbox_continer checked' : 'checkbox_continer'
 
     return (
@@ -40,7 +42,7 @@ export default class Checkbox extends React.Component {
         <div className="checkbox">
           <input type="checkbox"
             className="checkbox_tender"
-            checked={checked}
+            checked={this.checked}
             value={item.TenderID}
             onChange={this.onCheck} />
         </div>

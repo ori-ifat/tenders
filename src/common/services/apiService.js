@@ -183,3 +183,9 @@ export function addToFavorites(action, infoList) {
     InfoList: infoList
   }}, true)
 }
+
+export function getEmailData(infoList) {
+  return apiFetch('Email/EmailTo', {searchParams: {
+    InfoList: infoList
+  }}, true)
+}

@@ -60,6 +60,10 @@ export default class Home extends Component {
     //console.log(this.checkedItems)
   }
 
+  hideToolbar = () => {
+    this.checkedItems = []
+  }
+
   viewDetails = (tenderID) => {
     //this.setState({selected: true})
     //const { item: { TenderID } } = this.props
@@ -111,7 +115,10 @@ export default class Home extends Component {
             </div>
           </div>
         </div>
-        <Toolbar checkedItems={this.checkedItems} />
+        <Toolbar
+          checkedItems={this.checkedItems}
+          onClose={this.hideToolbar}
+        />
         {this.selectedTender > -1 && !this.showImage &&
           <ResultsItemDetails
             itemID={this.selectedTender}

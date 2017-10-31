@@ -72,6 +72,8 @@ export default {
     selectedTenders: 'מכרזים נבחרו',
     email: 'שלח במייל',
     print: 'הדפס',
-    fav: 'הוסף למועדפים'
+    fav: 'הוסף למועדפים',
+    emailSubject: 'משלוח עבורך מיפעת מכרזים',
+    emailBody: 'לצפיה במכרזים, לחצו כאן: http://www.tenders.co.il/DistAgent/DistAgent.aspx?uid=%{uid}'
   }
 }

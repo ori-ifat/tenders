@@ -47,7 +47,7 @@ export default class ResultsItem extends React.Component {
   }
 
   render() {
-    const { item, onClick, onCheck, onFav, checked, fav, t } = this.props
+    const { item, onClick, onCheck, checked, onFav, t } = this.props
     const cbItem = Object.assign({}, item, {IsFavorite: this.IsFavorite}) //merge this.IsFavorite to current item
 
     const publishDate = item.PublishDate != null ? moment(item.PublishDate).format('DD-MM-YYYY') : t('tender.noDate')
