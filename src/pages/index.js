@@ -4,6 +4,7 @@ import Topbar from 'app/components/Topbar'
 import SearchPage from 'pages/search'
 import ResultsPage from 'pages/results'
 import HomePage from 'pages/home'
+import TenderPage from 'pages/tender'
 import NotFound404 from 'pages/notFound404'
 
 class Pages extends React.Component {
@@ -28,6 +29,9 @@ class Pages extends React.Component {
           </Route>
           <Route path="/results/:sort/:tags">
             {this.ensureAuthentication(ResultsPage)}
+          </Route>
+          <Route path="/tender/:itemId">
+            {this.ensureAuthentication(TenderPage)}
           </Route>
           <Route>
             {this.ensureAuthentication(NotFound404)}
