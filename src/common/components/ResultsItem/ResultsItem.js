@@ -29,7 +29,6 @@ export default class ResultsItem extends React.Component {
   }
 
   @observable IsFavorite = false
-  @observable reminderDate = null
 
   componentWillMount() {
     //set favorite state from props
@@ -60,8 +59,7 @@ export default class ResultsItem extends React.Component {
     //tourDate
     const twoDaysLeftTour = moment(item.TourDate) > moment() && moment(item.TourDate) < moment().add(2, 'days')
     const oneDayLeftTour = moment(item.TourDate) > moment() && moment(item.TourDate) < moment().add(1, 'days')
-    //reminder
-    this.reminderDate = item.ReminderDate
+
     return (
       <div styleName={tenderStyle}>
         <div className="grid-x">
@@ -93,8 +91,8 @@ export default class ResultsItem extends React.Component {
             <div styleName="tender_action_wraper">
               <ul className="no-bullet">
                 <li><a onClick={() => setReminder(item.TenderID, item.Title, item.InfoDate)}><img src={timeSrc} alt="" />
-                  {this.reminderDate ?
-                    moment(this.reminderDate).format('DD-MM-YYYY') :
+                  {item.reminderDate ?
+                    moment(item.reminderDate).format('DD-MM-YYYY') :
                     t('tender.addReminder')}</a></li>
                 {onFav &&
                   <li>
