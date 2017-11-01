@@ -37,7 +37,7 @@ export default class Results extends Component {
   @observable imageTitle = ''
   @observable reminderItem = -1
   @observable reminderTitle = ''
-  @observable reminderDate = null
+  @observable reminderInfoDate = null
 
   componentWillMount() {
     //console.log('mount')
@@ -92,16 +92,16 @@ export default class Results extends Component {
     document.body.style.overflowY = 'visible'
   }
 
-  addReminder = (tenderID, title, date) => {
+  setReminder = (tenderID, title, infoDate) => {
     this.reminderItem = tenderID
     this.reminderTitle = title
-    this.reminderDate = date
+    this.reminderInfoDate = infoDate
   }
 
   cancelReminder = () => {
     this.reminderItem = -1
     this.reminderTitle = ''
-    this.reminderDate = null
+    this.reminderInfoDate = null
   }
 
   render() {
@@ -128,7 +128,7 @@ export default class Results extends Component {
                   onCheck={this.onCheck}
                   onFav={this.onFav}
                   viewDetails={this.viewDetails}
-                  addReminder={this.addReminder}
+                  setReminder={this.setReminder}
                   checkedItems={this.checkedItems} />
               </div>
             </div>
@@ -154,7 +154,7 @@ export default class Results extends Component {
                 tenderID={this.reminderItem}
                 onCancel={this.cancelReminder}
                 title={this.reminderTitle}
-                date={this.reminderDate}
+                date={this.reminderInfoDate}
               />
             }
           </div>

@@ -80,6 +80,7 @@ export default {
   reminder: {
     title: 'הוספת תזכורת',
     subject: 'נושא',
+    today: 'היום',
     date: 'תאריך',
     time: 'שעה',
     delivery: 'הגשה ב-%{dateVal}',

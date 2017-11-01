@@ -13,7 +13,7 @@ export default class HomeList extends React.Component {
     item: object,
     onCheck: func,
     onFav: func,
-    addReminder: func,
+    setReminder: func,
     checkedItems: object
   }
 
@@ -36,7 +36,7 @@ export default class HomeList extends React.Component {
             onClick={this.props.viewDetails}
             onCheck={this.props.onCheck}
             onFav={this.props.onFav}
-            addReminder={this.props.addReminder}
+            setReminder={this.props.setReminder}
             checked={checked}
             fav={fav}
           />

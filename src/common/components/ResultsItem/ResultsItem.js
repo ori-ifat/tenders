@@ -23,12 +23,13 @@ export default class ResultsItem extends React.Component {
     onClick: func,
     onCheck: func,
     onFav: func,
-    addReminder: func,
+    setReminder: func,
     checked: bool,
     fav: bool
   }
 
   @observable IsFavorite = false
+  @observable reminderDate = null
 
   componentWillMount() {
     //set favorite state from props
@@ -48,7 +49,7 @@ export default class ResultsItem extends React.Component {
   }
 
   render() {
-    const { item, onClick, onCheck, checked, onFav, addReminder, t } = this.props
+    const { item, onClick, onCheck, checked, onFav, setReminder, t } = this.props
     const cbItem = Object.assign({}, item, {IsFavorite: this.IsFavorite}) //merge this.IsFavorite to current item
 
     const publishDate = item.PublishDate != null ? moment(item.PublishDate).format('DD-MM-YYYY') : t('tender.noDate')
@@ -59,7 +60,8 @@ export default class ResultsItem extends React.Component {
     //tourDate
     const twoDaysLeftTour = moment(item.TourDate) > moment() && moment(item.TourDate) < moment().add(2, 'days')
     const oneDayLeftTour = moment(item.TourDate) > moment() && moment(item.TourDate) < moment().add(1, 'days')
-
+    //reminder
+    this.reminderDate = item.ReminderDate
     return (
       <div styleName={tenderStyle}>
         <div className="grid-x">
@@ -90,9 +92,9 @@ export default class ResultsItem extends React.Component {
           <div className="small-3 cell">
             <div styleName="tender_action_wraper">
               <ul className="no-bullet">
-                <li><a onClick={() => addReminder(item.TenderID, item.Title, item.InfoDate)}><img src={timeSrc} alt="" />
-                  {item.ReminderDate ?
-                    moment(item.ReminderDate).format('DD-MM-YYYY') :
+                <li><a onClick={() => setReminder(item.TenderID, item.Title, item.InfoDate)}><img src={timeSrc} alt="" />
+                  {this.reminderDate ?
+                    moment(this.reminderDate).format('DD-MM-YYYY') :
                     t('tender.addReminder')}</a></li>
                 {onFav &&
                   <li>
