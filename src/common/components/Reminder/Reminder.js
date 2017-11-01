@@ -4,11 +4,11 @@ import { observable } from 'mobx'
 import { translate } from 'react-polyglot'
 import moment from 'moment'
 import {addReminder} from 'common/services/apiService'
-//import DatePicker from 'react-datepicker'
+import DatePicker from 'react-datepicker'
 import CSSModules from 'react-css-modules'
 import styles from './Reminder.scss'
-//import 'react-datepicker/dist/react-datepicker-cssmodules.css'
-//import 'common/style/_datepicker.scss'
+import 'react-datepicker/dist/react-datepicker-cssmodules.css'
+import 'common/style/_datepicker.scss'
 
 @translate()
 @observer
@@ -86,8 +86,8 @@ export default class Reminder extends Component {
             </div>
             <div styleName="date">
               <span>{t('reminder.date')}</span>
-              <input type="text" name="date" defaultValue={dateVal} onBlur={this.updateField} />
-              {/*<div styleName="ui-filter-date">
+              {/*<input type="text" name="date" defaultValue={dateVal} onBlur={this.updateField} />*/}
+              <div styleName="date-container">
                 <DatePicker
                   bsSize="lg"
                   locale="he-IL"
@@ -98,7 +98,7 @@ export default class Reminder extends Component {
                   onChange={this.dateModified('dateStart')}
                   todayButton={t('reminder.today')}
                 />
-              </div>*/}
+              </div>
             </div>
             <span>{t('reminder.delivery', {dateVal})}</span>
           </div>
