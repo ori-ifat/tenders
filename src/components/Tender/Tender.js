@@ -44,6 +44,7 @@ export default class Tender extends Component {
                 onClose={this.closeViewer}
                 itemID={this.itemID}
                 showViewer={this.showViewer}
+                mode="singleItem"
               />
               :
               <ImageView
