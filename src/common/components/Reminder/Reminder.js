@@ -8,8 +8,8 @@ import {setReminder, getReminder} from 'common/services/apiService'
 import Calendar from 'common/components/Calendar'
 import CSSModules from 'react-css-modules'
 import styles from './Reminder.scss'
-import 'react-datepicker/dist/react-datepicker-cssmodules.css'
-import 'common/style/_datepicker.scss'
+//import 'react-datepicker/dist/react-datepicker-cssmodules.css'
+//import 'common/style/_datepicker.scss'
 
 @translate()
 @observer
