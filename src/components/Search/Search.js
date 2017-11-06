@@ -1,7 +1,7 @@
 import React, {Component} from 'react'
 import CSSModules from 'react-css-modules'
 import styles from './search.scss'
-import SearchInput from 'components/SearchInput'
+import SearchInput from 'common/components/SearchInput'
 //import Test from 'components/Test'
 import {inject} from 'mobx-react'
 

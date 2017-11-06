@@ -1,6 +1,5 @@
 import React, {Component} from 'react'
-import SearchInput from 'components/SearchInput'
-import Test from 'components/Test'
+import SearchInput from 'common/components/SearchInput'
 import {inject, observer} from 'mobx-react'
 import {observable, toJS} from 'mobx'
 import { whenRouted } from 'common/utils/withRouteHooks'
