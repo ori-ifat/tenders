@@ -205,7 +205,6 @@ export function setReminder(action, reminderID, tenderID, remark, title, reminde
 }
 
 export function getReminder(reminderID) {
-  //test:
   return apiFetch('Reminder/GetReminder', {searchParams: {
     ReminderID: reminderID
   }} )

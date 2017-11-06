@@ -5,6 +5,7 @@ import { translate } from 'react-polyglot'
 import moment from 'moment'
 import {setReminder, getReminder} from 'common/services/apiService'
 //import DatePicker from 'react-datepicker'
+import Calendar from 'common/components/Calendar'
 import CSSModules from 'react-css-modules'
 import styles from './Reminder.scss'
 //import 'react-datepicker/dist/react-datepicker-cssmodules.css'
@@ -118,8 +119,8 @@ export default class Reminder extends Component {
             </div>
             <div styleName="date">
               <span>{t('reminder.date')}</span>
-              <input type="text" name="date" value={dateVal} onChange={this.updateField} />
-              {/*<div styleName="ui-filter-date">
+              {/*<input type="text" name="date" value={dateVal} onChange={this.updateField} />
+              <div styleName="ui-filter-date">
                 <DatePicker
                   bsSize="lg"
                   locale="he-IL"
@@ -131,6 +132,7 @@ export default class Reminder extends Component {
                   todayButton={t('reminder.today')}
                 />
               </div>*/}
+              <Calendar todayLabel={t('reminder.today')} />
             </div>
             <span>{t('reminder.delivery', {infoDateVal})}</span>
           </div>
