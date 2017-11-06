@@ -90,9 +90,9 @@ export default class ResultsItem extends React.Component {
           <div className="small-3 cell">
             <div styleName="tender_action_wraper">
               <ul className="no-bullet">
-                <li><a onClick={() => setReminder(item.TenderID, item.Title, item.InfoDate)}><img src={timeSrc} alt="" />
-                  {item.reminderDate ?
-                    moment(item.reminderDate).format('DD-MM-YYYY') :
+                <li><a onClick={() => setReminder(item.TenderID, item.Title, item.InfoDate, item.ReminderID)}><img src={timeSrc} alt="" />
+                  {item.ReminderDate ?
+                    moment(item.ReminderDate).format('DD-MM-YYYY') :
                     t('tender.addReminder')}</a></li>
                 {onFav &&
                   <li>

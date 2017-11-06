@@ -190,16 +190,22 @@ export function getEmailData(infoList) {
   }}, true)
 }
 
-export function addReminder(tenderID, remark, title, reminderDate) {
+export function setReminder(action, reminderID, tenderID, remark, title, reminderDate) {
   //add more fields if needed, Ex. email, sms ...
   return apiFetch('Reminder/ReminderOptions', {searchParams: {
-    ReminderID: 0,
+    ReminderID: reminderID,
     InfoID: tenderID,
     Remark: remark,
     Title: title,
     Sms: '',
     Email: '',
     ReminderDate: reminderDate,
-    Option: 'Add'
+    Option: action
   }}, true)
+}
+
+export function getReminder(reminderID) {
+  return apiFetch('Reminder/GetReminder', {searchParams: {
+    ReminderID: reminderID
+  }} )
 }

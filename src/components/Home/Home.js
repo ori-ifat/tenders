@@ -38,6 +38,7 @@ export default class Home extends Component {
   @observable reminderItem = -1
   @observable reminderTitle = ''
   @observable reminderInfoDate = null
+  @observable reminderID = -1
 
   componentWillMount() {
     //console.log('mount')
@@ -92,16 +93,18 @@ export default class Home extends Component {
     document.body.style.overflowY = 'visible'
   }
 
-  setReminder = (tenderID, title, infoDate) => {
+  setReminder = (tenderID, title, infoDate, reminderID) => {
     this.reminderItem = tenderID
     this.reminderTitle = title
     this.reminderInfoDate = infoDate
+    this.reminderID = reminderID
   }
 
   cancelReminder = () => {
     this.reminderItem = -1
     this.reminderTitle = ''
     this.reminderInfoDate = null
+    this.reminderID = -1
   }
 
   render() {
@@ -155,6 +158,7 @@ export default class Home extends Component {
             onCancel={this.cancelReminder}
             title={this.reminderTitle}
             infoDate={this.reminderInfoDate}
+            reminderID={this.reminderID}
           />
         }
       </div>

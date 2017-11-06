@@ -45,9 +45,12 @@ export default class ResultsItemDetails extends React.Component {
     const fileName = item.File ? item.File.FileName : ''
     //for scroll pos of item
     const divTop = document.documentElement.scrollTop ? document.documentElement.scrollTop : document.body.scrollTop
+    const className = !this.props.mode ? 'reveal-overlay' : ''
+    const subClassName = !this.props.mode ? 'reveal large' : ''
+
     return (
-      <div className="reveal-overlay" style={{display: 'block'}}>
-        <div className="reveal large" style={{display: 'block'}}>
+      <div className={className} style={{display: 'block'}}>
+        <div className={subClassName} style={{display: 'block'}}>
           {!itemStore.resultsLoading &&
             <div styleName="view-details-wrapper" style={{top: (divTop + 10)}}>
               <div className="grid-x">
@@ -107,9 +110,11 @@ export default class ResultsItemDetails extends React.Component {
                   </ul>
                 </div>
               </div>
-              <button className="close-button" data-close aria-label="Close modal" type="button" onClick={onClose}>
-                <span aria-hidden="true">&times;</span>
-              </button>
+              {!this.props.mode &&
+                <button className="close-button" data-close aria-label="Close modal" type="button" onClick={onClose}>
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              }
             </div>
           }
           {itemStore.resultsLoading && <div>Loading...</div>}
