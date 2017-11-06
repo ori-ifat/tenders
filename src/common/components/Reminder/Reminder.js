@@ -119,8 +119,8 @@ export default class Reminder extends Component {
             </div>
             <div styleName="date">
               <span>{t('reminder.date')}</span>
-              <input type="text" name="date" value={dateVal} onChange={this.updateField} />
-              {/*<div styleName="ui-filter-date">
+              {/*<input type="text" name="date" value={dateVal} onChange={this.updateField} />
+              <div styleName="ui-filter-date">
                 <DatePicker
                   bsSize="lg"
                   locale="he-IL"
@@ -132,7 +132,7 @@ export default class Reminder extends Component {
                   todayButton={t('reminder.today')}
                 />
               </div>*/}
-              {/*<Calendar todayLabel={t('reminder.today')} />*/}
+              <Calendar todayLabel={t('reminder.today')} />
             </div>
             <span>{t('reminder.delivery', {infoDateVal})}</span>
           </div>
