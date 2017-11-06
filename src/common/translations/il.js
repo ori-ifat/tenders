@@ -83,9 +83,10 @@ export default {
     today: 'היום',
     date: 'תאריך',
     time: 'שעה',
-    delivery: 'הגשה ב-%{dateVal}',
+    delivery: 'הגשה ב-%{infoDateVal}',
     remark: 'הערה',
     cancel: 'בטל',
+    delete: 'מחק',
     submit: 'שמור תזכורת'
   }
 }
