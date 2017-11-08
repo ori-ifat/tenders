@@ -3,6 +3,8 @@ import { inject, observer } from 'mobx-react'
 import {observable, toJS} from 'mobx'
 import { translate } from 'react-polyglot'
 import SubSubjectsFilter from './SubSubjectsFilter'
+import TenderTypeFilter from './TenderTypeFilter'
+import DateFilter from './DateFilter'
 import CSSModules from 'react-css-modules'
 import styles from './Filters.scss'
 
@@ -11,8 +13,6 @@ import styles from './Filters.scss'
 @CSSModules(styles, { allowMultiple: true })
 @observer
 export default class Filters extends React.Component {
-
-  @observable selectedBranches = ''
 
   componentWillMount() {
     //debugger
@@ -34,9 +34,11 @@ export default class Filters extends React.Component {
             onClose={setLabel}
             label={subsubjects}
           />
-          <div>Tender Type</div>
+          <TenderTypeFilter
+            items={searchStore.availableFilters.TenderTypes}
+          />
           <div>Publishers</div>
-          <div>Dates</div>
+          <DateFilter />
           <div>Free Search</div>
         </div>
       </div>

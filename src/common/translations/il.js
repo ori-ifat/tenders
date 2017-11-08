@@ -91,6 +91,7 @@ export default {
   },
   filter: {
     subSubjectsTitle: 'בחר ענפים',
+    tenderTypeTitle: 'סוג מכרז',
     choose: 'בחר',
     cancel: 'בטל'
   }
