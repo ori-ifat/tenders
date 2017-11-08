@@ -109,25 +109,21 @@ export function autocomplete(query) {
 export async function search({tags, filters, page, pageSize, sort}) {
 
   const [filtersMeta, resultsPage] = await Promise.all([
-    fetchFilters({ tags, filters }),
+    fetchFilters({ tags, filters, sort }),
     fetchResultsPage({ tags, filters, page, pageSize, sort })
   ])
   return { filtersMeta, resultsPage }
 }
 
-function fetchFilters({tags, filters}) {
-  /*return apiFetch('MainSearch/GetFilters', {
+function fetchFilters({tags, filters, sort}) {
+  return apiFetch('Search/GetFilters', {
     searchParams: {
-      topic,
-      filters,
-      tags
+      tags, filters, sort
     }
-  })*/
-  return Promise.resolve([]) //debug
+  })
 }
 
 function fetchResultsPage({tags, filters, page, pageSize, sort}) {
-
   return apiFetch('Search/ResultPage', {
     searchParams: {
       tags,

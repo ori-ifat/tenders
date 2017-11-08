@@ -26,10 +26,10 @@ export default class ResultsActions extends React.Component {
   }
 
   changeSort = (sort) => {
-    const { searchStore, routingStore } = this.props
-    //console.log('search committed', selectedValues)
+    const { searchStore, routingStore } = this.props    
     const payload = JSON.stringify(searchStore.tags)
-    routingStore.push(`/results/${sort}/${payload}`)
+    const filters = JSON.stringify(searchStore.filters)
+    routingStore.push(`/results/${sort}/${payload}/${filters}`)
   }
 
   render() {

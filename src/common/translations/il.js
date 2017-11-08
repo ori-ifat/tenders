@@ -88,5 +88,10 @@ export default {
     cancel: 'בטל',
     delete: 'מחק',
     submit: 'שמור תזכורת'
+  },
+  filter: {
+    subSubjectsTitle: 'בחר ענפים',
+    choose: 'בחר',
+    cancel: 'בטל'
   }
 }

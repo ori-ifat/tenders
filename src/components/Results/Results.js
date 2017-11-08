@@ -8,6 +8,8 @@ import SearchInput from 'common/components/SearchInput'
 import ResultsTitle from './ResultsTitle'
 import ResultsActions from './ResultsActions'
 import ResultsList from './ResultsList'
+import Filters from './Filters'
+import Banners from './Banners'
 import Toolbar from 'common/components/Toolbar'
 import ResultsItemDetails from 'common/components/ResultsItemDetails'
 import Reminder from 'common/components/Reminder'
@@ -19,9 +21,10 @@ import CSSModules from 'react-css-modules'
 import styles from './results.scss'
 
 @withRouter
-@whenRouted(({ params: { sort, tags } }) => {
+@whenRouted(({ params: { sort, tags, filters } }) => {
   searchStore.applySort(sort)
   searchStore.applyTags(tags)
+  searchStore.applyFilters(filters)
   searchStore.clearResults()
   searchStore.loadNextResults()
 })
@@ -39,6 +42,7 @@ export default class Results extends Component {
   @observable reminderTitle = ''
   @observable reminderInfoDate = null
   @observable reminderID = -1;
+  @observable subsubjects = ''
 
   componentWillMount() {
     //console.log('mount')
@@ -107,6 +111,14 @@ export default class Results extends Component {
     this.reminderID = -1
   }
 
+  setFilterLabel = (label, value) => {
+    switch (label) {
+    case 'subsubjects':
+      this.subsubjects = value
+      break
+    }
+  }
+
   render() {
 
     const {searchStore, searchStore: {resultsLoading, resultsCount, tags}} = this.props
@@ -121,6 +133,11 @@ export default class Results extends Component {
             <div className="row">
               <div className="columns large-3">
                 <hr />
+                <Filters
+                  setLabel={this.setFilterLabel}
+                  subsubjects={this.subsubjects}
+                />
+                <Banners />
               </div>
               <div className="columns large-9">
                 <hr />
