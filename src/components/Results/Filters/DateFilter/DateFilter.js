@@ -13,12 +13,28 @@ import styles from './DateFilter.scss'
 @observer
 export default class DateFilter extends React.Component {
 
+  @observable startDate
+  @observable endDate
+
   componentWillMount() {
 
   }
 
   componentWillReceiveProps(nextProps) {
 
+  }
+
+  selectDate = (date, field) => {
+    //console.log('selectDate', date, moment(date).format('DD-MM-YYYY'))
+    switch (field) {
+    case 'startDate':
+      this.startDate = date
+      break
+    case 'endDate':
+      this.endDate = date
+      break
+    }
+    console.log(this.startDate, this.endDate)
   }
 
   doFilter = () => {
@@ -30,7 +46,22 @@ export default class DateFilter extends React.Component {
     return(
       <div>
         Dates
-        {/*<Calendar todayLabel={t('reminder.today')} />*/}
+        <div styleName="clearfix">
+          <div styleName="start-date">
+            <Calendar
+              todayLabel={t('reminder.today')}
+              selectDate={this.selectDate}
+              name="startDate"
+            />
+          </div>
+          <div styleName="end-date">
+            <Calendar
+              todayLabel={t('reminder.today')}
+              selectDate={this.selectDate}
+              name="endDate"
+            />
+          </div>
+        </div>
       </div>
     )
   }

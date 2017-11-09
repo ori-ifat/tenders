@@ -36,7 +36,8 @@ export default class Calendar extends React.Component {
   dateModified = key => value => {
     this.selectedDate = moment(value)
     //console.log('dateModified', this.selectedDate)
-    this.props.selectDate(this.selectedDate)
+    const {selectDate, name} = this.props
+    selectDate(this.selectedDate, name)
   }
 
   render() {
