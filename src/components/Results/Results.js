@@ -162,7 +162,7 @@ export default class Results extends Component {
                 tenderID={this.reminderItem}
                 onCancel={this.cancelReminder}
                 title={this.reminderTitle}
-                date={this.reminderInfoDate}
+                infoDate={this.reminderInfoDate}
                 reminderID={this.reminderID}
               />
             }

@@ -1,3 +1,10 @@
+:global {
+  .react-datepicker-popper {
+    top: -180px !important;
+    left: -90px !important;
+  }
+}
+
 .clearfix {
   overflow: auto;
   zoom: 1;

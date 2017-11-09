@@ -4,12 +4,9 @@ import { observable } from 'mobx'
 import { translate } from 'react-polyglot'
 import moment from 'moment'
 import {setReminder, getReminder} from 'common/services/apiService'
-//import DatePicker from 'react-datepicker'
 import Calendar from 'common/components/Calendar'
 import CSSModules from 'react-css-modules'
 import styles from './Reminder.scss'
-//import 'react-datepicker/dist/react-datepicker-cssmodules.css'
-//import 'common/style/_datepicker.scss'
 
 @translate()
 @observer
@@ -24,12 +21,12 @@ export default class Reminder extends Component {
   @observable reminderID = 0
 
   componentWillMount() {
-    //console.log('mount')
     const {tenderID, title, infoDate, reminderID} = this.props
+    //console.log('mount', infoDate)
     this.tenderID = tenderID
     if (!reminderID) {
       this.subject = title
-      this.reminderDate = moment(infoDate).format('DD-MM-YYYY')
+      this.reminderDate = moment(infoDate, 'YYYY-MM-DD HH:mm:ss').format('DD-MM-YYYY')
       this.time = '00:00'
       this.remark = ''
     }
@@ -40,7 +37,7 @@ export default class Reminder extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    console.log('receive')
+    //console.log('receive')
   }
 
   getReminderData = (reminderID) => {
@@ -71,12 +68,9 @@ export default class Reminder extends Component {
     }
   }
 
-  getDatetime = field => {
-    return moment()
-  }
-
-  dateModified = key => value => {
-    console.log(key, value)
+  selectDate = date => {
+    //console.log('selectDate', date, moment(date).format('DD-MM-YYYY'))
+    this.reminderDate = moment(date).format('DD-MM-YYYY')
   }
 
   addReminder = () => {
@@ -102,8 +96,8 @@ export default class Reminder extends Component {
     const title = this.subject
     const dateVal = moment(this.reminderDate, 'DD-MM-YYYY').format('DD-MM-YYYY')
     const timeVal = moment(this.reminderDate, 'DD-MM-YYYY').format('HH:mm')
-    const infoDateVal = moment(infoDate, 'DD-MM-YYYY').format('DD-MM-YYYY')
-
+    const infoDateVal = moment(infoDate, 'YYYY-MM-DD HH:mm:ss').format('DD-MM-YYYY')
+    //console.log('render reminder', this.reminderDate)
     return (
       <div className="reveal-overlay" style={{display: 'block'}}>
         <div className="reveal tiny" style={{display: 'block'}}>
@@ -119,20 +113,12 @@ export default class Reminder extends Component {
             </div>
             <div styleName="date">
               <span>{t('reminder.date')}</span>
-              <input type="text" name="date" value={dateVal} onChange={this.updateField} />
-              {/*<div styleName="ui-filter-date">
-                <DatePicker
-                  bsSize="lg"
-                  locale="he-IL"
-                  showMonthDropdown
-                  showYearDropdown
-                  dropdownMode="select"
-                  selected={this.getDatetime('dateStart')}
-                  onChange={this.dateModified('dateStart')}
-                  todayButton={t('reminder.today')}
-                />
-              </div>*/}
-              {/*<Calendar todayLabel={t('reminder.today')} />*/}
+              {/*<input type="text" name="date" value={dateVal} onChange={this.updateField} />*/}
+              {<Calendar
+                defaultDate={this.reminderDate}
+                todayLabel={t('reminder.today')}
+                selectDate={this.selectDate}
+              />}
             </div>
             <span>{t('reminder.delivery', {infoDateVal})}</span>
           </div>

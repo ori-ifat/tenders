@@ -22,7 +22,7 @@ export default class DateFilter extends React.Component {
   }
 
   doFilter = () => {
-    
+
   }
 
   render() {
@@ -30,7 +30,7 @@ export default class DateFilter extends React.Component {
     return(
       <div>
         Dates
-        <Calendar todayLabel={t('reminder.today')} />
+        {/*<Calendar todayLabel={t('reminder.today')} />*/}
       </div>
     )
   }
