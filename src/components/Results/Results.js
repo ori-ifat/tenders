@@ -15,7 +15,6 @@ import ResultsItemDetails from 'common/components/ResultsItemDetails'
 import Reminder from 'common/components/Reminder'
 import NoData from 'components/NoData'
 import {setCheckedStatus, setFavStatus, getImageUrl} from 'common/utils/util'
-import {addToFavorites, clearCache} from 'common/services/apiService'
 import ImageView from 'common/components/ImageView'
 import CSSModules from 'react-css-modules'
 import styles from './results.scss'
@@ -54,19 +53,11 @@ export default class Results extends Component {
   }
 
   onCheck = (checked, value, isFavorite) => {
-    //console.log('onCheck', checked, value, isFavorite)
     setCheckedStatus(this.checkedItems, checked, value, isFavorite)
-    //console.log(this.checkedItems)
   }
 
   onFav = (tenderID, add) => {
-    //console.log('onFav', tenderID, add)
-    //call api with item and relevant action (add\!add)
-    const action = add ? 'Favorite_add' : 'Favorite_del'
-    addToFavorites(action, [tenderID])
-    clearCache()
     setFavStatus(this.checkedItems, tenderID, add)
-    //console.log(this.checkedItems)
   }
 
   hideToolbar = () => {
@@ -74,9 +65,6 @@ export default class Results extends Component {
   }
 
   viewDetails = (tenderID) => {
-    //this.setState({selected: true})
-    //const { item: { TenderID } } = this.props
-    console.log('TenderID', tenderID)
     this.selectedTender = tenderID
   }
 
@@ -113,7 +101,7 @@ export default class Results extends Component {
 
   setFilterLabel = (label, value) => {
     switch (label) {
-    case 'subsubjects':
+    case 'subsubject':
       this.subsubjects = value
       break
     }

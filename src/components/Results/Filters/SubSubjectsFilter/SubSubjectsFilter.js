@@ -4,6 +4,7 @@ import {observable, toJS} from 'mobx'
 import { translate } from 'react-polyglot'
 import filter from 'lodash/filter'
 import remove from 'lodash/remove'
+import {doFilter} from 'common/utils/filter'
 import CSSModules from 'react-css-modules'
 import styles from './SubSubjectsFilter.scss'
 
@@ -38,20 +39,7 @@ export default class SubSubjectsFilter extends React.Component {
 
   doFilter = () => {
     const { searchStore, onClose } = this.props
-    //get current search params
-    const sort = searchStore.sort
-    const payload = JSON.stringify(searchStore.tags)
-    //get current filters and concat new ones
-    const newFilters = [...searchStore.filters, {field: 'subsubject', values: this.selected}]
-    const filters = JSON.stringify(newFilters)
-    //apply filters to store, and commit search:
-    searchStore.applyFilters(filters)
-    searchStore.clearResults()
-    searchStore.loadNextResults()
-    //fix the labels for filter view
-    const labels = this.itemLabels.join(',')
-    onClose('subsubjects', labels)
-    this.open = false   //close modal.
+    doFilter(searchStore, 'subsubject', this.selected, this.itemLabels, onClose, this.open)
   }
 
   filterItems = e => {

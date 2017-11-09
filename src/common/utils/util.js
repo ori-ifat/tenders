@@ -1,5 +1,6 @@
 import remove from 'lodash/remove'
 import find from 'lodash/find'
+import {addToFavorites, clearCache} from 'common/services/apiService'
 
 export function setCheckedStatus(checkedItems, checked, value, isFavorite) {
   if (checked) {
@@ -16,6 +17,9 @@ export function setCheckedStatus(checkedItems, checked, value, isFavorite) {
 }
 
 export function setFavStatus(checkedItems, tenderID, add) {
+  const action = add ? 'Favorite_add' : 'Favorite_del'
+  addToFavorites(action, [tenderID])
+  clearCache()
   const found = find(checkedItems, item => {
     return item.TenderID == tenderID && item.IsFavorite != add
   })
@@ -28,6 +32,8 @@ export function setFavStatus(checkedItems, tenderID, add) {
     checkedItems.push({ TenderID: tenderID, IsFavorite: add })
   }
 }
+
+
 
 export function getImageUrl(fileName) {
   const cleanFileName = fileName.replace(/\\/g, '/').replace(/\/\/int_fs\/Clips/g, '')
