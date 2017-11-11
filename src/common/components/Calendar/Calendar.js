@@ -27,8 +27,6 @@ export default class Calendar extends React.Component {
         <DatePicker
           bsSize="lg"
           locale="he-IL"
-          showMonthDropdown
-          showYearDropdown
           dropdownMode="select"
           selected={this.getDatetime('dateStart')}
           onChange={this.dateModified('dateStart')}
