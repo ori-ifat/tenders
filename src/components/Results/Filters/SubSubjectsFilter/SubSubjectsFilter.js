@@ -108,9 +108,12 @@ export default class SubSubjectsFilter extends React.Component {
             </div>
           </div> :
           <div onClick={this.openModal}>
-            { this.props.label }
-            <br />
-            <span style={{cursor: 'pointer'}}>{t('filter.subSubjectsTitle')}</span>
+            <span style={{cursor: 'pointer'}}>{ this.props.label }</span>
+            { (!this.props.label || this.props.label == '') &&
+            <div>
+              <br />
+              <span style={{cursor: 'pointer'}}>{t('filter.subSubjectsTitle')}</span>
+            </div> }
           </div>
         }
       </div>

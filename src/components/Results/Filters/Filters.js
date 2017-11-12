@@ -23,7 +23,8 @@ export default class Filters extends React.Component {
   }
 
   render() {
-    const {searchStore, subsubjects, setLabel} = this.props
+    const {searchStore, setSelected, selectedFilters} = this.props
+    const subsubjects = selectedFilters ? selectedFilters.subsubjects : ''
     console.log('filters', toJS(searchStore.availableFilters))
     return(
       <div>
@@ -31,7 +32,7 @@ export default class Filters extends React.Component {
         <div>
           <SubSubjectsFilter
             items={searchStore.availableFilters.SubSubjects}
-            onClose={setLabel}
+            onClose={setSelected}
             label={subsubjects}
           />
           <TenderTypeFilter

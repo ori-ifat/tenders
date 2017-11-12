@@ -41,7 +41,8 @@ export default class Results extends Component {
   @observable reminderTitle = ''
   @observable reminderInfoDate = null
   @observable reminderID = -1;
-  @observable subsubjects = ''
+  //@observable subsubjects = ''
+  @observable selectedFilters = {}
 
   componentWillMount() {
     //console.log('mount')
@@ -99,12 +100,14 @@ export default class Results extends Component {
     this.reminderID = -1
   }
 
-  setFilterLabel = (label, value) => {
+  setSelectedFilters = (label, value) => {
     switch (label) {
     case 'subsubject':
-      this.subsubjects = value
+      delete this.selectedFilters.subsubjects
+      this.selectedFilters.subsubjects = value
       break
     }
+    console.log(this.selectedFilters)
   }
 
   render() {
@@ -122,8 +125,8 @@ export default class Results extends Component {
               <div className="columns large-3">
                 <hr />
                 <Filters
-                  setLabel={this.setFilterLabel}
-                  subsubjects={this.subsubjects}
+                  setSelected={this.setSelectedFilters}
+                  selectedFilters={this.selectedFilters}
                 />
                 <Banners />
               </div>
