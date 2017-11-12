@@ -1,50 +1,69 @@
-/*:global {
-  .react-datepicker-popper {
-    top: -180px !important;
-    left: -90px !important;
-  }
-}*/
 
-.clearfix {
-  overflow: auto;
-  zoom: 1;
-}
-
-.date {
-  float: right;
-  width: 50%;
-  padding-left: 5px;
-  > div > div > div:nth-child(2)  {
-    /* relevant to the 'react-datepicker-popper' div only */
-    top: -180px !important;
-    left: -90px !important;
-  }
-}
-
-.time {
-  float: left;
-  width: 50%
-}
-
-.button-container {
+.buttons_cont {
   text-align: left;
+  padding-bottom: 1.5rem;
+  padding-top: 1rem;
+}
+
+.remider_ttl {
+  font-weight: 500;
 }
 
 .button-cancel {
-  margin-left: 30px;
+  position: absolute;
+  top: 1rem;
+  left: 1rem;
+  font-size: 1.5rem;
+}
+.button-remove {
+  font-size: rem-calc(15);
+  padding: 0 1.5rem;
 }
 
 .button-submit {
   background-color: #34b44f;
   color: white;
-  padding: 7px;
+  padding: 0.75rem 1.5rem;
+  border-radius: 4px;
+  font-family: 'Rubik', sans-serif;
+  font-weight: 600;
+  font-size: 1rem;
 }
 
-.ui-filter-date {
+.date-container {
   width: 100%;
-  padding: 0.5rem 0;
   & > div {
     width: 100%;
     display: block;
   }
+}
+
+.remark {
+  height:5.5rem;
+}
+
+.pb {
+  padding-bottom: 0.75rem;
+  span {
+    font-size: rem-calc(15);
+    color: #8a8a8a;
+    margin-bottom: 0.25rem;
+    display: block;
+  }
+}
+
+.note {
+  font-size: 0.75rem;
+  display: block;
+  margin-top: 0.5rem;
+}
+
+.ui-filter-date {
+  padding: 0 !important;
+}
+
+.reminder_lb {
+  padding: 1.5rem  2.5rem !important;
+  overflow: initial !important;
+  max-width: 32rem !important;
 }

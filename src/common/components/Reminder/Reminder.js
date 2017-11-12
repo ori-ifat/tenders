@@ -100,41 +100,58 @@ export default class Reminder extends Component {
     //console.log('render reminder', this.reminderDate)
     return (
       <div className="reveal-overlay" style={{display: 'block'}}>
-        <div className="reveal tiny" style={{display: 'block'}}>
-          <h2>{t('reminder.title')}</h2>
-          <div>
-            <span>{t('reminder.subject')}</span>
-            <input type="text" name="subject" value={title} onChange={this.updateField}/>
+        <div className="reveal" styleName="reminder_lb" style={{display: 'block'}}>
+          <button styleName="button-cancel" onClick={onCancel}>×</button>
+          <div className="grid-x grid-margin-x" styleName="pb">
+            <div className="small-12 cell">
+              <h2 styleName="remider_ttl">{t('reminder.title')}</h2>
+            </div>
           </div>
-          <div styleName="clearfix">
-            <div styleName="time">
+
+          <div className="grid-x grid-margin-x" styleName="pb">
+            <div className="small-12 cell">
+              <span>{t('reminder.subject')}</span>
+              <input type="text" name="subject" value={title} onChange={this.updateField}/>
+            </div>
+          </div>
+
+          <div className="grid-x grid-margin-x" styleName="pb">
+
+            <div className="small-6 cell">
+              <span>{t('reminder.date')}</span>
+              <Calendar
+                todayLabel={t('reminder.today')}
+                selectDate={this.selectDate}
+              />
+              <span styleName="note">{t('reminder.delivery', {infoDateVal})}</span>
+            </div>
+
+            <div className="small-6 cell">
               <span>{t('reminder.time')}</span>
               <input type="text" name="time" value={timeVal} onChange={this.updateField} />
             </div>
-            <div styleName="date">
-              <span>{t('reminder.date')}</span>
-              {/*<input type="text" name="date" value={dateVal} onChange={this.updateField} />*/}
-              {<Calendar
-                defaultDate={this.reminderDate}
-                todayLabel={t('reminder.today')}
-                selectDate={this.selectDate}
-              />}
+          </div>
+
+          <div className="grid-x grid-margin-x" styleName="pb">
+            <div className="small-12 cell">
+              <span>{t('reminder.remark')}</span>
+              <textarea styleName="remark" name="remark" value={this.remark} onChange={this.updateField} />
             </div>
-            <span>{t('reminder.delivery', {infoDateVal})}</span>
           </div>
-          <div>
-            <span>{t('reminder.remark')}</span>
-            <textarea name="remark" value={this.remark} onChange={this.updateField} />
+
+          <div className="grid-x grid-margin-x" styleName="buttons_cont">
+            <div className="small-12 cell">
+
+              {this.reminderID > 0 &&
+                <button styleName="button-remove" onClick={this.delReminder}>{t('reminder.delete')}</button>
+              }
+              <button styleName="button-submit" onClick={this.addReminder}>{t('reminder.submit')}</button>
+            </div>
           </div>
-          <div styleName="button-container">
-            <button styleName="button-cancel" onClick={onCancel}>{t('reminder.cancel')}</button>
-            {this.reminderID > 0 &&
-              <button styleName="button-cancel" onClick={this.delReminder}>{t('reminder.delete')}</button>
-            }
-            <button styleName="button-submit" onClick={this.addReminder}>{t('reminder.submit')}</button>
-          </div>
+
         </div>
       </div>
+
     )
   }
 }

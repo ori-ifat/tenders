@@ -7,7 +7,7 @@ import moment from 'moment'
 import CSSModules from 'react-css-modules'
 import styles from './Calendar.scss'
 import 'react-datepicker/dist/react-datepicker-cssmodules.css'
-//import 'common/style/_datepicker.scss'
+import 'common/style/_datepicker.scss'
 
 @CSSModules(styles)
 @observer
@@ -43,12 +43,10 @@ export default class Calendar extends React.Component {
   render() {
     //console.log('render calendar', this.selectedDate)
     return (
-      <div>
+      <div styleName="ui-filter-date">
         <DatePicker
           bsSize="lg"
           locale="he-IL"
-          showMonthDropdown
-          showYearDropdown
           dropdownMode="select"
           selected={this.selectedDate}
           onChange={this.dateModified('selectedDate')}
