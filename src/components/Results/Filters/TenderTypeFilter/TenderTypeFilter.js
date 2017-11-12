@@ -1,4 +1,5 @@
 import React from 'react'
+import { object } from 'prop-types'
 import { inject, observer } from 'mobx-react'
 import {observable, toJS} from 'mobx'
 import { translate } from 'react-polyglot'
@@ -13,6 +14,11 @@ import styles from './TenderTypeFilter.scss'
 @CSSModules(styles, { allowMultiple: true })
 @observer
 export default class TenderTypeFilter extends React.Component {
+
+  static propTypes = {
+    items: object
+  }
+
   @observable items = []
   @observable selected = []
 
@@ -28,7 +34,7 @@ export default class TenderTypeFilter extends React.Component {
 
   doFilter = () => {
     const { searchStore } = this.props
-    doFilter(searchStore, 'tendertype', this.selected)  
+    doFilter(searchStore, 'tendertype', this.selected)
   }
 
   onCheck = e => {
@@ -48,7 +54,7 @@ export default class TenderTypeFilter extends React.Component {
   render() {
     const {t} = this.props
     return(
-      <div>
+      <div style={{paddingTop: '20px', paddingBottom: '20px'}}>
         <div>{t('filter.tenderTypeTitle')}</div>
         {
           this.items.map(((item, index) =>
@@ -63,7 +69,7 @@ export default class TenderTypeFilter extends React.Component {
             </div>), this
           )
         }
-        <a onClick={this.doFilter}>Commit</a>
+        <a onClick={this.doFilter} style={{border: '1px solid', padding: '3px'}}>Commit</a>
       </div>
     )
   }

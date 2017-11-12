@@ -84,6 +84,7 @@ export default {
     date: 'תאריך',
     time: 'שעה',
     delivery: 'הגשה ב-%{infoDateVal}',
+    noDate: 'לא ידוע',
     remark: 'הערה',
     cancel: 'בטל',
     delete: 'מחק',
@@ -92,6 +93,7 @@ export default {
   filter: {
     subSubjectsTitle: 'בחר ענפים',
     tenderTypeTitle: 'סוג מכרז',
+    publishersTitle: 'בחר מפרסמים',
     infoDate: 'תאריך הגשה',
     publishDate: 'תאריך פרסום',
     from: 'מ',

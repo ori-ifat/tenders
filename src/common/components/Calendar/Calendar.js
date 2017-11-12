@@ -1,5 +1,5 @@
 import React from 'react'
-import { bool, object, func } from 'prop-types'
+import { bool, object, func, string } from 'prop-types'
 import { observer } from 'mobx-react'
 import {observable, toJS} from 'mobx'
 import DatePicker from 'react-datepicker'
@@ -12,6 +12,15 @@ import 'common/style/_datepicker.scss'
 @CSSModules(styles)
 @observer
 export default class Calendar extends React.Component {
+
+  static propTypes = {
+    name: string,
+    defaultDate: object,
+    todayLabel: string,
+    selectDate: func,
+    showMonths: bool,
+    showYears: bool
+  }
 
   @observable selectedDate
 
@@ -27,11 +36,13 @@ export default class Calendar extends React.Component {
     this.selectedDate = moment(defaultDate, 'DD-MM-YYYY')
   }
   */
-  /*
+
   getDatetime = () => {
     //console.log('getDatetime', this.selectedDate)
-    return moment(this.selectedDate)
-  }*/
+    const {defaultDate} = this.props
+    this.selectedDate = moment(defaultDate, 'DD-MM-YYYY')
+    return moment(defaultDate, 'DD-MM-YYYY')
+  }
 
   dateModified = key => value => {
     this.selectedDate = moment(value)
@@ -42,15 +53,18 @@ export default class Calendar extends React.Component {
 
   render() {
     //console.log('render calendar', this.selectedDate)
+    const {showMonths, showYears} = this.props
     return (
       <div styleName="ui-filter-date">
         <DatePicker
           bsSize="lg"
           locale="he-IL"
           dropdownMode="select"
-          selected={this.selectedDate}
+          selected={this.getDatetime()}
           onChange={this.dateModified('selectedDate')}
           todayButton={this.props.todayLabel}
+          showMonthDropdown={showMonths}
+          showYearDropdown={showYears}
         />
       </div>
     )

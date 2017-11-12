@@ -7,12 +7,16 @@ export default class Banners extends React.Component {
 
   render() {
     return(
-      <div>
-        <div>Banner</div>
-        <div>Banner</div>
-        <div>Banner</div>
-        <div>Banner</div>
+      <div style={{paddingTop: '20px'}}>
+        <Banner />
+        <Banner />
+        <Banner />
+        <Banner />
       </div>
     )
   }
+}
+
+const Banner = ({}) => {
+  return <div style={{ padding: '30px', border: '1px solid', marginTop: '10px'}}>Banner</div>
 }

@@ -1,4 +1,5 @@
 import React from 'react'
+import { string, object, func } from 'prop-types'
 import { inject, observer } from 'mobx-react'
 import {observable, toJS} from 'mobx'
 import { translate } from 'react-polyglot'
@@ -6,26 +7,39 @@ import filter from 'lodash/filter'
 import remove from 'lodash/remove'
 import {doFilter} from 'common/utils/filter'
 import CSSModules from 'react-css-modules'
-import styles from './SubSubjectsFilter.scss'
+import styles from './MultipleFilter.scss'
 
 @translate()
 @inject('searchStore')
 @CSSModules(styles, { allowMultiple: true })
 @observer
-export default class SubSubjectsFilter extends React.Component {
+export default class MultipleFilter extends React.Component {
+  /* component for multiple values filter selection */
+  //note: implemented for subsubjects and publishers only. need to find a more generic way to check the types
+  //(such as item.SubSubjectName vs. item.PublisherName)
+
+  static propTypes = {
+    type: string,
+    items: object,
+    label: string,
+    onClose: func
+  }
 
   @observable open = false
+  @observable type = ''
   @observable items = []
   @observable selected = []
   @observable itemLabels = []
 
   componentWillMount() {
-    const {items} = this.props
+    const {type, items} = this.props
+    this.type = type
     this.items = items
   }
 
   componentWillReceiveProps(nextProps) {
-    const {items} = nextProps
+    const {type, items} = nextProps
+    this.type = type
     this.items = items
   }
 
@@ -38,19 +52,28 @@ export default class SubSubjectsFilter extends React.Component {
   }
 
   doFilter = () => {
+    //commit filters
     const { searchStore, onClose } = this.props
-    doFilter(searchStore, 'subsubject', this.selected, this.itemLabels, onClose, this.open)
+    const field = this.type == 'subsubjects' ? 'subsubject' : 'publisher'
+    doFilter(searchStore, field, this.selected, this.itemLabels, onClose, this.open)
   }
 
   filterItems = e => {
+    //filter the checkboxes by text field value
     const {items} = this.props
     const reduced = filter(items, item => {
-      return item.SubSubjectName.indexOf(e.target.value) > -1
-    })
+      if (this.type == 'subsubjects') {
+        return item.SubSubjectName.indexOf(e.target.value) > -1
+      }
+      else {
+        return item.PublisherName.indexOf(e.target.value) > -1
+      }
+    }, this)
     this.items = reduced
   }
 
   onCheck = e => {
+    //checkbox check\uncheck event
     if (e.target.checked) {
       if (!this.selected.includes(e.target.value)) {
         this.selected.push(parseInt(e.target.value))
@@ -70,26 +93,29 @@ export default class SubSubjectsFilter extends React.Component {
 
   render() {
     const {t} = this.props
+    const title = this.type == 'subsubjects' ? t('filter.subSubjectsTitle') : t('filter.publishersTitle')
     return(
-      <div>
+      <div style={{border: 'silver solid 1px'}}>
         {this.open ?
           <div className="reveal-overlay" style={{display: 'block'}}>
             <div className="reveal tiny" style={{display: 'block'}}>
               <div>
-                <h2>{t('filter.subSubjectsTitle')}</h2>
+                <h2>{title}</h2>
                 <input type="text" onChange={this.filterItems} />
                 <div style={{height: '300px', overflow: 'auto'}}>
                   {
-                    this.items.map(((item, index) =>
-                      <div key={index}>
+                    this.items.map(((item, index) => {
+                      const id = this.type == 'subsubjects' ? item.SubSubjectID : item.PublisherID
+                      const name = this.type == 'subsubjects' ? item.SubSubjectName : item.PublisherName
+                      return <div key={index}>
                         <input type="checkbox"
-                          checked={this.selected.includes(item.SubSubjectID)}
-                          name={item.SubSubjectName}
-                          value={item.SubSubjectID}
+                          checked={this.selected.includes(id)}
+                          name={name}
+                          value={id}
                           onChange={this.onCheck}
                         />
-                        <span styleName="cb-label">{item.SubSubjectName}</span>
-                      </div>), this
+                        <span styleName="cb-label">{name}</span>
+                      </div>}), this
                     )
                   }
                 </div>
@@ -112,7 +138,7 @@ export default class SubSubjectsFilter extends React.Component {
             { (!this.props.label || this.props.label == '') &&
             <div>
               <br />
-              <span style={{cursor: 'pointer'}}>{t('filter.subSubjectsTitle')}</span>
+              <span style={{cursor: 'pointer'}}>{title}</span>
             </div> }
           </div>
         }

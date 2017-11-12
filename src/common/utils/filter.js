@@ -10,6 +10,11 @@ export function doFilter(searchStore, field, values, itemLabels, onClose, open) 
       return filter.field === 'publishdate' || filter.field === 'infodate'
     })
   }
+  else {
+    remove(searchStore.filters, filter => {
+      return filter.field === field
+    })
+  }
   //get current filters and concat new ones
   const newFilters = [...searchStore.filters, {field, values}]
   const filters = JSON.stringify(newFilters)

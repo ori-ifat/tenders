@@ -142,7 +142,7 @@ export default class Home extends Component {
         {this.reminderItem > -1 &&
           <Reminder
             tenderID={this.reminderItem}
-            onCancel={this.cancelReminder}
+            onClose={this.cancelReminder}
             title={this.reminderTitle}
             infoDate={this.reminderInfoDate}
             reminderID={this.reminderID}

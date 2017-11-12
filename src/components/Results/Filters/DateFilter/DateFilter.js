@@ -1,4 +1,5 @@
 import React from 'react'
+import { string, array, object, func } from 'prop-types'
 import { inject, observer } from 'mobx-react'
 import {observable, toJS} from 'mobx'
 import { translate } from 'react-polyglot'
@@ -13,25 +14,42 @@ import styles from './DateFilter.scss'
 @CSSModules(styles, { allowMultiple: true })
 @observer
 export default class DateFilter extends React.Component {
+  /* component for date range filter */
+
+  static propTypes = {
+    dateField: string,
+    dateValues: array,
+    onSubmit: func
+  }
 
   @observable dateField = 'publishdate'
   @observable startDate = moment()
   @observable endDate = moment()
 
   componentWillMount() {
-
+    const {dateField, dateValues} = this.props
+    this.chooseDateField(dateField)
+    this.setDefaultDates(dateValues)
   }
 
   componentWillReceiveProps(nextProps) {
-
+    const {dateField, dateValues} = nextProps
+    this.chooseDateField(dateField)
+    this.setDefaultDates(dateValues)
   }
 
   chooseDateField = field => {
     this.dateField = field
   }
 
+  setDefaultDates = dateValues => {
+    //if there is an array of dates, set default dates by it
+    this.startDate = dateValues && dateValues.length > 0 ? moment(dateValues[0], 'YYYY-MM-DD') || moment() : moment()
+    this.endDate = dateValues  && dateValues.length > 1 ? moment(dateValues[1], 'YYYY-MM-DD') || moment() : moment()
+  }
+
   selectDate = (date, field) => {
-    //console.log('selectDate', date, moment(date).format('DD-MM-YYYY'))
+    //set observables and doFilter
     switch (field) {
     case 'startDate':
       this.startDate = date
@@ -40,18 +58,20 @@ export default class DateFilter extends React.Component {
       this.endDate = date
       break
     }
-    //console.log(this.startDate, this.endDate)
     this.doFilter()
   }
 
   doFilter = () => {
-    const { searchStore } = this.props
+    //filter commit
+    const { searchStore, onSubmit } = this.props
     const values = [
       moment(this.startDate).format('YYYY-MM-DD'),
       moment(this.endDate).format('YYYY-MM-DD')
     ]
     doFilter(searchStore, this.dateField, values)
-    /* pass state object of filters from results to filter! */
+    //set the state-like object:
+    onSubmit('dateField', this.dateField) //...the date field name,
+    onSubmit(this.dateField, values)  //the actual values
   }
 
   render() {
@@ -60,7 +80,7 @@ export default class DateFilter extends React.Component {
     const clsRight = this.dateField == 'publishdate' ? 'dates-right selected' : 'dates-right'
 
     return(
-      <div>
+      <div style={{paddingTop: '20px'}}>
         <div styleName="clearfix">
           <div styleName={clsLeft} onClick={() => this.chooseDateField('infodate')} style={{cursor: 'pointer'}}>
             {t('filter.infoDate')}
@@ -76,16 +96,22 @@ export default class DateFilter extends React.Component {
         <div styleName="clearfix">
           <div styleName="start-date">
             <Calendar
+              name="startDate"
+              defaultDate={this.startDate}
               todayLabel={t('filter.today')}
               selectDate={this.selectDate}
-              name="startDate"
+              showMonths={true}
+              showYears={true}
             />
           </div>
           <div styleName="end-date">
             <Calendar
+              name="endDate"
+              defaultDate={this.endDate}
               todayLabel={t('filter.today')}
               selectDate={this.selectDate}
-              name="endDate"
+              showMonths={true}
+              showYears={true}
             />
           </div>
         </div>

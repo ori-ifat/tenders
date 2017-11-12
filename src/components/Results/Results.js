@@ -101,13 +101,28 @@ export default class Results extends Component {
   }
 
   setSelectedFilters = (label, value) => {
+    /* set the selectedFilters object - a state-like object for the filter container.
+      need that because the entire object is recreated upon filter commit action */
     switch (label) {
+    //note: Reflect.deleteProperty() may not work in IE...
     case 'subsubject':
       delete this.selectedFilters.subsubjects
       this.selectedFilters.subsubjects = value
       break
+    case 'publisher':
+      delete this.selectedFilters.publishers
+      this.selectedFilters.publishers = value
+      break
+    case 'dateField':
+      delete this.selectedFilters.dateField
+      this.selectedFilters.dateField = value
+    case 'publishdate':
+    case 'infodate':
+      delete this.selectedFilters.date
+      this.selectedFilters.date = { [label]: value}
+      break
     }
-    console.log(this.selectedFilters)
+    //console.log(this.selectedFilters)
   }
 
   render() {
@@ -163,7 +178,7 @@ export default class Results extends Component {
             {this.reminderItem > -1 &&
               <Reminder
                 tenderID={this.reminderItem}
-                onCancel={this.cancelReminder}
+                onClose={this.cancelReminder}
                 title={this.reminderTitle}
                 infoDate={this.reminderInfoDate}
                 reminderID={this.reminderID}
