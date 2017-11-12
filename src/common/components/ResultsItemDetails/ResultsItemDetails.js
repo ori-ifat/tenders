@@ -55,7 +55,7 @@ export default class ResultsItemDetails extends React.Component {
             <div styleName="view-details-wrapper" style={{top: (divTop + 10)}}>
               <div className="grid-x">
                 <div className="large-12 cell">
-                  {item.TenderType == t('tender.exclusive') && <span styleName="label">{t('tender.exclusive')}</span>}
+                  {item.TenderType == t('tender.exclusive') && <span styleName="label" className="label">{t('tender.exclusive')}</span>}
                   {twoDaysLeft && !oneDayLeft && <span styleName="label alert">{t('tender.twoDaysLeft')}</span>}
                   {oneDayLeft && <span styleName="label alert">{t('tender.oneDayLeft')}</span>}
                   {twoDaysLeftTour && !oneDayLeftTour && <span styleName="label alert">{t('tender.twoDaysLeftTour')}</span>}
