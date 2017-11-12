@@ -1,9 +1,16 @@
 import React, {Component} from 'react'
+import { string, func } from 'prop-types'
 import ImageViewer from 'react-image-viewer-zoom'
 import 'react-image-viewer-zoom/dist/style.css'
 import './style.scss'
 
 class ImageView extends Component {
+
+  static propTypes = {
+    onClose: func,
+    url: string,
+    title: string
+  }
 
   render() {
     //src: 'http://www.gettyimages.com/gi-resources/images/Embed/new/embed2.jpg', title: 'title', content: 'content'

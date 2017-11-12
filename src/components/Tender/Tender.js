@@ -20,7 +20,7 @@ export default class Tender extends Component {
 
   componentWillMount() {
     const { match: {params: { itemId }} } = this.props
-    this.itemID = itemId
+    this.itemID = parseInt(itemId)
   }
 
   showViewer = (fileName, title) => {

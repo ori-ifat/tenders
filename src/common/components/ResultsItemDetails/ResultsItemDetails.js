@@ -1,4 +1,5 @@
 import React from 'react'
+import { number, string, func } from 'prop-types'
 import { inject, observer } from 'mobx-react'
 import {observable, toJS} from 'mobx'
 import { translate } from 'react-polyglot'
@@ -16,6 +17,13 @@ const thumbSrc = req('./thumb.jpg')
 @CSSModules(styles, {allowMultiple: true})
 @observer
 export default class ResultsItemDetails extends React.Component {
+
+  static propTypes = {
+    itemID: number,
+    onClose: func,
+    showViewer: func,
+    mode: string
+  }
 
   componentWillMount() {
     const {itemStore, itemID} = this.props
