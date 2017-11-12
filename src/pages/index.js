@@ -27,7 +27,7 @@ class Pages extends React.Component {
           <Route path="/search">
             {this.ensureAuthentication(SearchPage)}
           </Route>
-          <Route path="/results/:sort/:tags">
+          <Route path="/results/:sort/:tags/:filters">
             {this.ensureAuthentication(ResultsPage)}
           </Route>
           <Route path="/tender/:itemId">

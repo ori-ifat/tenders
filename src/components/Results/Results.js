@@ -4,24 +4,26 @@ import {observable, toJS} from 'mobx'
 import { whenRouted } from 'common/utils/withRouteHooks'
 import { withRouter } from 'react-router'
 import { searchStore } from 'stores'
-import SearchInput from 'components/SearchInput'
+import SearchInput from 'common/components/SearchInput'
 import ResultsTitle from './ResultsTitle'
 import ResultsActions from './ResultsActions'
 import ResultsList from './ResultsList'
+import Filters from './Filters'
+import Banners from './Banners'
 import Toolbar from 'common/components/Toolbar'
 import ResultsItemDetails from 'common/components/ResultsItemDetails'
 import Reminder from 'common/components/Reminder'
 import NoData from 'components/NoData'
 import {setCheckedStatus, setFavStatus, getImageUrl} from 'common/utils/util'
-import {addToFavorites, clearCache} from 'common/services/apiService'
 import ImageView from 'common/components/ImageView'
 import CSSModules from 'react-css-modules'
 import styles from './results.scss'
 
 @withRouter
-@whenRouted(({ params: { sort, tags } }) => {
+@whenRouted(({ params: { sort, tags, filters } }) => {
   searchStore.applySort(sort)
   searchStore.applyTags(tags)
+  searchStore.applyFilters(filters)
   searchStore.clearResults()
   searchStore.loadNextResults()
 })
@@ -39,6 +41,7 @@ export default class Results extends Component {
   @observable reminderTitle = ''
   @observable reminderInfoDate = null
   @observable reminderID = -1;
+  @observable subsubjects = ''
 
   componentWillMount() {
     //console.log('mount')
@@ -50,19 +53,11 @@ export default class Results extends Component {
   }
 
   onCheck = (checked, value, isFavorite) => {
-    //console.log('onCheck', checked, value, isFavorite)
     setCheckedStatus(this.checkedItems, checked, value, isFavorite)
-    //console.log(this.checkedItems)
   }
 
   onFav = (tenderID, add) => {
-    //console.log('onFav', tenderID, add)
-    //call api with item and relevant action (add\!add)
-    const action = add ? 'Favorite_add' : 'Favorite_del'
-    addToFavorites(action, [tenderID])
-    clearCache()
     setFavStatus(this.checkedItems, tenderID, add)
-    //console.log(this.checkedItems)
   }
 
   hideToolbar = () => {
@@ -70,9 +65,6 @@ export default class Results extends Component {
   }
 
   viewDetails = (tenderID) => {
-    //this.setState({selected: true})
-    //const { item: { TenderID } } = this.props
-    console.log('TenderID', tenderID)
     this.selectedTender = tenderID
   }
 
@@ -107,6 +99,14 @@ export default class Results extends Component {
     this.reminderID = -1
   }
 
+  setFilterLabel = (label, value) => {
+    switch (label) {
+    case 'subsubject':
+      this.subsubjects = value
+      break
+    }
+  }
+
   render() {
 
     const {searchStore, searchStore: {resultsLoading, resultsCount, tags}} = this.props
@@ -121,6 +121,11 @@ export default class Results extends Component {
             <div className="row">
               <div className="columns large-3">
                 <hr />
+                <Filters
+                  setLabel={this.setFilterLabel}
+                  subsubjects={this.subsubjects}
+                />
+                <Banners />
               </div>
               <div className="columns large-9">
                 <hr />
@@ -157,7 +162,7 @@ export default class Results extends Component {
                 tenderID={this.reminderItem}
                 onCancel={this.cancelReminder}
                 title={this.reminderTitle}
-                date={this.reminderInfoDate}
+                infoDate={this.reminderInfoDate}
                 reminderID={this.reminderID}
               />
             }

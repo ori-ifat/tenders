@@ -16,7 +16,8 @@ const serializeTags = ({ID, Name, ResType}) => {
 }
 
 class Search {
-  @observable filters = [];
+  @observable filters = []; //chosen filters from filters component
+  @observable availableFilters = [];  //all relevant filters;
   @observable tags = [];
   @observable sort = 'publishDate'
   @observable resultsLoading = false
@@ -94,7 +95,6 @@ class Search {
   @action.bound
   clearResults() {
     this.results.clear()
-
     this.lastResultsPage = 0
     this.hasMoreResults = true
     this.resultsCount = 0
@@ -113,12 +113,13 @@ class Search {
       }
       this.request = await search(searchParams)
 
-      const {resultsPage: {data, total}} = this.request
+      const {resultsPage: {data, total}, filtersMeta} = this.request
       if (data.length > 0) {
         this.lastResultsPage++
       }
       console.log('loadNextResults', this.lastResultsPage)
       this.results = [...this.results, ...data.map(d => ({ ...d, key: d.TenderID }))]
+      this.availableFilters = filtersMeta
       //this.hasMoreResults = data.length === this.resultsPageSize
       this.resultsCount = total
       this.hasMoreResults = data.length > 0 && this.results.length < this.resultsCount

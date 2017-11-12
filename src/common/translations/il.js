@@ -88,5 +88,16 @@ export default {
     cancel: 'בטל',
     delete: 'מחק',
     submit: 'שמור תזכורת'
+  },
+  filter: {
+    subSubjectsTitle: 'בחר ענפים',
+    tenderTypeTitle: 'סוג מכרז',
+    infoDate: 'תאריך הגשה',
+    publishDate: 'תאריך פרסום',
+    from: 'מ',
+    to: 'עד',
+    today: 'היום',
+    choose: 'בחר',
+    cancel: 'בטל'
   }
 }

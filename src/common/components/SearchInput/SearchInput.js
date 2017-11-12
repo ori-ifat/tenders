@@ -19,9 +19,6 @@ export default class SearchInput extends Component {
   }
 
   @observable selectedValues =[]
-  /*state = {
-    selectedValues: []
-  }*/
 
   componentWillMount() {
     const {tags} = this.props
@@ -29,9 +26,7 @@ export default class SearchInput extends Component {
   }
 
   onChange = values => {
-    //console.log(`Selected: ${JSON.stringify(values)}`)
     this.selectedValues = values
-    //this.setState({selectedValues: values})
     setTimeout(() => {
       this.onSearch()
     }, 150)
@@ -84,17 +79,15 @@ export default class SearchInput extends Component {
   }
 
   onSearch = () => {
-    //const {selectedValues} = this.state
     const { routingStore } = this.props
     const sort = 'publishDate'  //default sort. note, means that on every search action, sort will reset here
-    //const payload = JSON.stringify(selectedValues)
     const payload = JSON.stringify(this.selectedValues)
-    routingStore.push(`/results/${sort}/${payload}`)
+    //note: on new search, filters should be empty
+    routingStore.push(`/results/${sort}/${payload}/[]`)
   }
 
   render() {
-    const selectedValues = toJS(this.selectedValues)
-    //const {selectedValues} = this.state
+    const selectedValues = toJS(this.selectedValues)    
     const {t} = this.props
 
     return (
