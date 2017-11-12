@@ -3,6 +3,7 @@ import { number, string, func } from 'prop-types'
 import { inject, observer } from 'mobx-react'
 import {observable, toJS} from 'mobx'
 import { translate } from 'react-polyglot'
+import {setDateLabel, isDateInRange} from 'common/utils/item'
 import moment from 'moment'
 import ImageView from 'common/components/ImageView'
 import Row from './Row'
@@ -36,19 +37,18 @@ export default class ResultsItemDetails extends React.Component {
   }
 
   render() {
-    //const { item, onClose } = this.props
     const { itemStore, onClose, t } = this.props
     const item = toJS(itemStore.item)
     //for display
-    const publishDate = item.PublishDate != null ? moment(item.PublishDate).format('DD-MM-YYYY') : t('tender.noDate')
-    const infoDate = item.InfoDate != null ? moment(item.InfoDate).format('DD-MM-YYYY HH:mm') : t('tender.noDate')
+    const publishDate = setDateLabel(item.PublishDate, 'DD-MM-YYYY', t('tender.noDate'))
+    const infoDate = setDateLabel(item.InfoDate, 'DD-MM-YYYY HH:mm', t('tender.noDate'))
     //
     //infoDate
-    const twoDaysLeft = moment(item.InfoDate) > moment() && moment(item.InfoDate) < moment().add(2, 'days')
-    const oneDayLeft = moment(item.InfoDate) > moment() && moment(item.InfoDate) < moment().add(1, 'days')
+    const twoDaysLeft = isDateInRange(item.InfoDate, 2)
+    const oneDayLeft = isDateInRange(item.InfoDate, 1)
     //tourDate
-    const twoDaysLeftTour = moment(item.TourDate) > moment() && moment(item.TourDate) < moment().add(2, 'days')
-    const oneDayLeftTour = moment(item.TourDate) > moment() && moment(item.TourDate) < moment().add(1, 'days')
+    const twoDaysLeftTour = isDateInRange(item.TourDate, 2)
+    const oneDayLeftTour = isDateInRange(item.TourDate, 1)
     //fileName
     const fileName = item.File ? item.File.FileName : ''
     //for scroll pos of item

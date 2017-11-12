@@ -3,6 +3,7 @@ import { object, func, bool } from 'prop-types'
 import { observer } from 'mobx-react'
 import {observable, toJS} from 'mobx'
 import { translate } from 'react-polyglot'
+import {setDateLabel, isDateInRange} from 'common/utils/item'
 import CSSModules from 'react-css-modules'
 import styles from './ResultsItem.scss'
 import moment from 'moment'
@@ -51,14 +52,14 @@ export default class ResultsItem extends React.Component {
     const { item, onClick, onCheck, checked, onFav, setReminder, t } = this.props
     const cbItem = Object.assign({}, item, {IsFavorite: this.IsFavorite}) //merge this.IsFavorite to current item
 
-    const publishDate = item.PublishDate != null ? moment(item.PublishDate).format('DD-MM-YYYY') : t('tender.noDate')
+    const publishDate = setDateLabel(item.PublishDate, 'DD-MM-YYYY', t('tender.noDate'))
     const tenderStyle = checked ? 'tender_summery checked' : 'tender_summery'
     //infoDate
-    const twoDaysLeft = moment(item.InfoDate) > moment() && moment(item.InfoDate) < moment().add(2, 'days')
-    const oneDayLeft = moment(item.InfoDate) > moment() && moment(item.InfoDate) < moment().add(1, 'days')
+    const twoDaysLeft = isDateInRange(item.InfoDate, 2)
+    const oneDayLeft = isDateInRange(item.InfoDate, 1)
     //tourDate
-    const twoDaysLeftTour = moment(item.TourDate) > moment() && moment(item.TourDate) < moment().add(2, 'days')
-    const oneDayLeftTour = moment(item.TourDate) > moment() && moment(item.TourDate) < moment().add(1, 'days')
+    const twoDaysLeftTour = isDateInRange(item.TourDate, 2)
+    const oneDayLeftTour = isDateInRange(item.TourDate, 1)
 
     return (
       <div styleName={tenderStyle}>
