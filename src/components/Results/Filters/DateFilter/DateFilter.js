@@ -3,6 +3,7 @@ import { inject, observer } from 'mobx-react'
 import {observable, toJS} from 'mobx'
 import { translate } from 'react-polyglot'
 import {doFilter} from 'common/utils/filter'
+import moment from 'moment'
 import Calendar from 'common/components/Calendar'
 import CSSModules from 'react-css-modules'
 import styles from './DateFilter.scss'
@@ -13,8 +14,9 @@ import styles from './DateFilter.scss'
 @observer
 export default class DateFilter extends React.Component {
 
-  @observable startDate
-  @observable endDate
+  @observable dateField = 'publishdate'
+  @observable startDate = moment()
+  @observable endDate = moment()
 
   componentWillMount() {
 
@@ -22,6 +24,10 @@ export default class DateFilter extends React.Component {
 
   componentWillReceiveProps(nextProps) {
 
+  }
+
+  chooseDateField = field => {
+    this.dateField = field
   }
 
   selectDate = (date, field) => {
@@ -34,29 +40,50 @@ export default class DateFilter extends React.Component {
       this.endDate = date
       break
     }
-    console.log(this.startDate, this.endDate)
+    //console.log(this.startDate, this.endDate)
+    this.doFilter()
   }
 
   doFilter = () => {
-
+    const { searchStore } = this.props
+    const values = [
+      moment(this.startDate).format('YYYY-MM-DD'),
+      moment(this.endDate).format('YYYY-MM-DD')
+    ]
+    doFilter(searchStore, this.dateField, values)
+    /* pass state object of filters from results to filter! */
   }
 
   render() {
     const {t} = this.props
+    const clsLeft = this.dateField == 'infodate' ? 'dates-left selected' : 'dates-left'
+    const clsRight = this.dateField == 'publishdate' ? 'dates-right selected' : 'dates-right'
+
     return(
       <div>
-        Dates
+        <div styleName="clearfix">
+          <div styleName={clsLeft} onClick={() => this.chooseDateField('infodate')} style={{cursor: 'pointer'}}>
+            {t('filter.infoDate')}
+          </div>
+          <div styleName={clsRight} onClick={() => this.chooseDateField('publishdate')} style={{cursor: 'pointer'}}>
+            {t('filter.publishDate')}
+          </div>
+        </div>
+        <div styleName="clearfix">
+          <div styleName="dates-left">{t('filter.to')}</div>
+          <div styleName="dates-right">{t('filter.from')}</div>
+        </div>
         <div styleName="clearfix">
           <div styleName="start-date">
             <Calendar
-              todayLabel={t('reminder.today')}
+              todayLabel={t('filter.today')}
               selectDate={this.selectDate}
               name="startDate"
             />
           </div>
           <div styleName="end-date">
             <Calendar
-              todayLabel={t('reminder.today')}
+              todayLabel={t('filter.today')}
               selectDate={this.selectDate}
               name="endDate"
             />

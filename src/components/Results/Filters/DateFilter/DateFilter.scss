@@ -3,6 +3,20 @@
   zoom: 1;
 }
 
+.dates-left {
+  float: left;
+  width: 50%
+}
+
+.dates-right {
+  float: right;
+  width: 50%;
+}
+
+.selected {
+  background-color: #34b44f
+}
+
 .start-date {
   float: right;
   width: 50%;
