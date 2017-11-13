@@ -55,7 +55,7 @@ export default class Calendar extends React.Component {
     //console.log('render calendar', this.selectedDate)
     const {showMonths, showYears} = this.props
     return (
-      <div styleName="ui-filter-date">
+      <div styleName="datepicker-container">
         <DatePicker
           bsSize="lg"
           locale="he-IL"
