@@ -33,8 +33,6 @@ export function setFavStatus(checkedItems, tenderID, add) {
   }
 }
 
-
-
 export function getImageUrl(fileName) {
   const cleanFileName = fileName.replace(/\\/g, '/').replace(/\/\/int_fs\/Clips/g, '')
   const url = cleanFileName.indexOf('ColorClp') > -1 || cleanFileName.indexOf('ClipsPdf') > -1 ?

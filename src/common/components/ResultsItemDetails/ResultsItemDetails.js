@@ -4,9 +4,11 @@ import { inject, observer } from 'mobx-react'
 import {observable, toJS} from 'mobx'
 import { translate } from 'react-polyglot'
 import {setDateLabel, isDateInRange} from 'common/utils/item'
+import {createUrl, getEmailData, clearCache} from 'common/services/apiService'
 import moment from 'moment'
 import ImageView from 'common/components/ImageView'
 import Row from './Row'
+import Reminder from 'common/components/Reminder'
 import CSSModules from 'react-css-modules'
 import styles from './ResultsItemDetails.scss'
 
@@ -26,6 +28,8 @@ export default class ResultsItemDetails extends React.Component {
     mode: string
   }
 
+  @observable remindMe = false
+
   componentWillMount() {
     const {itemStore, itemID} = this.props
     itemStore.loadTender(itemID)
@@ -34,6 +38,30 @@ export default class ResultsItemDetails extends React.Component {
   componentWillReceiveProps(nextProps, nextState) {
     const {itemStore, itemID} = nextProps
     itemStore.loadTender(itemID)
+  }
+
+  email = () => {
+    //console.log('email', this.props.checkedItems)
+    const {itemID, t} = this.props
+    const item = [itemID]
+    getEmailData(item).then(uid =>
+      //console.log('email', uid)
+      location.href = `mailto:someone@email.com?subject=${t('toolbar.emailSubject')}&body=${encodeURIComponent(t('toolbar.emailBody', {uid}))}`
+    )
+  }
+
+  print = () => {
+    //console.log('print', this.props.checkedItems)
+    const {itemID} = this.props
+    const item = [itemID]
+    window.open(createUrl('Export/ExportData', {
+      ExportType: 1,
+      InfoList: item
+    }, false), '_blank')
+  }
+
+  remind = open => {
+    this.remindMe = open
   }
 
   render() {
@@ -55,7 +83,7 @@ export default class ResultsItemDetails extends React.Component {
     const divTop = document.documentElement.scrollTop ? document.documentElement.scrollTop : document.body.scrollTop
     const className = !this.props.mode ? 'reveal-overlay' : ''
     const subClassName = !this.props.mode ? 'reveal large' : ''
-
+    
     return (
       <div className={className} style={{display: 'block'}}>
         <div className={subClassName} style={{display: 'block'}}>
@@ -80,15 +108,15 @@ export default class ResultsItemDetails extends React.Component {
                   <Row label={t('tender.delivery')} data={infoDate} />
                   <Row label={t('tender.details')} data={item.Summery} />
                   {
-                    item.TourDetails &&
+                    item.TourDetails && item.TourDetails.trim() != '' &&
                     <Row label={t('tender.tourDetails')} data={item.TourDetails} />
                   }
                   {
-                    item.TenderConditions &&
+                    item.TenderConditions && item.TenderConditions.trim() != '' &&
                     <Row label={t('tender.tenderConditions')} data={item.TenderConditions} />
                   }
                   {
-                    item.SubSubjects &&
+                    item.SubSubjects && item.SubSubjects.trim() != '' &&
                     <Row label={t('tender.subSubjects')} data={item.SubSubjects} />
                   }
                   {
@@ -111,10 +139,10 @@ export default class ResultsItemDetails extends React.Component {
                 <div className="large-3 cell">
                   {fileName != '' && <a onClick={() => this.props.showViewer(fileName, item.Title)}><img styleName="thender_thumb"  src={thumbSrc} /></a>}
                   <ul className="no-bullet" styleName="tender_actions">
-                    <li><a>{t('tender.toTenderDetails')}</a></li>
-                    <li><a>{t('tender.print')}</a></li>
-                    <li><a>{t('tender.email')}</a></li>
-                    <li><a>{t('tender.remind')}</a></li>
+                    {/*<li><a>{t('tender.toTenderDetails')}</a></li>*/}
+                    <li><a onClick={this.print}>{t('tender.print')}</a></li>
+                    <li><a onClick={this.email}>{t('tender.email')}</a></li>
+                    <li><a onClick={() => this.remind(true)}>{t('tender.remind')}</a></li>
                   </ul>
                 </div>
               </div>
@@ -127,6 +155,15 @@ export default class ResultsItemDetails extends React.Component {
           }
           {itemStore.resultsLoading && <div>Loading...</div>}
         </div>
+        {this.remindMe &&
+          <Reminder
+            tenderID={item.TenderID}
+            onClose={() => this.remind(false)}
+            title={item.Title}
+            infoDate={item.InfoDate}
+            reminderID={item.ReminderID}
+          />
+        }
       </div>
     )
   }

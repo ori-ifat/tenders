@@ -119,7 +119,7 @@ export default class Results extends Component {
     case 'publishdate':
     case 'infodate':
       delete this.selectedFilters.date
-      this.selectedFilters.date = { [label]: value}
+      this.selectedFilters.date = { [label]: value }
       break
     }
     //console.log(this.selectedFilters)

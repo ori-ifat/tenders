@@ -14,7 +14,7 @@ class Home {
   async loadAgentResults() {
     if (!this.resultsLoading) {
       this.resultsLoading = true
-      const lastSeenTenderID = 7736041  //implementation needed - get lastSeenTenderID of logged customer
+      const lastSeenTenderID = -1  //future implementation - get lastSeenTenderID of logged customer
       this.request = await getLastTenders(lastSeenTenderID)
 
       const data = this.request

@@ -4,7 +4,7 @@ import { observer } from 'mobx-react'
 import { observable } from 'mobx'
 import { translate } from 'react-polyglot'
 import moment from 'moment'
-import {setReminder, getReminder} from 'common/services/apiService'
+import {setReminder, getReminder, clearCache} from 'common/services/apiService'
 import Calendar from 'common/components/Calendar'
 import CSSModules from 'react-css-modules'
 import styles from './Reminder.scss'
@@ -89,13 +89,15 @@ export default class Reminder extends Component {
     const action = this.reminderID > 0 ? 'Update' : 'Add'
     setReminder(action, this.reminderID, this.tenderID, this.remark, this.subject, _date).then(saved => {
       console.log('saved status:', saved) //implement if user should know something about save op
+      clearCache()
       this.props.onClose() //...close the modal
     })
   }
 
   delReminder = () => {
     setReminder('Delete', this.reminderID, -1, '', '', '').then(deleted => {
-      console.log('delete status:', deleted) //implement if user should know something about save op
+      console.log('delete status:', deleted) //implement if user should know something about delete op
+      clearCache()
       this.props.onClose() //...close the modal
     })
   }
@@ -108,7 +110,7 @@ export default class Reminder extends Component {
     const infoDateVal = infoDate != null ? moment(infoDate, 'YYYY-MM-DD HH:mm:ss').format('DD-MM-YYYY') : t('reminder.noDate')
     //console.log('render reminder', this.reminderDate)
     return (
-      <div className="reveal-overlay" style={{display: 'block'}}>
+      <div className="reveal-overlay" style={{display: 'block', zIndex: 1100}}>
         <div className="reveal" styleName="reminder_lb" style={{display: 'block'}}>
           <button styleName="button-cancel" onClick={onClose}>×</button>
           <div className="grid-x grid-margin-x" styleName="pb">
