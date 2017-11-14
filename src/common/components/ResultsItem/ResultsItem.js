@@ -1,6 +1,6 @@
 import React from 'react'
 import { object, func, bool } from 'prop-types'
-import { observer } from 'mobx-react'
+import { inject, observer } from 'mobx-react'
 import {observable, toJS} from 'mobx'
 import { translate } from 'react-polyglot'
 import {setDateLabel, isDateInRange} from 'common/utils/item'
@@ -16,6 +16,7 @@ const favSrc = req('./fav.svg')
 const favActSrc = req('./action_fav.svg')
 
 @translate()
+@inject('accountStore')
 @CSSModules(styles, { allowMultiple: true })
 @observer
 export default class ResultsItem extends React.Component {
@@ -42,16 +43,20 @@ export default class ResultsItem extends React.Component {
   }
 
   addFav = () => {
-    const { item, onFav } = this.props
+    const { item, onFav, accountStore } = this.props
     //callee + local fav state
     onFav(item.TenderID, !this.IsFavorite)
-    this.IsFavorite = !this.IsFavorite
+    if (accountStore.profile) {
+      this.IsFavorite = !this.IsFavorite
+    }
   }
 
   render() {
-    const { item, onClick, onCheck, checked, onFav, setReminder, t } = this.props
+    const { accountStore, item, onClick, onCheck, checked, onFav, setReminder, t } = this.props
     const cbItem = Object.assign({}, item, {IsFavorite: this.IsFavorite}) //merge this.IsFavorite to current item
-
+    //if logged:
+    const logged = accountStore.profile ? true : false
+    //display issues
     const publishDate = setDateLabel(item.PublishDate, 'DD-MM-YYYY', t('tender.noDate'))
     const tenderStyle = checked ? 'tender_summery checked' : 'tender_summery'
     //infoDate
@@ -79,8 +84,12 @@ export default class ResultsItem extends React.Component {
               <div className="tender_meta">
                 <span>{t('tender.publishedAt')}: {publishDate}</span>
                 <span styleName="divider">•</span>
-                <span>{item.Publisher}</span>
-                <span styleName="divider">•</span>
+                { logged &&
+                  <span>
+                    <span>{item.Publisher}</span>
+                    <span styleName="divider">•</span>
+                  </span>
+                }
                 <span>{item.TenderType}</span>
                 <span styleName="divider">•</span>
                 <span>#{item.TenderID}</span>

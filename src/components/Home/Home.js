@@ -4,13 +4,14 @@ import {inject, observer} from 'mobx-react'
 import {observable, toJS} from 'mobx'
 import { whenRouted } from 'common/utils/withRouteHooks'
 import { withRouter } from 'react-router'
-import { homeStore } from 'stores'
+import { homeStore, accountStore } from 'stores'
 import { translate } from 'react-polyglot'
 import HomeTitle from './HomeTitle'
 import HomeList from './HomeList'
 import Toolbar from 'common/components/Toolbar'
 import ResultsItemDetails from 'common/components/ResultsItemDetails'
 import Reminder from 'common/components/Reminder'
+import NotLogged from 'common/components/NotLogged'
 import {setCheckedStatus, setFavStatus, getImageUrl} from 'common/utils/util'
 import ImageView from 'common/components/ImageView'
 import CSSModules from 'react-css-modules'
@@ -24,6 +25,7 @@ import styles from './home.scss'
   homeStore.loadMoreTenders()
 })
 @inject('homeStore')
+@inject('accountStore')
 @CSSModules(styles, { allowMultiple: true })
 @observer
 export default class Home extends Component {
@@ -37,6 +39,7 @@ export default class Home extends Component {
   @observable reminderTitle = ''
   @observable reminderInfoDate = null
   @observable reminderID = -1
+  @observable showLoginMsg = false
 
   componentWillMount() {
     //console.log('mount')
@@ -52,7 +55,13 @@ export default class Home extends Component {
   }
 
   onFav = (tenderID, add) => {
-    setFavStatus(this.checkedItems, tenderID, add)
+    const {accountStore} = this.props
+    if (accountStore.profile) {
+      setFavStatus(this.checkedItems, tenderID, add)
+    }
+    else {
+      this.showLoginMsg = true
+    }
   }
 
   hideToolbar = () => {
@@ -60,7 +69,13 @@ export default class Home extends Component {
   }
 
   viewDetails = (tenderID) => {
-    this.selectedTender = tenderID
+    const {accountStore} = this.props
+    if (accountStore.profile) {
+      this.selectedTender = tenderID
+    }
+    else {
+      this.showLoginMsg = true
+    }
   }
 
   closeDetails = () => {
@@ -68,11 +83,14 @@ export default class Home extends Component {
   }
 
   showViewer = (fileName, title) => {
-    const url = getImageUrl(fileName)
-    this.imageUrl = url
-    this.imageTitle = title
-    this.showImage = true
-    document.body.style.overflowY = 'hidden'
+    const {accountStore} = this.props
+    if (accountStore.profile) {
+      const url = getImageUrl(fileName)
+      this.imageUrl = url
+      this.imageTitle = title
+      this.showImage = true
+      document.body.style.overflowY = 'hidden'
+    }
   }
 
   closeViewer = () => {
@@ -81,10 +99,16 @@ export default class Home extends Component {
   }
 
   setReminder = (tenderID, title, infoDate, reminderID) => {
-    this.reminderItem = tenderID
-    this.reminderTitle = title
-    this.reminderInfoDate = infoDate
-    this.reminderID = reminderID
+    const {accountStore} = this.props
+    if (accountStore.profile) {
+      this.reminderItem = tenderID
+      this.reminderTitle = title
+      this.reminderInfoDate = infoDate
+      this.reminderID = reminderID
+    }
+    else {
+      this.showLoginMsg = true
+    }
   }
 
   cancelReminder = () => {
@@ -92,6 +116,10 @@ export default class Home extends Component {
     this.reminderTitle = ''
     this.reminderInfoDate = null
     this.reminderID = -1
+  }
+
+  continueUnlogged = () => {
+    this.showLoginMsg = false
   }
 
   render() {
@@ -126,26 +154,31 @@ export default class Home extends Component {
           checkedItems={this.checkedItems}
           onClose={this.hideToolbar}
         />
-        {this.selectedTender > -1 && !this.showImage &&
+        {this.selectedTender > -1 && !this.showImage && accountStore.profile &&
           <ResultsItemDetails
             itemID={this.selectedTender}
             onClose={this.closeDetails}
             showViewer={this.showViewer}
           />}
-        {this.selectedTender > -1 && this.showImage &&
+        {this.selectedTender > -1 && this.showImage && accountStore.profile &&
           <ImageView
             onClose={this.closeViewer}
             url={this.imageUrl}
             title={this.imageTitle}
           />
         }
-        {this.reminderItem > -1 &&
+        {this.reminderItem > -1 && accountStore.profile &&
           <Reminder
             tenderID={this.reminderItem}
             onClose={this.cancelReminder}
             title={this.reminderTitle}
             infoDate={this.reminderInfoDate}
             reminderID={this.reminderID}
+          />
+        }
+        {this.showLoginMsg &&
+          <NotLogged
+            onCancel={this.continueUnlogged}
           />
         }
       </div>

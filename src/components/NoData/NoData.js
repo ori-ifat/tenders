@@ -1,4 +1,5 @@
 import React from 'react'
+import { string } from 'prop-types'
 import { translate } from 'react-polyglot'
 import CSSModules from 'react-css-modules'
 import styles from './NoData.scss'
@@ -6,12 +7,21 @@ import styles from './NoData.scss'
 @translate()
 @CSSModules(styles)
 export default class NoData extends React.Component {
+  static propTypes = {
+    error: string
+  }
 
   render() {
-    const { t } = this.props
-
+    const { error, t } = this.props
+    //if error flag has been raised on searchStore, show error label (decide also if to show details...)
     return (
-      <h1 styleName="no-data">{t('results.noData')} </h1>
+      <div>
+        {error ?
+          <h2 styleName="error">{t('results.error')}</h2>
+          :
+          <h1 styleName="no-data">{t('results.noData')} </h1>
+        }
+      </div>
     )
   }
 }

@@ -1,0 +1,26 @@
+.notlogged_lb {
+  padding: 1.5rem  2.5rem !important;
+  overflow: initial !important;
+  max-width: 32rem !important;
+}
+
+.notlogged_ttl {
+  font-weight: 500;
+}
+
+.pb {
+  padding-bottom: 0.75rem;
+  span {
+    font-size: rem-calc(15);
+    color: #8a8a8a;
+    margin-bottom: 0.25rem;
+    display: block;
+  }
+}
+
+.button-cancel {
+  position: absolute;
+  top: 1rem;
+  left: 1rem;
+  font-size: 1.5rem;
+}

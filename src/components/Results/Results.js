@@ -14,6 +14,7 @@ import Toolbar from 'common/components/Toolbar'
 import ResultsItemDetails from 'common/components/ResultsItemDetails'
 import Reminder from 'common/components/Reminder'
 import NoData from 'components/NoData'
+import NotLogged from 'common/components/NotLogged'
 import {setCheckedStatus, setFavStatus, getImageUrl} from 'common/utils/util'
 import ImageView from 'common/components/ImageView'
 import CSSModules from 'react-css-modules'
@@ -28,6 +29,7 @@ import styles from './results.scss'
   searchStore.loadNextResults()
 })
 @inject('searchStore')
+@inject('accountStore')
 @CSSModules(styles, { allowMultiple: true })
 @observer
 export default class Results extends Component {
@@ -41,7 +43,7 @@ export default class Results extends Component {
   @observable reminderTitle = ''
   @observable reminderInfoDate = null
   @observable reminderID = -1;
-  //@observable subsubjects = ''
+  @observable showLoginMsg = false
   @observable selectedFilters = {}
 
   componentWillMount() {
@@ -58,7 +60,13 @@ export default class Results extends Component {
   }
 
   onFav = (tenderID, add) => {
-    setFavStatus(this.checkedItems, tenderID, add)
+    const {accountStore} = this.props
+    if (accountStore.profile) {
+      setFavStatus(this.checkedItems, tenderID, add)
+    }
+    else {
+      this.showLoginMsg = true
+    }
   }
 
   hideToolbar = () => {
@@ -66,7 +74,13 @@ export default class Results extends Component {
   }
 
   viewDetails = (tenderID) => {
-    this.selectedTender = tenderID
+    const {accountStore} = this.props
+    if (accountStore.profile) {
+      this.selectedTender = tenderID
+    }
+    else {
+      this.showLoginMsg = true
+    }
   }
 
   closeDetails = () => {
@@ -74,11 +88,14 @@ export default class Results extends Component {
   }
 
   showViewer = (fileName, title) => {
-    const url = getImageUrl(fileName)
-    this.imageUrl = url
-    this.imageTitle = title
-    this.showImage = true
-    document.body.style.overflowY = 'hidden'
+    const {accountStore} = this.props
+    if (accountStore.profile) {
+      const url = getImageUrl(fileName)
+      this.imageUrl = url
+      this.imageTitle = title
+      this.showImage = true
+      document.body.style.overflowY = 'hidden'
+    }
   }
 
   closeViewer = () => {
@@ -87,10 +104,16 @@ export default class Results extends Component {
   }
 
   setReminder = (tenderID, title, infoDate, reminderID) => {
-    this.reminderItem = tenderID
-    this.reminderTitle = title
-    this.reminderInfoDate = infoDate
-    this.reminderID = reminderID
+    const {accountStore} = this.props
+    if (accountStore.profile) {
+      this.reminderItem = tenderID
+      this.reminderTitle = title
+      this.reminderInfoDate = infoDate
+      this.reminderID = reminderID
+    }
+    else {
+      this.showLoginMsg = true
+    }
   }
 
   cancelReminder = () => {
@@ -100,25 +123,32 @@ export default class Results extends Component {
     this.reminderID = -1
   }
 
+  continueUnlogged = () => {
+    this.showLoginMsg = false
+  }
+
   setSelectedFilters = (label, value) => {
     /* set the selectedFilters object - a state-like object for the filter container.
       need that because the entire object is recreated upon filter commit action */
     switch (label) {
-    //note: Reflect.deleteProperty() may not work in IE...
     case 'subsubject':
-      delete this.selectedFilters.subsubjects
+      //delete this.selectedFilters.subsubjects
+      Reflect.deleteProperty(this.selectedFilters, 'subsubjects')
       this.selectedFilters.subsubjects = value
       break
     case 'publisher':
-      delete this.selectedFilters.publishers
+      //delete this.selectedFilters.publishers
+      Reflect.deleteProperty(this.selectedFilters, 'publishers')
       this.selectedFilters.publishers = value
       break
     case 'dateField':
-      delete this.selectedFilters.dateField
+      //delete this.selectedFilters.dateField
+      Reflect.deleteProperty(this.selectedFilters, 'dateField')
       this.selectedFilters.dateField = value
     case 'publishdate':
     case 'infodate':
-      delete this.selectedFilters.date
+      //delete this.selectedFilters.date
+      Reflect.deleteProperty(this.selectedFilters, 'date')
       this.selectedFilters.date = { [label]: value }
       break
     }
@@ -127,12 +157,12 @@ export default class Results extends Component {
 
   render() {
 
-    const {searchStore, searchStore: {resultsLoading, resultsCount, tags}} = this.props
+    const {accountStore, searchStore, searchStore: {resultsLoading, resultsCount, tags}} = this.props
     return (
       <div style={{marginTop: '50px'}}>
         <SearchInput tags={toJS(tags)} />
         {resultsLoading && <div>Loading...</div>}
-        {resultsCount == 0 && !resultsLoading && <NoData />}
+        {resultsCount == 0 && !resultsLoading && <NoData error={searchStore.searchError} />}
         {resultsCount > 0 &&
           <div>
             <ResultsTitle />
@@ -162,26 +192,31 @@ export default class Results extends Component {
               checkedItems={this.checkedItems}
               onClose={this.hideToolbar}
             />
-            {this.selectedTender > -1 && !this.showImage &&
+            {this.selectedTender > -1 && !this.showImage && accountStore.profile &&
               <ResultsItemDetails
                 itemID={this.selectedTender}
                 onClose={this.closeDetails}
                 showViewer={this.showViewer}
               />}
-            {this.selectedTender > -1 && this.showImage &&
+            {this.selectedTender > -1 && this.showImage && accountStore.profile &&
               <ImageView
                 onClose={this.closeViewer}
                 url={this.imageUrl}
                 title={this.imageTitle}
               />
             }
-            {this.reminderItem > -1 &&
+            {this.reminderItem > -1 && accountStore.profile &&
               <Reminder
                 tenderID={this.reminderItem}
                 onClose={this.cancelReminder}
                 title={this.reminderTitle}
                 infoDate={this.reminderInfoDate}
                 reminderID={this.reminderID}
+              />
+            }
+            {this.showLoginMsg &&
+              <NotLogged
+                onCancel={this.continueUnlogged}
               />
             }
           </div>

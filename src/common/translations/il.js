@@ -2,11 +2,16 @@ export default {
   page404: 'מצטערים, הקישור שגוי',
   loading: 'טוען...',
   AppTitle: 'מכרזים',
-  loginPage: {
+  login: {
     usernameLabel: 'שם משתמש',
     passwordLabel: 'סיסמה',
     loginBtnTitle: 'כניסה',
-    loginError: 'פרטי ההזדהות שהזנת שגויים, אנא נסה שנית.'
+    loginError: 'פרטי ההזדהות שהזנת שגויים, אנא נסה שנית.',
+    notLogged: 'אינך מחובר למערכת',
+    please: 'אנא',
+    login: 'התחבר',
+    or: 'או',
+    register: 'הירשם'
   },
   nav: {
     logoAlt: 'לוגו מכרזים',
@@ -44,7 +49,8 @@ export default {
     sortBy: 'מיין לפי',
     infoDate: 'תאריך הגשה',
     publishDate: 'תאריך פרסום',
-    noData: 'אין תוצאות להצגה'
+    noData: 'אין תוצאות להצגה',
+    error: 'חלה שגיאה בחיפוש, אנא נסה שנית'
   },
   tender: {
     publishedAt: 'פורסם ב',

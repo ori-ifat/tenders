@@ -24,6 +24,7 @@ class Search {
   @observable hasMoreResults = true
   @observable request = {};
   @observable results = []
+  @observable searchError = null
   @observable lastResultsPage = 0
   @observable resultsPageSize = 10
   @observable resultsCount = 0
@@ -95,6 +96,7 @@ class Search {
   @action.bound
   clearResults() {
     this.results.clear()
+    this.searchError = null
     this.lastResultsPage = 0
     this.hasMoreResults = true
     this.resultsCount = 0
@@ -104,6 +106,7 @@ class Search {
   async loadNextResults() {
     if (!this.resultsLoading) {
       this.resultsLoading = true
+      this.searchError = null
       const searchParams = {
         tags: this.serializedTags,
         filters: this.serializedFilters,  //toJS(this.filters),
@@ -111,18 +114,37 @@ class Search {
         pageSize: 10,
         sort: this.serializedSort
       }
-      this.request = await search(searchParams)
 
-      const {resultsPage: {data, total}, filtersMeta} = this.request
-      if (data.length > 0) {
-        this.lastResultsPage++
+      try {
+        this.request = await search(searchParams)
       }
-      console.log('loadNextResults', this.lastResultsPage)
-      this.results = [...this.results, ...data.map(d => ({ ...d, key: d.TenderID }))]
-      this.availableFilters = filtersMeta
-      //this.hasMoreResults = data.length === this.resultsPageSize
-      this.resultsCount = total
-      this.hasMoreResults = data.length > 0 && this.results.length < this.resultsCount
+      catch(e) {
+        //an error occured on search
+        this.searchError = `[loadNextResults] search error: ${e.message} http status code ${e.error.status}`
+      }
+
+      if (this.searchError == null) {
+        //if no errors occured, continue:
+        const {resultsPage: {data, total}, filtersMeta} = this.request
+        if (data.length > 0) {
+          this.lastResultsPage++
+        }
+        console.info('[loadNextResults]', this.lastResultsPage)
+        this.results = [...this.results, ...data.map(d => ({ ...d, key: d.TenderID }))]
+        this.availableFilters = filtersMeta
+        //this.hasMoreResults = data.length === this.resultsPageSize
+        this.resultsCount = total
+        this.hasMoreResults = data.length > 0 && this.results.length < this.resultsCount
+      }
+      else {
+        //error handle.
+        console.error(this.searchError) //a flag has been raised. implement what to do with it
+        //set as there is no data (actually there is none...)
+        this.results = []
+        this.availableFilters = []
+        this.resultsCount = 0
+        this.hasMoreResults = false
+      }
       this.resultsLoading = false
     }
   }
