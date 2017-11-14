@@ -123,6 +123,10 @@ export default class Results extends Component {
     this.reminderID = -1
   }
 
+  notlogged = () => {
+    this.showLoginMsg = true
+  }
+
   continueUnlogged = () => {
     this.showLoginMsg = false
   }
@@ -191,6 +195,7 @@ export default class Results extends Component {
             <Toolbar
               checkedItems={this.checkedItems}
               onClose={this.hideToolbar}
+              notlogged={this.notlogged}
             />
             {this.selectedTender > -1 && !this.showImage && accountStore.profile &&
               <ResultsItemDetails

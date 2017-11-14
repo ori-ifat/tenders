@@ -1,6 +1,6 @@
 import React from 'react'
 import { array, object, func } from 'prop-types'
-import { observer } from 'mobx-react'
+import { inject, observer } from 'mobx-react'
 import { translate } from 'react-polyglot'
 import remove from 'lodash/remove'
 import find from 'lodash/find'
@@ -22,61 +22,78 @@ const extractItems = (checkedItems) => {
 }
 
 @translate()
+@inject('accountStore')
 @CSSModules(styles, {allowMultiple: true})
 @observer
 export default class Toolbar extends React.Component {
 
   static propTypes = {
     checkedItems: object,
-    onClose: func
+    onClose: func,
+    notlogged: func
   }
 
   email = () => {
     //console.log('email', this.props.checkedItems)
-    const {checkedItems, onClose, t} = this.props
-    const itemsToAdd = extractItems(checkedItems)
-    getEmailData(itemsToAdd).then(uid =>
-      //console.log('email', uid)
-      location.href = `mailto:someone@email.com?subject=${t('toolbar.emailSubject')}&body=${encodeURIComponent(t('toolbar.emailBody', {uid}))}`
-    )
-    onClose()
+    const {accountStore, checkedItems, onClose, notlogged, t} = this.props
+    if (accountStore.profile) {
+      const itemsToAdd = extractItems(checkedItems)
+      getEmailData(itemsToAdd).then(uid =>
+        //console.log('email', uid)
+        location.href = `mailto:someone@email.com?subject=${t('toolbar.emailSubject')}&body=${encodeURIComponent(t('toolbar.emailBody', {uid}))}`
+      )
+      onClose()
+    }
+    else {
+      notlogged()
+    }
   }
 
   print = () => {
     //console.log('print', this.props.checkedItems)
-    const {checkedItems, onClose} = this.props
-    const itemsToAdd = extractItems(checkedItems)
-    window.open(createUrl('Export/ExportData', {
-      ExportType: 1,
-      InfoList: itemsToAdd
-    }, false), '_blank')
-    onClose()
+    const {accountStore, checkedItems, onClose, notlogged} = this.props
+    if (accountStore.profile) {
+      const itemsToAdd = extractItems(checkedItems)
+      window.open(createUrl('Export/ExportData', {
+        ExportType: 1,
+        InfoList: itemsToAdd
+      }, false), '_blank')
+      onClose()
+    }
+    else {
+      notlogged()
+    }
   }
 
   addFavorites = () => {
     //console.log('addFavorites', this.props.checkedItems)
-    const {checkedItems, onClose} = this.props
-    const itemsToAdd = extractItems(checkedItems)
-    //iterate over the relevant items, and change IsFavorite state on original array
-    //(this will cause the list to re-render, and show fav state on ResultsItem)
-    itemsToAdd.map(tenderID => {
-      const found = find(checkedItems, item => {
-        return item.TenderID == tenderID
-      })
-      if (found) {
-        //if item is in checkedItems array, need to update its fav state
-        remove(checkedItems, item => {
-          return item.TenderID === tenderID
+    const {accountStore, checkedItems, onClose, notlogged} = this.props
+    if (accountStore.profile) {
+      const itemsToAdd = extractItems(checkedItems)
+      //iterate over the relevant items, and change IsFavorite state on original array
+      //(this will cause the list to re-render, and show fav state on ResultsItem)
+      itemsToAdd.map(tenderID => {
+        const found = find(checkedItems, item => {
+          return item.TenderID == tenderID
         })
-        //add the item again with new fav state
-        checkedItems.push({ TenderID: tenderID, IsFavorite: true })
-      }
-    })
-    //call api with items and add action
-    addToFavorites('Favorite_add', itemsToAdd)
-    clearCache()
-    onClose()
-    //console.log(checkedItems, itemsToAdd)
+        if (found) {
+          //if item is in checkedItems array, need to update its fav state
+          remove(checkedItems, item => {
+            return item.TenderID === tenderID
+          })
+          //add the item again with new fav state
+          checkedItems.push({ TenderID: tenderID, IsFavorite: true })
+        }
+      })
+      //call api with items and add action
+      addToFavorites('Favorite_add', itemsToAdd)
+      clearCache()
+      onClose()
+      //console.log(checkedItems, itemsToAdd)
+    }
+    else {
+      notlogged()
+    }
   }
 
   render() {
