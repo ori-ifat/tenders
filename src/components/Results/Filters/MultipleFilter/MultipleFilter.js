@@ -96,7 +96,7 @@ export default class MultipleFilter extends React.Component {
     const title = this.type == 'subsubjects' ? t('filter.subSubjectsTitle') : t('filter.publishersTitle')
     return(
       <div style={{border: 'silver solid 1px'}}>
-        {this.open ?
+        {this.open &&
           <div className="reveal-overlay" style={{display: 'block'}}>
             <div className="reveal tiny" style={{display: 'block'}}>
               <div>
@@ -132,16 +132,17 @@ export default class MultipleFilter extends React.Component {
                 </div>
               </div>
             </div>
-          </div> :
-          <div onClick={this.openModal}>
-            <span style={{cursor: 'pointer'}}>{ this.props.label }</span>
-            { (!this.props.label || this.props.label == '') &&
-            <div>
-              <br />
-              <span style={{cursor: 'pointer'}}>{title}</span>
-            </div> }
           </div>
         }
+        <div onClick={this.openModal}>
+          <span style={{cursor: 'pointer'}}>{ this.props.label }</span>
+          { (!this.props.label || this.props.label == '') &&
+          <div>
+            <br />
+            <span style={{cursor: 'pointer'}}>{title}</span>
+          </div> }
+        </div>
+
       </div>
     )
   }

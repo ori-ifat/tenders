@@ -15,12 +15,26 @@ class Home {
     if (!this.resultsLoading) {
       this.resultsLoading = true
       const lastSeenTenderID = -1  //future implementation - get lastSeenTenderID of logged customer
-      this.request = await getLastTenders(lastSeenTenderID)
+      let error = null  //if needed, make an observable
+      try {
+        this.request = await getLastTenders(lastSeenTenderID)
+      }
+      catch(e) {
+        //an error occured on search
+        console.error(`[loadAgentResults] search error: ${e.message} http status code ${e.error.status}`)
+        error = e.message
+      }
 
-      const data = this.request
+      if (error == null) {
+        const data = this.request
 
-      this.results = [...data.map(d => ({ ...d, key: d.TenderID }))]
-      this.resultsCount = data.length
+        this.results = [...data.map(d => ({ ...d, key: d.TenderID }))]
+        this.resultsCount = data.length
+      }
+      else {
+        this.results = []
+        this.resultsCount = 0
+      }
       this.resultsLoading = false
     }
   }
