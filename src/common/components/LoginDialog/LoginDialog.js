@@ -56,19 +56,26 @@ export default class LoginDialog extends React.Component {
   login = () => {
     const {accountStore, onCancel} = this.props
     if (!accountStore.profile) {
-      accountStore.login(this.userName, this.password, this.rememberMe)
-      clearCache()
-      this.navigate('/')
-      onCancel()  //close modal
-      setTimeout(() => {
-        //allow element to be created.
-        FoundationHelper.reInitElement('top_nav')
-      }, 200)
+      accountStore.login(this.userName, this.password, this.rememberMe).then(() => {
+        if (accountStore.error == null && accountStore.profile != null) {
+          //successful login made
+          clearCache()
+          this.navigate('/')
+          onCancel()  //close modal
+          setTimeout(() => {
+            //allow element to be created.
+            FoundationHelper.reInitElement('top_nav')
+          }, 200)
+        }
+      }).catch(error => {
+        console.error('apiFetch Error:', error)
+        //notifyMessage(error)
+      })
     }
   }
 
   render() {
-    const {onCancel, t} = this.props
+    const {accountStore, onCancel, t} = this.props
     return (
       <div className="reveal-overlay" style={{display: 'block', zIndex: 1200}}>
         <div className="reveal" styleName="login_lb" style={{display: 'block'}}>
@@ -92,6 +99,9 @@ export default class LoginDialog extends React.Component {
                   {t('login.rememberMe')}
                 </div>
               </div>
+              {accountStore.error != null && accountStore.profile == null &&
+                <div style={{color: 'red'}}>{accountStore.errorMessage}</div>
+              }
             </div>
             <div className="grid-x grid-margin-x" styleName="buttons_cont">
               <div className="small-12 cell">
