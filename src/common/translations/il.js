@@ -3,8 +3,10 @@ export default {
   loading: 'טוען...',
   AppTitle: 'מכרזים',
   login: {
+    title: 'התחברות',
     usernameLabel: 'שם משתמש',
     passwordLabel: 'סיסמה',
+    rememberMe: 'זכור לפעם הבאה',
     loginBtnTitle: 'כניסה',
     loginError: 'פרטי ההזדהות שהזנת שגויים, אנא נסה שנית.',
     notLogged: 'אינך מחובר למערכת',

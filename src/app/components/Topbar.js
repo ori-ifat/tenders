@@ -3,7 +3,9 @@ import CSSModules from 'react-css-modules'
 import styles from './Topbar.scss'
 import {translate} from 'react-polyglot'
 import {inject, observer} from 'mobx-react'
+import {observable} from 'mobx'
 import {clearCache} from 'common/services/apiService'
+import LoginDialog from 'common/components/LoginDialog'
 import FoundationHelper from 'lib/FoundationHelper'
 
 const req = require.context('common/style/icons/', false)
@@ -30,6 +32,8 @@ const navbar = [  {
 @observer //note if class is not an observer, it will not be affected from changes in other classes observables...
 export default class Topbar extends Component {
 
+  @observable showLoginDialog = false
+
   componentWillMount() {
     //console.log('mount')
   }
@@ -46,19 +50,20 @@ export default class Topbar extends Component {
   }
 
   login = () => {
+    this.showLoginDialog = true
+    /*
     //temp implementation - login assistant
     const {accountStore} = this.props
     if (!accountStore.profile) {
       accountStore.login('r314g', 'r314g', true)
       clearCache()
       this.navigate('/')
-      /* //not working. :(
       setTimeout(() => {
         //allow element to be created.
         //console.log('init')
-        FoundationHelper.initElement('top_nav')
-      }, 200)*/
-    }
+        FoundationHelper.reInitElement('top_nav')
+      }, 200)
+    }*/
   }
 
   logout = () => {
@@ -66,6 +71,10 @@ export default class Topbar extends Component {
     accountStore.logout()
     clearCache()
     this.navigate('/')
+  }
+
+  continueUnlogged = () => {
+    this.showLoginDialog = false
   }
 
   render() {
@@ -100,6 +109,11 @@ export default class Topbar extends Component {
             </div>
           </div>
         </nav>
+        {this.showLoginDialog &&
+          <LoginDialog
+            onCancel={this.continueUnlogged}
+          />
+        }
       </div>
     )
   }
