@@ -56,21 +56,23 @@ export default class TenderTypeFilter extends React.Component {
     return(
       <div styleName="tender_type">
         <h4>{t('filter.tenderTypeTitle')}</h4>
-        {
-          this.items.map(((item, index) =>
-            <div className="checkbox" key={index}>
-              <input type="checkbox"
-                className="checkbox_tender"
-                checked={this.selected.includes(item.TenderTypeID)}
-                name={item.TenderTypeName}
-                value={item.TenderTypeID}
-                onChange={this.onCheck}
-              />
-              <span styleName="cb-label">{item.TenderTypeName}</span>
-            </div>), this
-          )
-        }
-        <a onClick={this.doFilter} style={{border: '1px solid', padding: '3px', display:'none'}}>Commit</a>
+        <div style={{paddingBottom: '20px'}}>
+          {
+            this.items.map(((item, index) =>
+              <div className="checkbox" key={index}>
+                <input type="checkbox"
+                  className="checkbox_tender"
+                  checked={this.selected.includes(item.TenderTypeID)}
+                  name={item.TenderTypeName}
+                  value={item.TenderTypeID}
+                  onChange={this.onCheck}
+                />
+                <span styleName="cb-label">{item.TenderTypeName}</span>
+              </div>), this
+            )
+          }
+        </div>
+        <a onClick={this.doFilter} style={{border: '1px solid', padding: '3px'}}>Commit</a>
       </div>
     )
   }

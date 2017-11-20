@@ -107,6 +107,7 @@ export default {
     from: 'מ',
     to: 'עד',
     today: 'היום',
+    edit: 'ערוך',
     choose: 'בחר',
     cancel: 'בטל'
   }

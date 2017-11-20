@@ -18,5 +18,5 @@ export default class Banners extends React.Component {
 }
 
 const Banner = ({}) => {
-  return <div style={{ padding: '30px', border: '1px solid #DEDEDE', marginTop: '1rem', color: '#DEDEDE' , 'text-align': 'center'}}>Banner</div>
+  return <div style={{ padding: '30px', border: '1px solid #DEDEDE', marginTop: '1rem', color: '#DEDEDE', textAlign: 'center'}}>Banner</div>
 }

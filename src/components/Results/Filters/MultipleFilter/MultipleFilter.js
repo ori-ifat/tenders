@@ -139,13 +139,13 @@ export default class MultipleFilter extends React.Component {
           </div>
         }
         <div onClick={this.openModal}>
-          <h4>ענפים
-            <a><img src={editSrc} alt="" />ערוך</a>
+          <h4>{title}
+            <a><img src={editSrc} alt="" />{t('filter.edit')}</a>
           </h4>
           <span>{ this.props.label }</span>
           { (!this.props.label || this.props.label == '') &&
           <div>
-            
+
             <span style={{cursor: 'pointer'}}>{title}</span>
           </div> }
         </div>
