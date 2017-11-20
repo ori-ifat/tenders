@@ -54,12 +54,13 @@ export default class TenderTypeFilter extends React.Component {
   render() {
     const {t} = this.props
     return(
-      <div style={{paddingTop: '20px', paddingBottom: '20px'}}>
-        <div>{t('filter.tenderTypeTitle')}</div>
+      <div styleName="tender_type">
+        <h4>{t('filter.tenderTypeTitle')}</h4>
         {
           this.items.map(((item, index) =>
-            <div key={index}>
+            <div className="checkbox" key={index}>
               <input type="checkbox"
+                className="checkbox_tender"
                 checked={this.selected.includes(item.TenderTypeID)}
                 name={item.TenderTypeName}
                 value={item.TenderTypeID}
@@ -69,7 +70,7 @@ export default class TenderTypeFilter extends React.Component {
             </div>), this
           )
         }
-        <a onClick={this.doFilter} style={{border: '1px solid', padding: '3px'}}>Commit</a>
+        <a onClick={this.doFilter} style={{border: '1px solid', padding: '3px', display:'none'}}>Commit</a>
       </div>
     )
   }

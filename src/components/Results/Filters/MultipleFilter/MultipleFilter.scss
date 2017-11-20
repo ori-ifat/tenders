@@ -1,3 +1,5 @@
+@import '~common/style/_settings.scss';
+
 .cb-label {
   margin-right: 10px;
 }
@@ -22,4 +24,39 @@
   background-color: #34b44f;
   color: white;
   padding: 7px;
+}
+
+.cb-wrapper {
+  display: block;
+  h4 {
+    font-weight: 600;
+    font-family: 'Heebo', sans-serif;
+    font-size: 15px;
+    border-bottom: 1px solid #DEDEDE !important;
+    position: relative;
+    padding-bottom: 0.5rem;
+    a {
+      position: absolute;
+      left:0;
+      font-weight: 500;
+      color: $dark-gray;
+      img path{
+        fill: $dark-gray;
+      }
+      &:hover {
+        color:$green !important;
+        img path {
+          fill: $green !important;
+          
+        }
+      }
+    }
+  }
+
+}
+
+h3.filter_ttl {
+  font-weight: 600;
+  font-family: 'Heebo', sans-serif;
+  font-size: 14px;
 }
