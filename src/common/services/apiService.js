@@ -205,3 +205,39 @@ export function getReminder(reminderID) {
     ReminderID: reminderID
   }} )
 }
+
+export function getFavorites({page, pageSize, sort}) {
+  //api implementation pending 
+  return apiFetch('Test/Fav', { //not implemented
+    searchParams: {
+      page,
+      pageSize,
+      sort
+    }
+  }).then(res => {
+    return {
+      total: res.info.count,
+      page: res.info.page,
+      data: res.data
+    }
+  })
+}
+/*
+export function getFavorites({tags, filters, page, pageSize, sort}) {
+  //TEMP!!
+  return apiFetch('Search/ResultPage', {
+    searchParams: {
+      tags,
+      page,
+      pageSize,
+      sort,
+      filters
+    }
+  }).then(res => {
+    return {
+      total: res.info.count,
+      page: res.info.page,
+      data: res.data
+    }
+  })
+} */

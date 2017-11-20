@@ -111,7 +111,7 @@ class Search {
         tags: this.serializedTags,
         filters: this.serializedFilters,  //toJS(this.filters),
         page: this.lastResultsPage + 1,
-        pageSize: 10,
+        pageSize: this.resultsPageSize,
         sort: this.serializedSort
       }
 
