@@ -19,7 +19,6 @@ export default class ResultsList extends React.Component {
     onCheck: func,
     onFav: func,
     viewDetails: func,
-    setReminder: func,
     checkedItems: object
   }
 
@@ -40,8 +39,7 @@ export default class ResultsList extends React.Component {
         item={item}
         onClick={this.props.viewDetails}
         onCheck={this.props.onCheck}
-        onFav={this.props.onFav}
-        setReminder={this.props.setReminder}
+        onFav={this.props.onFav}        
         checked={checked}
         fav={fav}
       />

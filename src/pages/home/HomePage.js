@@ -1,5 +1,6 @@
 import React, {Component} from 'react'
-import HomeComponent from 'components/Home'
+//import HomeComponent from 'components/Home'
+import WrapperComponent from 'components/Wrapper'
 //import CSSModules from 'react-css-modules'
 //import styles from './Home.scss'
 
@@ -12,6 +13,10 @@ export default class Home extends Component {
   //componentWillReceiveProps = (nextProps, nextState) => {};
 
   render(){
-    return <div><HomeComponent/></div>
+    return <div>
+      <WrapperComponent
+        use="home"
+      />
+    </div>
   }
 }

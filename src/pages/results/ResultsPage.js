@@ -1,5 +1,6 @@
 import React, {Component} from 'react'
-import ResultsComponent from 'components/Results'
+//import ResultsComponent from 'components/Results'
+import WrapperComponent from 'components/Wrapper'
 //import CSSModules from 'react-css-modules'
 //import styles from './Results.scss'
 
@@ -11,6 +12,10 @@ export default class Results extends Component {
   //componentWillReceiveProps = (nextProps, nextState) => {};
 
   render(){
-    return <div><ResultsComponent/></div>
+    return <div>
+      <WrapperComponent
+        use="results"
+      />
+    </div>
   }
 }

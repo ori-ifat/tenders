@@ -1,9 +1,16 @@
 import React, {Component} from 'react'
 import {observer} from 'mobx-react'
 import {observable, toJS} from 'mobx'
+import { whenRouted } from 'common/utils/withRouteHooks'
+import { withRouter } from 'react-router'
 import Toolbar from 'common/components/Toolbar'
 import Checkbox from 'common/components/Checkbox'
 
+
+@withRouter
+@whenRouted(({ params: { test } }) => {
+  console.log('test', test)
+})
 @observer
 export default class Test extends Component {
 /*
@@ -52,12 +59,12 @@ export default class Test extends Component {
     console.log('render')
     return (
       <div>Test<br />
-        <button onClick={this.onClick}>Click {this.num}</button>
+        {/*<button onClick={this.onClick}>Click {this.num}</button>
         <br />
         <input type='checkbox' checked={this.state.checked} value="1" onChange={this.handleCheckBox} />
         <br />
         <Checkbox checked={this.checked} value={111} onChange={this.chkBox} />
-        <Toolbar checkedItems={toJS(this.items)} />
+        <Toolbar checkedItems={toJS(this.items)} />*/}
       </div>
     )
   }

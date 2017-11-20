@@ -2,17 +2,12 @@ import remove from 'lodash/remove'
 import find from 'lodash/find'
 import {addToFavorites, clearCache} from 'common/services/apiService'
 
-export function setCheckedStatus(checkedItems, checked, value, isFavorite) {
+export function setCheckedStatus(checked, value, isFavorite, push, cut) {
   if (checked) {
-    const found = find(checkedItems, item => {
-      return item.TenderID == value
-    })
-    if (!found) checkedItems.push({ TenderID: value, IsFavorite: isFavorite })
+    push(value, isFavorite)
   }
   else {
-    remove(checkedItems, item => {
-      return item.TenderID === value
-    })
+    cut(value)
   }
 }
 

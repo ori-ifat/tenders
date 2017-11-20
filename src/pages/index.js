@@ -34,7 +34,7 @@ class Pages extends React.Component {
           <Route path="/tender/:itemId">
             {this.ensureAuthentication(TenderPage)}
           </Route>
-          <Route path="/favorites">
+          <Route path="/favorites/:test">
             {this.ensureAuthentication(FavoritesPage)}
           </Route>
           <Route>

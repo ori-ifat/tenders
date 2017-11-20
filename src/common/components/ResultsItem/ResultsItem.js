@@ -1,14 +1,18 @@
 import React from 'react'
 import { object, func, bool } from 'prop-types'
 import { inject, observer } from 'mobx-react'
-import {observable, toJS} from 'mobx'
+import {observable} from 'mobx'
 import { translate } from 'react-polyglot'
 import {setDateLabel, isDateInRange} from 'common/utils/item'
-import CSSModules from 'react-css-modules'
-import styles from './ResultsItem.scss'
+import {getImageUrl} from 'common/utils/util'
 import moment from 'moment'
 import Checkbox from 'common/components/Checkbox'
-
+import ResultsItemDetails from 'common/components/ResultsItemDetails'
+import ImageView from 'common/components/ImageView'
+import Reminder from 'common/components/Reminder'
+import NotLogged from 'common/components/NotLogged'
+import CSSModules from 'react-css-modules'
+import styles from './ResultsItem.scss'
 
 const req = require.context('common/style/icons/', false)
 const timeSrc = req('./Time.svg')
@@ -31,6 +35,13 @@ export default class ResultsItem extends React.Component {
   }
 
   @observable IsFavorite = false
+  @observable viewBig = false
+  @observable showLoginMsg = false
+  @observable showImage = false
+  @observable imageUrl = ''
+  @observable imageTitle = ''
+  @observable remindMe = false
+  @observable showLoginMsg = false
 
   componentWillMount() {
     //set favorite state from props
@@ -44,15 +55,66 @@ export default class ResultsItem extends React.Component {
 
   addFav = () => {
     const { item, onFav, accountStore } = this.props
-    //callee + local fav state
-    onFav(item.TenderID, !this.IsFavorite)
     if (accountStore.profile) {
+      //callee + local fav state
+      onFav(item.TenderID, !this.IsFavorite)
       this.IsFavorite = !this.IsFavorite
+    }
+    else {
+      this.showLoginMsg = true
     }
   }
 
+  viewDetails = id => {
+    const {accountStore} = this.props
+    if (accountStore.profile) {
+      this.viewBig = true
+    }
+    else {
+      this.showLoginMsg = true
+    }
+  }
+
+  closeDetails = () => {
+    this.viewBig = false
+  }
+
+  showViewer = (fileName, title) => {
+    const {accountStore} = this.props
+    if (accountStore.profile) {
+      const url = getImageUrl(fileName)
+      this.imageUrl = url
+      this.imageTitle = title
+      this.showImage = true
+      document.body.style.overflowY = 'hidden'
+    }
+  }
+
+  closeViewer = () => {
+    this.showImage = false
+    document.body.style.overflowY = 'visible'
+  }
+
+  remind = open => {
+    const {accountStore} = this.props
+    if (accountStore.profile) {
+      this.remindMe = open
+    }
+    else {
+      this.showLoginMsg = true
+    }
+  }
+
+  notlogged = () => {
+    this.showLoginMsg = true
+  }
+
+  continueUnlogged = () => {
+    this.showLoginMsg = false
+  }
+
   render() {
-    const { accountStore, item, onClick, onCheck, checked, onFav, setReminder, t } = this.props
+    const { accountStore, item, onClick, onCheck, checked, onFav, t } = this.props
     const cbItem = Object.assign({}, item, {IsFavorite: this.IsFavorite}) //merge this.IsFavorite to current item
     //if logged:
     const logged = accountStore.profile ? true : false
@@ -77,7 +139,7 @@ export default class ResultsItem extends React.Component {
               {oneDayLeft && <span styleName="label alert">{t('tender.oneDayLeft')}</span>}
               {twoDaysLeftTour && !oneDayLeftTour && <span styleName="label alert">{t('tender.twoDaysLeftTour')}</span>}
               {oneDayLeftTour && <span styleName="label alert">{t('tender.oneDayLeftTour')}</span>}
-              <h3 onClick={() => onClick(item.TenderID)} style={{cursor: 'pointer'}}>{item.Title}</h3>
+              <h3 onClick={() => this.viewDetails(item.TenderID)} style={{cursor: 'pointer'}}>{item.Title}</h3>
               <div styleName="tender_desc">
                 <p>{item.Summery}</p>
               </div>
@@ -100,7 +162,7 @@ export default class ResultsItem extends React.Component {
           <div className="small-3 cell">
             <div styleName="tender_action_wraper">
               <ul className="no-bullet">
-                <li><a onClick={() => setReminder(item.TenderID, item.Title, item.InfoDate, item.ReminderID)}><img src={timeSrc} alt="" />
+                <li><a onClick={() => this.remind(true)}><img src={timeSrc} alt="" />
                   {item.ReminderDate ?
                     moment(item.ReminderDate).format('DD-MM-YYYY') :
                     t('tender.addReminder')}</a></li>
@@ -114,6 +176,33 @@ export default class ResultsItem extends React.Component {
             </div>
           </div>
         </div>
+        {this.viewBig && !this.showImage && logged &&
+          <ResultsItemDetails
+            itemID={item.TenderID}
+            onClose={this.closeDetails}
+            showViewer={this.showViewer}
+          />}
+        {this.viewBig && this.showImage && logged &&
+          <ImageView
+            onClose={this.closeViewer}
+            url={this.imageUrl}
+            title={this.imageTitle}
+          />
+        }
+        {this.remindMe && logged &&
+          <Reminder
+            tenderID={item.TenderID}
+            onClose={() => this.remind(false)}
+            title={item.Title}
+            infoDate={item.InfoDate}
+            reminderID={item.ReminderID}
+          />
+        }
+        {this.showLoginMsg &&
+          <NotLogged
+            onCancel={this.continueUnlogged}
+          />
+        }
       </div>
     )
   }

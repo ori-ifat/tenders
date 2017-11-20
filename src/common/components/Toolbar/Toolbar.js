@@ -1,10 +1,12 @@
 import React from 'react'
-import { array, object, func } from 'prop-types'
+import { object, func } from 'prop-types'
 import { inject, observer } from 'mobx-react'
+import { observable } from 'mobx'
 import { translate } from 'react-polyglot'
 import remove from 'lodash/remove'
 import find from 'lodash/find'
 import {createUrl, addToFavorites, getEmailData, clearCache} from 'common/services/apiService'
+import NotLogged from 'common/components/NotLogged'
 import CSSModules from 'react-css-modules'
 import styles from './Toolbar.scss'
 
@@ -30,14 +32,19 @@ export default class Toolbar extends React.Component {
   static propTypes = {
     checkedItems: object,
     onClose: func,
-    notlogged: func
+    extractItems: func,
+    isInChecked: func,
+    push: func,
+    cut: func
   }
+
+  @observable showLoginMsg = false
 
   email = () => {
     //console.log('email', this.props.checkedItems)
-    const {accountStore, checkedItems, onClose, notlogged, t} = this.props
+    const {accountStore, extractItems, onClose, t} = this.props
     if (accountStore.profile) {
-      const itemsToAdd = extractItems(checkedItems)
+      const itemsToAdd = extractItems()
       getEmailData(itemsToAdd).then(uid =>
         //console.log('email', uid)
         location.href = `mailto:someone@email.com?subject=${t('toolbar.emailSubject')}&body=${encodeURIComponent(t('toolbar.emailBody', {uid}))}`
@@ -45,15 +52,15 @@ export default class Toolbar extends React.Component {
       onClose()
     }
     else {
-      notlogged()
+      this.showLoginMsg = true
     }
   }
 
   print = () => {
     //console.log('print', this.props.checkedItems)
-    const {accountStore, checkedItems, onClose, notlogged} = this.props
+    const {accountStore, extractItems, onClose} = this.props
     if (accountStore.profile) {
-      const itemsToAdd = extractItems(checkedItems)
+      const itemsToAdd = extractItems()
       window.open(createUrl('Export/ExportData', {
         ExportType: 1,
         InfoList: itemsToAdd
@@ -61,28 +68,24 @@ export default class Toolbar extends React.Component {
       onClose()
     }
     else {
-      notlogged()
+      this.showLoginMsg = true
     }
   }
 
   addFavorites = () => {
     //console.log('addFavorites', this.props.checkedItems)
-    const {accountStore, checkedItems, onClose, notlogged} = this.props
+    const {accountStore, extractItems, onClose, isInChecked, push, cut} = this.props
     if (accountStore.profile) {
-      const itemsToAdd = extractItems(checkedItems)
+      const itemsToAdd = extractItems()
       //iterate over the relevant items, and change IsFavorite state on original array
       //(this will cause the list to re-render, and show fav state on ResultsItem)
       itemsToAdd.map(tenderID => {
-        const found = find(checkedItems, item => {
-          return item.TenderID == tenderID
-        })
+        const found = isInChecked(tenderID)
         if (found) {
           //if item is in checkedItems array, need to update its fav state
-          remove(checkedItems, item => {
-            return item.TenderID === tenderID
-          })
+          cut(tenderID)
           //add the item again with new fav state
-          checkedItems.push({ TenderID: tenderID, IsFavorite: true })
+          push(tenderID, true)
         }
       })
       //call api with items and add action
@@ -92,8 +95,12 @@ export default class Toolbar extends React.Component {
       //console.log(checkedItems, itemsToAdd)
     }
     else {
-      notlogged()
+      this.showLoginMsg = true
     }
+  }
+
+  continueUnlogged = () => {
+    this.showLoginMsg = false
   }
 
   render() {
@@ -123,6 +130,11 @@ export default class Toolbar extends React.Component {
 
           </div>
         </div>
+        {this.showLoginMsg &&
+          <NotLogged
+            onCancel={this.continueUnlogged}
+          />
+        }
       </div>
     )
   }
