@@ -9,6 +9,9 @@ import {doFilter} from 'common/utils/filter'
 import CSSModules from 'react-css-modules'
 import styles from './MultipleFilter.scss'
 
+const req = require.context('common/style/icons/', false)
+const editSrc = req('./icon_edit.svg')
+
 @translate()
 @inject('searchStore')
 @CSSModules(styles, { allowMultiple: true })
@@ -95,7 +98,8 @@ export default class MultipleFilter extends React.Component {
     const {t} = this.props
     const title = this.type == 'subsubjects' ? t('filter.subSubjectsTitle') : t('filter.publishersTitle')
     return(
-      <div style={{border: 'silver solid 1px'}}>
+      <div styleName="cb-wrapper">
+
         {this.open &&
           <div className="reveal-overlay" style={{display: 'block'}}>
             <div className="reveal tiny" style={{display: 'block'}}>
@@ -114,7 +118,7 @@ export default class MultipleFilter extends React.Component {
                           value={id}
                           onChange={this.onCheck}
                         />
-                        <span styleName="cb-label">{name}</span>
+                        <lable styleName="cb-label">{name}</lable>
                       </div>}), this
                     )
                   }
@@ -135,10 +139,13 @@ export default class MultipleFilter extends React.Component {
           </div>
         }
         <div onClick={this.openModal}>
-          <span style={{cursor: 'pointer'}}>{ this.props.label }</span>
+          <h4>{title}
+            <a><img src={editSrc} alt="" />{t('filter.edit')}</a>
+          </h4>
+          <span>{ this.props.label }</span>
           { (!this.props.label || this.props.label == '') &&
           <div>
-            <br />
+
             <span style={{cursor: 'pointer'}}>{title}</span>
           </div> }
         </div>
