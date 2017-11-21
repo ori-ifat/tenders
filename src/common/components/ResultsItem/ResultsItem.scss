@@ -39,6 +39,9 @@
 	& .checkbox_continer {
 		background-color: #D7F5DD;
 	}
+	.checkbox_continer {
+		background-color: #D8F5DE !important;
+	}
 	input[type="checkbox"]:after {
 		border: 2px solid $green;
 	}

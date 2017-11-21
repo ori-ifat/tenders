@@ -54,7 +54,7 @@ export default class Filters extends React.Component {
             dateValues={dateValues}
             onSubmit={setSelected}
           />
-          <div styleName="">
+          <div styleName="free_search">
             <h4>חפש בתוצאות</h4>
             <input type="text" placeholder="חפש"></input>
           </div>
