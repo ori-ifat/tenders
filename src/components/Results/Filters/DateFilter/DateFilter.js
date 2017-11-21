@@ -85,16 +85,16 @@ export default class DateFilter extends React.Component {
           <div styleName={clsRight} onClick={() => this.chooseDateField('publishdate')} style={{cursor: 'pointer'}}>
             {t('filter.publishDate')}
           </div>
-          
+
           <div styleName={clsLeft} onClick={() => this.chooseDateField('infodate')} style={{cursor: 'pointer'}}>
             {t('filter.infoDate')}
           </div>
         </div>
         <div className="grid-x">
-          
+
 
           <div className="small-6 cell">
-            <span styleName="date_lable">{t('filter.to')}</span>
+            <span styleName="date_lable">{t('filter.from')}</span>
             <div>
               <Calendar
                 name="startDate"
@@ -108,7 +108,7 @@ export default class DateFilter extends React.Component {
           </div>
 
           <div className="small-6 cell">
-            <span styleName="date_lable">{t('filter.from')}</span>
+            <span styleName="date_lable">{t('filter.to')}</span>
 
             <div>
               <Calendar
