@@ -115,7 +115,7 @@ export default class ResultsItem extends React.Component {
 
   render() {
     const { accountStore, item, onClick, onCheck, checked, onFav, t } = this.props
-    const cbItem = Object.assign({}, item, {IsFavorite: this.IsFavorite}) //merge this.IsFavorite to current item
+    const cbItem = Object.assign({}, item, {checked, IsFavorite: this.IsFavorite}) //merge this.IsFavorite to current item
     //if logged:
     const logged = accountStore.profile ? true : false
     //display issues

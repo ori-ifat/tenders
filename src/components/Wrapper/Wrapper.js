@@ -5,6 +5,7 @@ import { searchStore, accountStore } from 'stores'
 import {setCheckedStatus, setFavStatus} from 'common/utils/util'
 import remove from 'lodash/remove'
 import find from 'lodash/find'
+import map from 'lodash/map'
 import Home from 'components/Home'
 import Results from 'components/Results'
 import Toolbar from 'common/components/Toolbar'
@@ -17,18 +18,19 @@ import styles from './wrapper.scss'
 @observer
 export default class Wrapper extends Component {
 
-  @observable checkedItems = []
+  @observable checkedItems = []   /* this observable holds the state of items: checked\unchecked, favorite true\false. only for touched items */
   @observable selectedFilters = {}
 
+  /*
   cleanChecked = () => {
     this.checkedItems.clear()
   }
-
-  push = (value, isFavorite) => {
+  */
+  push = (checked, value, isFavorite) => {
     const found = find(this.checkedItems, item => {
       return item.TenderID == value
     })
-    if (!found) this.checkedItems.push({ TenderID: value, IsFavorite: isFavorite })
+    if (!found) this.checkedItems.push({ checked, TenderID: value, IsFavorite: isFavorite })
   }
 
   cut = (value) => {
@@ -40,7 +42,9 @@ export default class Wrapper extends Component {
   extractItems = () => {
     const itemsToAdd = []
     this.checkedItems.map(item => {
-      itemsToAdd.push(item.TenderID)
+      if (item.checked) { //add only ids of checked items
+        itemsToAdd.push(item.TenderID)
+      }
     })
     return itemsToAdd
   }
@@ -54,12 +58,14 @@ export default class Wrapper extends Component {
 
   onCheck = (checked, value, isFavorite) => {
     setCheckedStatus(checked, value, isFavorite, this.push, this.cut)
+    //console.log(toJS(this.checkedItems))
   }
 
   onFav = (tenderID, add) => {
     const {accountStore} = this.props
     if (accountStore.profile) {
-      setFavStatus(this.checkedItems, tenderID, add)
+      setFavStatus(tenderID, add, this.isInChecked, this.push, this.cut)
+      //console.log(toJS(this.checkedItems))
     }
     else {
       this.showLoginMsg = true
@@ -67,7 +73,13 @@ export default class Wrapper extends Component {
   }
 
   hideToolbar = () => {
-    this.checkedItems.clear()
+    //this.checkedItems.clear() //removes all elements.
+    //instead: uncheck all. the checkedItems array will stay in tact, with checked state for each element
+    this.checkedItems = map(this.checkedItems, item => {
+      item.checked = false
+      return item
+    })
+    //console.log(toJS(this.checkedItems))
   }
 
   setSelectedFilters = (label, value) => {

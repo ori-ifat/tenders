@@ -31,7 +31,7 @@ export default class ResultsList extends React.Component {
         return chk.TenderID == item.TenderID
       })
 
-      const checked = found ? true : false
+      const checked = found ? found.checked : false
       const fav = found ? found.IsFavorite : item.IsFavorite
 
       return <ResultsItem
@@ -39,7 +39,7 @@ export default class ResultsList extends React.Component {
         item={item}
         onClick={this.props.viewDetails}
         onCheck={this.props.onCheck}
-        onFav={this.props.onFav}        
+        onFav={this.props.onFav}
         checked={checked}
         fav={fav}
       />

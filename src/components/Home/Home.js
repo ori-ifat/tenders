@@ -30,7 +30,7 @@ export default class Home extends Component {
 
   componentWillReceiveProps(nextProps, nextState) {
     //console.log('receive props')
-    this.props.cleanChecked()
+    //this.props.cleanChecked()
   }
 
   render() {

@@ -34,7 +34,7 @@ export default class Results extends Component {
 
   componentWillReceiveProps(nextProps, nextState) {
     //console.log('receive props')
-    this.props.cleanChecked()
+    //this.props.cleanChecked()
   }
 
   render() {
@@ -68,7 +68,7 @@ export default class Results extends Component {
                   loadMore={searchStore.loadNextResults}
                   onCheck={onCheck}
                   onFav={onFav}
-                  viewDetails={viewDetails}                  
+                  viewDetails={viewDetails}
                   checkedItems={checkedItems} />
               </div>
             </div>

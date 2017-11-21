@@ -15,14 +15,6 @@ const emailSrc = req('./mail.png')
 const printSrc = req('./print.svg')
 const actionFavSrc = req('./action_fav.svg')
 
-const extractItems = (checkedItems) => {
-  const itemsToAdd = []
-  checkedItems.map(item => {
-    itemsToAdd.push(item.TenderID)
-  })
-  return itemsToAdd
-}
-
 @translate()
 @inject('accountStore')
 @CSSModules(styles, {allowMultiple: true})
@@ -41,7 +33,7 @@ export default class Toolbar extends React.Component {
   @observable showLoginMsg = false
 
   email = () => {
-    //console.log('email', this.props.checkedItems)
+    /* send email with url to selected tenders */
     const {accountStore, extractItems, onClose, t} = this.props
     if (accountStore.profile) {
       const itemsToAdd = extractItems()
@@ -57,7 +49,7 @@ export default class Toolbar extends React.Component {
   }
 
   print = () => {
-    //console.log('print', this.props.checkedItems)
+    /* create pdf from selected tenders */
     const {accountStore, extractItems, onClose} = this.props
     if (accountStore.profile) {
       const itemsToAdd = extractItems()
@@ -73,7 +65,7 @@ export default class Toolbar extends React.Component {
   }
 
   addFavorites = () => {
-    //console.log('addFavorites', this.props.checkedItems)
+    /* add selected tenders to favorites */
     const {accountStore, extractItems, onClose, isInChecked, push, cut} = this.props
     if (accountStore.profile) {
       const itemsToAdd = extractItems()
@@ -81,18 +73,18 @@ export default class Toolbar extends React.Component {
       //(this will cause the list to re-render, and show fav state on ResultsItem)
       itemsToAdd.map(tenderID => {
         const found = isInChecked(tenderID)
-        if (found) {
-          //if item is in checkedItems array, need to update its fav state
-          cut(tenderID)
-          //add the item again with new fav state
-          push(tenderID, true)
-        }
+        //if (found) {
+        //old way...: if item is in checkedItems array, need to update its fav state
+        //new way: add it anyway because it was touched
+        cut(tenderID)
+        //add the item again with new fav state
+        push((found && found.checked) || false, tenderID, true)
+        //}
       })
       //call api with items and add action
       addToFavorites('Favorite_add', itemsToAdd)
       clearCache()
       onClose()
-      //console.log(checkedItems, itemsToAdd)
     }
     else {
       this.showLoginMsg = true
@@ -105,7 +97,8 @@ export default class Toolbar extends React.Component {
 
   render() {
     const {checkedItems, t} = this.props
-    const toolBarStyle = checkedItems.length > 0 ? 'action_bar active' : 'action_bar'
+    const relevantItems = checkedItems.filter(item => item.checked || false)
+    const toolBarStyle = relevantItems.length > 0 ? 'action_bar active' : 'action_bar'
     return (
       <div id="action_bar" styleName={toolBarStyle} >
         <div className="grid-container">
@@ -115,7 +108,7 @@ export default class Toolbar extends React.Component {
             <div className="grid-x">
 
               <div className="small-9 cell">
-                <span>{checkedItems.length} {t('toolbar.selectedTenders')}</span>
+                <span>{relevantItems.length} {t('toolbar.selectedTenders')}</span>
               </div>
 
               <div className="small-3 cell">
