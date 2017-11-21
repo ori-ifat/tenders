@@ -1,5 +1,6 @@
 import React, {Component} from 'react'
 import FavoritesComponent from 'components/Favorites'
+import WrapperComponent from 'components/Wrapper'
 //import CSSModules from 'react-css-modules'
 //import styles from './Search.scss'
 
@@ -11,6 +12,6 @@ export default class Favorites extends Component {
   //componentWillReceiveProps = (nextProps, nextState) => {};
 
   render(){
-    return <div><FavoritesComponent/></div>
+    return <div><WrapperComponent/></div>
   }
 }

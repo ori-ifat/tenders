@@ -83,7 +83,7 @@ export default class ResultsItemDetails extends React.Component {
     const divTop = document.documentElement.scrollTop ? document.documentElement.scrollTop : document.body.scrollTop
     const className = !this.props.mode ? 'reveal-overlay' : ''
     const subClassName = !this.props.mode ? 'reveal large' : ''
-    
+
     return (
       <div className={className} style={{display: 'block'}}>
         <div className={subClassName} style={{display: 'block'}}>
@@ -139,7 +139,7 @@ export default class ResultsItemDetails extends React.Component {
                 <div className="large-3 cell">
                   {fileName != '' && <a onClick={() => this.props.showViewer(fileName, item.Title)}><img styleName="thender_thumb"  src={thumbSrc} /></a>}
                   <ul className="no-bullet" styleName="tender_actions">
-                    {/*<li><a>{t('tender.toTenderDetails')}</a></li>*/}
+                    {item.TenderLink && <li><a href={item.TenderLink} target="_blank">{t('tender.toTenderDetails')}</a></li>}
                     <li><a onClick={this.print}>{t('tender.print')}</a></li>
                     <li><a onClick={this.email}>{t('tender.email')}</a></li>
                     <li><a onClick={() => this.remind(true)}>{t('tender.remind')}</a></li>
