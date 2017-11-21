@@ -129,7 +129,7 @@ export default class ResultsItem extends React.Component {
     const oneDayLeftTour = isDateInRange(item.TourDate, 1)
 
     return (
-      <div styleName={tenderStyle}>
+      <div styleName={tenderStyle} >
         <div className="grid-x">
           <div className="small-9 cell">
             {onCheck && <Checkbox checked={checked} item={cbItem} onChange={onCheck} />}

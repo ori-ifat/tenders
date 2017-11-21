@@ -80,40 +80,48 @@ export default class DateFilter extends React.Component {
     const clsRight = this.dateField == 'publishdate' ? 'dates-right selected' : 'dates-right'
 
     return(
-      <div style={{paddingTop: '20px'}}>
-        <div styleName="clearfix">
-          <div styleName={clsLeft} onClick={() => this.chooseDateField('infodate')} style={{cursor: 'pointer'}}>
-            {t('filter.infoDate')}
-          </div>
+      <div styleName="dateContainer">
+        <div styleName="tabs_container">
           <div styleName={clsRight} onClick={() => this.chooseDateField('publishdate')} style={{cursor: 'pointer'}}>
             {t('filter.publishDate')}
           </div>
-        </div>
-        <div styleName="clearfix">
-          <div styleName="dates-left">{t('filter.to')}</div>
-          <div styleName="dates-right">{t('filter.from')}</div>
-        </div>
-        <div styleName="clearfix">
-          <div styleName="start-date">
-            <Calendar
-              name="startDate"
-              defaultDate={this.startDate}
-              todayLabel={t('filter.today')}
-              selectDate={this.selectDate}
-              showMonths={true}
-              showYears={true}
-            />
+
+          <div styleName={clsLeft} onClick={() => this.chooseDateField('infodate')} style={{cursor: 'pointer'}}>
+            {t('filter.infoDate')}
           </div>
-          <div styleName="end-date">
-            <Calendar
-              name="endDate"
-              defaultDate={this.endDate}
-              todayLabel={t('filter.today')}
-              selectDate={this.selectDate}
-              showMonths={true}
-              showYears={true}
-            />
+        </div>
+        <div className="grid-x">
+
+
+          <div className="small-6 cell">
+            <span styleName="date_lable">{t('filter.from')}</span>
+            <div>
+              <Calendar
+                name="startDate"
+                defaultDate={this.startDate}
+                todayLabel={t('filter.today')}
+                selectDate={this.selectDate}
+                showMonths={true}
+                showYears={true}
+              />
+            </div>
           </div>
+
+          <div className="small-6 cell">
+            <span styleName="date_lable">{t('filter.to')}</span>
+
+            <div>
+              <Calendar
+                name="endDate"
+                defaultDate={this.endDate}
+                todayLabel={t('filter.today')}
+                selectDate={this.selectDate}
+                showMonths={true}
+                showYears={true}
+              />
+            </div>
+          </div>
+
         </div>
       </div>
     )

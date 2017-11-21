@@ -31,8 +31,8 @@ export default class Filters extends React.Component {
     //console.log('filters', toJS(searchStore.availableFilters))
 
     return(
-      <div>
-        <div style={{margin: '1rem 0 1.5rem 0'}}>&nbsp;</div>
+      <div styleName="filter_container">
+        
         <div>
           <MultipleFilter
             type="subsubjects"
@@ -54,7 +54,11 @@ export default class Filters extends React.Component {
             dateValues={dateValues}
             onSubmit={setSelected}
           />
-          <div style={{marginTop: '10px', paddingTop: '10px', border: 'silver solid 1px'}}>Free Search...</div>
+          <div styleName="free_search">
+            <h4>חפש בתוצאות</h4>
+            <input type="text" placeholder="חפש"></input>
+          </div>
+          
         </div>
       </div>
     )

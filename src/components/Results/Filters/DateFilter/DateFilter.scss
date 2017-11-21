@@ -1,29 +1,43 @@
+@import '~common/style/_settings.scss';
+
 .clearfix {
   overflow: auto;
   zoom: 1;
 }
 
-.dates-left {
-  float: left;
-  width: 50%
-}
-
-.dates-right {
-  float: right;
-  width: 50%;
+.dates-right, .dates-left {
+  display: inline-block;
+  padding: 0.25rem 0;
+  margin-left: 1rem;
+  position: relative;
+  bottom: -2px;
 }
 
 .selected {
-  background-color: #34b44f
+  border-bottom: 4px solid $green;
+  font-weight: 600;
 }
 
 .start-date {
-  float: right;
-  width: 50%;
-  padding-left: 5px;
+
 }
 
 .end-date {
-  float: left;
-  width: 50%
+  display: block;
+}
+
+.dateContainer {
+  margin-top: 2rem;
+  .tabs_container {
+    border-bottom: 1px solid $medium-gray;
+  }
+  .date_lable {
+    display: block;
+    font-size: rem-calc(14);
+    padding: 1rem 0 0.5rem 0;
+  }
+  input {
+    padding:0.5rem;
+    
+  }
 }
