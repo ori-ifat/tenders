@@ -110,5 +110,8 @@ export default {
     edit: 'ערוך',
     choose: 'בחר',
     cancel: 'בטל'
+  },
+  favorites: {
+    title: 'מועדפים נמצאו'
   }
 }

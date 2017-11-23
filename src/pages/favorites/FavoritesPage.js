@@ -12,6 +12,9 @@ export default class Favorites extends Component {
   //componentWillReceiveProps = (nextProps, nextState) => {};
 
   render(){
-    return <div><WrapperComponent/></div>
+    return <div>
+      <WrapperComponent
+        use="favorites" />
+    </div>
   }
 }

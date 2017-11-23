@@ -26,11 +26,8 @@ class Favorites {
       this.resultsLoading = true
       this.searchError = null
       const searchParams = {
-        tags: [{'id':4, 'type':'area'}],
-        filters: [],
         page: this.lastResultsPage + 1,
-        pageSize: this.resultsPageSize,
-        sort: [{field: 'TenderID', isAscending: true}]
+        pageSize: this.resultsPageSize  //implement sort if needed
       }
 
       try {

@@ -206,13 +206,11 @@ export function getReminder(reminderID) {
   }} )
 }
 
-export function getFavorites({page, pageSize, sort}) {
-  //api implementation pending 
-  return apiFetch('Test/Fav', { //not implemented
+export function getFavorites({page, pageSize}) {
+  return apiFetch('Favorites/GetFavorites', {
     searchParams: {
       page,
-      pageSize,
-      sort
+      pageSize
     }
   }).then(res => {
     return {
@@ -222,22 +220,3 @@ export function getFavorites({page, pageSize, sort}) {
     }
   })
 }
-/*
-export function getFavorites({tags, filters, page, pageSize, sort}) {
-  //TEMP!!
-  return apiFetch('Search/ResultPage', {
-    searchParams: {
-      tags,
-      page,
-      pageSize,
-      sort,
-      filters
-    }
-  }).then(res => {
-    return {
-      total: res.info.count,
-      page: res.info.page,
-      data: res.data
-    }
-  })
-} */

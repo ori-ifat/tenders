@@ -8,6 +8,7 @@ import find from 'lodash/find'
 import map from 'lodash/map'
 import Home from 'components/Home'
 import Results from 'components/Results'
+import Favorites from 'components/Favorites'
 import Toolbar from 'common/components/Toolbar'
 import CSSModules from 'react-css-modules'
 import styles from './wrapper.scss'
@@ -112,7 +113,11 @@ export default class Wrapper extends Component {
 
   render() {
     const {use} = this.props
-    const Component = use == 'results' ? Results : Home
+    const Component = use == 'results' ?
+      Results :
+      use == 'favorites' ?
+        Favorites :
+        Home
 
     return (
       <div>

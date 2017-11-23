@@ -2,23 +2,23 @@ import React from 'react'
 import { inject, observer } from 'mobx-react'
 import { translate } from 'react-polyglot'
 import CSSModules from 'react-css-modules'
-import styles from './ResultsTitle.scss'
+import styles from './Title.scss'
 
 @translate()
 @inject('searchStore')
 @CSSModules(styles, { allowMultiple: true })
 @observer
-export default class ResultsTitle extends React.Component {
+export default class Title extends React.Component {
 
   render() {
-    const { t, searchStore } = this.props
-    const { resultsLoading, resultsCount } = searchStore
-
+    const { mode, t, store } = this.props
+    const { resultsLoading, resultsCount } = store
+    const title = mode == 'favorites' ? t('favorites.title') : t('results.title')
     return (
       <div className="row">
         <div className="large-12 columns">
           {!resultsLoading &&
-            <h1 styleName="results_summery"><span>{resultsCount}</span> {t('results.title')} </h1>
+            <h1 styleName="results_summery"><span>{resultsCount}</span> {title} </h1>
           }
           {resultsLoading &&
             <div>Loading...</div>

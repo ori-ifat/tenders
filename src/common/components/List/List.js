@@ -3,7 +3,7 @@ import { object, func, array } from 'prop-types'
 import { observer } from 'mobx-react'
 import { translate } from 'react-polyglot'
 import CSSModules from 'react-css-modules'
-import styles from './ResultsList.scss'
+import styles from './List.scss'
 import InfiniteScroll from 'react-infinite-scroller'
 import ResultsItem from 'common/components/ResultsItem'
 import find from 'lodash/find'
@@ -11,7 +11,7 @@ import find from 'lodash/find'
 @translate()
 @CSSModules(styles)
 @observer
-export default class ResultsList extends React.Component {
+export default class List extends React.Component {
 
   static propTypes = {
     store: object,
@@ -25,7 +25,7 @@ export default class ResultsList extends React.Component {
   render() {
     const { t, store, loadMore, checkedItems } = this.props
     const { resultsPageSize, resultsLoading, results, hasMoreResults } = store
-
+    //console.log('hasMoreResults', hasMoreResults)
     const items = results.map((item, index) => {
       const found = find(this.props.checkedItems, chk => {
         return chk.TenderID == item.TenderID

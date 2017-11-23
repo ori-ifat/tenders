@@ -5,9 +5,9 @@ import { whenRouted } from 'common/utils/withRouteHooks'
 import { withRouter } from 'react-router'
 import { searchStore } from 'stores'
 import SearchInput from 'common/components/SearchInput'
-import ResultsTitle from './ResultsTitle'
+import Title from 'common/components/Title'
 import ResultsActions from './ResultsActions'
-import ResultsList from './ResultsList'
+import List from 'common/components/List'
 import Filters from './Filters'
 import Banners from './Banners'
 import NoData from 'components/NoData'
@@ -50,7 +50,7 @@ export default class Results extends Component {
         {resultsCount == 0 && !resultsLoading && <NoData error={searchStore.searchError} />}
         {resultsCount > 0 &&
           <div>
-            <ResultsTitle />
+            <Title store={searchStore} />
             <div className="row">
               <div className="columns large-3">
                 <hr />
@@ -63,7 +63,7 @@ export default class Results extends Component {
               <div className="columns large-9">
                 <hr />
                 <ResultsActions />
-                <ResultsList
+                <List
                   store={searchStore}
                   loadMore={searchStore.loadNextResults}
                   onCheck={onCheck}
