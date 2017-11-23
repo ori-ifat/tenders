@@ -1,4 +1,5 @@
 import React, {Component} from 'react'
+import { object, func } from 'prop-types'
 import {inject, observer} from 'mobx-react'
 import {observable, toJS} from 'mobx'
 import { whenRouted } from 'common/utils/withRouteHooks'
@@ -22,6 +23,17 @@ import styles from './favorites.scss'
 @observer
 export default class Favorites extends Component {
 
+  static propTypes = {
+    cleanChecked: func,
+    setSelectedFilters: func,
+    selectedFilters: object,
+    onCheck: func,
+    onFav: func,
+    viewDetails: func,
+    setReminder: func,
+    checkedItems: object
+  }
+  
   componentWillMount() {
     //console.log('mount')
   }

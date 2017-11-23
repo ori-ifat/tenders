@@ -1,4 +1,5 @@
 import React, {Component} from 'react'
+import { object, func } from 'prop-types'
 import SearchInput from 'common/components/SearchInput'
 import {inject, observer} from 'mobx-react'
 import {observable, toJS} from 'mobx'
@@ -23,6 +24,17 @@ import styles from './home.scss'
 @CSSModules(styles, { allowMultiple: true })
 @observer
 export default class Home extends Component {
+
+  static propTypes = {
+    cleanChecked: func,
+    setSelectedFilters: func,
+    selectedFilters: object,
+    onCheck: func,
+    onFav: func,
+    viewDetails: func,
+    setReminder: func,
+    checkedItems: object
+  }
 
   componentWillMount() {
     //console.log('mount')
