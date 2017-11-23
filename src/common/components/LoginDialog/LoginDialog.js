@@ -81,28 +81,36 @@ export default class LoginDialog extends React.Component {
         <div className="reveal" styleName="login_lb" style={{display: 'block'}}>
           <button styleName="button-cancel" onClick={onCancel}>×</button>
           <div className="grid-x grid-margin-x" styleName="pb">
-            <div className="small-12 cell">
-              <h3 styleName="login_ttl">{t('login.title')}</h3>
-              <div styleName="clearfix">
-                <div styleName="input-label">{t('login.usernameLabel')}</div>
-                <div styleName="input-placeholder"><input type="text" name="userName" value={this.userName} onChange={this.updateField}/></div>
-              </div>
-              <div styleName="clearfix">
-                <div styleName="input-label">{t('login.passwordLabel')}</div>
-                <div styleName="input-placeholder"><input type="password" name="password" value={this.password} onChange={this.updateField}/></div>
-              </div>
-              <div styleName="clearfix">
-                <div styleName="input-label" style={{width: '10%'}}>
-                  <input type="checkbox" name="rememberMe" onChange={this.updateField}/>
+            <div className="columns small-8">
+              <div className="small-12 cell">
+                <h3 styleName="login_ttl">{t('login.title')}</h3>
+                <div styleName="clearfix">
+                  <div styleName="input-label">{t('login.usernameLabel')}</div>
+                  <div styleName="input-placeholder"><input type="text" name="userName" value={this.userName} onChange={this.updateField}/></div>
                 </div>
-                <div styleName="input-placeholder" style={{width: '90%'}}>
-                  {t('login.rememberMe')}
+                <div styleName="clearfix">
+                  <div styleName="input-label">{t('login.passwordLabel')}</div>
+                  <div styleName="input-placeholder"><input type="password" name="password" value={this.password} onChange={this.updateField}/></div>
                 </div>
+                <div styleName="clearfix">
+                  <div styleName="input-label" style={{width: '10%'}}>
+                    <input type="checkbox" name="rememberMe" onChange={this.updateField}/>
+                  </div>
+                  <div styleName="input-placeholder" style={{width: '90%'}}>
+                    {t('login.rememberMe')}
+                  </div>
+                </div>
+                {accountStore.error != null && accountStore.profile == null &&
+                  <div style={{color: 'red'}}>{accountStore.errorMessage}</div>
+                }
               </div>
-              {accountStore.error != null && accountStore.profile == null &&
-                <div style={{color: 'red'}}>{accountStore.errorMessage}</div>
-              }
             </div>
+            <div className="columns small-4" style={{paddingTop: '20px', paddingRight: '40px', backgroundColor: 'aliceblue'}}>
+              <div>
+                <a href="#/subscriptions" target="_blank">{t('login.register')}</a>
+              </div>
+            </div>
+
             <div className="grid-x grid-margin-x" styleName="buttons_cont">
               <div className="small-12 cell">
                 <button styleName="button-submit" onClick={this.login}>{t('login.login')}</button>

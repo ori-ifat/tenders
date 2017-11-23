@@ -98,10 +98,15 @@ export default class Topbar extends Component {
                 {navbar.map((nav, index) =>
                   <li key={index}><a onClick={this.navigate(`${nav.link}`)}>{t(`nav.${nav.title}`)}</a></li>
                 ) }
-                <li styleName="">
-                  <a onClick={this.login}><img src={userSrc} alt="" />{loginLabel}</a>
+                <li>
+                  {accountStore.profile ?
+                    <a onClick={f => f}><img src={userSrc} alt="" />{loginLabel}</a>
+                    :
+                    <a onClick={this.login}><img src={userSrc} alt="" />{loginLabel}</a>
+                  }
                   {accountStore.profile &&
                   <ul id="logout" className="submenu menu vertical" styleName="menu" data-dropdown-menu>
+                    <li><a onClick={this.navigate('/favorites')}>{t('nav.favorites')}</a></li>
                     <li><a onClick={this.logout}>{t('nav.logout')}</a></li>
                   </ul>}
                 </li>

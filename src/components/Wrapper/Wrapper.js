@@ -137,8 +137,7 @@ export default class Wrapper extends Component {
           onClose={this.hideToolbar}
           push={this.push}
           cut={this.cut}
-          isInChecked={this.isInChecked}
-          notlogged={this.notlogged}
+          isInChecked={this.isInChecked}          
         />
       </div>
     )

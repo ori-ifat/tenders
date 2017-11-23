@@ -10,7 +10,7 @@ import Checkbox from 'common/components/Checkbox'
 import ResultsItemDetails from 'common/components/ResultsItemDetails'
 import ImageView from 'common/components/ImageView'
 import Reminder from 'common/components/Reminder'
-import NotLogged from 'common/components/NotLogged'
+import LoginDialog from 'common/components/LoginDialog'
 import CSSModules from 'react-css-modules'
 import styles from './ResultsItem.scss'
 
@@ -199,7 +199,7 @@ export default class ResultsItem extends React.Component {
           />
         }
         {this.showLoginMsg &&
-          <NotLogged
+          <LoginDialog
             onCancel={this.continueUnlogged}
           />
         }

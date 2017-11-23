@@ -9,21 +9,17 @@ export default {
     rememberMe: 'זכור לפעם הבאה',
     loginBtnTitle: 'כניסה',
     loginError: 'פרטי ההזדהות שהזנת שגויים, אנא נסה שנית.',
-    notLogged: 'אינך מחובר למערכת',
-    please: 'אנא',
     login: 'התחבר',
-    or: 'או',
-    register: 'הירשם'
+    register: 'אנא הירשם'
   },
   nav: {
     logoAlt: 'לוגו מכרזים',
     subscriptions: 'מסלולים',
     contactus: 'צור קשר',
     publish: 'פרסם מכרז',
-    fakeUser: 'ורד קמין',
+    favorites: 'מועדפים',
     pleaseLog: 'התחבר',
-    logout: 'התנתק',
-    test: 'טסט',
+    logout: 'התנתק',    
     search: 'חיפוש'
   },
   home: {

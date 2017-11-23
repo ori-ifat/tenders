@@ -6,7 +6,7 @@ import { translate } from 'react-polyglot'
 import remove from 'lodash/remove'
 import find from 'lodash/find'
 import {createUrl, addToFavorites, getEmailData, clearCache} from 'common/services/apiService'
-import NotLogged from 'common/components/NotLogged'
+import LoginDialog from 'common/components/LoginDialog'
 import CSSModules from 'react-css-modules'
 import styles from './Toolbar.scss'
 
@@ -124,7 +124,7 @@ export default class Toolbar extends React.Component {
           </div>
         </div>
         {this.showLoginMsg &&
-          <NotLogged
+          <LoginDialog
             onCancel={this.continueUnlogged}
           />
         }
