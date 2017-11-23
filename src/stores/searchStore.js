@@ -120,7 +120,10 @@ class Search {
       }
       catch(e) {
         //an error occured on search
-        this.searchError = `[loadNextResults] search error: ${e.message} http status code ${e.error.status}`
+        this.searchError = {
+          message: `[loadNextResults] search error: ${e.message} http status code ${e.error.status}`,
+          statusCode: e.error.status
+        }
       }
 
       if (this.searchError == null) {

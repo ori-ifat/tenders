@@ -19,7 +19,7 @@ export default {
     publish: 'פרסם מכרז',
     favorites: 'מועדפים',
     pleaseLog: 'התחבר',
-    logout: 'התנתק',    
+    logout: 'התנתק',
     search: 'חיפוש'
   },
   home: {
@@ -48,6 +48,7 @@ export default {
     infoDate: 'תאריך הגשה',
     publishDate: 'תאריך פרסום',
     noData: 'אין תוצאות להצגה',
+    login: 'יש להתחבר למערכת',
     error: 'חלה שגיאה בחיפוש, אנא נסה שנית'
   },
   tender: {
@@ -66,12 +67,16 @@ export default {
     tenderConditions: 'תנאי סף למכרז',
     subSubjects: 'סיווגים',
     details: 'פרטים',
+    comment: 'פרטים נוספים',
     links: 'מסמכים מקושרים למכרז',
     toTenderDetails: 'למסמכי המכרז',
     print: 'הדפסה',
     email: 'שלח במייל',
     remind: 'צור התראה',
-    addReminder: 'הוסף תזכורת'
+    addReminder: 'הוסף תזכורת',
+    didLike: 'מה דעתך על המכרז?',
+    liked: 'בדיוק מה שחיפשתי',
+    disliked: 'לא מתאים לי'
   },
   toolbar: {
     selectedTenders: 'מכרזים נבחרו',

@@ -9,6 +9,7 @@ import SearchInput from 'common/components/SearchInput'
 import Title from 'common/components/Title'
 //import ResultsActions from 'components/Results/ResultsActions'
 import List from 'common/components/List'
+import NoData from 'components/NoData'
 import CSSModules from 'react-css-modules'
 import styles from './favorites.scss'
 
@@ -33,7 +34,7 @@ export default class Favorites extends Component {
     setReminder: func,
     checkedItems: object
   }
-  
+
   componentWillMount() {
     //console.log('mount')
   }

@@ -1,5 +1,5 @@
 import React from 'react'
-import { string } from 'prop-types'
+import { object } from 'prop-types'
 import { translate } from 'react-polyglot'
 import CSSModules from 'react-css-modules'
 import styles from './NoData.scss'
@@ -8,7 +8,7 @@ import styles from './NoData.scss'
 @CSSModules(styles)
 export default class NoData extends React.Component {
   static propTypes = {
-    error: string
+    error: object
   }
 
   render() {
@@ -17,7 +17,13 @@ export default class NoData extends React.Component {
     return (
       <div>
         {error ?
-          <h2 styleName="error">{t('results.error')}</h2>
+          <h2 styleName="error">
+            { error.statusCode != 401 ?
+              t('results.error')
+              :
+              t('results.login')
+            }
+          </h2>
           :
           <h1 styleName="no-data">{t('results.noData')} </h1>
         }

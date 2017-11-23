@@ -9,6 +9,7 @@ import moment from 'moment'
 import ImageView from 'common/components/ImageView'
 import Row from './Row'
 import Reminder from 'common/components/Reminder'
+import LikeItem from './LikeItem'
 import CSSModules from 'react-css-modules'
 import styles from './ResultsItemDetails.scss'
 
@@ -108,6 +109,10 @@ export default class ResultsItemDetails extends React.Component {
                   <Row label={t('tender.delivery')} data={infoDate} />
                   <Row label={t('tender.details')} data={item.Summery} />
                   {
+                    item.Comment && item.Comment.trim() != '' &&
+                    <Row label={t('tender.comment')} data={item.Comment} />
+                  }
+                  {
                     item.TourDetails && item.TourDetails.trim() != '' &&
                     <Row label={t('tender.tourDetails')} data={item.TourDetails} />
                   }
@@ -151,6 +156,7 @@ export default class ResultsItemDetails extends React.Component {
                   <span aria-hidden="true">&times;</span>
                 </button>
               }
+              <LikeItem />           
             </div>
           }
           {itemStore.resultsLoading && <div>Loading...</div>}
