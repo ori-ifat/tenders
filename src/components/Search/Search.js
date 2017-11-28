@@ -5,7 +5,7 @@ import SearchInput from 'common/components/SearchInput'
 //import Test from 'components/Test'
 import {inject} from 'mobx-react'
 
-@CSSModules(styles, { allowMultiple: true })
+@CSSModules(styles)
 export default class Search extends Component {
 
   render() {

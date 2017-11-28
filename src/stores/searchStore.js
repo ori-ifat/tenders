@@ -3,7 +3,7 @@ import isObject from 'lodash/isObject'
 import map from 'lodash/map'
 import filter from 'lodash/filter'
 import moment from 'moment'
-import {search} from 'common/services/apiService'
+import {/*search*/ fetchResultsPage, fetchFilters } from 'common/services/apiService'
 
 const serializeTags = ({ID, Name, ResType}) => {
   return ResType.indexOf('_partial') > -1 ? {
@@ -21,10 +21,13 @@ class Search {
   @observable tags = [];
   @observable sort = 'publishDate'
   @observable resultsLoading = false
+  @observable filtersLoading = false
   @observable hasMoreResults = true
   @observable request = {};
+  @observable requestFilters = {};
   @observable results = []
   @observable searchError = null
+  @observable filtersError = null
   @observable lastResultsPage = 0
   @observable resultsPageSize = 10
   @observable resultsCount = 0
@@ -116,7 +119,8 @@ class Search {
       }
 
       try {
-        this.request = await search(searchParams)
+        //this.request = await search(searchParams)
+        this.request = await fetchResultsPage(searchParams)
       }
       catch(e) {
         //an error occured on search
@@ -128,14 +132,14 @@ class Search {
 
       if (this.searchError == null) {
         //if no errors occured, continue:
-        const {resultsPage: {data, total}, filtersMeta} = this.request
+        //const {resultsPage: {data, total}, filtersMeta} = this.request
+        const {data, total} = this.request
         if (data.length > 0) {
           this.lastResultsPage++
         }
         console.info('[loadNextResults]', this.lastResultsPage)
         this.results = [...this.results, ...data.map(d => ({ ...d, key: d.TenderID }))]
-        this.availableFilters = filtersMeta
-        //this.hasMoreResults = data.length === this.resultsPageSize
+        //this.availableFilters = filtersMeta
         this.resultsCount = total
         this.hasMoreResults = data.length > 0 && this.results.length < this.resultsCount
       }
@@ -144,11 +148,45 @@ class Search {
         console.error(this.searchError) //a flag has been raised. implement what to do with it
         //set as there is no data (actually there is none...)
         this.results = []
-        this.availableFilters = []
+        //this.availableFilters = []
         this.resultsCount = 0
         this.hasMoreResults = false
       }
       this.resultsLoading = false
+    }
+  }
+
+  @action.bound
+  async loadNextFilters() {
+    if (!this.filtersLoading) {
+      this.filtersLoading = true
+      this.filtersError = null
+      const searchParams = {
+        tags: this.serializedTags,
+        filters: [],  //no drilldown - from tags only
+        sort: this.serializedSort
+      }
+
+      try {
+        this.requestFilters = await fetchFilters(searchParams)
+      }
+      catch(e) {
+        //an error occured on search
+        this.filtersError = {
+          message: `[loadNextFilters] filter search error: ${e.message} http status code ${e.error.status}`,
+          statusCode: e.error.status
+        }
+      }
+
+      if (this.filtersError == null) {
+        console.info('[loadNextFilters]')
+        this.availableFilters = this.requestFilters
+      }
+      else {
+        console.error(this.filtersError) //a flag has been raised. implement what to do with it
+        this.availableFilters = []
+      }
+      this.filtersLoading = false
     }
   }
 }

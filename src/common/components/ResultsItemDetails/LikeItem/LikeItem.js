@@ -6,7 +6,7 @@ import styles from './LikeItem.scss'
 
 @translate()
 @inject('itemStore')
-@CSSModules(styles, { allowMultiple: true })
+@CSSModules(styles)
 @observer
 export default class LikeItem extends React.Component {
 

@@ -12,7 +12,7 @@ import {autocomplete} from 'common/services/apiService'
 @inject('translationsStore')
 @inject('routingStore')
 @observer
-@CSSModules(styles, { allowMultiple: true })
+@CSSModules(styles)
 export default class SearchInput extends Component {
   static propTypes = {
     tags: array
@@ -87,7 +87,7 @@ export default class SearchInput extends Component {
   }
 
   render() {
-    const selectedValues = toJS(this.selectedValues)    
+    const selectedValues = toJS(this.selectedValues)
     const {t} = this.props
 
     return (

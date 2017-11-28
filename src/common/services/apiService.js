@@ -115,7 +115,7 @@ export async function search({tags, filters, page, pageSize, sort}) {
   return { filtersMeta, resultsPage }
 }
 
-function fetchFilters({tags, filters, sort}) {
+export async function fetchFilters({tags, filters, sort}) {
   return apiFetch('Search/GetFilters', {
     searchParams: {
       tags, filters, sort
@@ -123,7 +123,7 @@ function fetchFilters({tags, filters, sort}) {
   })
 }
 
-function fetchResultsPage({tags, filters, page, pageSize, sort}) {
+export async function fetchResultsPage({tags, filters, page, pageSize, sort}) {
   return apiFetch('Search/ResultPage', {
     searchParams: {
       tags,

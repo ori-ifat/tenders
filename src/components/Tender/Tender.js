@@ -10,7 +10,7 @@ import styles from './tender.scss'
 
 @withRouter
 @observer
-@CSSModules(styles, { allowMultiple: true })
+@CSSModules(styles)
 export default class Tender extends Component {
 
   @observable itemID = -1

@@ -6,7 +6,7 @@ import styles from './Title.scss'
 
 @translate()
 @inject('searchStore')
-@CSSModules(styles, { allowMultiple: true })
+@CSSModules(styles)
 @observer
 export default class Title extends React.Component {
 

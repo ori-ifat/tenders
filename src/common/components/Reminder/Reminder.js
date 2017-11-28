@@ -11,7 +11,7 @@ import styles from './Reminder.scss'
 
 @translate()
 @observer
-@CSSModules(styles, { allowMultiple: true })
+@CSSModules(styles)
 export default class Reminder extends Component {
 
   static propTypes = {

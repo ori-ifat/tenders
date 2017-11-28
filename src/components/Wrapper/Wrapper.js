@@ -2,10 +2,11 @@ import React, {Component} from 'react'
 import {inject, observer} from 'mobx-react'
 import {observable, toJS} from 'mobx'
 import { searchStore, accountStore } from 'stores'
-import {setCheckedStatus, setFavStatus} from 'common/utils/util'
+import {setCheckedStatus, setFavStatus, extractLabel} from 'common/utils/util'
 import remove from 'lodash/remove'
 import find from 'lodash/find'
 import map from 'lodash/map'
+import { translate } from 'react-polyglot'
 import Home from 'components/Home'
 import Results from 'components/Results'
 import Favorites from 'components/Favorites'
@@ -13,6 +14,7 @@ import Toolbar from 'common/components/Toolbar'
 import CSSModules from 'react-css-modules'
 import styles from './wrapper.scss'
 
+@translate()
 @inject('searchStore')
 @inject('accountStore')
 @CSSModules(styles)
@@ -86,26 +88,35 @@ export default class Wrapper extends Component {
   setSelectedFilters = (label, value) => {
     /* set the selectedFilters object - a state-like object for the filter container.
       need that because the entire object is recreated upon filter commit action */
+    const {t} = this.props
     switch (label) {
     case 'subsubject':
       //delete this.selectedFilters.subsubjects
       Reflect.deleteProperty(this.selectedFilters, 'subsubjects')
-      this.selectedFilters.subsubjects = value
+      const subsubjects = extractLabel(value, t('filter.more'))
+      this.selectedFilters.subsubjects = subsubjects
       break
     case 'publisher':
       //delete this.selectedFilters.publishers
       Reflect.deleteProperty(this.selectedFilters, 'publishers')
-      this.selectedFilters.publishers = value
+      const publishers = extractLabel(value, t('filter.more'))
+      this.selectedFilters.publishers = publishers
       break
     case 'dateField':
       //delete this.selectedFilters.dateField
       Reflect.deleteProperty(this.selectedFilters, 'dateField')
       this.selectedFilters.dateField = value
+      break
     case 'publishdate':
     case 'infodate':
       //delete this.selectedFilters.date
       Reflect.deleteProperty(this.selectedFilters, 'date')
       this.selectedFilters.date = { [label]: value }
+      break
+    case 'searchText':
+      //delete this.selectedFilters.searchText
+      Reflect.deleteProperty(this.selectedFilters, 'searchText')
+      this.selectedFilters.searchText = value
       break
     }
     //console.log(this.selectedFilters)
@@ -137,7 +148,7 @@ export default class Wrapper extends Component {
           onClose={this.hideToolbar}
           push={this.push}
           cut={this.cut}
-          isInChecked={this.isInChecked}          
+          isInChecked={this.isInChecked}
         />
       </div>
     )

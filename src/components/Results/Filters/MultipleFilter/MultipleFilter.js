@@ -14,7 +14,7 @@ const editSrc = req('./icon_edit.svg')
 
 @translate()
 @inject('searchStore')
-@CSSModules(styles, { allowMultiple: true })
+@CSSModules(styles)
 @observer
 export default class MultipleFilter extends React.Component {
   /* component for multiple values filter selection */
@@ -58,7 +58,7 @@ export default class MultipleFilter extends React.Component {
     //commit filters
     const { searchStore, onClose } = this.props
     const field = this.type == 'subsubjects' ? 'subsubject' : 'publisher'
-    doFilter(searchStore, field, this.selected, this.itemLabels, onClose, this.open)
+    doFilter(searchStore, field, this.selected, this.itemLabels, onClose, this.closeModal)
   }
 
   filterItems = e => {
