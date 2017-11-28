@@ -1,7 +1,62 @@
+@import '~common/style/_settings.scss';
+
 .login_lb {
-  padding: 1.5rem  2.5rem !important;
-  overflow: initial !important;
-  max-width: 32rem !important;
+  display: block;
+  padding: 0 !important;
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+  .grid-x {
+    padding: 0;
+  }
+  @include breakpoint(large) {
+  // All CSS in here goes inside the media query
+    min-width: 740px;
+  }
+}
+
+.pb {
+  display: flex;
+  flex-direction: row;
+  .sign_up {
+    background-color: $green;
+    width: 300px;
+    padding: 2.5rem 2rem 3rem 2rem;
+    h3 {
+      color: #fff;
+
+    }
+  }
+  .error_box {
+    background-color: red;
+    color: #fff;
+    padding: 0.25rem 0.5rem;
+    margin-bottom: 1rem;
+  }
+  .login_container {
+    display: block;
+    input[type='checkbox'] {
+      margin-left: 0.5rem;
+      margin-bottom: 2rem;
+      display: inline-block;
+    }
+    input[type='text'] {
+      padding: 0.175rem;
+    }
+  }
+}
+
+
+.login_ttl{
+  display: block;
+}
+
+.subttl {
+  display: block;
+}
+
+.login_container {
+  padding: 2.5rem 3.5rem 3rem 3.5rem;
 }
 
 .login_ttl {
@@ -9,7 +64,7 @@
 }
 
 .pb {
-  padding-bottom: 0.75rem;
+
   span {
     font-size: rem-calc(15);
     color: #8a8a8a;
@@ -25,20 +80,14 @@
   font-size: 1.5rem;
 }
 
-.clearfix {
-  overflow: auto;
-  zoom: 1;
-}
+
 
 .input-label {
-  float: right;
-  width: 30%;
-  padding-left: 5px;
+  display: block;
 }
 
 .input-placeholder {
-  float: left;
-  width: 70%
+  display: block;
 }
 
 .buttons_cont {

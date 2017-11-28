@@ -80,41 +80,33 @@ export default class LoginDialog extends React.Component {
       <div className="reveal-overlay" style={{display: 'block', zIndex: 1200}}>
         <div className="reveal" styleName="login_lb" style={{display: 'block'}}>
           <button styleName="button-cancel" onClick={onCancel}>×</button>
-          <div className="grid-x grid-margin-x" styleName="pb">
-            <div className="columns small-8">
-              <div className="small-12 cell">
-                <h3 styleName="login_ttl">{t('login.title')}</h3>
-                <div styleName="clearfix">
-                  <div styleName="input-label">{t('login.usernameLabel')}</div>
-                  <div styleName="input-placeholder"><input type="text" name="userName" value={this.userName} onChange={this.updateField}/></div>
-                </div>
-                <div styleName="clearfix">
-                  <div styleName="input-label">{t('login.passwordLabel')}</div>
-                  <div styleName="input-placeholder"><input type="password" name="password" value={this.password} onChange={this.updateField}/></div>
-                </div>
-                <div styleName="clearfix">
-                  <div styleName="input-label" style={{width: '10%'}}>
-                    <input type="checkbox" name="rememberMe" onChange={this.updateField}/>
-                  </div>
-                  <div styleName="input-placeholder" style={{width: '90%'}}>
-                    {t('login.rememberMe')}
-                  </div>
-                </div>
-                {accountStore.error != null && accountStore.profile == null &&
-                  <div style={{color: 'red'}}>{accountStore.errorMessage}</div>
-                }
-              </div>
-            </div>
-            <div className="columns small-4" style={{paddingTop: '20px', paddingRight: '40px', backgroundColor: 'aliceblue'}}>
-              <div>
-                <a href="#/subscriptions" target="_blank">{t('login.register')}</a>
-              </div>
-            </div>
+          <div styleName="pb">
+            <div styleName="login_container">
+              <h3 styleName="login_ttl">המידע למנויים בלבד </h3>
+              <p styleName="subttl">המכרז זמין רק למנויים, לצפיה התחבר או רכוש מנוי</p>
+              {accountStore.error != null && accountStore.profile == null &&
+                <div styleName="error_box">{accountStore.errorMessage}</div>
+              }
 
-            <div className="grid-x grid-margin-x" styleName="buttons_cont">
-              <div className="small-12 cell">
+              <div styleName="input-placeholder"><input type="text" name="userName" placeholder={t('login.usernameLabel')} value={this.userName} onChange={this.updateField}/></div>
+
+
+
+              <div styleName="input-placeholder"><input type="password" name="password" placeholder={t('login.passwordLabel')} value={this.password} onChange={this.updateField}/></div>
+              <input type="checkbox" name="rememberMe" onChange={this.updateField}/>
+              {t('login.rememberMe')}
+
+              <div>
                 <button styleName="button-submit" onClick={this.login}>{t('login.login')}</button>
               </div>
+
+            </div>
+
+            <div styleName="sign_up">
+              <a href="#/subscriptions" target="_blank">
+                <h3 styleName="login_ttl">להרשמה</h3>
+
+              </a>
             </div>
           </div>
         </div>
