@@ -1,6 +1,6 @@
 import remove from 'lodash/remove'
 
-export function doFilter(searchStore, field, values, itemLabels, onClose, open) {
+export function doFilter(searchStore, field, values, itemLabels, onClose, closeModal) {
   //get current search params
   const sort = searchStore.sort
   const payload = JSON.stringify(searchStore.tags)
@@ -16,7 +16,13 @@ export function doFilter(searchStore, field, values, itemLabels, onClose, open) 
     })
   }
   //get current filters and concat new ones
-  const newFilters = [...searchStore.filters, {field, values}]
+  /*
+  if (values.length == 0) values = [-999]   //add default to avoid search errors
+  const newFilters = [...searchStore.filters, {field, values}]  //concat new filter to previous filters
+  //const newFilters = [{field, values}]  //seperate filters mode ... not used
+  */
+  //better:
+  const newFilters = values.length > 0 ? [...searchStore.filters, {field, values}] : searchStore.filters
   const filters = JSON.stringify(newFilters)
   //apply filters to store, and commit search:
   searchStore.applyFilters(filters)
@@ -26,6 +32,6 @@ export function doFilter(searchStore, field, values, itemLabels, onClose, open) 
   if (onClose) {
     const labels = itemLabels.join(',')
     onClose(field, labels)
-    open = false   //close modal.
+    closeModal()   //close modal.
   }
 }

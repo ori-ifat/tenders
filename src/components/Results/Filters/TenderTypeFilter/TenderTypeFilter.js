@@ -5,13 +5,14 @@ import {observable, toJS} from 'mobx'
 import { translate } from 'react-polyglot'
 import filter from 'lodash/filter'
 import remove from 'lodash/remove'
+import find from 'lodash/find'
 import {doFilter} from 'common/utils/filter'
 import CSSModules from 'react-css-modules'
 import styles from './TenderTypeFilter.scss'
 
 @translate()
 @inject('searchStore')
-@CSSModules(styles, { allowMultiple: true })
+@CSSModules(styles)
 @observer
 export default class TenderTypeFilter extends React.Component {
 
@@ -23,13 +24,30 @@ export default class TenderTypeFilter extends React.Component {
   @observable selected = []
 
   componentWillMount() {
-    const {items} = this.props
+    const {items, searchStore} = this.props
     this.items = items
+    this.addSelected(searchStore.filters)
   }
 
   componentWillReceiveProps(nextProps) {
-    const {items} = nextProps
+    const {items, searchStore} = nextProps
     this.items = items
+    this.addSelected(searchStore.filters)
+  }
+
+  addSelected = (filters) => {
+    //get relevant tendertype filter (if any)
+    const tenderTypes = find(filters, filter => {
+      return filter.field == 'tendertype'
+    })
+    //iterate on items. add to selected the ones that were already filtered (or all, if none was) -
+    //to check relevant on open\after filter action
+    this.items && this.items.map(item => {
+      if (!this.selected.includes(item.TenderTypeID) &&
+        (tenderTypes == undefined || tenderTypes.values.includes(item.TenderTypeID))) {
+        this.selected.push(item.TenderTypeID)
+      }
+    })
   }
 
   doFilter = () => {
@@ -49,6 +67,7 @@ export default class TenderTypeFilter extends React.Component {
       })
     }
     //console.log(toJS(this.selected))
+    this.doFilter()
   }
 
   render() {
@@ -72,7 +91,7 @@ export default class TenderTypeFilter extends React.Component {
             )
           }
         </div>
-        <a onClick={this.doFilter} style={{border: '1px solid', padding: '3px'}}>Commit</a>
+        {/*<a onClick={this.doFilter} style={{border: '1px solid', padding: '3px'}}>Commit</a>*/}
       </div>
     )
   }

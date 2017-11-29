@@ -7,7 +7,7 @@ import styles from './HomeTitle.scss'
 @translate()
 @inject('homeStore')
 @inject('accountStore')
-@CSSModules(styles, { allowMultiple: true })
+@CSSModules(styles)
 @observer
 export default class HomeTitle extends React.Component {
 

@@ -8,7 +8,7 @@ import FoundationHelper from 'lib/FoundationHelper'
 @translate()
 @inject('searchStore')
 @inject('routingStore')
-@CSSModules(styles, { allowMultiple: true })
+@CSSModules(styles)
 @observer
 export default class ResultsActions extends React.Component {
 
@@ -26,7 +26,7 @@ export default class ResultsActions extends React.Component {
   }
 
   changeSort = (sort) => {
-    const { searchStore, routingStore } = this.props    
+    const { searchStore, routingStore } = this.props
     const payload = JSON.stringify(searchStore.tags)
     const filters = JSON.stringify(searchStore.filters)
     routingStore.push(`/results/${sort}/${payload}/${filters}`)

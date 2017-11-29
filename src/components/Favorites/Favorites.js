@@ -20,7 +20,7 @@ import styles from './favorites.scss'
 })
 @inject('favoritesStore')
 @inject('accountStore')
-@CSSModules(styles, { allowMultiple: true })
+@CSSModules(styles)
 @observer
 export default class Favorites extends Component {
 

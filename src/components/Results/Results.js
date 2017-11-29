@@ -22,10 +22,11 @@ import styles from './results.scss'
   searchStore.applyFilters(filters)
   searchStore.clearResults()
   searchStore.loadNextResults()
+  searchStore.loadNextFilters()
 })
 @inject('searchStore')
 @inject('accountStore')
-@CSSModules(styles, { allowMultiple: true })
+@CSSModules(styles)
 @observer
 export default class Results extends Component {
 
@@ -58,34 +59,36 @@ export default class Results extends Component {
     return (
       <div style={{marginTop: '50px'}}>
         <SearchInput tags={toJS(tags)} />
-        {resultsLoading && <div>Loading...</div>}
-        {resultsCount == 0 && !resultsLoading && <NoData error={searchStore.searchError} />}
-        {resultsCount > 0 &&
-          <div>
-            <Title store={searchStore} />
-            <div className="row">
-              <div className="columns large-3">
-                <hr />
-                <Filters
-                  setSelected={setSelectedFilters}
-                  selectedFilters={selectedFilters}
-                />
-                <Banners />
-              </div>
-              <div className="columns large-9">
-                <hr />
-                <ResultsActions />
-                <List
-                  store={searchStore}
-                  loadMore={searchStore.loadNextResults}
-                  onCheck={onCheck}
-                  onFav={onFav}
-                  viewDetails={viewDetails}
-                  checkedItems={checkedItems} />
-              </div>
+        <div>
+          <Title store={searchStore} />
+          <div className="row">
+            <div className="columns large-3">
+              <hr />
+              <Filters
+                setSelected={setSelectedFilters}
+                selectedFilters={selectedFilters}
+              />
+              <Banners />
+            </div>
+            <div className="columns large-9">
+              <hr />
+              {resultsLoading && <div>Loading...</div>}
+              {resultsCount == 0 && !resultsLoading && <NoData error={searchStore.searchError} />}
+              {resultsCount > 0 &&
+                <div>
+                  <ResultsActions />
+                  <List
+                    store={searchStore}
+                    loadMore={searchStore.loadNextResults}
+                    onCheck={onCheck}
+                    onFav={onFav}
+                    viewDetails={viewDetails}
+                    checkedItems={checkedItems} />
+                </div>
+              }
             </div>
           </div>
-        }
+        </div>
       </div>
     )
   }

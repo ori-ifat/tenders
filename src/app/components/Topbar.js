@@ -28,7 +28,7 @@ const navbar = [  {
 @inject('translationsStore')
 @inject('routingStore')
 @inject('accountStore')
-@CSSModules(styles, { allowMultiple: true })
+@CSSModules(styles)
 @observer //note if class is not an observer, it will not be affected from changes in other classes observables...
 export default class Topbar extends Component {
 

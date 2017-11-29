@@ -11,7 +11,7 @@ import styles from './LoginDialog.scss'
 @translate()
 @inject('accountStore')
 @inject('routingStore')
-@CSSModules(styles, {allowMultiple: true})
+@CSSModules(styles)
 @observer
 export default class LoginDialog extends React.Component {
 

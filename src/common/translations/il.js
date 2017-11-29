@@ -110,7 +110,10 @@ export default {
     today: 'היום',
     edit: 'ערוך',
     choose: 'בחר',
-    cancel: 'בטל'
+    cancel: 'בטל',
+    more: '...עוד',
+    searchText: 'חפש בתוצאות',
+    search: 'חפש'
   },
   favorites: {
     title: 'מועדפים נמצאו'
