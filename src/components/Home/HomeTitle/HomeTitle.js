@@ -15,7 +15,7 @@ export default class HomeTitle extends React.Component {
     const { t, homeStore, accountStore: { profile } } = this.props
     const { resultsLoading, resultsCount } = homeStore
     const count = resultsCount
-    const user = profile ? decodeURIComponent(profile.contactName) : ''
+    const user = profile ? decodeURIComponent(profile.contactName).replace(/\+/g, ' ') : ''
 
     return (
       <div className="row">
