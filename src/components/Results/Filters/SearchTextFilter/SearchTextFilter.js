@@ -40,7 +40,15 @@ export default class SearchTextFilter extends React.Component {
   onChange = e => {
     this.text = e.target.value
     //console.log(toJS(this.selected))
-    this.doFilter()
+    //this.doFilter()  //too slow
+  }
+
+  onKeyDown = e => {
+    if (e.keyCode === 13) {
+      setTimeout(() => {
+        this.doFilter()
+      }, 150) //to allow action to complete
+    }
   }
 
   render() {
@@ -48,7 +56,10 @@ export default class SearchTextFilter extends React.Component {
     return(
       <div styleName="free_search">
         <h4>{t('filter.searchText')}</h4>
-        <input type="text" placeholder={t('filter.search')} onChange={this.onChange} />
+        <input type="text"
+          placeholder={t('filter.search')}
+          onChange={this.onChange}
+          onKeyDown={this.onKeyDown} />
       </div>
     )
   }
