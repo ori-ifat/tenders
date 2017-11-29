@@ -82,8 +82,8 @@ export default class LoginDialog extends React.Component {
           <button styleName="button-cancel" onClick={onCancel}>×</button>
           <div styleName="pb">
             <div styleName="login_container">
-              <h3 styleName="login_ttl">המידע למנויים בלבד </h3>
-              <p styleName="subttl">המכרז זמין רק למנויים, לצפיה התחבר או רכוש מנוי</p>
+              <h3 styleName="login_ttl">{t('login.subscibeTitle')}</h3>
+              <p styleName="subttl">{t('login.subscibeSubTitle')}</p>
               {accountStore.error != null && accountStore.profile == null &&
                 <div styleName="error_box">{accountStore.errorMessage}</div>
               }
@@ -104,7 +104,7 @@ export default class LoginDialog extends React.Component {
 
             <div styleName="sign_up">
               <a href="#/subscriptions" target="_blank">
-                <h3 styleName="login_ttl">להרשמה</h3>
+                <h3 styleName="login_ttl">{t('login.subscribe')}</h3>
 
               </a>
             </div>

@@ -79,7 +79,7 @@ export default class Topbar extends Component {
 
   render() {
     const {accountStore, t} = this.props
-    const loginLabel = accountStore.profile ? decodeURIComponent(accountStore.profile.contactName) : t('nav.pleaseLog')
+    const loginLabel = accountStore.profile ? decodeURIComponent(accountStore.profile.contactName).replace(/\+/g, ' ') : t('nav.pleaseLog')
     return (
       <div styleName="header">
         <nav className="column row">
