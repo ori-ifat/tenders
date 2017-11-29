@@ -6,7 +6,7 @@ export default {
     usernameLabel: 'שם משתמש',
     passwordLabel: 'סיסמה',
     rememberMe: 'זכור לפעם הבאה',
-    login: 'התחבר',    
+    login: 'התחבר',
     subscibeTitle: 'המידע למנויים בלבד',
     subscibeSubTitle: 'המכרז זמין רק למנויים, לצפיה התחבר או רכוש מנוי',
     subscribe: 'להרשמה'
@@ -112,7 +112,8 @@ export default {
     cancel: 'בטל',
     more: '...עוד',
     searchText: 'חפש בתוצאות',
-    search: 'חפש'
+    search: 'חפש',
+    selectAll: 'בחר הכל'
   },
   favorites: {
     title: 'מועדפים נמצאו'

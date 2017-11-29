@@ -33,6 +33,7 @@ export default class MultipleFilter extends React.Component {
   @observable items = []
   @observable selected = []
   @observable itemLabels = []
+  @observable allChecked = false
 
   componentWillMount() {
     const {type, items} = this.props
@@ -90,8 +91,28 @@ export default class MultipleFilter extends React.Component {
       remove(this.itemLabels, name => {
         return name === e.target.name
       })
+      this.allChecked = false
     }
     //console.log(toJS(this.selected))
+  }
+
+  onCheckAll = e => {
+    if (e.target.checked) {
+      this.items.map((item => {
+        const id = this.type == 'subsubjects' ? item.SubSubjectID : item.PublisherID
+        const name = this.type == 'subsubjects' ? item.SubSubjectName : item.PublisherName
+        if (!this.selected.includes(id)) {
+          this.selected.push(id)
+          this.itemLabels.push(name)
+        }
+      }), this)
+      this.allChecked = true
+    }
+    else {
+      this.selected.clear()
+      this.itemLabels.clear()
+      this.allChecked = false
+    }
   }
 
   render() {
@@ -106,6 +127,10 @@ export default class MultipleFilter extends React.Component {
               <div>
                 <h2>{title}</h2>
                 <input type="text" onChange={this.filterItems} />
+                {this.type == 'subsubjects' && <div>
+                  <input type="checkbox" onChange={this.onCheckAll} checked={this.allChecked} />
+                  <label styleName="cb-label">{t('filter.selectAll')}</label>
+                </div>}
                 <div style={{height: '300px', overflow: 'auto'}}>
                   {
                     this.items.map(((item, index) => {
@@ -118,7 +143,7 @@ export default class MultipleFilter extends React.Component {
                           value={id}
                           onChange={this.onCheck}
                         />
-                        <lable styleName="cb-label">{name}</lable>
+                        <label styleName="cb-label">{name}</label>
                       </div>}), this
                     )
                   }
