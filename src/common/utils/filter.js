@@ -16,9 +16,13 @@ export function doFilter(searchStore, field, values, itemLabels, onClose, closeM
     })
   }
   //get current filters and concat new ones
+  /*
   if (values.length == 0) values = [-999]   //add default to avoid search errors
   const newFilters = [...searchStore.filters, {field, values}]  //concat new filter to previous filters
   //const newFilters = [{field, values}]  //seperate filters mode ... not used
+  */
+  //better:
+  const newFilters = values.length > 0 ? [...searchStore.filters, {field, values}] : searchStore.filters
   const filters = JSON.stringify(newFilters)
   //apply filters to store, and commit search:
   searchStore.applyFilters(filters)
