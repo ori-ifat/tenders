@@ -4,6 +4,7 @@ import { inject, observer } from 'mobx-react'
 import {observable, toJS} from 'mobx'
 import { translate } from 'react-polyglot'
 import filter from 'lodash/filter'
+import find from 'lodash/find'
 import remove from 'lodash/remove'
 import {doFilter} from 'common/utils/filter'
 import CSSModules from 'react-css-modules'
@@ -34,17 +35,54 @@ export default class MultipleFilter extends React.Component {
   @observable selected = []
   @observable itemLabels = []
   @observable allChecked = false
+  @observable label = ''
 
   componentWillMount() {
-    const {type, items} = this.props
+    const {type, items, label} = this.props
     this.type = type
     this.items = items
+    this.label = label
+    this.checkSubsubjects()
   }
 
   componentWillReceiveProps(nextProps) {
-    const {type, items} = nextProps
+    const {type, items, label} = nextProps
     this.type = type
     this.items = items
+    this.label = label
+    this.checkSubsubjects()
+  }
+
+  checkSubsubjects = () => {
+    //check if store filters contain subsubject filter
+    if (this.type == 'subsubjects') {
+      const {searchStore, onClose} = this.props
+      //find it on current filters
+      const filter = find(searchStore.filters, item => {
+        return item.field == 'subsubject'
+      })
+      if (filter) {
+        //iterate on values
+        filter.values.map(id => {
+          if (!this.selected.includes(id)) {
+            //add id if it is not there
+            this.selected.push(id)
+            //find relevant on items - for name label
+            const found = find(this.items, item => {
+              return item.SubSubjectID == id
+            })
+            if (found) {
+              this.itemLabels.push(found.SubSubjectName)
+              const labels = this.itemLabels.join(',')
+              //update the 'selectedFilters' object on wrapper
+              onClose('subsubject', labels)
+              //update current label - somehow it is not affected
+              this.label = labels
+            }
+          }
+        })
+      }
+    }
   }
 
   openModal = () => {
@@ -167,8 +205,8 @@ export default class MultipleFilter extends React.Component {
           <h4>{title}
             <a><img src={editSrc} alt="" />{t('filter.edit')}</a>
           </h4>
-          <span>{ this.props.label }</span>
-          { (!this.props.label || this.props.label == '') &&
+          <span>{ this.label }</span>
+          { (!this.label || this.label == '') &&
           <div>
 
             <span style={{cursor: 'pointer'}}>{title}</span>

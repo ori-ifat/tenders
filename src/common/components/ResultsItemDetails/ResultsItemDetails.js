@@ -26,23 +26,30 @@ export default class ResultsItemDetails extends React.Component {
     itemID: number,
     onClose: func,
     showViewer: func,
-    mode: string
+    mode: string,
+    onFav: func
   }
 
   @observable remindMe = false
+  @observable IsFavorite = false
 
   componentWillMount() {
     const {itemStore, itemID} = this.props
-    itemStore.loadTender(itemID)
+    itemStore.loadTender(itemID).then(() => {
+      this.IsFavorite = itemStore.item.IsFavorite || false
+      //console.log('mount', this.IsFavorite)
+    })
   }
 
   componentWillReceiveProps(nextProps, nextState) {
     const {itemStore, itemID} = nextProps
-    itemStore.loadTender(itemID)
+    itemStore.loadTender(itemID).then(() => {
+      this.IsFavorite = itemStore.item.IsFavorite || false
+      //console.log('receive', this.IsFavorite)
+    })
   }
 
   email = () => {
-    //console.log('email', this.props.checkedItems)
     const {itemID, t} = this.props
     const item = [itemID]
     getEmailData(item).then(uid =>
@@ -51,14 +58,24 @@ export default class ResultsItemDetails extends React.Component {
     )
   }
 
-  print = () => {
-    //console.log('print', this.props.checkedItems)
+  print = isBig => {
     const {itemID} = this.props
     const item = [itemID]
+    const exportType = isBig ? 2 : 1
     window.open(createUrl('Export/ExportData', {
-      ExportType: 1,
+      ExportType: exportType,
       InfoList: item
     }, false), '_blank')
+  }
+
+  fav = () => {
+    const {itemStore: {item}, onFav} = this.props
+    if (onFav) {
+      onFav(item.TenderID, !this.IsFavorite)
+      clearCache()
+      this.IsFavorite = !this.IsFavorite
+      //console.log('added', this.IsFavorite)
+    }
   }
 
   remind = open => {
@@ -68,6 +85,7 @@ export default class ResultsItemDetails extends React.Component {
   render() {
     const { itemStore, onClose, t } = this.props
     const item = toJS(itemStore.item)
+    //console.log('render', this.IsFavorite)
     //for display
     const publishDate = setDateLabel(item.PublishDate, 'DD-MM-YYYY', t('tender.noDate'))
     const infoDate = setDateLabel(item.InfoDate, 'DD-MM-YYYY HH:mm', t('tender.noDate'))
@@ -145,9 +163,13 @@ export default class ResultsItemDetails extends React.Component {
                   {fileName != '' && <a onClick={() => this.props.showViewer(fileName, item.Title)}><img styleName="thender_thumb"  src={thumbSrc} /></a>}
                   <ul className="no-bullet" styleName="tender_actions">
                     {item.TenderLink && <li><a href={item.TenderLink} target="_blank">{t('tender.toTenderDetails')}</a></li>}
-                    <li><a onClick={this.print}>{t('tender.print')}</a></li>
+                    {fileName != '' && <li><a onClick={() => this.print(true)}>{t('tender.printImage')}</a></li>}
+                    <li><a onClick={() => this.print(false)}>{t('tender.print')}</a></li>
                     <li><a onClick={this.email}>{t('tender.email')}</a></li>
                     <li><a onClick={() => this.remind(true)}>{t('tender.remind')}</a></li>
+                    {!this.props.mode &&
+                      <li><a onClick={this.fav}>{this.IsFavorite ? t('tender.removeFromFav') : t('tender.addToFav')}</a></li>
+                    }
                   </ul>
                 </div>
               </div>
@@ -156,7 +178,7 @@ export default class ResultsItemDetails extends React.Component {
                   <span aria-hidden="true">&times;</span>
                 </button>
               }
-              <LikeItem />           
+              <LikeItem />
             </div>
           }
           {itemStore.resultsLoading && <div>Loading...</div>}

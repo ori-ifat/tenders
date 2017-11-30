@@ -181,6 +181,7 @@ export default class ResultsItem extends React.Component {
             itemID={item.TenderID}
             onClose={this.closeDetails}
             showViewer={this.showViewer}
+            onFav={onFav}
           />}
         {this.viewBig && this.showImage && logged &&
           <ImageView

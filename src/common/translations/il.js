@@ -70,12 +70,14 @@ export default {
     links: 'מסמכים מקושרים למכרז',
     toTenderDetails: 'למסמכי המכרז',
     print: 'הדפסה',
+    printImage: 'הדפסת תמונה',
     email: 'שלח במייל',
     remind: 'צור התראה',
     addReminder: 'הוסף תזכורת',
     didLike: 'מה דעתך על המכרז?',
     liked: 'בדיוק מה שחיפשתי',
-    disliked: 'לא מתאים לי'
+    disliked: 'לא מתאים לי',
+    sentFeedback: 'תודה על פנייתך'
   },
   toolbar: {
     selectedTenders: 'מכרזים נבחרו',

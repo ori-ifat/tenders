@@ -220,3 +220,10 @@ export function getFavorites({page, pageSize}) {
     }
   })
 }
+
+export function setFeedback(tenderID, feedback) {
+  return apiFetch('Tender/SetFeedback', {searchParams: {
+    InfoID: tenderID,
+    feedback
+  }} )
+}

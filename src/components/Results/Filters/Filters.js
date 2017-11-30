@@ -3,6 +3,8 @@ import { object, func } from 'prop-types'
 import { inject, observer } from 'mobx-react'
 import {observable, toJS} from 'mobx'
 import { translate } from 'react-polyglot'
+import find from 'lodash/find'
+import filter from 'lodash/filter'
 import MultipleFilter from './MultipleFilter'
 import TenderTypeFilter from './TenderTypeFilter'
 import DateFilter from './DateFilter'
@@ -21,6 +23,42 @@ export default class Filters extends React.Component {
     setSelected: func
   }
 
+  componentWillMount() {
+    //console.log('filters mount')
+  }
+
+  componentWillReceiveProps(nextProps) {
+    //console.log('filters receive')
+    const {searchStore} = this.props
+    //only if not committed: create a new filter from subsubject tags - to mark them on MultipleFilter
+    if (searchStore.filters.length == 0) {
+      //get current tags and check if there are subsubjects in it
+      const tags = filter(searchStore.tags, item => {
+        return item.ResType == 'subsubject'
+      })
+      //iterate on tags:
+      tags.map(tag => {
+        //check if a subsubject filter exists (may be from prev iteration)
+        let filter = find(searchStore.filters, item => {
+          return item.field == 'subsubject'
+        })
+
+        if (!filter) {
+          //create new
+          filter = {field: 'subsubject', values: [tag.ID]}
+        }
+        else {
+          //concat to values
+          if (!filter.values.includes(tag.ID)) filter.values.push(tag.ID)
+        }
+        //merge with current
+        const newFilters = [Object.assign({}, searchStore.filters, filter)]
+        //apply newFilters
+        const filters = JSON.stringify(newFilters)
+        searchStore.applyFilters(filters)
+      })}
+  }
+
   render() {
     const {searchStore, searchStore: {resultsLoading, filtersLoading}, setSelected, selectedFilters} = this.props
     //note: selectedFilters - should maintain the state of child filter components, after this component recreates;
@@ -31,7 +69,6 @@ export default class Filters extends React.Component {
     const dateValues = selectedFilters && selectedFilters.date ? selectedFilters.date[dateField] || [] : []
     const text = selectedFilters ? selectedFilters.searchText : ''
     //console.log('filters', toJS(searchStore.availableFilters))
-
     return(
       <div styleName="filter_container">
         {filtersLoading && <div>Loading...</div>}
