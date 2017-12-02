@@ -158,6 +158,7 @@ export default class ResultsItemDetails extends React.Component {
                       </div>
                     </div>)
                   }
+                  <LikeItem />
                 </div>
                 <div className="large-3 cell">
                   {fileName != '' && <a onClick={() => this.props.showViewer(fileName, item.Title)}><img styleName="thender_thumb"  src={thumbSrc} /></a>}
@@ -178,7 +179,7 @@ export default class ResultsItemDetails extends React.Component {
                   <span aria-hidden="true">&times;</span>
                 </button>
               }
-              <LikeItem />
+
             </div>
           }
           {itemStore.resultsLoading && <div>Loading...</div>}

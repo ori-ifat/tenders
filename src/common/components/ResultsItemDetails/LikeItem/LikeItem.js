@@ -31,11 +31,16 @@ export default class LikeItem extends React.Component {
             <div className="large-12 cell">{t('tender.sentFeedback')}</div>
           </div>
           :
-          <div className="grid-x" style={{paddingTop: '30px'}}>
-            <div className="large-6 cell">{t('tender.didLike')}</div>
+          <div className="grid-x" styleName="likeitem">
+            <div className="large-6 cell" styleName="text">
+              <p styleName="ttl">{t('tender.didLike')}</p>
+              <p styleName="sub">המידע יעזור לנו לשפר את הלהביא טקסט</p>
+            </div>
             <div className="large-6 cell">
-              <button styleName="button-like" onClick={() => this.likeTender(true)}>{t('tender.liked')}</button>
-              <button styleName="button-dislike" onClick={() => this.likeTender(false)}>{t('tender.disliked')}</button>
+              <div styleName="buttons">
+                <a className="button" styleName="button-like" onClick={() => this.likeTender(true)}>{t('tender.liked')}</a>
+                <a className="button" styleName="button-dislike" onClick={() => this.likeTender(false)}>{t('tender.disliked')}</a>
+              </div>
             </div>
           </div>
         }
