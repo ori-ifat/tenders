@@ -75,6 +75,7 @@ export default {
     remind: 'צור התראה',
     addReminder: 'הוסף תזכורת',
     didLike: 'מה דעתך על המכרז?',
+    didLikeSub: 'המידע יעזור לנו לשפר משהו',
     liked: 'בדיוק מה שחיפשתי',
     disliked: 'לא מתאים לי',
     sentFeedback: 'תודה על פנייתך'

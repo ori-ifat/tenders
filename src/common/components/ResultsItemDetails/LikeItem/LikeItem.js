@@ -26,24 +26,24 @@ export default class LikeItem extends React.Component {
     const {t} = this.props
     return (
       <div>
-        {this.sent ?
-          <div className="grid-x" style={{paddingTop: '30px'}}>
-            <div className="large-12 cell">{t('tender.sentFeedback')}</div>
-          </div>
-          :
-          <div className="grid-x" styleName="likeitem">
+        <div className="grid-x" styleName="likeitem">
+          {this.sent ?
+            <div className="large-6 cell" styleName="text">
+              <p styleName="ttl">{t('tender.sentFeedback')}</p>
+            </div>
+            :
             <div className="large-6 cell" styleName="text">
               <p styleName="ttl">{t('tender.didLike')}</p>
-              <p styleName="sub">המידע יעזור לנו לשפר את הלהביא טקסט</p>
+              <p styleName="sub">{t('tender.didLikeSub')}</p>
             </div>
-            <div className="large-6 cell">
-              <div styleName="buttons">
-                <a className="button" styleName="button-like" onClick={() => this.likeTender(true)}>{t('tender.liked')}</a>
-                <a className="button" styleName="button-dislike" onClick={() => this.likeTender(false)}>{t('tender.disliked')}</a>
-              </div>
+          }
+          <div className="large-6 cell">
+            <div styleName="buttons">
+              <a className="button" styleName="button-like" onClick={() => this.likeTender(true)}>{t('tender.liked')}</a>
+              <a className="button" styleName="button-dislike" onClick={() => this.likeTender(false)}>{t('tender.disliked')}</a>
             </div>
           </div>
-        }
+        </div>        
       </div>
     )
   }
