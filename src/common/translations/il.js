@@ -1,6 +1,6 @@
 export default {
   page404: 'מצטערים, הקישור שגוי',
-  loading: 'טוען...',
+  loading: 'מעדכן ...',
   AppTitle: 'מכרזים',
   login: {
     usernameLabel: 'שם משתמש',
