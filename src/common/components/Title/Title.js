@@ -21,7 +21,7 @@ export default class Title extends React.Component {
             <h1 styleName="results_summery"><span>{resultsCount}</span> {title} </h1>
           }
           {resultsLoading &&
-            <div>Loading...</div>
+            <h1 styleName="results_summery">{t('loading')}</h1>
           }
         </div>
 

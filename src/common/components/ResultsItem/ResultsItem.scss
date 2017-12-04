@@ -36,11 +36,11 @@
 
 .tender_summery:hover {
 	// border: 1px solid $green;
-	& .checkbox_continer {
-		background-color: #D7F5DD;
+	h3 {
+		color: $green;
 	}
 	.checkbox_continer {
-		background-color: #D8F5DE !important;
+		background-color: $green;
 	}
 	input[type="checkbox"]:after {
 		border: 2px solid $green;
@@ -64,6 +64,7 @@
 		color: $black;
 		line-height: 1.75rem;
 		font-weight: 500;
+		transition: all 0.25s;
 	}
 	p {
 		font-family: 'Heebo', sans-serif;

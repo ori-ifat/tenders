@@ -61,31 +61,33 @@ export default class Results extends Component {
         <SearchInput tags={toJS(tags)} />
         <div>
           <Title store={searchStore} />
-          <div className="row">
-            <div className="columns large-3">
-              <hr />
-              <Filters
-                setSelected={setSelectedFilters}
-                selectedFilters={selectedFilters}
-              />
-              <Banners />
-            </div>
-            <div className="columns large-9">
-              <hr />
-              {resultsLoading && <div>Loading...</div>}
-              {resultsCount == 0 && !resultsLoading && <NoData error={searchStore.searchError} />}
-              {resultsCount > 0 &&
-                <div>
-                  <ResultsActions />
-                  <List
-                    store={searchStore}
-                    loadMore={searchStore.loadNextResults}
-                    onCheck={onCheck}
-                    onFav={onFav}
-                    viewDetails={viewDetails}
-                    checkedItems={checkedItems} />
-                </div>
-              }
+          <div className="grid-container">
+            <div className="grid-x grid-padding-x">
+              <div className="cell large-3">
+                <hr />
+                <Filters
+                  setSelected={setSelectedFilters}
+                  selectedFilters={selectedFilters}
+                />
+                <Banners />
+              </div>
+              <div className="cell large-9">
+                <hr />
+                {resultsLoading && <div>Loading...</div>}
+                {resultsCount == 0 && !resultsLoading && <NoData error={searchStore.searchError} />}
+                {resultsCount > 0 &&
+                  <div>
+                    <ResultsActions />
+                    <List
+                      store={searchStore}
+                      loadMore={searchStore.loadNextResults}
+                      onCheck={onCheck}
+                      onFav={onFav}
+                      viewDetails={viewDetails}
+                      checkedItems={checkedItems} />
+                  </div>
+                }
+              </div>
             </div>
           </div>
         </div>
