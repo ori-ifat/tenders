@@ -116,7 +116,8 @@ export default {
     more: '...עוד',
     searchText: 'חפש בתוצאות',
     search: 'חפש',
-    selectAll: 'בחר הכל'
+    selectAll: 'בחר הכל',
+    noData: 'לא נמצאו תוצאות'
   },
   favorites: {
     title: 'מועדפים נמצאו'

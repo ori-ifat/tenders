@@ -6,6 +6,7 @@ import { translate } from 'react-polyglot'
 import find from 'lodash/find'
 import filter from 'lodash/filter'
 import MultipleFilter from './MultipleFilter'
+import ComboFilter from './ComboFilter'
 import TenderTypeFilter from './TenderTypeFilter'
 import DateFilter from './DateFilter'
 import SearchTextFilter from './SearchTextFilter'
@@ -83,11 +84,15 @@ export default class Filters extends React.Component {
             <TenderTypeFilter
               items={searchStore.availableFilters.TenderTypes}
             />
-            <MultipleFilter
+            {/*<MultipleFilter
               type="publishers"
               items={searchStore.availableFilters.Publishers}
               onClose={setSelected}
               label={publishers}
+            />*/}
+            <ComboFilter
+              type="publishers"
+              items={searchStore.availableFilters.Publishers}
             />
             <DateFilter
               dateField={dateField}
