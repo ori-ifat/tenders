@@ -4,6 +4,7 @@ import map from 'lodash/map'
 import filter from 'lodash/filter'
 import moment from 'moment'
 import {/*search*/ fetchResultsPage, fetchFilters } from 'common/services/apiService'
+import {getDefaultFilter} from 'common/utils/filter'
 
 const serializeTags = ({ID, Name, ResType}) => {
   return ResType.indexOf('_partial') > -1 ? {
@@ -50,16 +51,14 @@ class Search {
   @computed
   get serializedFilters() {
     const tags = toJS(this.tags)
-    let filters = toJS(this.filters)  //[{values:[129], field:'city'}, {values:[40046], field:'publisher'}] //test
+    let filters = toJS(this.filters)
     const reduced = filter(tags, tag => {
       return tag.ResType ==  'tender_partial'
     })
     //add date filter if partial search was done, or no tags have beed added (empty search)
     if (reduced.length > 0 || (tags.length == 0 && filters.length == 0)) {
-      const dateBack = moment().subtract(1, 'years').format('YYYY-MM-DD')
-      const field = tags.length == 0 && filters.length == 0 ? 'publishdate' : 'inputdate'
-      filters = [...filters, {field, values:[dateBack]}]
-      //console.log('filters', filters)
+      const filter = getDefaultFilter(tags.length == 0 && filters.length == 0)
+      filters = [...filters, filter]
     }
     return filters
   }
@@ -161,9 +160,15 @@ class Search {
     if (!this.filtersLoading) {
       this.filtersLoading = true
       this.filtersError = null
+      const tags = toJS(this.tags)
+      let filters = []  //no drilldown - from tags only
+      if (tags.length == 0) {
+        const filter = getDefaultFilter(true)
+        filters = [filter]
+      }
       const searchParams = {
         tags: this.serializedTags,
-        filters: [],  //no drilldown - from tags only
+        filters,
         sort: this.serializedSort
       }
 

@@ -27,8 +27,6 @@ import styles from './home.scss'
 export default class Home extends Component {
 
   static propTypes = {
-    setSelectedFilters: func,
-    selectedFilters: object,
     onCheck: func,
     onFav: func
   }
@@ -63,7 +61,7 @@ export default class Home extends Component {
               <Banner banner={toJS(homeStore.banner)} />
               <h6 styleName="more-tenders-title">{t('home.moreTenders')}</h6>
               <HomeList
-                items={homeStore.resultsMore}                
+                items={homeStore.resultsMore}
                 onFav={onFav}
               />
             </div>

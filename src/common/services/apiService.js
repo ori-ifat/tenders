@@ -228,9 +228,9 @@ export function setFeedback(tenderID, feedback) {
   }})
 }
 
-export function getExtraCount(tags) {
+export function getExtraCount(tags, filters) {
   return apiFetch('Search/RecCount', {searchParams: {
     tags,
-    filters: []
+    filters
   }})
 }

@@ -1,4 +1,5 @@
 import remove from 'lodash/remove'
+import moment from 'moment'
 
 export function doFilter(searchStore, field, values, itemLabels, onClose, closeModal) {
   //get current search params
@@ -34,4 +35,10 @@ export function doFilter(searchStore, field, values, itemLabels, onClose, closeM
     onClose(field, labels)
     closeModal()   //close modal.
   }
+}
+
+export function getDefaultFilter(isEmpty) {
+  const dateBack = moment().subtract(1, 'years').format('YYYY-MM-DD')
+  const field = isEmpty ? 'publishdate' : 'inputdate'
+  return {field, values:[dateBack]}
 }

@@ -1,9 +1,11 @@
 import React from 'react'
 import { number } from 'prop-types'
 import { inject, observer } from 'mobx-react'
-import { observable } from 'mobx'
+import { observable, toJS } from 'mobx'
 import { translate } from 'react-polyglot'
+import moment from 'moment'
 import { getExtraCount } from 'common/services/apiService'
+import { getDefaultFilter } from 'common/utils/filter'
 import CSSModules from 'react-css-modules'
 import styles from './ExtraCount.scss'
 
@@ -23,7 +25,13 @@ export default class ExtraCount extends React.Component {
   componentWillMount() {
     const { searchStore } = this.props
     this.loading = true
-    getExtraCount(searchStore.serializedTags).then(res => {
+    const tags = toJS(searchStore.tags)
+    let filters = []
+    if (tags.length == 0) {
+      const filter = getDefaultFilter(true)
+      filters = [filter]
+    }
+    getExtraCount(searchStore.serializedTags, filters).then(res => {
       this.extraCount = res
       this.loading = false
     })
