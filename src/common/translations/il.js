@@ -48,7 +48,8 @@ export default {
     publishDate: 'תאריך פרסום',
     noData: 'אין תוצאות להצגה',
     login: 'יש להתחבר למערכת',
-    error: 'חלה שגיאה בחיפוש, אנא נסה שנית'
+    error: 'חלה שגיאה בחיפוש, אנא נסה שנית',
+    extraData: '(כמנוי לכל הסיווגים, תקבל %{count})'
   },
   tender: {
     publishedAt: 'פורסם ב',
@@ -97,6 +98,7 @@ export default {
     delivery: 'הגשה ב-%{infoDateVal}',
     noDate: 'לא ידוע',
     remark: 'הערה',
+    email: 'מייל לתזכורת',
     cancel: 'בטל',
     delete: 'מחק',
     submit: 'שמור תזכורת'

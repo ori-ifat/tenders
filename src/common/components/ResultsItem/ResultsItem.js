@@ -1,11 +1,13 @@
 import React from 'react'
 import { object, func, bool } from 'prop-types'
 import { inject, observer } from 'mobx-react'
-import {observable} from 'mobx'
+import {observable, toJS} from 'mobx'
 import { translate } from 'react-polyglot'
 import {setDateLabel, isDateInRange} from 'common/utils/item'
 import {getImageUrl} from 'common/utils/util'
 import moment from 'moment'
+import find from 'lodash/find'
+import replace from 'lodash/replace'
 import Checkbox from 'common/components/Checkbox'
 import ResultsItemDetails from 'common/components/ResultsItemDetails'
 import ImageView from 'common/components/ImageView'
@@ -21,6 +23,7 @@ const favActSrc = req('./action_fav.svg')
 
 @translate()
 @inject('accountStore')
+@inject('searchStore')
 @CSSModules(styles, { allowMultiple: true })
 @observer
 export default class ResultsItem extends React.Component {
@@ -95,6 +98,22 @@ export default class ResultsItem extends React.Component {
     document.body.style.overflowY = 'visible'
   }
 
+  markUpText = text => {
+    /* highlight text if text search\text filter was made */
+    const {searchStore} = this.props
+    //get text filter or text tag
+    const filter = find(searchStore.filters, filter => {
+      return filter.field == 'searchtext'
+    })
+    const tag = find(searchStore.tags, tag => {
+      return tag.ResType == 'tender_partial'
+    })
+    //alter the text to inject as html
+    let fixedText = filter ? replace(text, new RegExp(filter.values[0], 'g'), `<span style="background-color: yellow">${filter.values[0]}</span>`) : text
+    fixedText = tag ? replace(fixedText, new RegExp(tag.Name, 'g'), `<span style="background-color: yellow">${tag.Name}</span>`): fixedText
+    return {__html: fixedText}
+  }
+
   remind = open => {
     const {accountStore} = this.props
     if (accountStore.profile) {
@@ -141,7 +160,7 @@ export default class ResultsItem extends React.Component {
               {oneDayLeftTour && <span styleName="label alert">{t('tender.oneDayLeftTour')}</span>}
               <h3 onClick={() => this.viewDetails(item.TenderID)} style={{cursor: 'pointer'}}>{item.Title}</h3>
               <div styleName="tender_desc">
-                <p>{item.Summery}</p>
+                <p dangerouslySetInnerHTML={this.markUpText(item.Summery)}></p>
               </div>
               <div className="tender_meta">
                 <span>{t('tender.publishedAt')}: {publishDate}</span>

@@ -5,6 +5,7 @@ import { observable } from 'mobx'
 import { translate } from 'react-polyglot'
 import moment from 'moment'
 import {setReminder, getReminder, clearCache} from 'common/services/apiService'
+import {getCookie, setCookie} from 'common/utils/cookies'
 import Calendar from 'common/components/Calendar'
 import CSSModules from 'react-css-modules'
 import styles from './Reminder.scss'
@@ -27,6 +28,7 @@ export default class Reminder extends Component {
   @observable time = '';
   @observable reminderDate;
   @observable remark = '';
+  @observable email = '';
   @observable reminderID = 0
 
   componentWillMount() {
@@ -43,6 +45,8 @@ export default class Reminder extends Component {
       this.reminderID = reminderID
       this.getReminderData(reminderID)
     }
+    const email = getCookie('userEmail')
+    this.email = email
   }
 
   componentWillReceiveProps(nextProps) {
@@ -74,6 +78,9 @@ export default class Reminder extends Component {
     case 'remark':
       this.remark = e.target.value
       break
+    case 'email':
+      this.email = e.target.value
+      break
     }
   }
 
@@ -87,11 +94,14 @@ export default class Reminder extends Component {
     const _date = moment(`${this.reminderDate} ${this.time}`, 'DD-MM-YYYY HH:mm').format('YYYY-MM-DD HH:mm:ss')
     //console.log(_date)
     const action = this.reminderID > 0 ? 'Update' : 'Add'
-    setReminder(action, this.reminderID, this.tenderID, this.remark, this.subject, _date).then(saved => {
+    setReminder(action, this.reminderID, this.tenderID, this.remark, this.subject, this.email, _date).then(saved => {
       console.log('saved status:', saved) //implement if user should know something about save op
       clearCache()
       this.props.onClose() //...close the modal
     })
+    if (this.email != '') {
+      setCookie('userEmail', this.email)
+    }
   }
 
   delReminder = () => {
@@ -106,7 +116,7 @@ export default class Reminder extends Component {
     const {onClose, infoDate, t} = this.props
     const title = this.subject
     const dateVal = moment(this.reminderDate, 'DD-MM-YYYY').format('DD-MM-YYYY')
-    const timeVal = moment(this.reminderDate, 'DD-MM-YYYY').format('HH:mm')
+    const timeVal = this.time != '' ? this.time : moment(this.reminderDate, 'DD-MM-YYYY').format('HH:mm')
     const infoDateVal = infoDate != null ? moment(infoDate, 'YYYY-MM-DD HH:mm:ss').format('DD-MM-YYYY') : t('reminder.noDate')
     //console.log('render reminder', this.reminderDate)
     return (
@@ -143,6 +153,13 @@ export default class Reminder extends Component {
             <div className="small-6 cell">
               <span>{t('reminder.time')}</span>
               <input type="text" name="time" value={timeVal} onChange={this.updateField} />
+            </div>
+          </div>
+
+          <div className="grid-x grid-margin-x" styleName="pb">
+            <div className="small-12 cell">
+              <span>{t('reminder.email')}</span>
+              <input type="email" name="email" value={this.email} onChange={this.updateField}/>
             </div>
           </div>
 

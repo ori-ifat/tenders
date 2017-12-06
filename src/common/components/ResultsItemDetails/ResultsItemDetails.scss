@@ -12,6 +12,11 @@
   padding: 0.5rem 1rem 0.5rem 3rem;
 }
 
+.item_ltr {
+  direction: ltr;
+  text-align: right;
+}
+
 .item_meta {
   font-family: 'Heebo', sans-serif;
   margin-bottom: 1rem;

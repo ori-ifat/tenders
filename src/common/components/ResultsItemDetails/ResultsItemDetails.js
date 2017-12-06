@@ -87,8 +87,10 @@ export default class ResultsItemDetails extends React.Component {
     const item = toJS(itemStore.item)
     //console.log('render', this.IsFavorite)
     //for display
-    const publishDate = setDateLabel(item.PublishDate, 'DD-MM-YYYY', t('tender.noDate'))
-    const infoDate = setDateLabel(item.InfoDate, 'DD-MM-YYYY HH:mm', t('tender.noDate'))
+    const publishDate = setDateLabel(item.PublishDate, 'DD/MM/YYYY', t('tender.noDate'))
+    const infoDateChk = moment(item.InfoDate)
+    const format = infoDateChk.hour() == 0 && infoDateChk.minute() == 0 ? 'DD/MM/YYYY' : 'DD/MM/YYYY HH:mm'
+    const infoDate = setDateLabel(item.InfoDate, format, t('tender.noDate'))
     //
     //infoDate
     const twoDaysLeft = isDateInRange(item.InfoDate, 2)
@@ -124,7 +126,7 @@ export default class ResultsItemDetails extends React.Component {
               <div className="grid-x" styleName="tender_data">
                 <div className="large-9 cell">
                   <Row label={t('tender.publisher')} data={item.Publisher} />
-                  <Row label={t('tender.delivery')} data={infoDate} />
+                  <Row label={t('tender.delivery')} data={infoDate} dir="ltr" />
                   <Row label={t('tender.details')} data={item.Summery} />
                   {
                     item.Comment && item.Comment.trim() != '' &&

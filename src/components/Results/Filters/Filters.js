@@ -84,16 +84,16 @@ export default class Filters extends React.Component {
             <TenderTypeFilter
               items={searchStore.availableFilters.TenderTypes}
             />
-            {/*<MultipleFilter
+            <MultipleFilter
               type="publishers"
               items={searchStore.availableFilters.Publishers}
               onClose={setSelected}
               label={publishers}
-            />*/}
-            <ComboFilter
+            />
+            {/*<ComboFilter
               type="publishers"
               items={searchStore.availableFilters.Publishers}
-            />
+            />*/}
             <DateFilter
               dateField={dateField}
               dateValues={dateValues}
