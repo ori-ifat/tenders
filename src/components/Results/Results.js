@@ -4,7 +4,7 @@ import {inject, observer} from 'mobx-react'
 import {observable, toJS} from 'mobx'
 import { whenRouted } from 'common/utils/withRouteHooks'
 import { withRouter } from 'react-router'
-import { searchStore } from 'stores'
+import { searchStore, recordStore } from 'stores'
 import SearchInput from 'common/components/SearchInput'
 import Title from 'common/components/Title'
 import ResultsActions from './ResultsActions'
@@ -20,25 +20,23 @@ import styles from './results.scss'
   searchStore.applySort(sort)
   searchStore.applyTags(tags)
   searchStore.applyFilters(filters)
+  recordStore.cleanChecked()
   searchStore.clearResults()
   searchStore.loadNextResults()
   searchStore.loadNextFilters()
 })
 @inject('searchStore')
 @inject('accountStore')
+@inject('recordStore')
 @CSSModules(styles)
 @observer
 export default class Results extends Component {
 
   static propTypes = {
-    cleanChecked: func,
     setSelectedFilters: func,
     selectedFilters: object,
     onCheck: func,
-    onFav: func,
-    viewDetails: func,
-    setReminder: func,
-    checkedItems: object
+    onFav: func
   }
 
   componentWillMount() {
@@ -53,8 +51,8 @@ export default class Results extends Component {
   render() {
 
     const {accountStore, searchStore, searchStore: {resultsLoading, resultsCount, tags}} = this.props
-    const {setSelectedFilters, selectedFilters, onCheck, onFav, viewDetails} = this.props
-    const {checkedItems} = this.props
+    const {setSelectedFilters, selectedFilters, onCheck, onFav} = this.props
+    const {recordStore: {checkedItems}} = this.props
 
     return (
       <div style={{marginTop: '50px'}}>
@@ -83,7 +81,6 @@ export default class Results extends Component {
                       loadMore={searchStore.loadNextResults}
                       onCheck={onCheck}
                       onFav={onFav}
-                      viewDetails={viewDetails}
                       checkedItems={checkedItems} />
                   </div>
                 }

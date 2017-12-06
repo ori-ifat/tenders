@@ -18,7 +18,6 @@ export default class List extends React.Component {
     loadMore: func,
     onCheck: func,
     onFav: func,
-    viewDetails: func,
     checkedItems: object
   }
 
@@ -36,8 +35,7 @@ export default class List extends React.Component {
 
       return <ResultsItem
         key={index}
-        item={item}
-        onClick={this.props.viewDetails}
+        item={item}        
         onCheck={this.props.onCheck}
         onFav={this.props.onFav}
         checked={checked}

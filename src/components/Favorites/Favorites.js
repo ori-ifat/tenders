@@ -20,19 +20,14 @@ import styles from './favorites.scss'
 })
 @inject('favoritesStore')
 @inject('accountStore')
+@inject('recordStore')
 @CSSModules(styles)
 @observer
 export default class Favorites extends Component {
 
   static propTypes = {
-    cleanChecked: func,
-    setSelectedFilters: func,
-    selectedFilters: object,
     onCheck: func,
-    onFav: func,
-    viewDetails: func,
-    setReminder: func,
-    checkedItems: object
+    onFav: func
   }
 
   componentWillMount() {
@@ -47,7 +42,7 @@ export default class Favorites extends Component {
   render() {
 
     const {accountStore, favoritesStore, favoritesStore: {resultsLoading, resultsCount, tags}} = this.props
-    const {onCheck, onFav, viewDetails, checkedItems} = this.props
+    const {onCheck, onFav, recordStore: {checkedItems}} = this.props
 
     return (
       <div style={{marginTop: '50px'}}>
@@ -65,8 +60,7 @@ export default class Favorites extends Component {
                   store={favoritesStore}
                   loadMore={favoritesStore.loadNextResults}
                   onCheck={onCheck}
-                  onFav={onFav}
-                  viewDetails={viewDetails}
+                  onFav={onFav}                  
                   checkedItems={checkedItems} />
               </div>
             </div>

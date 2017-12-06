@@ -1,5 +1,5 @@
 import React from 'react'
-import { object, func } from 'prop-types'
+//import { object, func } from 'prop-types'
 import { inject, observer } from 'mobx-react'
 import { observable } from 'mobx'
 import { translate } from 'react-polyglot'
@@ -17,10 +17,11 @@ const actionFavSrc = req('./action_fav.svg')
 
 @translate()
 @inject('accountStore')
+@inject('recordStore')
 @CSSModules(styles, {allowMultiple: true})
 @observer
 export default class Toolbar extends React.Component {
-
+/*
   static propTypes = {
     checkedItems: object,
     onClose: func,
@@ -29,19 +30,20 @@ export default class Toolbar extends React.Component {
     push: func,
     cut: func
   }
-
+*/
   @observable showLoginMsg = false
 
   email = () => {
     /* send email with url to selected tenders */
-    const {accountStore, extractItems, onClose, t} = this.props
+    const {accountStore, recordStore, t} = this.props
     if (accountStore.profile) {
-      const itemsToAdd = extractItems()
+      const itemsToAdd = recordStore.extractItems()
       getEmailData(itemsToAdd).then(uid =>
         //console.log('email', uid)
         location.href = `mailto:someone@email.com?subject=${t('toolbar.emailSubject')}&body=${encodeURIComponent(t('toolbar.emailBody', {uid}))}`
       )
-      onClose()
+      //onClose()
+      recordStore.cleanChecked()
     }
     else {
       this.showLoginMsg = true
@@ -50,14 +52,15 @@ export default class Toolbar extends React.Component {
 
   print = () => {
     /* create pdf from selected tenders */
-    const {accountStore, extractItems, onClose} = this.props
+    const {accountStore, recordStore} = this.props
     if (accountStore.profile) {
-      const itemsToAdd = extractItems()
+      const itemsToAdd = recordStore.extractItems()
       window.open(createUrl('Export/ExportData', {
         ExportType: 1,
         InfoList: itemsToAdd
       }, false), '_blank')
-      onClose()
+      //onClose()
+      recordStore.cleanChecked()
     }
     else {
       this.showLoginMsg = true
@@ -66,25 +69,26 @@ export default class Toolbar extends React.Component {
 
   addFavorites = () => {
     /* add selected tenders to favorites */
-    const {accountStore, extractItems, onClose, isInChecked, push, cut} = this.props
+    const {accountStore, recordStore} = this.props
     if (accountStore.profile) {
-      const itemsToAdd = extractItems()
+      const itemsToAdd = recordStore.extractItems()
       //iterate over the relevant items, and change IsFavorite state on original array
       //(this will cause the list to re-render, and show fav state on ResultsItem)
       itemsToAdd.map(tenderID => {
-        const found = isInChecked(tenderID)
+        const found = recordStore.isInChecked(tenderID)
         //if (found) {
         //old way...: if item is in checkedItems array, need to update its fav state
         //new way: add it anyway because it was touched
-        cut(tenderID)
+        recordStore.cut(tenderID)
         //add the item again with new fav state
-        push((found && found.checked) || false, tenderID, true)
+        recordStore.push((found && found.checked) || false, tenderID, true)
         //}
       })
       //call api with items and add action
       addToFavorites('Favorite_add', itemsToAdd)
       clearCache()
-      onClose()
+      //onClose()
+      recordStore.cleanChecked()
     }
     else {
       this.showLoginMsg = true
@@ -96,7 +100,7 @@ export default class Toolbar extends React.Component {
   }
 
   render() {
-    const {checkedItems, t} = this.props
+    const {recordStore: {checkedItems}, t} = this.props
     const relevantItems = checkedItems.filter(item => item.checked || false)
     const toolBarStyle = relevantItems.length > 0 ? 'action_bar active' : 'action_bar'
     return (

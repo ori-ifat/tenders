@@ -29,7 +29,6 @@ const favActSrc = req('./action_fav.svg')
 export default class ResultsItem extends React.Component {
   static propTypes = {
     item: object,
-    onClick: func,
     onCheck: func,
     onFav: func,
     setReminder: func,
@@ -133,7 +132,7 @@ export default class ResultsItem extends React.Component {
   }
 
   render() {
-    const { accountStore, item, onClick, onCheck, checked, onFav, t } = this.props
+    const { accountStore, item, onCheck, checked, onFav, t } = this.props
     const cbItem = Object.assign({}, item, {checked, IsFavorite: this.IsFavorite}) //merge this.IsFavorite to current item
     //if logged:
     const logged = accountStore.profile ? true : false

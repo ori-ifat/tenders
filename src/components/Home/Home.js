@@ -21,19 +21,16 @@ import styles from './home.scss'
 })
 @inject('homeStore')
 @inject('accountStore')
+@inject('recordStore')
 @CSSModules(styles)
 @observer
 export default class Home extends Component {
 
   static propTypes = {
-    cleanChecked: func,
     setSelectedFilters: func,
     selectedFilters: object,
     onCheck: func,
-    onFav: func,
-    viewDetails: func,
-    setReminder: func,
-    checkedItems: object
+    onFav: func
   }
 
   componentWillMount() {
@@ -47,8 +44,8 @@ export default class Home extends Component {
 
   render() {
     const { homeStore, t } = this.props
-    const {onCheck, onFav, viewDetails} = this.props
-    const {checkedItems} = this.props
+    const {onCheck, onFav} = this.props
+    const {recordStore: {checkedItems}} = this.props
 
     return (
       <div>
@@ -61,14 +58,12 @@ export default class Home extends Component {
                 items={homeStore.results}
                 onCheck={onCheck}
                 onFav={onFav}
-                viewDetails={viewDetails}
                 checkedItems={checkedItems}
               />
               <Banner banner={toJS(homeStore.banner)} />
               <h6 styleName="more-tenders-title">{t('home.moreTenders')}</h6>
               <HomeList
-                items={homeStore.resultsMore}
-                viewDetails={viewDetails}
+                items={homeStore.resultsMore}                
                 onFav={onFav}
               />
             </div>
