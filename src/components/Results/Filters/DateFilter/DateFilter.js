@@ -1,5 +1,5 @@
 import React from 'react'
-import { string, array, object, func } from 'prop-types'
+import { string, array } from 'prop-types'
 import { inject, observer } from 'mobx-react'
 import {observable, toJS} from 'mobx'
 import { translate } from 'react-polyglot'
@@ -18,8 +18,7 @@ export default class DateFilter extends React.Component {
 
   static propTypes = {
     dateField: string,
-    dateValues: array,
-    onSubmit: func
+    dateValues: array
   }
 
   @observable dateField = 'publishdate'
@@ -63,15 +62,17 @@ export default class DateFilter extends React.Component {
 
   doFilter = () => {
     //filter commit
-    const { searchStore, onSubmit } = this.props
+    const { searchStore, t } = this.props
     const values = [
       moment(this.startDate).format('YYYY-MM-DD'),
       moment(this.endDate).format('YYYY-MM-DD')
     ]
     doFilter(searchStore, this.dateField, values)
     //set the state-like object:
-    onSubmit('dateField', this.dateField) //...the date field name,
-    onSubmit(this.dateField, values)  //the actual values
+    //...the date field name,
+    searchStore.setSelectedFilters('dateField', this.dateField, t('filter.more'))
+    //the actual values
+    searchStore.setSelectedFilters(this.dateField, values, t('filter.more'))
   }
 
   render() {

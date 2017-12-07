@@ -1,5 +1,5 @@
 import React from 'react'
-import { object, func } from 'prop-types'
+//import { object, func } from 'prop-types'
 import { inject, observer } from 'mobx-react'
 import {observable, toJS} from 'mobx'
 import { translate } from 'react-polyglot'
@@ -19,11 +19,12 @@ import styles from './Filters.scss'
 @observer
 export default class Filters extends React.Component {
 
+  /*
   static propTypes = {
     selectedFilters: object,
     setSelected: func
   }
-
+  */
   componentWillMount() {
     //console.log('filters mount')
   }
@@ -57,13 +58,13 @@ export default class Filters extends React.Component {
         //apply newFilters
         const filters = JSON.stringify(newFilters)
         searchStore.applyFilters(filters)
-      })}
+      })
+    }
   }
 
   render() {
-    const {searchStore, searchStore: {resultsLoading, filtersLoading}, setSelected, selectedFilters} = this.props
-    //note: selectedFilters - should maintain the state of child filter components, after this component recreates;
-    //setSelected: a func on Results component that sets it
+    const {searchStore, searchStore: {resultsLoading, filtersLoading, selectedFilters}} = this.props
+    //note: selectedFilters - should maintain the state of child filter components, after this component recreates;    
     const subsubjects = selectedFilters ? selectedFilters.subsubjects : ''
     const publishers = selectedFilters ? selectedFilters.publishers : ''
     const dateField = selectedFilters ? selectedFilters.dateField || 'publishdate' : 'publishdate'
@@ -78,7 +79,6 @@ export default class Filters extends React.Component {
             <MultipleFilter
               type="subsubjects"
               items={searchStore.availableFilters.SubSubjects}
-              onClose={setSelected}
               label={subsubjects}
             />
             <TenderTypeFilter
@@ -87,7 +87,6 @@ export default class Filters extends React.Component {
             <MultipleFilter
               type="publishers"
               items={searchStore.availableFilters.Publishers}
-              onClose={setSelected}
               label={publishers}
             />
             {/*<ComboFilter
@@ -97,7 +96,6 @@ export default class Filters extends React.Component {
             <DateFilter
               dateField={dateField}
               dateValues={dateValues}
-              onSubmit={setSelected}
             />
             <SearchTextFilter
               text={text}

@@ -28,16 +28,7 @@ export default class Favorites extends Component {
   static propTypes = {
     onCheck: func,
     onFav: func
-  }
-
-  componentWillMount() {
-    //console.log('mount')
-  }
-
-  componentWillReceiveProps(nextProps, nextState) {
-    //console.log('receive props')
-    //this.props.cleanChecked()
-  }
+  }  
 
   render() {
 
@@ -60,7 +51,7 @@ export default class Favorites extends Component {
                   store={favoritesStore}
                   loadMore={favoritesStore.loadNextResults}
                   onCheck={onCheck}
-                  onFav={onFav}                  
+                  onFav={onFav}
                   checkedItems={checkedItems} />
               </div>
             </div>

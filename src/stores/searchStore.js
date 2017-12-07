@@ -3,6 +3,7 @@ import isObject from 'lodash/isObject'
 import map from 'lodash/map'
 import filter from 'lodash/filter'
 import moment from 'moment'
+import {extractLabel} from 'common/utils/util'
 import {/*search*/ fetchResultsPage, fetchFilters } from 'common/services/apiService'
 import {getDefaultFilter} from 'common/utils/filter'
 
@@ -19,6 +20,7 @@ const serializeTags = ({ID, Name, ResType}) => {
 class Search {
   @observable filters = []; //chosen filters from filters component
   @observable availableFilters = [];  //all relevant filters;
+  @observable selectedFilters = {};   //labels for the filters component
   @observable tags = [];
   @observable sort = 'publishDate'
   @observable resultsLoading = false
@@ -93,6 +95,42 @@ class Search {
       //implement error handle
       console.error('[searchStore]applyTags', 'could not load tags from query')
     }
+  }
+
+  @action.bound
+  setSelectedFilters(label, value, more) {
+    /* set the selectedFilters object - a state-like object for the filter container.
+      need that because the entire object is recreated upon filter commit action */
+    switch (label) {
+    case 'subsubject':
+      Reflect.deleteProperty(this.selectedFilters, 'subsubjects')   //note equals to delete this.selectedFilters.prop ...
+      const subsubjects = extractLabel(value, more)
+      this.selectedFilters.subsubjects = subsubjects
+      break
+    case 'publisher':
+      Reflect.deleteProperty(this.selectedFilters, 'publishers')
+      const publishers = extractLabel(value, more)
+      this.selectedFilters.publishers = publishers
+      break
+    case 'dateField':
+      Reflect.deleteProperty(this.selectedFilters, 'dateField')
+      this.selectedFilters.dateField = value
+      break
+    case 'publishdate':
+    case 'infodate':
+      Reflect.deleteProperty(this.selectedFilters, 'date')
+      this.selectedFilters.date = { [label]: value }
+      break
+    case 'searchText':
+      Reflect.deleteProperty(this.selectedFilters, 'searchText')
+      this.selectedFilters.searchText = value
+      break
+    }
+  }
+
+  @action.bound
+  clearFilterLabels() {
+    this.selectedFilters = {}
   }
 
   @action.bound

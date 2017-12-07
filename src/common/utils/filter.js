@@ -1,7 +1,7 @@
 import remove from 'lodash/remove'
 import moment from 'moment'
 
-export function doFilter(searchStore, field, values, itemLabels, onClose, closeModal) {
+export function doFilter(searchStore, field, values, itemLabels, close, closeModal, more) {
   //get current search params
   const sort = searchStore.sort
   const payload = JSON.stringify(searchStore.tags)
@@ -30,9 +30,10 @@ export function doFilter(searchStore, field, values, itemLabels, onClose, closeM
   searchStore.clearResults()
   searchStore.loadNextResults()
   //fix the labels for filter view
-  if (onClose) {
+  if (close) {
     const labels = itemLabels.join(',')
-    onClose(field, labels)
+    //onClose(field, labels)
+    searchStore.setSelectedFilters(field, labels, more)
     closeModal()   //close modal.
   }
 }

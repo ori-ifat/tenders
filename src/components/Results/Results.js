@@ -1,5 +1,5 @@
 import React, {Component} from 'react'
-import { object, func } from 'prop-types'
+import { func } from 'prop-types'
 import {inject, observer} from 'mobx-react'
 import {observable, toJS} from 'mobx'
 import { whenRouted } from 'common/utils/withRouteHooks'
@@ -19,6 +19,7 @@ import styles from './results.scss'
 @whenRouted(({ params: { sort, tags, filters } }) => {
   searchStore.applySort(sort)
   searchStore.applyTags(tags)
+  searchStore.clearFilterLabels()
   searchStore.applyFilters(filters)
   recordStore.cleanChecked()
   searchStore.clearResults()
@@ -33,25 +34,14 @@ import styles from './results.scss'
 export default class Results extends Component {
 
   static propTypes = {
-    setSelectedFilters: func,
-    selectedFilters: object,
     onCheck: func,
     onFav: func
-  }
-
-  componentWillMount() {
-    //console.log('mount')
-  }
-
-  componentWillReceiveProps(nextProps, nextState) {
-    //console.log('receive props')
-    //this.props.cleanChecked()
   }
 
   render() {
 
     const {accountStore, searchStore, searchStore: {resultsLoading, resultsCount, tags}} = this.props
-    const {setSelectedFilters, selectedFilters, onCheck, onFav} = this.props
+    const {onCheck, onFav} = this.props
     const {recordStore: {checkedItems}} = this.props
 
     return (
@@ -63,10 +53,7 @@ export default class Results extends Component {
             <div className="grid-x grid-padding-x">
               <div className="cell large-3">
                 <hr />
-                <Filters
-                  setSelected={setSelectedFilters}
-                  selectedFilters={selectedFilters}
-                />
+                <Filters />
                 <Banners />
               </div>
               <div className="cell large-9">

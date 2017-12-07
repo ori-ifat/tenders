@@ -1,5 +1,5 @@
 import React from 'react'
-import { string, object, func } from 'prop-types'
+import { string, object } from 'prop-types'
 import { inject, observer } from 'mobx-react'
 import {observable, toJS} from 'mobx'
 import { translate } from 'react-polyglot'
@@ -25,8 +25,7 @@ export default class MultipleFilter extends React.Component {
   static propTypes = {
     type: string,
     items: object,
-    label: string,
-    onClose: func
+    label: string
   }
 
   @observable open = false
@@ -56,7 +55,7 @@ export default class MultipleFilter extends React.Component {
   checkSubsubjects = () => {
     //check if store filters contain subsubject filter
     if (this.type == 'subsubjects') {
-      const {searchStore, onClose} = this.props
+      const {searchStore, t} = this.props
       //find it on current filters
       const filter = find(searchStore.filters, item => {
         return item.field == 'subsubject'
@@ -75,7 +74,8 @@ export default class MultipleFilter extends React.Component {
               this.itemLabels.push(found.SubSubjectName)
               const labels = this.itemLabels.join(',')
               //update the 'selectedFilters' object on wrapper
-              onClose('subsubject', labels)
+              //onClose('subsubject', labels)
+              searchStore.setSelectedFilters('subsubject', labels, t('filter.more'))
               //update current label - somehow it is not affected
               this.label = labels
             }
@@ -95,9 +95,9 @@ export default class MultipleFilter extends React.Component {
 
   doFilter = () => {
     //commit filters
-    const { searchStore, onClose } = this.props
+    const { searchStore, t } = this.props
     const field = this.type == 'subsubjects' ? 'subsubject' : 'publisher'
-    doFilter(searchStore, field, this.selected, this.itemLabels, onClose, this.closeModal)
+    doFilter(searchStore, field, this.selected, this.itemLabels, true, this.closeModal, t('filter.more'))
   }
 
   filterItems = e => {

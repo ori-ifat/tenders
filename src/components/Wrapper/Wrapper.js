@@ -2,7 +2,7 @@ import React, {Component} from 'react'
 import {inject, observer} from 'mobx-react'
 import {observable, toJS} from 'mobx'
 import { searchStore, accountStore } from 'stores'
-import {setCheckedStatus, setFavStatus, extractLabel} from 'common/utils/util'
+import {setCheckedStatus, setFavStatus /*, extractLabel*/} from 'common/utils/util'
 import { translate } from 'react-polyglot'
 import Home from 'components/Home'
 import Results from 'components/Results'
@@ -19,11 +19,11 @@ import styles from './wrapper.scss'
 @observer
 export default class Wrapper extends Component {
 
-  @observable selectedFilters = {}
+  //@observable selectedFilters = {}
 
   onCheck = (checked, value, isFavorite) => {
     const {recordStore} = this.props
-    setCheckedStatus(checked, value, isFavorite, recordStore.push, recordStore.cut)    
+    setCheckedStatus(checked, value, isFavorite, recordStore.push, recordStore.cut)
   }
 
   onFav = (tenderID, add) => {
@@ -36,9 +36,10 @@ export default class Wrapper extends Component {
     }
   }
 
+  /*
   setSelectedFilters = (label, value) => {
     /* set the selectedFilters object - a state-like object for the filter container.
-      need that because the entire object is recreated upon filter commit action */
+      need that because the entire object is recreated upon filter commit action * /
     const {t} = this.props
     switch (label) {
     case 'subsubject':
@@ -71,7 +72,7 @@ export default class Wrapper extends Component {
       break
     }
     //console.log(this.selectedFilters)
-  }
+  }*/
 
   render() {
     const {use} = this.props
@@ -84,8 +85,6 @@ export default class Wrapper extends Component {
     return (
       <div>
         <Component
-          setSelectedFilters={this.setSelectedFilters}
-          selectedFilters={this.selectedFilters}
           onCheck={this.onCheck}
           onFav={this.onFav}
         />
