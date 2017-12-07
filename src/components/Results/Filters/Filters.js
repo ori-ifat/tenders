@@ -25,6 +25,7 @@ export default class Filters extends React.Component {
     setSelected: func
   }
   */
+
   componentWillMount() {
     //console.log('filters mount')
   }
@@ -62,9 +63,18 @@ export default class Filters extends React.Component {
     }
   }
 
+  cleanFilters = () => {
+    const {searchStore} = this.props
+    searchStore.filters.clear()
+    searchStore.clearFilterLabels()
+    searchStore.clearResults()
+    searchStore.loadNextResults()
+    searchStore.loadNextFilters() //cached, but will allow filters to be unchecked on child components
+  }
+
   render() {
     const {searchStore, searchStore: {resultsLoading, filtersLoading, selectedFilters}} = this.props
-    //note: selectedFilters - should maintain the state of child filter components, after this component recreates;    
+    //note: selectedFilters - should maintain the state of child filter components, after this component recreates;
     const subsubjects = selectedFilters ? selectedFilters.subsubjects : ''
     const publishers = selectedFilters ? selectedFilters.publishers : ''
     const dateField = selectedFilters ? selectedFilters.dateField || 'publishdate' : 'publishdate'
@@ -100,6 +110,7 @@ export default class Filters extends React.Component {
             <SearchTextFilter
               text={text}
             />
+            <a onClick={this.cleanFilters}>Clean</a>
           </div>
         }
       </div>
