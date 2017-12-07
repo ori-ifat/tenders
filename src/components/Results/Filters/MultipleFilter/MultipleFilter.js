@@ -6,6 +6,7 @@ import { translate } from 'react-polyglot'
 import filter from 'lodash/filter'
 import find from 'lodash/find'
 import remove from 'lodash/remove'
+import take from 'lodash/take'
 import {doFilter} from 'common/utils/filter'
 import CSSModules from 'react-css-modules'
 import styles from './MultipleFilter.scss'
@@ -47,7 +48,20 @@ export default class MultipleFilter extends React.Component {
   componentWillReceiveProps(nextProps) {
     const {type, items, label} = nextProps
     this.type = type
-    this.items = items
+    //this.items = items
+    //place checked items on top:
+    const checked = filter(items, item => {
+      return this.type == 'subsubjects' ?
+        this.selected.includes(item.SubSubjectID) :
+        this.selected.includes(item.PublisherID)
+    }) //<- selected items
+    const unchecked = filter(items, item => {
+      return this.type == 'subsubjects' ?
+        !this.selected.includes(item.SubSubjectID) :
+        !this.selected.includes(item.PublisherID)
+    })  //<- the rest
+    //concat:
+    this.items = [...checked, ...unchecked]
     this.label = label
     this.checkSubsubjects()
   }
@@ -188,9 +202,13 @@ export default class MultipleFilter extends React.Component {
                 </div>
                 <div>
                   {
-                    this.itemLabels.map((item, index) =>
+                    take(this.itemLabels, 2).map((item, index) =>
                       <div key={index} styleName="selected-tile">{item}</div>
                     )
+                  }
+                  {
+                    this.itemLabels.length > 2 &&
+                      <div styleName="selected-tile">{t('filter.more')}</div>
                   }
                 </div>
                 <div styleName="button-container">
