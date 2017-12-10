@@ -1,6 +1,8 @@
 import React from 'react'
 import { Redirect, Route, Switch } from 'react-router-dom'
+import { accountStore } from 'stores'
 import Topbar from 'app/components/Topbar'
+import HomePage from 'pages/home'
 import SearchPage from 'pages/search'
 import ResultsPage from 'pages/results'
 import MainPage from 'pages/main'
@@ -9,9 +11,8 @@ import FavoritesPage from 'pages/favorites'
 import NotFound404 from 'pages/notFound404'
 
 class Pages extends React.Component {
-  ensureAuthentication(Component) {
-    //return http.isAuthenticated ? <Component /> : <Redirect to="/login" />
-    return <Component />
+  ensureAuthentication(Component) {    
+    return accountStore.profile ? <Component /> : <Redirect to="/home" />
   }
 
   render() {
@@ -20,7 +21,10 @@ class Pages extends React.Component {
         <Topbar />
         <Switch>
           <Route exact path="/">
-            <Redirect to="/main" />
+            <Redirect to="/home" />
+          </Route>
+          <Route path="/home">
+            <HomePage />
           </Route>
           <Route path="/main">
             {this.ensureAuthentication(MainPage)}
@@ -29,7 +33,7 @@ class Pages extends React.Component {
             {this.ensureAuthentication(SearchPage)}
           </Route>
           <Route path="/results/:sort/:tags/:filters">
-            {this.ensureAuthentication(ResultsPage)}
+            <ResultsPage />
           </Route>
           <Route path="/tender/:itemId">
             {this.ensureAuthentication(TenderPage)}
@@ -38,7 +42,7 @@ class Pages extends React.Component {
             {this.ensureAuthentication(FavoritesPage)}
           </Route>
           <Route>
-            {this.ensureAuthentication(NotFound404)}
+            <NotFound404 />
           </Route>
         </Switch>
       </section>
