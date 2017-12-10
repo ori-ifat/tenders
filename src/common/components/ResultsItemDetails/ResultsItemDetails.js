@@ -82,6 +82,13 @@ export default class ResultsItemDetails extends React.Component {
     this.remindMe = open
   }
 
+  formatText = text => {
+    //<a> tag fix
+    const fixedText = text.replace(/((https|http):\/\/)?(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)/,
+      '<a target="_blank" href="\$&">\$&</a>')
+    return {__html: fixedText}
+  }
+
   render() {
     const { itemStore, onClose, t } = this.props
     const item = toJS(itemStore.item)
@@ -127,10 +134,10 @@ export default class ResultsItemDetails extends React.Component {
                 <div className="large-9 cell">
                   <Row label={t('tender.publisher')} data={item.Publisher} />
                   <Row label={t('tender.delivery')} data={infoDate} dir="ltr" />
-                  <Row label={t('tender.details')} data={item.Summery} />
+                  <Row label={t('tender.details')} html={this.formatText(item.Summery)} />
                   {
                     item.Comment && item.Comment.trim() != '' &&
-                    <Row label={t('tender.comment')} data={item.Comment} />
+                    <Row label={t('tender.comment')} html={this.formatText(item.Comment)} />
                   }
                   {
                     item.TourDetails && item.TourDetails.trim() != '' &&

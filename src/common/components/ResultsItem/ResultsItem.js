@@ -157,10 +157,15 @@ export default class ResultsItem extends React.Component {
               {oneDayLeft && <span styleName="label alert">{t('tender.oneDayLeft')}</span>}
               {twoDaysLeftTour && !oneDayLeftTour && <span styleName="label alert">{t('tender.twoDaysLeftTour')}</span>}
               {oneDayLeftTour && <span styleName="label alert">{t('tender.oneDayLeftTour')}</span>}
-              <h3 onClick={() => this.viewDetails(item.TenderID)} style={{cursor: 'pointer'}}>{item.Title}</h3>
-              <div styleName="tender_desc">
-                <p dangerouslySetInnerHTML={this.markUpText(item.Summery)}></p>
-              </div>
+              <h3
+                onClick={() => this.viewDetails(item.TenderID)}                
+                styleName="item-title"
+                dangerouslySetInnerHTML={this.markUpText(item.Title)}></h3>
+              { logged &&
+                <div styleName="tender_desc">
+                  <p dangerouslySetInnerHTML={this.markUpText(item.Summery)}></p>
+                </div>
+              }
               <div className="tender_meta">
                 <span>{t('tender.publishedAt')}: {publishDate}</span>
                 <span styleName="divider">•</span>

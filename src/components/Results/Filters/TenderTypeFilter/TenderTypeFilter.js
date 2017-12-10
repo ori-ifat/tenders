@@ -22,6 +22,7 @@ export default class TenderTypeFilter extends React.Component {
 
   @observable items = []
   @observable selected = []
+  searching = false
 
   componentWillMount() {
     const {items, searchStore} = this.props
@@ -67,14 +68,23 @@ export default class TenderTypeFilter extends React.Component {
       })
     }
     //console.log(toJS(this.selected))
-    this.doFilter()
+    //solve performance problem: raise search flag and setTimeout for filter commit action
+    if (!this.searching) {
+      this.searching = true
+      setTimeout(() => {
+        this.searching = false
+        //commit:
+        this.doFilter()
+      }, 1000)
+    }
   }
 
   render() {
-    const {t} = this.props
+    const {searchStore, t} = this.props
     return(
       <div styleName="tender_type">
         <h4>{t('filter.tenderTypeTitle')}</h4>
+        {!searchStore.resultsLoading &&
         <div style={{paddingBottom: '20px'}}>
           {
             this.items.map(((item, index) =>
@@ -91,6 +101,12 @@ export default class TenderTypeFilter extends React.Component {
             )
           }
         </div>
+        }
+        {searchStore.resultsLoading &&
+          <div style={{height: '250px'}}>
+            <div>Loading...</div>
+          </div>
+        }
         {/*<a onClick={this.doFilter} style={{border: '1px solid', padding: '3px'}}>Commit</a>*/}
       </div>
     )

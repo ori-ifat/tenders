@@ -1,6 +1,17 @@
 //@import '~app/global.scss';
 @import '~common/style/_settings.scss';
 
+.item-title {
+	cursor: pointer;
+	span {
+		font-size: 1.25rem !important;
+    color: #545955 !important;
+    line-height: 1.75rem !important;
+    font-weight: 500 !important;
+    transition: all 0.25s !important;
+	}
+}
+
 .tender_summery {
 	position: relative;
 	margin-top: 1.5rem;
