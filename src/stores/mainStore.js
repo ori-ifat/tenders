@@ -1,7 +1,7 @@
 import { action, computed, observable, toJS } from 'mobx'
 import {getLastTenders, getBanners, getMoreTenders} from 'common/services/apiService'
 
-class Home {
+class Main {
   @observable resultsLoading = false
   @observable request = {};
   @observable results = []
@@ -55,4 +55,4 @@ class Home {
   }
 }
 
-export const homeStore = new Home()
+export const mainStore = new Main()

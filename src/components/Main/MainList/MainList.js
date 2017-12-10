@@ -4,11 +4,11 @@ import { observer } from 'mobx-react'
 import ResultsItem from 'common/components/ResultsItem'
 import find from 'lodash/find'
 import CSSModules from 'react-css-modules'
-import styles from './HomeList.scss'
+import styles from './MainList.scss'
 
 @CSSModules(styles)
 @observer
-export default class HomeList extends React.Component {
+export default class MainList extends React.Component {
   static propTypes = {
     item: object,
     onCheck: func,
@@ -31,7 +31,7 @@ export default class HomeList extends React.Component {
 
           return <ResultsItem
             key={index}
-            item={item}            
+            item={item}
             onCheck={this.props.onCheck}
             onFav={this.props.onFav}
             checked={checked}

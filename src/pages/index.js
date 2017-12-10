@@ -3,7 +3,7 @@ import { Redirect, Route, Switch } from 'react-router-dom'
 import Topbar from 'app/components/Topbar'
 import SearchPage from 'pages/search'
 import ResultsPage from 'pages/results'
-import HomePage from 'pages/home'
+import MainPage from 'pages/main'
 import TenderPage from 'pages/tender'
 import FavoritesPage from 'pages/favorites'
 import NotFound404 from 'pages/notFound404'
@@ -20,10 +20,10 @@ class Pages extends React.Component {
         <Topbar />
         <Switch>
           <Route exact path="/">
-            <Redirect to="/home" />
+            <Redirect to="/main" />
           </Route>
-          <Route path="/home">
-            {this.ensureAuthentication(HomePage)}
+          <Route path="/main">
+            {this.ensureAuthentication(MainPage)}
           </Route>
           <Route path="/search">
             {this.ensureAuthentication(SearchPage)}

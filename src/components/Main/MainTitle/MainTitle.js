@@ -2,18 +2,18 @@ import React from 'react'
 import { inject, observer } from 'mobx-react'
 import { translate } from 'react-polyglot'
 import CSSModules from 'react-css-modules'
-import styles from './HomeTitle.scss'
+import styles from './MainTitle.scss'
 
 @translate()
-@inject('homeStore')
+@inject('mainStore')
 @inject('accountStore')
 @CSSModules(styles)
 @observer
-export default class HomeTitle extends React.Component {
+export default class MainTitle extends React.Component {
 
   render() {
-    const { t, homeStore, accountStore: { profile } } = this.props
-    const { resultsLoading, resultsCount } = homeStore
+    const { t, mainStore, accountStore: { profile } } = this.props
+    const { resultsLoading, resultsCount } = mainStore
     const count = resultsCount
     const user = profile ? decodeURIComponent(profile.contactName).replace(/\+/g, ' ') : ''
 
