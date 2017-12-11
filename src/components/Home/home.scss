@@ -1,8 +1,5 @@
-//@import '~app/global.scss';
-
-.search-div {
-  margin-top: 3rem;
-  //background-color: red;
+.hide {
+  display: none;
 }
 
 .hero {
@@ -182,6 +179,15 @@
 
 .ten_title {
 	width: 74%;
+}
+
+.subcat {
+  color: #444444;
+  padding: 0.65rem 0.5rem;
+  border-top: 1px solid #9B9B9B;
+  display: block;
+  margin: 0 0.5rem;
+  transition: all 0.35s ease;
 }
 
 .news {

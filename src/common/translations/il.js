@@ -27,6 +27,7 @@ export default {
     subTitle: 'השאירו פרטים ונחזור אליכם עם הצעה משתלמת',
     catTitle: 'כל המכרזים, כל התחומים',
     showAllCat: 'כל הקטגוריות',
+    hideAllCat: 'סגור',
     opportunities: 'ההזדמנויות זורמת אליך בכל דרך שתבחר',
     testemonials: 'לקוחות מספרים',
     lastTenders: 'מכרזים אחרונים',

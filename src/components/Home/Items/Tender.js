@@ -3,17 +3,17 @@ import CSSModules from 'react-css-modules'
 import styles from '../Home.scss'
 
 const Tender = ({date, title, desc}) => {
-  return    <div styleName="tender_wrapper" data-font-size="16" data-font-size-type="px" data-line-height="24px">
-    <div styleName="ten_date" data-font-size="16" data-font-size-type="px" data-line-height="24px">
-      <p data-font-size="16" data-font-size-type="px" data-line-height="25.6px">{date}</p>
+  return    <div styleName="tender_wrapper">
+    <div styleName="ten_date">
+      <p data-font-size="16">{date}</p>
     </div>
 
-    <div styleName="ten_cat" data-font-size="16" data-font-size-type="px" data-line-height="24px">
-      <p data-font-size="16" data-font-size-type="px" data-line-height="25.6px">{title}</p>
+    <div styleName="ten_cat">
+      <p data-font-size="16">{title}</p>
     </div>
 
-    <div styleName="ten_title" data-font-size="16" data-font-size-type="px" data-line-height="24px">
-      <p data-font-size="16" data-font-size-type="px" data-line-height="25.6px">{desc}</p>
+    <div styleName="ten_title">
+      <p data-font-size="16">{desc}</p>
     </div>
 
   </div>

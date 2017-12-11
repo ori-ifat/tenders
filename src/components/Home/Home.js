@@ -1,6 +1,7 @@
 import React, {Component} from 'react'
 import SearchInput from 'common/components/SearchInput'
-import {inject} from 'mobx-react'
+import {inject, observer} from 'mobx-react'
+import {observable} from 'mobx'
 import {translate} from 'react-polyglot'
 import CatItem from './Items/CatItem'
 import SubCatItem from './Items/SubCatItem'
@@ -13,15 +14,32 @@ import styles from './home.scss'
 import 'common/style/home.css'
 
 const req = require.context('common/style/icons/', false)
-const food = req('./Food.svg')
+//const food = req('./Food.svg')
 const mobile = req('./mobile.svg')
 
 @translate()
+@inject('homeStore')
 @CSSModules(styles)
+@observer
 export default class Home extends Component {
 
+  @observable allCats = false
+
+  componentWillMount() {
+    const {homeStore} = this.props
+    homeStore.loadCatResults().then(() => {
+      homeStore.loadSubCatResults()
+    })
+  }
+
+  showAllCats = () => {
+    this.allCats = !this.allCats
+  }
+
   render() {
-    const {t} = this.props
+    const {homeStore, homeStore: {resultsLoading},  t} = this.props
+    const catStyle = this.allCats ? '' : 'hide'
+    const catLabel = this.allCats ? t('home.hideAllCat') : t('home.showAllCat')
     return (
       <div>
         <section styleName="hero">
@@ -43,33 +61,32 @@ export default class Home extends Component {
             <div className="large-12 columns">
               <h2 styleName="cat-title" >{t('home.catTitle')}</h2>
               <div className="row collapse small-up-1 medium-up-2 large-up-4">
-
+              {resultsLoading && <div>Loading...</div>}
+              {!resultsLoading && homeStore.catResults.map((cat, index) =>
                 <CatItem
-                  displayName="Test and Test2"
-                  count="222"
-                  catID="957"
-                  subSubjectID="68"
-                  catName="Test33"
-                  imgSrc={food}
-                 />
+                  key={index}
+                  count={cat.count}
+                  subSubjectID={cat.subsubjectId}
+                  catName={cat.subsubjectName}                  
+                 />)
+               }
 
               </div>
 
-              <div id="other_cat" style={{display: 'none'}}>
+              <div id="other_cat" styleName={catStyle}>
                 <div className="row collapse small-up-1 medium-up-2 large-up-4">
-
+                {!resultsLoading && homeStore.subCatResults.map((cat, index) =>
                   <SubCatItem
-                    displayName="Test 44"
-                    count="333"
-                    catID="957"
-                    subSubjectID="68"
-                    catName="Test44"
-                   />
-
+                    key={index}
+                    count={cat.count}
+                    subSubjectID={cat.subsubjectId}
+                    catName={cat.subsubjectName}
+                   />)
+                }
                 </div>
               </div>
 
-              <a href="#" styleName="show_all">{t('home.showAllCat')}</a>
+              <a onClick={this.showAllCats} styleName="show_all">{catLabel}</a>
             </div>
           </div>
         </section>

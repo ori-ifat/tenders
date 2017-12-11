@@ -234,3 +234,11 @@ export function getExtraCount(tags, filters) {
     filters
   }})
 }
+
+export function getMainSubjects() {
+  return apiFetch('FrontPage/getMainSubjects')
+}
+
+export function getAllSubjects() {
+  return apiFetch('FrontPage/getAllSubjects')
+}
