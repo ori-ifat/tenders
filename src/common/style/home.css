@@ -1,0 +1,14 @@
+.bg {
+	background-image: url(icons/home_bg.jpg);
+	background-repeat: no-repeat;
+	background-position: center -420px;
+  height: 400px;
+}
+
+.tes_wrapper {
+	color: #fff;
+	padding: 1.125rem;
+	background-image: url(icons/quote.svg);
+	background-position: top right;
+	background-repeat: no-repeat;
+}

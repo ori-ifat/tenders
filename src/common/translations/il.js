@@ -22,6 +22,20 @@ export default {
     search: 'חיפוש'
   },
   home: {
+    mainTitle: 'רק אנחנו נמצא את',
+    mainTitle2: 'ההזדמנויות המתאימות עבורך',
+    subTitle: 'השאירו פרטים ונחזור אליכם עם הצעה משתלמת',
+    catTitle: 'כל המכרזים, כל התחומים',
+    showAllCat: 'כל הקטגוריות',
+    opportunities: 'ההזדמנויות זורמת אליך בכל דרך שתבחר',
+    testemonials: 'לקוחות מספרים',
+    lastTenders: 'מכרזים אחרונים',
+    articles: 'כתבות',
+    allArticles: 'לכל הכתבות',
+    rights: 'כל הזכויות שמורות ליפעת מכרזים',
+    service: 'לשרות ותמיכה: 03-5635000'
+  },
+  main: {
     greet: 'שלום %{user},',
     title: 'מצאנו לך %{count} הזדמנויות עסקיות חדשות',
     moreTenders: 'מכרזים נוספים עבורך:',

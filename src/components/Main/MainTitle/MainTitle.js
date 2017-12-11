@@ -22,8 +22,8 @@ export default class MainTitle extends React.Component {
         <div className="large-12 columns">
           {!resultsLoading &&
             <div>
-              <h5 styleName="user-greet">{t('home.greet', {user})}</h5>
-              <h1 styleName="results_summery">{resultsCount > 0 ? t('home.title', {count}) : t('home.noResults')}</h1>
+              <h5 styleName="user-greet">{t('main.greet', {user})}</h5>
+              <h1 styleName="results_summery">{resultsCount > 0 ? t('main.title', {count}) : t('main.noResults')}</h1>
             </div>
           }
           {resultsLoading &&
