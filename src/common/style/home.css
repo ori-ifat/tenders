@@ -12,3 +12,17 @@
 	background-position: top right;
 	background-repeat: no-repeat;
 }
+
+.sa_container {
+  background-color: #44C960;
+  background-image: url(icons/tile.png);
+  box-shadow: 0 2px 14px 0 rgba(0,0,0,0.19);
+  border-radius: 4px;
+  padding: 4rem 2rem 0 2rem;
+  margin-bottom: 6rem;
+}
+
+.send-cat-form {
+  background-color: #FED810;
+  background-image: url(icons/arow_left_dark.svg);
+}

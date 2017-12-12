@@ -5,7 +5,7 @@ import styles from '../Home.scss'
 const SubCatItem = ({count, catID, subSubjectID, catName}) => {
   const url = `#/category/${count}/${subSubjectID}/${catName}`
   return <div className="column column-block">
-    <a href={url} styleName="subcat">
+    <a href={url} target="_blank" styleName="subcat">
       {catName} {count}
     </a>
   </div>

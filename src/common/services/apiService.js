@@ -242,3 +242,13 @@ export function getMainSubjects() {
 export function getAllSubjects() {
   return apiFetch('FrontPage/getAllSubjects')
 }
+
+export function getSampleTenders() {
+  return apiFetch('FrontPage/GetSampleTenders')
+}
+
+export function getSampleTendersBySub(subSubjectID) {
+  return apiFetch('FrontPage/GetSampleTendersBySub', {searchParams: {
+    SubsubjectID: subSubjectID
+  }})
+}

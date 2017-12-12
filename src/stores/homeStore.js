@@ -1,11 +1,13 @@
 import { action, computed, observable, toJS } from 'mobx'
-import {getMainSubjects, getAllSubjects} from 'common/services/apiService'
+import {getMainSubjects, getAllSubjects, getSampleTenders} from 'common/services/apiService'
 
 class Home {
   @observable resultsLoading = false
   @observable request = {};
+  @observable requestSamp = {};
   @observable catResults = []
   @observable subCatResults = []
+  @observable sampleTenders = []
   @observable resultsCount = 0
 
   @action.bound
@@ -57,6 +59,28 @@ class Home {
       }
       this.resultsLoading = false
     }
+  }
+
+  @action.bound
+  async loadSampleTenders() {
+
+    let error = null  //if needed, make an observable
+    try {
+      this.requestSamp = await getSampleTenders()
+    }
+    catch(e) {
+      //an error occured on search
+      console.error(`[loadSampleTenders] search error: ${e.message} http status code ${e.error.status}`)
+      error = e.message
+    }
+
+    if (error == null) {
+      const data = this.requestSamp
+      this.sampleTenders = [...data.map(d => ({ ...d, key: d.infoId }))]
+    }
+    else {
+      this.sampleTenders = []
+    }    
   }
 
 }

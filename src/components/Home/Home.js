@@ -9,12 +9,13 @@ import Opportunity from './Items/Opportunity'
 import Testemonial from './Items/Testemonial'
 import Tender from './Items/Tender'
 import Article from './Items/Article'
+import Footer from './Items/Footer'
+import moment from 'moment'
 import CSSModules from 'react-css-modules'
 import styles from './home.scss'
 import 'common/style/home.css'
 
 const req = require.context('common/style/icons/', false)
-//const food = req('./Food.svg')
 const mobile = req('./mobile.svg')
 
 @translate()
@@ -30,6 +31,7 @@ export default class Home extends Component {
     homeStore.loadCatResults().then(() => {
       homeStore.loadSubCatResults()
     })
+    homeStore.loadSampleTenders()
   }
 
   showAllCats = () => {
@@ -67,7 +69,7 @@ export default class Home extends Component {
                   key={index}
                   count={cat.count}
                   subSubjectID={cat.subsubjectId}
-                  catName={cat.subsubjectName}                  
+                  catName={cat.subsubjectName}
                  />)
                }
 
@@ -133,13 +135,16 @@ export default class Home extends Component {
 
           <div className="row">
             <div className="large-12 columns">
-
-              <Tender
-                date="11/11/11"
-                title="test11"
-                desc="some long title"
-              />
-
+            {
+              homeStore.sampleTenders.map(tender =>
+                <Tender
+                  key={tender.infoId}
+                  date={moment(tender.releaseDate).format('DD/MM/YYYY')}
+                  title={tender.title}
+                  subSubject={tender.subsubjectName}
+                />
+              )
+            }
             </div>
           </div>
         </section>
@@ -180,19 +185,10 @@ export default class Home extends Component {
         </div>
 
       </section>
-
-      <footer styleName="footer">
-        <div className="row">
-          <div className="medium-6 columns">
-            <p>{t('home.rights')}</p>
-          </div>
-
-          <div className="medium-6 columns">
-            <p className="medium-text-left">{t('home.service')}</p>
-          </div>
-        </div>
-      </footer>
-
+      <Footer
+        rights={t('home.rights')}
+        service={t('home.service')}
+      />
       </div>
     )
   }

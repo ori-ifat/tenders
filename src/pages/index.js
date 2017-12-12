@@ -8,10 +8,11 @@ import ResultsPage from 'pages/results'
 import MainPage from 'pages/main'
 import TenderPage from 'pages/tender'
 import FavoritesPage from 'pages/favorites'
+import CategoryPage from 'pages/category'
 import NotFound404 from 'pages/notFound404'
 
 class Pages extends React.Component {
-  ensureAuthentication(Component) {    
+  ensureAuthentication(Component) {
     return accountStore.profile ? <Component /> : <Redirect to="/home" />
   }
 
@@ -40,6 +41,9 @@ class Pages extends React.Component {
           </Route>
           <Route path="/favorites">
             {this.ensureAuthentication(FavoritesPage)}
+          </Route>
+          <Route path="/category/:count/:id/:name">
+            <CategoryPage />
           </Route>
           <Route>
             <NotFound404 />
