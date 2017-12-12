@@ -63,10 +63,12 @@ export default class DateFilter extends React.Component {
   doFilter = () => {
     //filter commit
     const { searchStore, t } = this.props
+    this.endDate = this.endDate.hour(23).minute(59).second(59)  //include all last day.
     const values = [
       moment(this.startDate).format('YYYY-MM-DD'),
-      moment(this.endDate).format('YYYY-MM-DD')
+      moment(this.endDate).format('YYYY-MM-DD HH:mm:ss')
     ]
+    //console.log('values', values)
     doFilter(searchStore, this.dateField, values)
     //set the state-like object:
     //...the date field name,
