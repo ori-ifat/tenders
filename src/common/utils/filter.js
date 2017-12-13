@@ -27,7 +27,8 @@ export function doFilter(searchStore, field, values, itemLabels, close, closeMod
   const filters = JSON.stringify(newFilters)
   //apply filters to store, and commit search:
   searchStore.applyFilters(filters)
-  searchStore.clearResults()
+  //searchStore.clearResults()
+  searchStore.fromRoute = true  //raise route flag
   searchStore.loadNextResults()
   //fix the labels for filter view
   if (close) {

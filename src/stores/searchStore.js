@@ -23,6 +23,7 @@ class Search {
   @observable selectedFilters = {};   //labels for the filters component
   @observable tags = [];
   @observable sort = 'publishDate'
+  @observable fromRoute = false
   @observable resultsLoading = false
   @observable filtersLoading = false
   @observable hasMoreResults = true
@@ -175,8 +176,9 @@ class Search {
           this.lastResultsPage++
         }
         console.info('[loadNextResults]', this.lastResultsPage)
+        if (this.fromRoute) this.clearResults() //this will allow opacity loader to show prev results until new ones appear
         this.results = [...this.results, ...data.map(d => ({ ...d, key: d.TenderID }))]
-        //this.availableFilters = filtersMeta
+        //this.availableFilters = filtersMeta  //no drilldown - from tags only
         this.resultsCount = total
         this.hasMoreResults = data.length > 0 && this.results.length < this.resultsCount
       }
@@ -190,6 +192,7 @@ class Search {
         this.hasMoreResults = false
       }
       this.resultsLoading = false
+      this.fromRoute = false  //reset route flag
     }
   }
 

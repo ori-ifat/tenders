@@ -22,7 +22,8 @@ import styles from './results.scss'
   searchStore.clearFilterLabels()
   searchStore.applyFilters(filters)
   recordStore.cleanChecked()
-  searchStore.clearResults()
+  //searchStore.clearResults()
+  searchStore.fromRoute = true  //raise route flag
   searchStore.loadNextResults()
   searchStore.loadNextFilters()
 })
@@ -43,7 +44,7 @@ export default class Results extends Component {
     const {accountStore, searchStore, searchStore: {resultsLoading, resultsCount, tags}} = this.props
     const {onCheck, onFav} = this.props
     const {recordStore: {checkedItems}} = this.props
-
+    const divStyle = resultsLoading && searchStore.fromRoute ? 'loading' : ''
     return (
       <div style={{marginTop: '50px'}}>
         <SearchInput tags={toJS(tags)} />
@@ -58,10 +59,10 @@ export default class Results extends Component {
               </div>
               <div className="cell large-9">
                 <hr />
-                {resultsLoading && <div>Loading...</div>}
+                {/*resultsLoading && <div>Loading...</div>*/}
                 {resultsCount == 0 && !resultsLoading && <NoData error={searchStore.searchError} />}
                 {resultsCount > 0 &&
-                  <div>
+                  <div styleName={divStyle}>
                     <ResultsActions />
                     <List
                       store={searchStore}

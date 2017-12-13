@@ -80,34 +80,34 @@ export default class TenderTypeFilter extends React.Component {
   }
 
   render() {
-    const {searchStore, t} = this.props
+    const {searchStore, searchStore: {resultsLoading}, t} = this.props
+    const divStyle = resultsLoading && searchStore.fromRoute ? 'loading' : ''
     return(
       <div styleName="tender_type">
         <h4>{t('filter.tenderTypeTitle')}</h4>
-        {!searchStore.resultsLoading &&
-        <div style={{paddingBottom: '20px'}}>
-          {
-            this.items.map(((item, index) =>
-              <div className="checkbox" key={index}>
-                <input type="checkbox"
-                  className="checkbox_tender"
-                  checked={this.selected.includes(item.TenderTypeID)}
-                  name={item.TenderTypeName}
-                  value={item.TenderTypeID}
-                  onChange={this.onCheck}
-                />
-                <span styleName="cb-label">{item.TenderTypeName}</span>
-              </div>), this
-            )
-          }
-        </div>
-        }
-        {searchStore.resultsLoading &&
-          <div style={{height: '250px'}}>
-            <div>Loading...</div>
+        {/*!searchStore.resultsLoading &&*/
+          <div styleName={divStyle} style={{paddingBottom: '20px'}}>
+            {
+              this.items.map(((item, index) =>
+                <div className="checkbox" key={index}>
+                  <input type="checkbox"
+                    className="checkbox_tender"
+                    checked={this.selected.includes(item.TenderTypeID)}
+                    name={item.TenderTypeName}
+                    value={item.TenderTypeID}
+                    onChange={this.onCheck}
+                  />
+                  <span styleName="cb-label">{item.TenderTypeName}</span>
+                </div>), this
+              )
+            }
           </div>
         }
-        {/*<a onClick={this.doFilter} style={{border: '1px solid', padding: '3px'}}>Commit</a>*/}
+        {searchStore.resultsLoading &&  //mask the checkboxes when loading - for opacity loader
+          <div styleName="loading-mask">
+            &nbsp;
+          </div>
+        }
       </div>
     )
   }

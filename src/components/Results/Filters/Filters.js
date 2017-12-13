@@ -67,7 +67,8 @@ export default class Filters extends React.Component {
     const {searchStore} = this.props
     searchStore.filters.clear()
     searchStore.clearFilterLabels()
-    searchStore.clearResults()
+    //searchStore.clearResults()
+    searchStore.fromRoute = true  //raise route flag
     searchStore.loadNextResults()
     searchStore.loadNextFilters() //cached, but will allow filters to be unchecked on child components
   }
