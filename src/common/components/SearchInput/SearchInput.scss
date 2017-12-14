@@ -23,3 +23,20 @@
 	background-color: #FFFFFF !important;
 
 }
+
+.wrapper {
+	position: relative;
+}
+.search_btn {
+	position: absolute;
+  left: 0;
+  top: 0;
+  background-color: #44C960;
+  width: 4rem;
+  z-index: 100;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  border-top-left-radius: 4px;
+  border-bottom-left-radius: 4px
+}

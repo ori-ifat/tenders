@@ -8,6 +8,9 @@ import Select from 'react-select'
 import {observable, toJS} from 'mobx'
 import {autocomplete} from 'common/services/apiService'
 
+const req = require.context('common/style/icons/', false)
+const search_go = req('./search_go.svg')
+
 @translate()
 @inject('translationsStore')
 @inject('routingStore')
@@ -93,7 +96,8 @@ export default class SearchInput extends Component {
     return (
       <div className="row">
         <div className="medium-12 columns">
-          <div id="searchbox_wrapper">
+          <div id="searchbox_wrapper" styleName="wrapper">
+          <a styleName="search_btn"><img src={search_go}/></a>
             <Select.Async
               styleName="select-searchbox"
               className="search-select"
