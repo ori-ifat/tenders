@@ -8,6 +8,7 @@ import ResultsPage from 'pages/results'
 import MainPage from 'pages/main'
 import TenderPage from 'pages/tender'
 import FavoritesPage from 'pages/favorites'
+import RemindersPage from 'pages/reminders'
 import CategoryPage from 'pages/category'
 import PublishPage from 'pages/publish'
 import NotFound404 from 'pages/notFound404'
@@ -42,6 +43,10 @@ class Pages extends React.Component {
           </Route>
           <Route path="/favorites">
             {this.ensureAuthentication(FavoritesPage)}
+          </Route>
+          <Route path="/reminders">
+            {/*this.ensureAuthentication(RemindersPage)*/}
+            <RemindersPage />
           </Route>
           <Route path="/category/:count/:id/:name">
             <CategoryPage />

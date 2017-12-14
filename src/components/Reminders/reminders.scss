@@ -1,0 +1,53 @@
+.search-div {
+  margin-top: 3rem;
+}
+
+.title-container {
+  margin-top: 40px;
+}
+
+.title {
+  font-family: 'Rubik', sans-serif;
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: #444945;
+  text-shadow: 0 2px 3px rgba(0,0,0,0.2);
+  margin-top: 3rem;
+  margin-bottom: 1rem;
+  border-bottom: 4px solid #EAEAEA;
+  padding-bottom: 0.5rem;
+  line-height: 1.1;
+}
+
+.record {
+  padding: 5px;
+  margin: 1px;
+  border-bottom: #c1bcbc 1px solid;
+  cursor: pointer;
+}
+
+.selected {
+  border: green 1px solid !important;
+}
+
+.clearfix {
+  overflow: auto;
+  zoom: 0
+}
+
+.record-title {
+  width: 80%;
+  float: right;
+}
+
+.record-date {
+  width: 20%;
+  float: left;
+  margin-top: 3px;
+  color: gray;
+}
+
+.record-infodate {
+  font-size: 0.8rem;
+  color: gray;
+}

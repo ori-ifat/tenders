@@ -107,6 +107,7 @@ export default class Topbar extends Component {
                   {accountStore.profile &&
                   <ul id="logout" className="submenu menu vertical" styleName="menu" data-dropdown-menu>
                     <li><a onClick={this.navigate('/favorites')}>{t('nav.favorites')}</a></li>
+                    <li><a onClick={this.navigate('/reminders')}>{t('nav.reminders')}</a></li>
                     <li><a onClick={this.logout}>{t('nav.logout')}</a></li>
                   </ul>}
                 </li>

@@ -206,6 +206,10 @@ export function getReminder(reminderID) {
   }} )
 }
 
+export function getAllReminders() {
+  return apiFetch('Reminder/GetReminders')
+}
+
 export function getFavorites({page, pageSize}) {
   return apiFetch('Favorites/GetFavorites', {
     searchParams: {

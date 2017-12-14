@@ -17,6 +17,7 @@ export default {
     contactus: 'צור קשר',
     publish: 'פרסם מכרז',
     favorites: 'מועדפים',
+    reminders: 'תזכורות',
     pleaseLog: 'התחבר',
     logout: 'התנתק',
     search: 'חיפוש'
@@ -171,5 +172,10 @@ export default {
   },
   favorites: {
     title: 'מועדפים נמצאו'
+  },
+  reminders: {
+    title: 'תזכורות',
+    infoDate: 'ת. הגשה',
+    today: 'היום'
   }
 }
