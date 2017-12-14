@@ -235,6 +235,24 @@ export function getExtraCount(tags, filters) {
   }})
 }
 
+export function publishTender(firstName, lastName, companyName, companyPhone,
+  toDate, email, phone, fax, address, title, description) {
+  return apiFetch('CustomerTender/InsertTender', {searchParams: {
+    FirstName: firstName,
+    LastName: lastName,
+    CompanyName: companyName,
+    CompanyPhone: companyPhone,
+    CompanyType: '',
+    ToDate: toDate,
+    Email: email,
+    Phone: phone,
+    Fax: fax,
+    Adress: address,
+    Title: title,
+    Details: description
+  }})
+}
+
 export function getMainSubjects() {
   return apiFetch('FrontPage/getMainSubjects')
 }
