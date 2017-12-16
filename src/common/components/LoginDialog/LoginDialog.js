@@ -104,7 +104,13 @@ export default class LoginDialog extends React.Component {
 
             <div styleName="sign_up">
               <a href="#/subscriptions" target="_blank">
-                <h3 styleName="login_ttl">{t('login.subscribe')}</h3>
+                <h3> רכישת מנוי</h3>
+                <p>{t('login.subscribe')}</p>
+                <ul className="no-bullet">
+                  <li>הטבות בלעדיות לנרשמים דרך האתר</li>
+                  <li>מגוון מסלולים רחב המתואם לכל עסק</li>
+                </ul>
+                <button styleName="button-submit" >להרשמה</button>
 
               </a>
             </div>

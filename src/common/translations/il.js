@@ -9,7 +9,7 @@ export default {
     login: 'התחבר',
     subscibeTitle: 'המידע למנויים בלבד',
     subscibeSubTitle: 'המכרז זמין רק למנויים, לצפיה התחבר או רכוש מנוי',
-    subscribe: 'להרשמה'
+    subscribe: 'מעוניינים להמשיך ולצפות בעוד מכרזים והזדמנויות עסקיות בתחומך?'
   },
   nav: {
     logoAlt: 'לוגו מכרזים',
