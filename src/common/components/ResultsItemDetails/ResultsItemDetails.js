@@ -14,7 +14,12 @@ import CSSModules from 'react-css-modules'
 import styles from './ResultsItemDetails.scss'
 
 const req = require.context('common/style/icons/', false)
-const thumbSrc = req('./thumb.jpg')
+const thumbSrc = req('./preview.svg')
+const docSrc = req('./doc.svg')
+const printSrc = req('./print_gray.svg')
+const mailSrc = req('./mail_gray.svg')
+const alertSrc = req('./alert.svg')
+const favSrc = req('./fav.svg')
 
 @translate()
 @inject('itemStore')
@@ -170,13 +175,18 @@ export default class ResultsItemDetails extends React.Component {
                   <LikeItem />
                 </div>
                 <div className="large-3 cell">
-                  {fileName != '' && <a onClick={() => this.props.showViewer(fileName, item.Title)}><img styleName="thender_thumb"  src={thumbSrc} /></a>}
+
                   <ul className="no-bullet" styleName="tender_actions">
-                    {item.TenderLink && <li><a href={item.TenderLink} target="_blank">{t('tender.toTenderDetails')}</a></li>}
-                    {fileName != '' && <li><a onClick={() => this.print(true)}>{t('tender.printImage')}</a></li>}
-                    <li><a onClick={() => this.print(false)}>{t('tender.print')}</a></li>
-                    <li><a onClick={this.email}>{t('tender.email')}</a></li>
-                    <li><a onClick={() => this.remind(true)}>{t('tender.remind')}</a></li>
+                    <li>{fileName != '' && <a onClick={() => this.props.showViewer(fileName, item.Title)}>
+                    <img src={thumbSrc}/>לצפיה במכרז המקורי</a>}
+                    </li>
+                    {item.TenderLink && <li><a href={item.TenderLink} target="_blank"><img src={docSrc}/>{t('tender.toTenderDetails')}</a></li>}
+                    {fileName != '' && <li><a onClick={() => this.print(true)}><img src={printSrc}/>{t('tender.printImage')}</a></li>}
+                    <li><a onClick={() => this.print(false)}><img src={printSrc}/>{t('tender.print')}</a></li>
+                    <li><a onClick={this.email}><img src={mailSrc}/>{t('tender.email')}</a></li>
+                    <li><a onClick={() => this.remind(true)}>
+                    <img src={alertSrc}/>
+                    {t('tender.remind')}</a></li>
                     {!this.props.mode &&
                       <li><a onClick={this.fav}>{this.IsFavorite ? t('tender.removeFromFav') : t('tender.addToFav')}</a></li>
                     }

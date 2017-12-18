@@ -28,13 +28,17 @@
 }
 
 ul.tender_actions {
-  margin-top: 1rem;
+
   li {
     padding: 0.5rem;
     border-bottom: 1px solid $light-gray;
     a {
       color: $dark-gray;
+      img {
+        padding-left: 0.5rem;
+      }
     }
+
   }
 
 }
