@@ -93,6 +93,7 @@ export default {
     subSubjects: 'סיווגים',
     details: 'פרטים',
     comment: 'פרטים נוספים',
+    viewImage: 'לצפיה במכרז המקורי',
     links: 'מסמכים מקושרים למכרז',
     toTenderDetails: 'למסמכי המכרז',
     print: 'הדפסה',

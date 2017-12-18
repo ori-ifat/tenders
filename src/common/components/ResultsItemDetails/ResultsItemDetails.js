@@ -178,15 +178,15 @@ export default class ResultsItemDetails extends React.Component {
 
                   <ul className="no-bullet" styleName="tender_actions">
                     <li>{fileName != '' && <a onClick={() => this.props.showViewer(fileName, item.Title)}>
-                    <img src={thumbSrc}/>לצפיה במכרז המקורי</a>}
+                      <img src={thumbSrc} />{t('tender.viewImage')}</a>}
                     </li>
                     {item.TenderLink && <li><a href={item.TenderLink} target="_blank"><img src={docSrc}/>{t('tender.toTenderDetails')}</a></li>}
                     {fileName != '' && <li><a onClick={() => this.print(true)}><img src={printSrc}/>{t('tender.printImage')}</a></li>}
                     <li><a onClick={() => this.print(false)}><img src={printSrc}/>{t('tender.print')}</a></li>
                     <li><a onClick={this.email}><img src={mailSrc}/>{t('tender.email')}</a></li>
                     <li><a onClick={() => this.remind(true)}>
-                    <img src={alertSrc}/>
-                    {t('tender.remind')}</a></li>
+                      <img src={alertSrc}/>
+                      {t('tender.remind')}</a></li>
                     {!this.props.mode &&
                       <li><a onClick={this.fav}>{this.IsFavorite ? t('tender.removeFromFav') : t('tender.addToFav')}</a></li>
                     }
