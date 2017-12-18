@@ -5,8 +5,9 @@ import {remindersStore} from 'stores'
 import {inject, observer} from 'mobx-react'
 import {observable, toJS} from 'mobx'
 import {translate} from 'react-polyglot'
-import ReminderItem from './ReminderItem'
+import ReminderItem from './ReminderItem/ReminderItem'
 import SearchInput from 'common/components/SearchInput'
+import Reminder from 'common/components/Reminder'
 import CSSModules from 'react-css-modules'
 import styles from './reminders.scss'
 
@@ -22,13 +23,14 @@ export default class Reminders extends Component {
 
   @observable itemId = -1
 
-  selectItem = itemId => {
-    const {remindersStore} = this.props
-    remindersStore.cleanItem()
-    remindersStore.loadReminder(itemId).then(() => {
-      console.log(toJS(remindersStore.item), itemId)
-      this.itemId = itemId
-    })
+  selectItem = (itemId, update) => {  
+    this.itemId = itemId
+    if (itemId == -1 && update) {
+      //called for update\delete - reload items
+      const {remindersStore} = this.props
+      remindersStore.results.clear()
+      remindersStore.loadAllReminders()
+    }
   }
 
   render() {
@@ -47,25 +49,30 @@ export default class Reminders extends Component {
           </div>
         </div>
         <div className="row">
-          <div className="column large-6" >
-            {!resultsLoading && results.map((reminder, index) =>
+          <div className="column large-12">
+            {!resultsLoading && this.itemId == -1 && results.map((reminder, index) =>
               <ReminderItem
                 key={index}
                 reminderID={reminder.ReminderID}
                 title={reminder.Title}
                 date={reminder.ReminderDate}
-                infoDate={reminder.ReminderDate}
-                infoDateLabel={t('reminders.infoDate')}
-                todayLabel={t('reminders.today')}
+                infoDate={reminder.InfoDate}
                 selectItem={this.selectItem}
                 isSelected={this.itemId == reminder.ReminderID}
               />
             )}
+            {this.itemId > -1 && !remindersStore.reminderLoading &&
+              <div styleName="reminder-container">
+                <Reminder
+                  onClose={this.selectItem}
+                  reminderID={this.itemId}
+                  isModal={false}
+                />
+              </div>
+            }
             {resultsLoading && <div>Loading...</div>}
           </div>
-          <div className="column large-6" >
-            Test 2
-          </div>
+
         </div>
       </div>
     )

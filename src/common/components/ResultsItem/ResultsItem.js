@@ -158,7 +158,7 @@ export default class ResultsItem extends React.Component {
               {twoDaysLeftTour && !oneDayLeftTour && <span styleName="label alert">{t('tender.twoDaysLeftTour')}</span>}
               {oneDayLeftTour && <span styleName="label alert">{t('tender.oneDayLeftTour')}</span>}
               <h3
-                onClick={() => this.viewDetails(item.TenderID)}                
+                onClick={() => this.viewDetails(item.TenderID)}
                 styleName="item-title"
                 dangerouslySetInnerHTML={this.markUpText(item.Title)}></h3>
               { logged &&
@@ -220,6 +220,7 @@ export default class ResultsItem extends React.Component {
             title={item.Title}
             infoDate={item.InfoDate}
             reminderID={item.ReminderID}
+            isModal={true}
           />
         }
         {this.showLoginMsg &&

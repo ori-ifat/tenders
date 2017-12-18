@@ -19,35 +19,7 @@
   line-height: 1.1;
 }
 
-.record {
-  padding: 5px;
-  margin: 1px;
-  border-bottom: #c1bcbc 1px solid;
-  cursor: pointer;
-}
-
-.selected {
-  border: green 1px solid !important;
-}
-
-.clearfix {
-  overflow: auto;
-  zoom: 0
-}
-
-.record-title {
-  width: 80%;
-  float: right;
-}
-
-.record-date {
-  width: 20%;
-  float: left;
-  margin-top: 3px;
-  color: gray;
-}
-
-.record-infodate {
-  font-size: 0.8rem;
-  color: gray;
+.reminder-container {
+  margin: 0 auto;
+  width: 600px;
 }

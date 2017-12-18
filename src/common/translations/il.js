@@ -176,6 +176,7 @@ export default {
   reminders: {
     title: 'תזכורות',
     infoDate: 'ת. הגשה',
-    today: 'היום'
+    today: 'היום',
+    back: 'חזור לתזכורות'
   }
 }

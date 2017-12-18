@@ -1,6 +1,6 @@
 import React, {Component} from 'react'
-import { string, number, func } from 'prop-types'
-import { observer } from 'mobx-react'
+import { string, number, func, bool } from 'prop-types'
+import { /*inject,*/ observer } from 'mobx-react'
 import { observable } from 'mobx'
 import { translate } from 'react-polyglot'
 import moment from 'moment'
@@ -11,6 +11,7 @@ import CSSModules from 'react-css-modules'
 import styles from './Reminder.scss'
 
 @translate()
+//@inject('remindersStore')
 @observer
 @CSSModules(styles)
 export default class Reminder extends Component {
@@ -20,7 +21,8 @@ export default class Reminder extends Component {
     onClose: func,
     title: string,
     infoDate: string,
-    reminderID: number
+    reminderID: number,
+    isModal: bool
   }
 
   @observable tenderID = -1
@@ -32,10 +34,17 @@ export default class Reminder extends Component {
   @observable reminderID = 0
 
   componentWillMount() {
+    this.initReminder()
+  }
+
+  componentWillReceiveProps(nextProps) {
+    this.initReminder()
+  }
+
+  initReminder = () => {
     const {tenderID, title, infoDate, reminderID} = this.props
-    //console.log('mount', infoDate)
-    this.tenderID = tenderID
     if (!reminderID) {
+      this.tenderID = tenderID
       this.subject = title
       this.reminderDate = infoDate != null ? moment(infoDate, 'YYYY-MM-DD HH:mm:ss').format('DD-MM-YYYY') : moment()
       this.time = '00:00'
@@ -49,18 +58,25 @@ export default class Reminder extends Component {
     this.email = email
   }
 
-  componentWillReceiveProps(nextProps) {
-    //console.log('receive')
-  }
-
   getReminderData = (reminderID) => {
-    //console.log('getReminderData')
     getReminder(reminderID).then(reminder => {
+      //console.log('reminder', reminder)
+      this.tenderID = reminder[0].InfoID
       this.subject = reminder[0].Title
       this.reminderDate = moment(reminder[0].ReminderDate).format('DD-MM-YYYY')
       this.time = moment(reminder[0].ReminderDate).format('HH:mm')
       this.remark = reminder[0].Remark || ''
     })
+    /* //use the store - caused some problems on reminders screen
+    const {remindersStore}= this.props
+    remindersStore.loadReminder(reminderID).then(() => {
+      console.log('reminder', remindersStore.item)
+      this.tenderID = remindersStore.item.InfoID
+      this.subject = remindersStore.item.Title
+      this.reminderDate = moment(remindersStore.item.ReminderDate).format('DD-MM-YYYY')
+      this.time = moment(remindersStore.item.ReminderDate).format('HH:mm')
+      this.remark = remindersStore.item.Remark || ''
+    })*/
   }
 
   updateField = e => {
@@ -97,7 +113,7 @@ export default class Reminder extends Component {
     setReminder(action, this.reminderID, this.tenderID, this.remark, this.subject, this.email, _date).then(saved => {
       console.log('saved status:', saved) //implement if user should know something about save op
       clearCache()
-      this.props.onClose() //...close the modal
+      this.props.onClose(-1, true) //...close the modal
     })
     if (this.email != '') {
       setCookie('userEmail', this.email)
@@ -108,26 +124,29 @@ export default class Reminder extends Component {
     setReminder('Delete', this.reminderID, -1, '', '', '').then(deleted => {
       console.log('delete status:', deleted) //implement if user should know something about delete op
       clearCache()
-      this.props.onClose() //...close the modal
+      this.props.onClose(-1, true) //...close the modal
     })
   }
 
   render() {
-    const {onClose, infoDate, t} = this.props
+    const {onClose, infoDate, isModal, t} = this.props
     const title = this.subject
     const dateVal = moment(this.reminderDate, 'DD-MM-YYYY').format('DD-MM-YYYY')
     const timeVal = this.time != '' ? this.time : moment(this.reminderDate, 'DD-MM-YYYY').format('HH:mm')
     const infoDateVal = infoDate != null ? moment(infoDate, 'YYYY-MM-DD HH:mm:ss').format('DD-MM-YYYY') : t('reminder.noDate')
+    const revealClass = isModal ? 'reveal-overlay' : ''
+    const revealClass2 = isModal ? 'reveal' : ''
     //console.log('render reminder', this.reminderDate)
     return (
-      <div className="reveal-overlay" style={{display: 'block', zIndex: 1100}}>
-        <div className="reveal" styleName="reminder_lb" style={{display: 'block'}}>
-          <button styleName="button-cancel" onClick={onClose}>×</button>
-          <div className="grid-x grid-margin-x" styleName="pb">
+      <div className={revealClass} style={{display: 'block', zIndex: 1100}}>
+        <div className={revealClass2} styleName="reminder_lb" style={{display: 'block'}}>
+          {isModal && <button styleName="button-cancel" onClick={onClose}>×</button>}
+          {isModal && <div className="grid-x grid-margin-x" styleName="pb">
             <div className="small-12 cell">
               <h2 styleName="remider_ttl">{t('reminder.title')}</h2>
             </div>
-          </div>
+          </div>}
+          {!isModal && <a onClick={() => onClose(-1)}>&rarr; {t('reminders.back')}</a>}
 
           <div className="grid-x grid-margin-x" styleName="pb">
             <div className="small-12 cell">
