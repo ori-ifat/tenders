@@ -210,7 +210,6 @@ export default class ResultsItemDetails extends React.Component {
             title={item.Title}
             infoDate={item.InfoDate}
             reminderID={item.ReminderID}
-            isModal={true}
           />
         }
       </div>

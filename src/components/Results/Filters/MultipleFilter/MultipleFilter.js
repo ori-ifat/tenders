@@ -208,7 +208,7 @@ export default class MultipleFilter extends React.Component {
                   }
                   {
                     this.itemLabels.length > 2 &&
-                      <div styleName="selected-tile">{t('filter.more')}</div>
+                      <div styleName="selected-tile">{`${t('filter.more')} ${this.itemLabels.length - 2}`}</div>
                   }
                 </div>
                 <div styleName="button-container">

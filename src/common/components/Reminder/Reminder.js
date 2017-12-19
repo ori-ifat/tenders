@@ -1,5 +1,5 @@
 import React, {Component} from 'react'
-import { string, number, func, bool } from 'prop-types'
+import { string, number, func } from 'prop-types'
 import { /*inject,*/ observer } from 'mobx-react'
 import { observable } from 'mobx'
 import { translate } from 'react-polyglot'
@@ -21,8 +21,7 @@ export default class Reminder extends Component {
     onClose: func,
     title: string,
     infoDate: string,
-    reminderID: number,
-    isModal: bool
+    reminderID: number
   }
 
   @observable tenderID = -1
@@ -46,7 +45,7 @@ export default class Reminder extends Component {
     if (!reminderID) {
       this.tenderID = tenderID
       this.subject = title
-      this.reminderDate = infoDate != null ? moment(infoDate, 'YYYY-MM-DD HH:mm:ss').format('DD-MM-YYYY') : moment()
+      this.reminderDate = infoDate != null ? moment(infoDate, 'YYYY-MM-DD HH:mm:ss').format('DD-MM-YYYY') : moment().format('DD-MM-YYYY')
       this.time = '00:00'
       this.remark = ''
     }
@@ -106,11 +105,11 @@ export default class Reminder extends Component {
   }
 
   addReminder = () => {
-    //temp until DatePicker implementation... note, take from DD-MM-YYYY HH:mm format
-    const _date = moment(`${this.reminderDate} ${this.time}`, 'DD-MM-YYYY HH:mm').format('YYYY-MM-DD HH:mm:ss')
-    //console.log(_date)
+    //take from DD-MM-YYYY HH:mm format
+    const selectedDate = moment(`${this.reminderDate} ${this.time}`, 'DD-MM-YYYY HH:mm').format('YYYY-MM-DD HH:mm:ss')
+    console.log(this.reminderDate, selectedDate)
     const action = this.reminderID > 0 ? 'Update' : 'Add'
-    setReminder(action, this.reminderID, this.tenderID, this.remark, this.subject, this.email, _date).then(saved => {
+    setReminder(action, this.reminderID, this.tenderID, this.remark, this.subject, this.email, selectedDate).then(saved => {
       console.log('saved status:', saved) //implement if user should know something about save op
       clearCache()
       this.props.onClose(-1, true) //...close the modal
@@ -129,24 +128,21 @@ export default class Reminder extends Component {
   }
 
   render() {
-    const {onClose, infoDate, isModal, t} = this.props
+    const {onClose, infoDate, t} = this.props
     const title = this.subject
     const dateVal = moment(this.reminderDate, 'DD-MM-YYYY').format('DD-MM-YYYY')
     const timeVal = this.time != '' ? this.time : moment(this.reminderDate, 'DD-MM-YYYY').format('HH:mm')
     const infoDateVal = infoDate != null ? moment(infoDate, 'YYYY-MM-DD HH:mm:ss').format('DD-MM-YYYY') : t('reminder.noDate')
-    const revealClass = isModal ? 'reveal-overlay' : ''
-    const revealClass2 = isModal ? 'reveal' : ''
-    //console.log('render reminder', this.reminderDate)
+
     return (
-      <div className={revealClass} style={{display: 'block', zIndex: 1100}}>
-        <div className={revealClass2} styleName="reminder_lb" style={{display: 'block'}}>
-          {isModal && <button styleName="button-cancel" onClick={onClose}>×</button>}
-          {isModal && <div className="grid-x grid-margin-x" styleName="pb">
+      <div className="reveal-overlay" style={{display: 'block', zIndex: 1100}}>
+        <div className="reveal" styleName="reminder_lb" style={{display: 'block'}}>
+          <button styleName="button-cancel" onClick={() => onClose(-1)}>×</button>
+          <div className="grid-x grid-margin-x" styleName="pb">
             <div className="small-12 cell">
               <h2 styleName="remider_ttl">{t('reminder.title')}</h2>
             </div>
-          </div>}
-          {!isModal && <a onClick={() => onClose(-1)}>&rarr; {t('reminders.back')}</a>}
+          </div>
 
           <div className="grid-x grid-margin-x" styleName="pb">
             <div className="small-12 cell">

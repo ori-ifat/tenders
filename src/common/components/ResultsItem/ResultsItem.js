@@ -220,7 +220,6 @@ export default class ResultsItem extends React.Component {
             title={item.Title}
             infoDate={item.InfoDate}
             reminderID={item.ReminderID}
-            isModal={true}
           />
         }
         {this.showLoginMsg &&

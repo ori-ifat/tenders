@@ -23,14 +23,18 @@ export default class Reminders extends Component {
 
   @observable itemId = -1
 
-  selectItem = (itemId, update) => {  
+  selectItem = (itemId, update) => {
     this.itemId = itemId
     if (itemId == -1 && update) {
-      //called for update\delete - reload items
-      const {remindersStore} = this.props
-      remindersStore.results.clear()
-      remindersStore.loadAllReminders()
+      this.reloadItems()
     }
+  }
+
+  reloadItems = () => {
+    //called for update\delete - reload items
+    const {remindersStore} = this.props
+    remindersStore.results.clear()
+    remindersStore.loadAllReminders()
   }
 
   render() {
@@ -50,7 +54,7 @@ export default class Reminders extends Component {
         </div>
         <div className="row">
           <div className="column large-12">
-            {!resultsLoading && this.itemId == -1 && results.map((reminder, index) =>
+            {!resultsLoading && results.map((reminder, index) =>
               <ReminderItem
                 key={index}
                 reminderID={reminder.ReminderID}
@@ -58,7 +62,7 @@ export default class Reminders extends Component {
                 date={reminder.ReminderDate}
                 infoDate={reminder.InfoDate}
                 selectItem={this.selectItem}
-                isSelected={this.itemId == reminder.ReminderID}
+                reload={this.reloadItems}
               />
             )}
             {this.itemId > -1 && !remindersStore.reminderLoading &&
@@ -66,7 +70,6 @@ export default class Reminders extends Component {
                 <Reminder
                   onClose={this.selectItem}
                   reminderID={this.itemId}
-                  isModal={false}
                 />
               </div>
             }
