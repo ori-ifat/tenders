@@ -4,6 +4,9 @@ import ImageViewer from 'react-image-viewer-zoom'
 import 'react-image-viewer-zoom/dist/style.css'
 import './style.scss'
 
+const req = require.context('common/style/icons/', false)
+const closeSrc = req('./close.svg')
+
 class ImageView extends Component {
 
   static propTypes = {
@@ -21,13 +24,13 @@ class ImageView extends Component {
 
     return (
       <div>
-        <a onClick={this.props.onClose} className="image-close-button">X</a>
         <ImageViewer
           showPreview={true}
-         	showIndex={true}
+         	showIndex={false}
           prefixCls="react-image-viewer"
           activeIndex={0}
           images={images} />
+
       </div>
     )
   }
