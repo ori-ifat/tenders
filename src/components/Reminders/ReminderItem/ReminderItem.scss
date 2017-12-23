@@ -1,8 +1,29 @@
+@import '~common/style/_settings.scss';
+
 .record {
-  padding: 5px;
-  margin: 1px;
-  border-bottom: #c1bcbc 1px solid;
-  direction: rtl;
+    position: relative;
+    margin-top: 1.5rem;
+    background: #FFFFFF;
+    border: 1px solid transparent;
+    box-shadow: 1px 1px 2px 0 rgba(0, 0, 0, 0.2);
+    transition: all 0.25s;
+    padding: 1rem;
+    span {
+      font-family: 'Heebo', sans-serif;
+      color: $dark-gray;
+      font-size: 0.9rem;
+      padding-left: 0.75rem;
+      border-left: 1px solid $light-gray;
+      line-height: 0.9rem;
+    }
+    a {
+      font-size: 0.9rem;
+      margin-right: 0.75rem;
+      color: $dark-gray;
+      &:hover {
+        text-decoration: underline;
+      }
+    }
 }
 
 .selected {
@@ -14,19 +35,20 @@
   zoom: 0
 }
 
-.record-title {
-  width: 80%;
-  float: right;
-}
-
-.record-date {
-  width: 20%;
-  float: left;
-  margin-top: 3px;
-  color: gray;
-}
-
 .record-infodate {
-  font-size: 0.8rem;
-  color: gray;
+  display: block;
+  font-size: 1.125rem;
+  font-weight: 500;
+  margin-bottom: 0;
+}
+
+.time {
+  border-left: 0px solid transparent !important;
+}
+
+.record-title {
+  font-size: 1.25rem;
+  font-weight: 500;
+  margin-bottom: 0;
+
 }

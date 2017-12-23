@@ -6,6 +6,9 @@ import {setReminder, clearCache} from 'common/services/apiService'
 import CSSModules from 'react-css-modules'
 import styles from './ReminderItem.scss'
 
+const req = require.context('common/style/icons/', false)
+const alertSrc = req('./alert.svg')
+
 @translate()
 @CSSModules(styles, {allowMultiple: true})
 export default class ReminderItem extends React.Component {
@@ -36,12 +39,22 @@ export default class ReminderItem extends React.Component {
 
     return (
       <div styleName="record">
-        <div styleName="clearfix">
-          <h5 styleName="record-title">{title}</h5><h6 styleName="record-date">{reminderDate}</h6>
+        <div className="grid-x">
+          <div className="large-2 cell">
+
+            <h3 styleName="record-infodate">{reminderDate}</h3>
+            <span styleName="time">10:50</span>
+          </div>
+          <div className="large-10 cell">
+
+            <h3 styleName="record-title">{title}</h3>
+            <span> {`${t('reminders.infoDate')} ${moment(infoDate, 'YYYY-MM-DD HH:mm').format('DD/MM/YY')}`}</span>
+            <a onClick={() => selectItem(reminderID)}>ערוך</a>
+            <a onClick={() => this.delReminder(reminderID)} style={{paddingLeft: '10px'}}>מחק</a>
+          </div>
+
+
         </div>
-        <h6 styleName="record-infodate">{`${t('reminders.infoDate')} ${moment(infoDate, 'YYYY-MM-DD HH:mm').format('DD/MM/YY')}`}</h6>
-        <a onClick={() => selectItem(reminderID)}>edit</a>
-        <a onClick={() => this.delReminder(reminderID)} style={{paddingLeft: '10px'}}>delete</a>
       </div>
     )
   }
