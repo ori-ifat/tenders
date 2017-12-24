@@ -25,7 +25,6 @@ const navbar = [  {
 }]
 
 @translate()
-@inject('translationsStore')
 @inject('routingStore')
 @inject('accountStore')
 @CSSModules(styles)

@@ -1,5 +1,5 @@
 //@import '~app/global.scss';
-/* NOTE need to import '~app/global.scss' only on top-level, on app/index!! 
+/* NOTE need to import '~app/global.scss' only on top-level, on app/index!!
 if only settings are needed, import '~common/style/_settings.scss' instead. this will drasticlly improve css size */
 //@import '~common/style/_settings.scss'
 // Header
@@ -118,6 +118,7 @@ if only settings are needed, import '~common/style/_settings.scss' instead. this
 
 .menu {
 	justify-content: flex-end;
+	z-index: 1000;
 }
 
 .top-bar {

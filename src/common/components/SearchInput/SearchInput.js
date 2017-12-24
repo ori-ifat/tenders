@@ -12,8 +12,9 @@ const req = require.context('common/style/icons/', false)
 const search_go = req('./search_go.svg')
 
 @translate()
-@inject('translationsStore')
 @inject('routingStore')
+@inject('searchStore')
+@inject('recordStore')
 @observer
 @CSSModules(styles)
 export default class SearchInput extends Component {
@@ -89,6 +90,21 @@ export default class SearchInput extends Component {
     routingStore.push(`/results/${sort}/${payload}/[]`)
   }
 
+  onSearchClick = () => {
+    const {searchStore, recordStore} = this.props
+    const sort = 'publishDate'  //default sort - see above
+    const tags = JSON.stringify(this.selectedValues)
+    searchStore.applySort(sort)
+    searchStore.applyTags(tags)
+    searchStore.clearFilterLabels()
+    searchStore.applyFilters('[]')
+    recordStore.cleanChecked()
+    //searchStore.clearResults()
+    searchStore.fromRoute = true  //raise route flag - behave same as on route
+    searchStore.loadNextResults()
+    searchStore.loadNextFilters()
+  }
+
   render() {
     const selectedValues = toJS(this.selectedValues)
     const {t} = this.props
@@ -97,7 +113,7 @@ export default class SearchInput extends Component {
       <div className="row">
         <div className="medium-12 columns">
           <div id="searchbox_wrapper" styleName="wrapper">
-          <a styleName="search_btn"><img src={search_go}/></a>
+            <a styleName="search_btn" onClick={this.onSearchClick}><img src={search_go}/></a>
             <Select.Async
               styleName="select-searchbox"
               className="search-select"
