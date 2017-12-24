@@ -1,3 +1,5 @@
+@import '~common/style/_settings.scss';
+
 .title-container {
   margin-top: 40px;
 }
@@ -15,12 +17,12 @@
   line-height: 1.1;
 }
 
-.input-value {
-  width: 50% !important;
+.btn_container {
+  text-align: left;
 }
 
 .button-submit {
-  float: left;
+
   background-color: #34b44f;
   color: white;
   padding: 0.75rem 1.5rem;
@@ -31,23 +33,54 @@
 }
 
 .errors {
-  font-family: 'Rubik', sans-serif;
   font-size: 1rem;
-  font-weight: 700;
+  font-weight: 400;
   color: #e02113;
-  /*text-shadow: 0 2px 3px rgba(0, 0, 0, 0.2);*/
-  margin-bottom: 1rem;
   padding-bottom: 0.5rem;
-  line-height: 1.1;
+  line-height: 1.2;
+  display: block;
 }
 
 .sent {
-  font-family: 'Rubik', sans-serif;
-  font-size: 1rem;
-  font-weight: 700;
-  color: #2196F3;
-  text-shadow: 0 2px 3px rgba(0, 0, 0, 0.2);
-  margin-bottom: 1rem;
-  padding-bottom: 0.5rem;
-  line-height: 1.1;
+  display: none;
+}
+
+.wraper {
+    background: #FFFFFF;
+    box-shadow: 0 2px 8px 0 rgba(0,0,0,0.20);
+    border-radius: 4px;
+    padding: 2rem 3rem 2.5rem 3rem;
+    margin-bottom: 3rem;
+    h2 {
+      font-size: 1.5rem;
+      font-weight: 500;
+      border-bottom: 2px solid $light-gray;
+      margin-bottom: 2rem;
+
+    }
+    .input-value {
+      display: block;
+      margin-bottom: 1.5rem;
+    }
+    .pl {
+      padding-left: 1.5rem;
+    }
+    .pr {
+      padding-right: 1.5rem;
+    }
+
+    .tender {
+      margin-bottom: 2rem;
+    }
+}
+.promoWraper {
+  margin-bottom: 0.5rem;
+  h4 {
+    font-weight: 500;
+    font-size: 1.5rem;
+  }
+  padding: 1rem;
+  p.promo {
+    display: block;
+  }
 }

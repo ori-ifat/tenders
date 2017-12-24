@@ -9,6 +9,9 @@ import Calendar from 'common/components/Calendar'
 import CSSModules from 'react-css-modules'
 import styles from './publish.scss'
 
+const req = require.context('common/style/icons/', false)
+const addSrc = req('./add.svg')
+
 @translate()
 @withRouter
 @observer
@@ -78,7 +81,7 @@ export default class Publish extends Component {
   }
 
   publishTender = () => {
-    const {t} = this.props    
+    const {t} = this.props
     this.sent = false
     this.status = ''
     let errors = ''
@@ -132,121 +135,107 @@ export default class Publish extends Component {
             <h1 styleName="title">{t('publish.title')}</h1>
           </div>
         </div>
+
         <div className="row">
-          <div className="column large-12">
-            <h4 styleName={style} dangerouslySetInnerHTML={{__html: this.status}}></h4>
-          </div>
-        </div>
-        <div className="row">
-          <div className="column large-3">
-            <span>{t('publish.firstName')}:</span>
-          </div>
-          <div className="column large-9">
-            <input type="text" name="firstName" styleName="input-value" onChange={this.onChange} />
-          </div>
-        </div>
-        <div className="row">
-          <div className="column large-3">
-            <span>{t('publish.lastName')}:</span>
-          </div>
-          <div className="column large-9">
-            <input type="text" name="lastName" styleName="input-value" onChange={this.onChange} />
-          </div>
-        </div>
-        <div className="row">
-          <div className="column large-3">
-            <span>{t('publish.companyName')}:</span>
-          </div>
-          <div className="column large-9">
-            <input type="text" name="companyName" styleName="input-value" onChange={this.onChange} />
-          </div>
-        </div>
-        <div className="row">
-          <div className="column large-3">
-            <span>{t('publish.companyPhone')}:</span>
-          </div>
-          <div className="column large-9">
-            <input type="tel" name="companyPhone" styleName="input-value" onChange={this.onChange} />
-          </div>
-        </div>
-        <div className="row">
-          <div className="column large-3">
-            <span>{t('publish.toDate')}:</span>
-          </div>
-          <div className="column large-2" style={{paddingBottom: '0.5rem', marginBottom: '0.4rem'}}>
-            <Calendar
-              name="endDate"
-              defaultDate={this.endDate}
-              todayLabel={t('filter.today')}
-              selectDate={this.selectDate}
-              showMonths={true}
-              showYears={true}
-            />
-          </div>
-        </div>
-        <div className="row">
-          <div className="column large-3">
-            <span>{t('publish.toTime')}:</span>
-          </div>
-          <div className="column large-2">
-            <input type="time" name="toTime" onChange={this.onChange} />
-          </div>
-        </div>
-        <div className="row">
-          <div className="column large-3">
-            <span>{t('publish.email')}:</span>
-          </div>
-          <div className="column large-9">
-            <input type="email" name="email" styleName="input-value" onChange={this.onChange} />
-          </div>
-        </div>
-        <div className="row">
-          <div className="column large-3">
-            <span>{t('publish.phone')}:</span>
-          </div>
-          <div className="column large-9">
-            <input type="tel" name="phone" styleName="input-value" onChange={this.onChange} />
-          </div>
-        </div>
-        <div className="row">
-          <div className="column large-3">
-            <span>{t('publish.fax')}:</span>
-          </div>
-          <div className="column large-9">
-            <input type="tel" name="fax" styleName="input-value" onChange={this.onChange} />
-          </div>
-        </div>
-        <div className="row">
-          <div className="column large-3">
-            <span>{t('publish.address')}:</span>
-          </div>
-          <div className="column large-9">
-            <input type="text" name="address" styleName="input-value" onChange={this.onChange} />
-          </div>
-        </div>
-        <div className="row">
-          <div className="column large-3">
-            <span>{t('publish.tenderTitle')}:</span>
-          </div>
-          <div className="column large-9">
-            <input type="text" name="title" styleName="input-value" onChange={this.onChange} />
-          </div>
-        </div>
-        <div className="row">
-          <div className="column large-3">
-            <span>{t('publish.tenderDesc')}:</span>
-          </div>
-          <div className="column large-9">
-            <textarea name="description" styleName="input-value" style={{height: '300px'}} onChange={this.onChange} />
-          </div>
-        </div>
-        <div className="row" style={{paddingBottom: '0.5rem', marginBottom: '1rem'}}>
           <div className="column large-8">
-            <button styleName="button-submit" onClick={this.publishTender}>{t('publish.submit')}</button>
+            <div styleName="wraper">
+              <div className="callout alert" styleName={style}>
+                <p styleName={style} dangerouslySetInnerHTML={{__html: this.status}}></p>
+              </div>
+              <div styleName="tender">
+                <h2>פרטי המכרז</h2>
+                <span>{t('publish.tenderTitle')}:</span>
+                <input type="text" name="title" styleName="input-value" onChange={this.onChange} />
+                <span>{t('publish.tenderDesc')}:</span>
+                <textarea name="description" styleName="input-value" style={{height: '300px'}} onChange={this.onChange} />
+              </div>
+
+              <h2>פרטים אישיים</h2>
+              <div className="grid-x">
+                <div styleName="pl" className="medium-6 cell">
+                  <span>{t('publish.firstName')}:</span>
+                  <input type="text" name="firstName" styleName="input-value" onChange={this.onChange} />
+                </div>
+                <div styleName="pr" className="medium-6 cell">
+                  <span>{t('publish.lastName')}:</span>
+                  <input type="text" name="lastName" styleName="input-value" onChange={this.onChange} />
+                </div>
+              </div>
+
+              <div className="grid-x">
+                <div styleName="pl" className="medium-6 cell">
+                  <span>{t('publish.companyName')}:</span>
+                  <input type="text" name="companyName" styleName="input-value" onChange={this.onChange} />
+                </div>
+                <div styleName="pr" className="medium-6 cell">
+                  <span>{t('publish.companyPhone')}:</span>
+                  <input type="tel" name="companyPhone" styleName="input-value" onChange={this.onChange} />
+                </div>
+              </div>
+
+              <div className="grid-x">
+                <div styleName="pl" className="medium-6 cell">
+                  <span>{t('publish.toDate')}:</span>
+                  <div style={{paddingBottom: '0.5rem', marginBottom: '0.4rem'}}>
+                    <Calendar
+                      name="endDate"
+                      defaultDate={this.endDate}
+                      todayLabel={t('filter.today')}
+                      selectDate={this.selectDate}
+                      showMonths={true}
+                      showYears={true}
+                    />
+                  </div>
+                </div>
+                <div styleName="pr" className="medium-6 cell">
+                  <span>{t('publish.toTime')}:</span>
+                  <input type="time" name="toTime" onChange={this.onChange} />
+                </div>
+              </div>
+
+              <div className="grid-x">
+                <div styleName="pl" className="medium-6 cell">
+                  <span>{t('publish.email')}:</span>
+                  <input type="email" name="email" styleName="input-value" onChange={this.onChange} />
+                </div>
+                <div styleName="pr" className="medium-6 cell">
+                  <span>{t('publish.phone')}:</span>
+                  <input type="tel" name="phone" styleName="input-value" onChange={this.onChange} />
+                </div>
+              </div>
+
+              <div className="grid-x">
+                <div styleName="pl" className="medium-6 cell">
+                  <span>{t('publish.fax')}:</span>
+                  <input type="tel" name="fax" styleName="input-value" onChange={this.onChange} />
+                </div>
+                <div styleName="pr" className="medium-6 cell">
+                  <span>{t('publish.address')}:</span>
+                  <input type="text" name="address" styleName="input-value" onChange={this.onChange} />
+                </div>
+              </div>
+              <div styleName="btn_container">
+                <button className="left" styleName="button-submit" onClick={this.publishTender}>{t('publish.submit')}</button>
+              </div>
+
+            </div>
           </div>
           <div className="column large-4">
-            &nbsp;
+            <div styleName="promoWraper">
+              <h4>הגיעו לאלפי ספקיי שרות</h4>
+              <p styleName="promo">
+                  יפעת מכרזים מציגה בפנייך אפשרות מתאימה לכל חברה קטנה או גדולה, הגשת בקשה להצעת מחיר בחינם לכל שירות או מטרה וקבלת הצעות מחיר מספקים ונותני שירותים הרשומים במערכת.
+              </p>
+            </div>
+
+            <div styleName="promoWraper">
+              <h4>לורם איפסום</h4>
+              <p styleName="promo">
+                  יפעת מכרזים מציגה בפנייך אפשרות מתאימה לכל חברה קטנה או גדולה, הגשת בקשה להצעת מחיר בחינם לכל שירות או מטרה וקבלת הצעות מחיר מספקים ונותני שירותים הרשומים במערכת.
+              </p>
+            </div>
           </div>
+
         </div>
       </div>
     )
