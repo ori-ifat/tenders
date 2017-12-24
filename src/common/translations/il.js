@@ -178,6 +178,8 @@ export default {
     title: 'תזכורות',
     infoDate: 'ת. הגשה',
     today: 'היום',
-    back: 'חזור לתזכורות'
+    back: 'חזור לתזכורות',
+    edit: 'ערוך',
+    delete: 'מחק'
   }
 }

@@ -24,6 +24,7 @@ class ImageView extends Component {
 
     return (
       <div>
+        <a onClick={this.props.onClose} className="close-button-img">X</a>
         <ImageViewer
           showPreview={true}
          	showIndex={false}

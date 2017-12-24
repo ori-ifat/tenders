@@ -33,24 +33,26 @@ export default class ReminderItem extends React.Component {
   render() {
     const { reminderID, title, date, infoDate, selectItem, isSelected, t } = this.props
     //determine the date tabel
+    const timeVal = moment(date, 'YYYY-MM-DD HH:mm').format('HH:mm')
     const reminderDate = moment(date, 'YYYY-MM-DD HH:mm').startOf('day').isSame(moment().startOf('day')) ?
-      `${t('reminders.today')} ${moment(date, 'YYYY-MM-DD HH:mm').format('HH:mm')}` :
+      `${t('reminders.today')} ${timeVal}` :
       moment(date, 'YYYY-MM-DD HH:mm').format('DD/MM/YY')
 
+    const infoDateVal = infoDate ? moment(infoDate, 'YYYY-MM-DD HH:mm').format('DD/MM/YY') : t('reminder.noDate')
     return (
       <div styleName="record">
         <div className="grid-x">
           <div className="large-2 cell">
 
             <h3 styleName="record-infodate">{reminderDate}</h3>
-            <span styleName="time">10:50</span>
+            <span styleName="time">{timeVal}</span>
           </div>
           <div className="large-10 cell">
 
-            <h3 styleName="record-title">{title}</h3>
-            <span> {`${t('reminders.infoDate')} ${moment(infoDate, 'YYYY-MM-DD HH:mm').format('DD/MM/YY')}`}</span>
-            <a onClick={() => selectItem(reminderID)}>ערוך</a>
-            <a onClick={() => this.delReminder(reminderID)} style={{paddingLeft: '10px'}}>מחק</a>
+            <h3 styleName="record-title" onClick={() => selectItem(reminderID)}>{title}</h3>
+            <span> {`${t('reminders.infoDate')} ${infoDateVal}`}</span>
+            <a onClick={() => selectItem(reminderID)}>{t('reminders.edit')}</a>
+            <a onClick={() => this.delReminder(reminderID)} style={{paddingLeft: '10px'}}>{t('reminders.delete')}</a>
           </div>
 
 

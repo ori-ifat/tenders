@@ -39,7 +39,7 @@
       border: 0px solid transparent !important;
       background: transparent !important;
       &:hover {
-        
+
       }
 
       &:before{
@@ -67,8 +67,9 @@
     background-color: #44C960;
     color: white;
     padding: 10px;
-    right: 0px;
-    top: 0px;
+    position: absolute;
+    right: 20px;
+    top: -617px;
     z-index: 1600 !important;
   }
 
