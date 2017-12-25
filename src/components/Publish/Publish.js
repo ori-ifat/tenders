@@ -117,10 +117,10 @@ export default class Publish extends Component {
       const toDate = moment(`${toDateVal} ${this.toTime}`, 'YYYY-MM-DD HH:mm').format('YYYY-MM-DD HH:mm:ss')
       publishTender(this.firstName, this.lastName, this.companyName, this.companyPhone,
         toDate, this.email, this.phone, this.fax, this.address, this.title, this.description).then(res => {
-        //console.log(res)
         //show a message
         this.sent = true
         this.status = t('publish.sentSuccessfully')
+        console.log(res, this.sent, this.status)
       })
     }
   }
@@ -139,18 +139,20 @@ export default class Publish extends Component {
         <div className="row">
           <div className="column large-8">
             <div styleName="wraper">
+              {this.status != '' &&
               <div className="callout alert" styleName={style}>
                 <p styleName={style} dangerouslySetInnerHTML={{__html: this.status}}></p>
               </div>
+              }
               <div styleName="tender">
-                <h2>פרטי המכרז</h2>
+                <h2>{t('publish.titleSection1')}</h2>
                 <span>{t('publish.tenderTitle')}:</span>
                 <input type="text" name="title" styleName="input-value" onChange={this.onChange} />
                 <span>{t('publish.tenderDesc')}:</span>
                 <textarea name="description" styleName="input-value" style={{height: '300px'}} onChange={this.onChange} />
               </div>
 
-              <h2>פרטים אישיים</h2>
+              <h2>{t('publish.titleSection2')}</h2>
               <div className="grid-x">
                 <div styleName="pl" className="medium-6 cell">
                   <span>{t('publish.firstName')}:</span>
@@ -222,16 +224,16 @@ export default class Publish extends Component {
           </div>
           <div className="column large-4">
             <div styleName="promoWraper">
-              <h4>הגיעו לאלפי ספקיי שרות</h4>
+              <h4>{t('publish.promo1')}</h4>
               <p styleName="promo">
-                  יפעת מכרזים מציגה בפנייך אפשרות מתאימה לכל חברה קטנה או גדולה, הגשת בקשה להצעת מחיר בחינם לכל שירות או מטרה וקבלת הצעות מחיר מספקים ונותני שירותים הרשומים במערכת.
+                {t('publish.promoDetails1')}
               </p>
             </div>
 
             <div styleName="promoWraper">
-              <h4>לורם איפסום</h4>
+              <h4>{t('publish.promo2')}</h4>
               <p styleName="promo">
-                  יפעת מכרזים מציגה בפנייך אפשרות מתאימה לכל חברה קטנה או גדולה, הגשת בקשה להצעת מחיר בחינם לכל שירות או מטרה וקבלת הצעות מחיר מספקים ונותני שירותים הרשומים במערכת.
+                {t('publish.promoDetails2')}
               </p>
             </div>
           </div>

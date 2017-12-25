@@ -55,7 +55,7 @@ export default class Results extends Component {
               <div className="cell large-3">
                 <hr />
                 <Filters />
-                <Banners />
+                {/*<Banners />*/}
               </div>
               <div className="cell large-9">
                 <hr />
