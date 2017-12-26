@@ -40,7 +40,9 @@ export function doFilter(searchStore, field, values, itemLabels, close, closeMod
 }
 
 export function getDefaultFilter(isEmpty) {
-  const dateBack = moment().subtract(1, 'years').format('YYYY-MM-DD')
+  //isEmpty = empty search (no tags)
+  const dateBack = isEmpty ? moment().subtract(1, 'week').format('YYYY-MM-DD')
+    : moment().subtract(1, 'years').format('YYYY-MM-DD')
   const field = isEmpty ? 'publishdate' : 'inputdate'
   return {field, values:[dateBack]}
 }
