@@ -13,16 +13,19 @@ const logoSrc = req('./logo.png')
 const navIconSrc = req('./nav_icon.svg')
 const userSrc = req('./user.svg')
 
-const navbar = [  {
+const navbar = [  /*{
   title: 'subscriptions',
   link: '/subscriptions'
-}, {
-  title: 'contactus',
-  link: '/contact'
-}, {
-  title: 'publish',
-  link: '/publish'
-}]
+},*/ {
+    title: 'smartagent',
+    link: '/smartagent'
+  }, {
+    title: 'contactus',
+    link: '/contact'
+  }, {
+    title: 'publish',
+    link: '/publish'
+  }]
 
 @translate()
 @inject('routingStore')

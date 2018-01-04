@@ -1,0 +1,43 @@
+
+.buttons_cont {
+  text-align: left;
+  padding-bottom: 1.5rem;
+  padding-top: 1rem;
+}
+
+.definition_ttl {
+  font-weight: 500;
+}
+
+.pb {
+  padding-bottom: 0.75rem;
+  span {
+    font-size: rem-calc(15);
+    color: #8a8a8a;
+    margin-bottom: 0.25rem;
+    display: block;
+  }
+}
+
+.definition_lb {
+  padding: 1.5rem  2.5rem !important;
+  overflow: initial !important;
+  max-width: 32rem !important;
+}
+
+.button-cancel {
+  position: absolute;
+  top: 1rem;
+  left: 1rem;
+  font-size: 1.5rem;
+}
+
+.button-submit {
+  background-color: #34b44f;
+  color: white;
+  padding: 0.75rem 1.5rem;
+  border-radius: 4px;
+  font-family: 'Rubik', sans-serif;
+  font-weight: 600;
+  font-size: 1rem;
+}

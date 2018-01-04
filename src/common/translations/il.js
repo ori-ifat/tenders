@@ -14,6 +14,7 @@ export default {
   nav: {
     logoAlt: 'לוגו מכרזים',
     subscriptions: 'מסלולים',
+    smartagent: 'הגדרות סוכן',
     contactus: 'צור קשר',
     publish: 'פרסם מכרז',
     favorites: 'מועדפים',
@@ -187,5 +188,21 @@ export default {
     back: 'חזור לתזכורות',
     edit: 'ערוך',
     delete: 'מחק'
+  },
+  agent: {
+    title: 'הגדרות סוכן חכם',
+    reminderTime: 'מועדי קבלת התראות',
+    immediately: 'ברגע שהמכרזים מופיעים במערכת',
+    daily: 'אחת ליום בשעה 20:00',
+    destination: 'יעדי קבלת ההתראות',
+    queries: 'שאילתות הסוכן',
+    branch: 'ענף',
+    words: 'מילים',
+    definitionTitle: 'עריכת הגדרה',
+    infoTypes: 'סוגי מידע',
+    email: 'מייל',
+    phone: 'טלפון',
+    submit: 'שמור הגדרות',
+    definitionSubmit: 'שמור הגדרה'
   }
 }

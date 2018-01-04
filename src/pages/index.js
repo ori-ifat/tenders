@@ -11,6 +11,7 @@ import FavoritesPage from 'pages/favorites'
 import RemindersPage from 'pages/reminders'
 import CategoryPage from 'pages/category'
 import PublishPage from 'pages/publish'
+import SmartAgentPage from 'pages/smartagent'
 import NotFound404 from 'pages/notFound404'
 
 class Pages extends React.Component {
@@ -40,6 +41,9 @@ class Pages extends React.Component {
           </Route>
           <Route path="/tender/:itemId">
             {this.ensureAuthentication(TenderPage)}
+          </Route>
+          <Route path="/smartagent">
+            {this.ensureAuthentication(SmartAgentPage)}
           </Route>
           <Route path="/favorites">
             {this.ensureAuthentication(FavoritesPage)}
