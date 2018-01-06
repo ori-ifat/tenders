@@ -91,7 +91,7 @@ export default class TenderTypeFilter extends React.Component {
               this.items.map(((item, index) =>
                 <div className="checkbox" key={index}>
                   <input type="checkbox"
-                    className="checkbox_tender"
+                    className="checkbox"
                     checked={this.selected.includes(item.TenderTypeID)}
                     name={item.TenderTypeName}
                     value={item.TenderTypeID}

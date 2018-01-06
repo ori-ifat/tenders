@@ -41,11 +41,11 @@ export default class ExtraCount extends React.Component {
     const { total, t } = this.props
     const count = this.extraCount
     //if extraCount equals to the total results count, hide the div
-    const style = count == total || this.loading ? 'extra-div hide' : 'extra-div'
+    const style = count == total || this.loading ? 'extra hide' : 'extra'
     return (
-      <div styleName={style}>
+      <span styleName={style}>
         {t('results.extraData', {count})}
-      </div>
+      </span>
     )
   }
 }

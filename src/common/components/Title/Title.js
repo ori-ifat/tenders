@@ -28,7 +28,7 @@ export default class Title extends React.Component {
     return (
       <div className="row">
         <div className="large-12 columns">
-          <h1 styleName={titleStyle}><span>{this.count}</span> {title} </h1>
+          <h1 styleName={titleStyle}><span styleName="num">{this.count}</span> {title}
           {!resultsLoading &&
             store.filters &&
             store.filters.length == 0
@@ -38,7 +38,9 @@ export default class Title extends React.Component {
             <ExtraCount
               total={resultsCount}
             />
+
           }
+          </h1>
         </div>
 
       </div>
