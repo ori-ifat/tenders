@@ -1,3 +1,23 @@
+@import '~common/style/_settings.scss';
 .filter_container {
-	padding-top: 5.75rem;
+	padding-top: 1.5rem;
+}
+.filter_ttl {
+	position: relative;
+	.clean {
+		position: absolute;
+		left: 0;
+		font-size: 15px;
+		color: $dark-gray;
+		&:hover {
+			color: $green;
+		}
+	}
+	h4 {
+		font-weight: 600;
+		font-family: 'Heebo', sans-serif;
+		font-size: 15px;
+		margin-bottom: 2rem;
+
+	}
 }

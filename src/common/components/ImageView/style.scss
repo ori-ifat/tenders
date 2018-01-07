@@ -64,13 +64,15 @@
   }
 
   .close-button-img {
-    background-color: #44C960;
+    background-color: #000;
     color: white;
-    padding: 10px;
-    position: absolute;
-    right: 20px;
-    top: -617px;
+    text-align: center;
+    border-radius: 2px;
+    position: fixed;
+    left: 1rem;
+    top: 1rem;
     z-index: 1600 !important;
+    padding: 5px 8px 6px 8px;
   }
 
 

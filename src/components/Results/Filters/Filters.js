@@ -84,8 +84,13 @@ export default class Filters extends React.Component {
     //console.log('filters', toJS(searchStore.availableFilters))
     return(
       <div styleName="filter_container">
+        <div styleName="filter_ttl">
+          <a styleName="clean" onClick={this.cleanFilters}>נקה</a>
+          <h4>הגדרות חיפוש:</h4>
+        </div>
         {filtersLoading && <div>Loading...</div>}
         {!filtersLoading &&
+
           <div>
             <MultipleFilter
               type="subsubjects"
@@ -111,7 +116,7 @@ export default class Filters extends React.Component {
             <SearchTextFilter
               text={text}
             />
-            <a onClick={this.cleanFilters}>Clean</a>
+
           </div>
         }
       </div>

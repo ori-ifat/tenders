@@ -174,33 +174,40 @@ export default class MultipleFilter extends React.Component {
       <div styleName="cb-wrapper">
 
         {this.open &&
-          <div className="reveal-overlay" style={{display: 'block'}}>
-            <div className="reveal tiny" style={{display: 'block'}}>
-              <div>
-                <h2>{title}</h2>
-                <input type="text" onChange={this.filterItems} />
+          <div className="reveal-overlay"  style={{display: 'block'}}>
+            <div className="reveal" styleName="multipal-selection" style={{display: 'block'}}>
+              <div styleName="">
+                <h2>{title}
+                  <div styleName="selectAll_links">
+                    <a>בחר הכל</a><span styleName="sep">|</span>
+                    <a>נקה הכל</a>
+                  </div>
+                </h2>
+                <input type="text" placeholder="חפש" onChange={this.filterItems} />
                 {this.type == 'subsubjects' && <div>
-                  <input type="checkbox" onChange={this.onCheckAll} checked={this.allChecked} />
-                  <label styleName="cb-label">{t('filter.selectAll')}</label>
+
+
                 </div>}
                 <div style={{height: '300px', overflow: 'auto'}}>
                   {
                     this.items.map(((item, index) => {
                       const id = this.type == 'subsubjects' ? item.SubSubjectID : item.PublisherID
                       const name = this.type == 'subsubjects' ? item.SubSubjectName : item.PublisherName
-                      return <div key={index}>
+                      return <div styleName="checkbox" key={index}>
+                      <label styleName="cb-label">
                         <input type="checkbox"
+                          styleName="checkbox"
                           checked={this.selected.includes(id)}
                           name={name}
                           value={id}
                           onChange={this.onCheck}
-                        />
-                        <label styleName="cb-label">{name}</label>
+                          />
+                        <span>{name}</span></label>
                       </div>}), this
                     )
                   }
                 </div>
-                <div>
+                <div styleName="selected">
                   {
                     take(this.itemLabels, 2).map((item, index) =>
                       <div key={index} styleName="selected-tile">{item}</div>
@@ -212,8 +219,8 @@ export default class MultipleFilter extends React.Component {
                   }
                 </div>
                 <div styleName="button-container">
-                  <a styleName="button-cancel" onClick={this.closeModal}>{t('filter.cancel')}</a>
-                  <a styleName="button-submit" onClick={this.doFilter}>{t('filter.choose')}</a>
+                  <a  styleName="button-cancel" onClick={this.closeModal}>{t('filter.cancel')}</a>
+                  <a className="button" styleName="button-submit" onClick={this.doFilter}>{t('filter.choose')}</a>
                 </div>
               </div>
             </div>

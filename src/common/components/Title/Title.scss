@@ -5,12 +5,11 @@
 	margin-top: 4rem;
 	font-size: 2.5rem;
 	color: $black;
-	float: right;
-	span {
+	span.num {
 		font-size: 2.15rem;
 	}
 }
 
 .loading {
-	opacity: 0.25
+	opacity: 0.15
 }
