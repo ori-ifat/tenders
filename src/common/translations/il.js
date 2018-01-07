@@ -161,6 +161,7 @@ export default {
     submit: 'שמור תזכורת'
   },
   filter: {
+    title: 'הגדרות חיפוש',
     subSubjectsTitle: 'בחר ענפים',
     tenderTypeTitle: 'סוג מכרז',
     publishersTitle: 'בחר מפרסמים',
@@ -172,6 +173,9 @@ export default {
     edit: 'ערוך',
     choose: 'בחר',
     cancel: 'בטל',
+    clean: 'נקה',
+    selectAll: 'בחר הכל',
+    clearAll: 'נקה הכל',
     more: '...עוד',
     searchText: 'חפש בתוצאות',
     search: 'חפש',

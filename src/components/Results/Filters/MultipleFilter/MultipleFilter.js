@@ -34,7 +34,7 @@ export default class MultipleFilter extends React.Component {
   @observable items = []
   @observable selected = []
   @observable itemLabels = []
-  @observable allChecked = false
+  //@observable allChecked = false
   @observable label = ''
 
   componentWillMount() {
@@ -143,13 +143,13 @@ export default class MultipleFilter extends React.Component {
       remove(this.itemLabels, name => {
         return name === e.target.name
       })
-      this.allChecked = false
+      //this.allChecked = false
     }
     //console.log(toJS(this.selected))
   }
 
-  onCheckAll = e => {
-    if (e.target.checked) {
+  onCheckAll = checked => {
+    if (checked) {
       this.items.map((item => {
         const id = this.type == 'subsubjects' ? item.SubSubjectID : item.PublisherID
         const name = this.type == 'subsubjects' ? item.SubSubjectName : item.PublisherName
@@ -158,12 +158,12 @@ export default class MultipleFilter extends React.Component {
           this.itemLabels.push(name)
         }
       }), this)
-      this.allChecked = true
+      //this.allChecked = true
     }
     else {
       this.selected.clear()
       this.itemLabels.clear()
-      this.allChecked = false
+      //this.allChecked = false
     }
   }
 
@@ -179,11 +179,11 @@ export default class MultipleFilter extends React.Component {
               <div styleName="">
                 <h2>{title}
                   <div styleName="selectAll_links">
-                    <a>בחר הכל</a><span styleName="sep">|</span>
-                    <a>נקה הכל</a>
+                    <a onClick={() => this.onCheckAll(true)}>{t('filter.selectAll')}</a><span styleName="sep">|</span>
+                    <a onClick={() => this.onCheckAll(false)}>{t('filter.clearAll')}</a>
                   </div>
                 </h2>
-                <input type="text" placeholder="חפש" onChange={this.filterItems} />
+                <input type="text" placeholder={t('filter.search')} onChange={this.filterItems} />
                 {this.type == 'subsubjects' && <div>
 
 

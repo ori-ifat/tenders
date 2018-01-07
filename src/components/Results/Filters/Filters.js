@@ -74,7 +74,7 @@ export default class Filters extends React.Component {
   }
 
   render() {
-    const {searchStore, searchStore: {resultsLoading, filtersLoading, selectedFilters}} = this.props
+    const {searchStore, searchStore: {resultsLoading, filtersLoading, selectedFilters}, t} = this.props
     //note: selectedFilters - should maintain the state of child filter components, after this component recreates;
     const subsubjects = selectedFilters ? selectedFilters.subsubjects : ''
     const publishers = selectedFilters ? selectedFilters.publishers : ''
@@ -85,8 +85,8 @@ export default class Filters extends React.Component {
     return(
       <div styleName="filter_container">
         <div styleName="filter_ttl">
-          <a styleName="clean" onClick={this.cleanFilters}>נקה</a>
-          <h4>הגדרות חיפוש:</h4>
+          <a styleName="clean" onClick={this.cleanFilters}>{t('filter.clean')}</a>
+          <h4>{t('filter.title')}:</h4>
         </div>
         {filtersLoading && <div>Loading...</div>}
         {!filtersLoading &&
