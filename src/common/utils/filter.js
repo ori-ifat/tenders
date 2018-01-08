@@ -43,6 +43,7 @@ export function getDefaultFilter(isEmpty) {
   //isEmpty = empty search (no tags)
   const dateBack = isEmpty ? moment().subtract(1, 'week').format('YYYY-MM-DD')
     : moment().subtract(1, 'months').format('YYYY-MM-DD')
-  const field = isEmpty ? 'publishdate' : 'inputdate'
+  //const field = isEmpty ? 'publishdate' : 'inputdate'
+  const field = 'publishdate'
   return {field, values:[dateBack]}
 }

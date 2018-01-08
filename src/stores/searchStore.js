@@ -203,7 +203,10 @@ class Search {
       this.filtersError = null
       const tags = toJS(this.tags)
       let filters = []  //no drilldown - from tags only
-      if (tags.length == 0) {
+      const reduced = filter(tags, tag => {
+        return tag.ResType ==  'tender_partial'
+      })
+      if (tags.length == 0 || reduced.length > 0) {
         const filter = getDefaultFilter(true)
         filters = [filter]
       }

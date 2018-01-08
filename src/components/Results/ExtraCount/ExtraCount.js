@@ -4,6 +4,7 @@ import { inject, observer } from 'mobx-react'
 import { observable, toJS } from 'mobx'
 import { translate } from 'react-polyglot'
 import moment from 'moment'
+import filter from 'lodash/filter'
 import { getExtraCount } from 'common/services/apiService'
 import { getDefaultFilter } from 'common/utils/filter'
 import CSSModules from 'react-css-modules'
@@ -27,7 +28,10 @@ export default class ExtraCount extends React.Component {
     this.loading = true
     const tags = toJS(searchStore.tags)
     let filters = []
-    if (tags.length == 0) {
+    const reduced = filter(tags, tag => {
+      return tag.ResType ==  'tender_partial'
+    })
+    if (tags.length == 0 || reduced.length > 0) {
       const filter = getDefaultFilter(true)
       filters = [filter]
     }
