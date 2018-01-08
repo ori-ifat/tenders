@@ -1,14 +1,15 @@
 import { action, computed, observable, toJS } from 'mobx'
-import {getAgentSettings, getSubSubjects} from 'common/services/apiService'
+import {getAgentSettings, getSubSubjects, updateAgentSettings} from 'common/services/apiService'
 
 class SmartAgent {
   @observable resultsLoading = false
   @observable request = {};
   @observable results = []
   @observable searchError = null
-  @observable query = null
   @observable subSubjectsLoading = false
   @observable subSubjects = []
+  @observable settingsLoading = false
+  @observable settingsData = -1
 
   @action.bound
   async loadAgentSettings() {
@@ -40,11 +41,6 @@ class SmartAgent {
   }
 
   @action.bound
-  setCurrentQuery(query) {
-    this.query = query
-  }
-
-  @action.bound
   async loadSubSubjects() {
     if (!this.subSubjectsLoading) {
       this.subSubjectsLoading = true
@@ -69,6 +65,33 @@ class SmartAgent {
         this.subSubjects = []
       }
       this.subSubjectsLoading = false
+    }
+  }
+
+  @action.bound
+  async updateSettings(settings) {
+    if (!this.settingsLoading) {
+      this.settingsLoading = true
+      let searchError = null
+
+      try {
+        this.settingsData = await updateAgentSettings(settings)
+      }
+      catch(e) {
+        //an error occured on search
+        searchError = {
+          message: `[updateSettings] search error: ${e.message} http status code ${e.error.status}`,
+          statusCode: e.error.status
+        }
+      }
+
+      if (searchError == null) {
+        console.info('[updateSettings]', this.settingsData)
+      }
+      else {
+        console.error(searchError)
+      }
+      this.settingsLoading = false
     }
   }
 

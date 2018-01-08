@@ -41,8 +41,7 @@ export default class SmartAgent extends Component {
     smartAgentStore.loadSubSubjects()
   }
 
-
-  onChange = e => {
+  onInputChange = e => {
     switch (e.target.name) {
     case 'email':
       this.email = e.target.value
@@ -54,35 +53,15 @@ export default class SmartAgent extends Component {
     //console.log(this.email, this.phone)
   }
 
-  onSave = () => {
-    const {t} = this.props
-    this.sent = false
-    this.status = ''
-    let errors = ''
-    if (this.email == '' && this.phone == '') {
-      errors += `${t('agent.enterEmailOrPhone')}; `
-    }
-
-    if (errors != '') {
-      this.status = errors
-    }
-    else {
-      //send data
-      const data = {
-        Query: toJS(this.queries),
-        Tenders_Type: toJS(this.tendertypes),
-        Cellulars: toJS(this.phone) || '',
-        Emails: toJS(this.email) || ''
-      }
-      //this.frequencies,  //??
-      console.log(data)
-      /*f().then(res => {
-        //show a message
-        this.sent = true
-        this.status = t('publish.sentSuccessfully')
-        console.log(res, this.sent, this.status)
-      })*/
-    }
+  onRadioCheck = e => {
+    this.frequencies.clear()
+    const val = e.target.value.split('_')
+    this.frequencies.push({
+      FrequencyID: parseInt(val[0]),
+      FrequencyName: val[1],
+      FrequencySelected: 1
+    })
+    console.log(toJS(this.frequencies))
   }
 
   onCheck = e => {
@@ -106,14 +85,42 @@ export default class SmartAgent extends Component {
     //console.log(toJS(this.tendertypes))
   }
 
-  onError = () => {
-    console.log('__cannot save')
-  }
-
   onQuerySave = (query, newQuery) => {
     if (query) this.onDelete(query)
     this.queries.push(newQuery)
-    console.log(toJS(this.queries))
+    //console.log(toJS(this.queries))
+  }
+
+  onSave = () => {
+    const {smartAgentStore, t} = this.props
+    this.sent = false
+    this.status = ''
+    let errors = ''
+    if (this.email == '' && this.phone == '') {
+      errors += `${t('agent.enterEmailOrPhone')}; `
+    }
+
+    if (errors != '') {
+      this.status = errors
+    }
+    else {
+      //send data
+      const data = {
+        Query: toJS(this.queries),
+        Tenders_Type: toJS(this.tendertypes),
+        frequencies: toJS(this.frequencies),
+        Cellulars: toJS(this.phone) || '',
+        Emails: toJS(this.email) || ''
+      }
+      console.log(data)
+      smartAgentStore.updateSettings(data)
+        .then(res => {
+          //show a message
+          this.sent = true
+          this.status = t('publish.sentSuccessfully')
+          console.log(res, this.sent, this.status)
+        })
+    }
   }
 
   onDelete = (query) => {
@@ -128,26 +135,17 @@ export default class SmartAgent extends Component {
           current.SearchWords == query.SearchWords
       })
     }
-    console.log(toJS(this.queries))
-  }
-  /*
-  editQuery = (query) => {
-    const {smartAgentStore} = this.props
-    smartAgentStore.setCurrentQuery(query)
+    //console.log(toJS(this.queries))
   }
 
-  saveQuery = (query) => {
-    const {smartAgentStore} = this.props
-    console.log(toJS(smartAgentStore.query), query)
-    //...
-    smartAgentStore.setCurrentQuery(null)
+  onError = () => {
+    console.log('__cannot save')
   }
-*/
+
   render() {
     const {smartAgentStore: {resultsLoading, results, query}, t} = this.props
     const style = this.sent ? 'sent' : 'errors'
-    //this.email = resultsLoading ? '' : results.Contacts[0].Email
-    //this.phone = resultsLoading ? '' : results.Contacts[0].Cellular
+
     return (
       <div>
         <div styleName="search-div" >
@@ -176,10 +174,11 @@ export default class SmartAgent extends Component {
                     <div className="medium-9 cell">
                       {results.Frequencies.map((frequency, index) =>
                         <div key={index}>
-                          <input type='radio'
+                          <input type="radio"
                             name="Frequencies"
-                            value={frequency.FrequencyID}
+                            value={`${frequency.FrequencyID}_${frequency.FrequencyName}`}
                             defaultChecked={frequency.FrequencySelected}
+                            onClick={this.onRadioCheck}
                           />
                           {frequency.FrequencyName}
                         </div>)
@@ -196,14 +195,14 @@ export default class SmartAgent extends Component {
                       <input type="email"
                         name="email"
                         styleName="input-value"
-                        onChange={this.onChange}
+                        onChange={this.onInputChange}
                         defaultValue={results.Contacts[0].Email}
                       />
                       <span>{t('agent.phone')}:</span>
                       <input type="text"
                         name="phone"
                         styleName="input-value"
-                        onChange={this.onChange}
+                        onChange={this.onInputChange}
                         defaultValue={results.Contacts[0].Cellular}
                       />
                     </div>

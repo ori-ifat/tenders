@@ -282,3 +282,7 @@ export function getAgentSettings() {
 export function getSubSubjects() {
   return apiFetch('Lookup/GetSubSubjects2Customer')
 }
+
+export function updateAgentSettings(settings) {
+  return apiFetch('Agent/UpdateSmartAgentParams', {body: settings, method: 'POST' }, true)
+}
