@@ -274,3 +274,11 @@ export function getSampleTendersBySub(subSubjectID) {
     SubsubjectID: subSubjectID
   }})
 }
+
+export function getAgentSettings() {
+  return apiFetch('Agent/GetAgentSettings')
+}
+
+export function getSubSubjects() {
+  return apiFetch('Lookup/GetSubSubjects2Customer')
+}

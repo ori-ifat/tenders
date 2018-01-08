@@ -1,63 +1,145 @@
 import React, {Component} from 'react'
-import { string, number, func } from 'prop-types'
-import { /*inject,*/ observer } from 'mobx-react'
-import { observable } from 'mobx'
+import { object, func, bool } from 'prop-types'
+import { inject, observer } from 'mobx-react'
+import { observable, toJS } from 'mobx'
 import { translate } from 'react-polyglot'
-
+import Select from 'react-select'
 import CSSModules from 'react-css-modules'
 import styles from './Definition.scss'
 
 @translate()
+@inject('smartAgentStore')
 @observer
 @CSSModules(styles)
 export default class Definition extends Component {
 
   static propTypes = {
-    tenderID: number,
-    onClose: func
+    isNew: bool,
+    query: object,
+    onError: func,
+    onSave: func,
+    onDelete: func
   }
 
-  @observable tenderID = -1
+  @observable selectedValues = null
+  @observable words = ''
+  @observable edit = false
 
   componentWillMount() {
-
+    this.initComponent(this.props)
   }
 
   componentWillReceiveProps(nextProps) {
-
+    this.initComponent(nextProps)
   }
 
-  updateField = e => {
-    //console.log('updateField', e.target.name, e.target.value)
-    switch (e.target.name) {
-    case 'email':
-      this.email = e.target.value
-      break
+  initComponent = (props) => {
+    const {isNew} = props
+    if (!isNew) {
+      const {query: {SubsubjectID, SubSubjectName, SearchWords}} = props
+      //initialize the <Select> with the selected value:
+      const query = {
+        SubSubjectID: SubsubjectID,
+        SubSubjectName
+      }
+      this.selectedValues = query
+      //set the words
+      this.words = SearchWords
     }
   }
 
+  updateField = e => {
+    this.words = e.target.value
+  }
+
+  onChange = values => {
+    this.selectedValues = values
+  }
+
+  onInputKeyDown = (e) => {
+    if (e.keyCode === 13) {
+      //e.preventDefault()  //fucks up the search.
+      e.stopPropagation()
+    }
+  }
+
+  onEdit = () => {
+    this.edit = true
+  }
+
+  onSave = () => {
+    const {onError, onSave, query} = this.props
+    if (this.selectedValues) {
+      if (!this.selectedValues.SubSubjectID &&  this.words == '') {
+        onError()
+      }
+      else {
+        const newQuery = {
+          SubsubjectID: this.selectedValues.SubSubjectID,
+          SubSubjectName: this.selectedValues.SubSubjectName,
+          SearchWords: this.words || ''
+        }
+        onSave(query, newQuery)
+        this.edit = false
+      }
+    }
+    else {
+      onError()
+    }
+  }
+
+  onCancel = () => {
+    this.edit = false
+  }
+
+  onDelete = () => {
+    const {onDelete, query} = this.props
+    onDelete(query)
+  }
+
   render() {
-    const {onClose, t} = this.props
-
+    //const selectedValues = toJS(this.selectedValues)  //for multiple option - an array
+    const {smartAgentStore, query, isNew, t} = this.props
+    const options = smartAgentStore.subSubjects
     return (
-      <div className="reveal-overlay" style={{display: 'block', zIndex: 1100}}>
-        <div className="reveal" styleName="definition_lb" style={{display: 'block'}}>
-          <button styleName="button-cancel" onClick={onClose}>×</button>
-          <div className="grid-x grid-margin-x" styleName="pb">
-            <div className="small-12 cell">
-              <h2 styleName="definition_ttl">{t('agent.definitionTitle')}</h2>
-            </div>
+      <div>
+        {this.edit ?
+          <div>
+            {!smartAgentStore.subSubjectsLoading && <Select
+              styleName="subsubject-searchbox"
+              className="search-select"
+              name="searchbox"
+              noResultsText={null}
+              searchPromptText=""
+              multi={false}
+              cache={false}
+              clearable={false}
+              options={toJS(options)}
+              onChange={this.onChange}
+              onInputKeyDown={this.onInputKeyDown}
+              value={this.selectedValues}
+              labelKey={'SubSubjectName'}
+              valueKey={'SubSubjectID'}
+            />}
+            <input type="text" name="words" styleName="word-input" defaultValue={this.words} onChange={this.updateField} />
+            <a onClick={this.onCancel}>cancel</a>&nbsp;
+            <a onClick={this.onSave}>save</a>
+            {smartAgentStore.subSubjectsLoading && <div>Loading...</div>}
           </div>
-
-          <div className="grid-x grid-margin-x" styleName="buttons_cont">
-            <div className="small-12 cell">
-              <button styleName="button-submit" onClick={this.addReminder}>{t('agent.definitionSubmit')}</button>
+          :
+          isNew ?
+            <a onClick={() => this.edit = true}>New</a>
+            :
+            <div className="grid-x">
+              <div className="medium-3 cell">
+                {query.SubSubjectName}
+              </div>
+              <div className="medium-6 cell">
+                {query.SearchWords} <a onClick={this.onEdit}>edit</a>&nbsp;<a onClick={this.onDelete}>delete</a>
+              </div>
             </div>
-          </div>
-
-        </div>
+        }
       </div>
-
     )
   }
 }

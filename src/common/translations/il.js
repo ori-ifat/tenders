@@ -195,9 +195,7 @@ export default {
   },
   agent: {
     title: 'הגדרות סוכן חכם',
-    reminderTime: 'מועדי קבלת התראות',
-    immediately: 'ברגע שהמכרזים מופיעים במערכת',
-    daily: 'אחת ליום בשעה 20:00',
+    reminderTime: 'מועדי קבלת התראות',    
     destination: 'יעדי קבלת ההתראות',
     queries: 'שאילתות הסוכן',
     branch: 'ענף',
@@ -207,6 +205,7 @@ export default {
     email: 'מייל',
     phone: 'טלפון',
     submit: 'שמור הגדרות',
-    definitionSubmit: 'שמור הגדרה'
+    definitionSubmit: 'שמור הגדרה',
+    enterEmailOrPhone: 'יש להזין מייל או מספר טלפון נייד'
   }
 }

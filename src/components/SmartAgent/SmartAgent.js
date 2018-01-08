@@ -1,9 +1,10 @@
 import React, {Component} from 'react'
-import { withRouter } from 'react-router'
-import { observer } from 'mobx-react'
-import { observable } from 'mobx'
+import { inject, observer } from 'mobx-react'
+import { observable, toJS} from 'mobx'
 import {translate} from 'react-polyglot'
 import moment from 'moment'
+import remove from 'lodash/remove'
+import find from 'lodash/find'
 import SearchInput from 'common/components/SearchInput'
 import {publishTender} from 'common/services/apiService'
 import Definition from './Definition'
@@ -13,7 +14,7 @@ import styles from './smartAgent.scss'
 const req = require.context('common/style/icons/', false)
 
 @translate()
-@withRouter
+@inject('smartAgentStore')
 @observer
 @CSSModules(styles)
 export default class SmartAgent extends Component {
@@ -22,10 +23,22 @@ export default class SmartAgent extends Component {
   @observable status = ''
   @observable email = ''
   @observable phone = ''
-  @observable edit = false
+  @observable frequencies = []
+  @observable tendertypes = []
+  @observable queries = []
+  @observable contacts = []
 
   componentWillMount() {
-    //const { match: {params: { itemId }} } = this.props
+    const {smartAgentStore} = this.props
+    smartAgentStore.loadAgentSettings().then(() => {
+      this.frequencies = smartAgentStore.results.Frequencies.filter(frequency => frequency.FrequencySelected == 1)
+      this.tendertypes = smartAgentStore.results.TenderTypes.filter(tendertype => tendertype.TenderTypeSelected == 1)
+      this.queries = smartAgentStore.results.Queries
+      this.contacts = smartAgentStore.results.Contacts
+      this.email = smartAgentStore.results.Contacts[0].Email
+      this.phone = smartAgentStore.results.Contacts[0].Cellular
+    })
+    smartAgentStore.loadSubSubjects()
   }
 
 
@@ -38,6 +51,7 @@ export default class SmartAgent extends Component {
       this.phone = e.target.value
       break
     }
+    //console.log(this.email, this.phone)
   }
 
   onSave = () => {
@@ -45,11 +59,8 @@ export default class SmartAgent extends Component {
     this.sent = false
     this.status = ''
     let errors = ''
-    if (this.email == '') {
-      errors += `${t('publish.enterEmail')}; `
-    }
-    if (this.phone == '') {
-      errors += `${t('publish.enterPhone')}; `
+    if (this.email == '' && this.phone == '') {
+      errors += `${t('agent.enterEmailOrPhone')}; `
     }
 
     if (errors != '') {
@@ -57,6 +68,14 @@ export default class SmartAgent extends Component {
     }
     else {
       //send data
+      const data = {
+        Query: toJS(this.queries),
+        Tenders_Type: toJS(this.tendertypes),
+        Cellulars: toJS(this.phone) || '',
+        Emails: toJS(this.email) || ''
+      }
+      //this.frequencies,  //??
+      console.log(data)
       /*f().then(res => {
         //show a message
         this.sent = true
@@ -67,22 +86,68 @@ export default class SmartAgent extends Component {
   }
 
   onCheck = e => {
-    console.log(e.target.checked)
-    if (e.target.checked) {
-
+    if(e.target.checked){
+      const found = find(this.tendertypes, tendertype => {
+        return tendertype.TenderTypeID === parseInt(e.target.value)
+      })
+      if (!found) {
+        this.tendertypes.push({
+          TenderTypeID: parseInt(e.target.value),
+          TenderTypeName: e.target.name,
+          TenderTypeSelected: 1
+        })
+      }
     }
     else {
-
+      remove(this.tendertypes, tendertype => {
+        return tendertype.TenderTypeID === parseInt(e.target.value)
+      })
     }
+    //console.log(toJS(this.tendertypes))
   }
 
-  editItem = () => {
-    this.edit = !this.edit  //debug
+  onError = () => {
+    console.log('__cannot save')
   }
 
+  onQuerySave = (query, newQuery) => {
+    if (query) this.onDelete(query)
+    this.queries.push(newQuery)
+    console.log(toJS(this.queries))
+  }
+
+  onDelete = (query) => {
+    const found = find(this.queries, current => {
+      return current.SubsubjectID == query.SubsubjectID &&
+        current.SearchWords == query.SearchWords
+    })
+
+    if (found) {
+      remove(this.queries, current => {
+        return current.SubsubjectID == query.SubsubjectID &&
+          current.SearchWords == query.SearchWords
+      })
+    }
+    console.log(toJS(this.queries))
+  }
+  /*
+  editQuery = (query) => {
+    const {smartAgentStore} = this.props
+    smartAgentStore.setCurrentQuery(query)
+  }
+
+  saveQuery = (query) => {
+    const {smartAgentStore} = this.props
+    console.log(toJS(smartAgentStore.query), query)
+    //...
+    smartAgentStore.setCurrentQuery(null)
+  }
+*/
   render() {
-    const {t} = this.props
+    const {smartAgentStore: {resultsLoading, results, query}, t} = this.props
     const style = this.sent ? 'sent' : 'errors'
+    //this.email = resultsLoading ? '' : results.Contacts[0].Email
+    //this.phone = resultsLoading ? '' : results.Contacts[0].Cellular
     return (
       <div>
         <div styleName="search-div" >
@@ -102,78 +167,106 @@ export default class SmartAgent extends Component {
                 <p styleName={style} dangerouslySetInnerHTML={{__html: this.status}}></p>
               </div>
               }
-
-              <div className="grid-x">
-                <div className="medium-3 cell">
-                  {t('agent.reminderTime')}
-                </div>
-                <div className="medium-9 cell">
-                  <input type='radio' name="sendTime" />{t('agent.immediately')} <br />
-                  <input type='radio' name="sendTime" />{t('agent.daily')}
-                </div>
-              </div>
-
-              <div className="grid-x">
-                <div className="medium-3 cell">
-                  {t('agent.destination')}
-                </div>
-                <div className="medium-9 cell">
-                  <span>{t('agent.email')}:</span>
-                  <input type="email" name="email" styleName="input-value" onChange={this.onChange} />
-                  <span>{t('agent.phone')}:</span>
-                  <input type="text" name="phone" styleName="input-value" onChange={this.onChange} />
-                </div>
-              </div>
-
-              <div className="grid-x">
-                <div className="medium-3 cell">
-                  {t('agent.queries')}
-                </div>
-                <div className="medium-9 cell">
+              {!resultsLoading &&
+                <div>
                   <div className="grid-x">
                     <div className="medium-3 cell">
-                      {t('agent.branch')}
+                      {t('agent.reminderTime')}
                     </div>
-                    <div className="medium-6 cell">
-                      {t('agent.words')}
+                    <div className="medium-9 cell">
+                      {results.Frequencies.map((frequency, index) =>
+                        <div key={index}>
+                          <input type='radio'
+                            name="Frequencies"
+                            value={frequency.FrequencyID}
+                            defaultChecked={frequency.FrequencySelected}
+                          />
+                          {frequency.FrequencyName}
+                        </div>)
+                      }
                     </div>
                   </div>
 
                   <div className="grid-x">
-                    <div className="medium-3 cell" onClick={this.editItem}>
-                      test
+                    <div className="medium-3 cell">
+                      {t('agent.destination')}
                     </div>
-                    <div className="medium-6 cell">
-                      words
+                    <div className="medium-9 cell">
+                      <span>{t('agent.email')}:</span>
+                      <input type="email"
+                        name="email"
+                        styleName="input-value"
+                        onChange={this.onChange}
+                        defaultValue={results.Contacts[0].Email}
+                      />
+                      <span>{t('agent.phone')}:</span>
+                      <input type="text"
+                        name="phone"
+                        styleName="input-value"
+                        onChange={this.onChange}
+                        defaultValue={results.Contacts[0].Cellular}
+                      />
                     </div>
                   </div>
 
-                  {this.edit && <Definition onClose={this.editItem} />}
+                  <div className="grid-x">
+                    <div className="medium-3 cell">
+                      {t('agent.queries')}
+                    </div>
+                    <div className="medium-9 cell">
+                      <div className="grid-x">
+                        <div className="medium-3 cell">
+                          {t('agent.branch')}
+                        </div>
+                        <div className="medium-6 cell">
+                          {t('agent.words')}
+                        </div>
+                      </div>
 
+                      {results.Queries.map((query, index) =>
+                        <Definition
+                          key={index}
+                          query={query}
+                          onError={this.onError}
+                          onSave={this.onQuerySave}
+                          onDelete={this.onDelete}
+                        />)
+                      }
+                      <Definition
+                        isNew={true}
+                        query={null}
+                        onError={this.onError}
+                        onSave={this.onQuerySave}
+                        onDelete={this.onDelete}
+                      />
+                    </div>
+                  </div>
+
+                  <div className="grid-x">
+                    <div className="medium-3 cell">
+                      {t('agent.infoTypes')}
+                    </div>
+                    <div className="medium-9 cell">
+                      {results.TenderTypes.map((tendertype, index) =>
+                        <div key={index}>
+                          <input type="checkbox"
+                            className="checkbox_tender"
+                            name={tendertype.TenderTypeName}
+                            defaultChecked={tendertype.TenderTypeSelected}
+                            value={tendertype.TenderTypeID}
+                            onChange={this.onCheck}
+                          />
+                          <span styleName="cb-label">{tendertype.TenderTypeName}</span>
+                        </div>)
+                      }
+                    </div>
+                  </div>
+
+                  <div styleName="btn_container">
+                    <button className="left" styleName="button-submit" onClick={this.onSave}>{t('agent.submit')}</button>
+                  </div>
                 </div>
-              </div>
-
-              <div className="grid-x">
-                <div className="medium-3 cell">
-                  {t('agent.infoTypes')}
-                </div>
-                <div className="medium-9 cell">
-
-                  <input type="checkbox"
-                    className="checkbox_tender"
-                    checked={true}
-                    name="test"
-                    value="1"
-                    onChange={this.onCheck}
-                  />
-                  <span styleName="cb-label">test</span>
-                </div>
-              </div>
-
-              <div styleName="btn_container">
-                <button className="left" styleName="button-submit" onClick={this.onSave}>{t('agent.submit')}</button>
-              </div>
-
+              }
             </div>
           </div>
         </div>

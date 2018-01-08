@@ -43,14 +43,14 @@ class Pages extends React.Component {
             {this.ensureAuthentication(TenderPage)}
           </Route>
           <Route path="/smartagent">
-            {this.ensureAuthentication(SmartAgentPage)}
+            {/*this.ensureAuthentication(SmartAgentPage)*/}
+            <SmartAgentPage />
           </Route>
           <Route path="/favorites">
             {this.ensureAuthentication(FavoritesPage)}
           </Route>
           <Route path="/reminders">
-            {/*this.ensureAuthentication(RemindersPage)*/}
-            <RemindersPage />
+            this.ensureAuthentication(RemindersPage)
           </Route>
           <Route path="/category/:count/:id/:name">
             <CategoryPage />
