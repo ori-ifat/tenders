@@ -106,7 +106,7 @@ export default class SmartAgent extends Component {
     else {
       //send data
       const data = {
-        Query: toJS(this.queries),
+        Subsubjects: toJS(this.queries),
         Tenders_Type: toJS(this.tendertypes),
         frequencies: toJS(this.frequencies),
         Cellulars: toJS(this.phone) || '',
