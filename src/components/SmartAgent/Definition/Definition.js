@@ -1,8 +1,9 @@
 import React, {Component} from 'react'
-import { object, func, bool } from 'prop-types'
+import { array, object, func, bool } from 'prop-types'
 import { inject, observer } from 'mobx-react'
 import { observable, toJS } from 'mobx'
 import { translate } from 'react-polyglot'
+import find from 'lodash/find'
 import Select from 'react-select'
 import CSSModules from 'react-css-modules'
 import styles from './Definition.scss'
@@ -16,6 +17,7 @@ export default class Definition extends Component {
   static propTypes = {
     isNew: bool,
     query: object,
+    allQueries: array,
     onError: func,
     onSave: func,
     onDelete: func
@@ -68,15 +70,20 @@ export default class Definition extends Component {
   }
 
   onSave = () => {
-    const {onError, onSave, query} = this.props
-    if (this.selectedValues) {
-      if (!this.selectedValues.SubSubjectID &&  this.words == '') {
-        onError()
+    const {isNew, onError, onSave, query, allQueries} = this.props
+    if (this.selectedValues || (this.selectedValues == null && this.words != '')) {
+      const found = find(allQueries, current => {
+        return this.selectedValues && current.SubsubjectID == this.selectedValues.SubSubjectID
+      })
+      if (found && isNew) {
+        onError(true)
       }
       else {
+        const subSubjectID = this.selectedValues != null ? this.selectedValues.SubSubjectID : null
+        const subSubjectName = this.selectedValues != null ? this.selectedValues.SubSubjectName : null
         const newQuery = {
-          SubsubjectID: this.selectedValues.SubSubjectID,
-          SubSubjectName: this.selectedValues.SubSubjectName,
+          SubsubjectID: subSubjectID,
+          SubSubjectName: subSubjectName,
           SearchWords: this.words || ''
         }
         onSave(query, newQuery)

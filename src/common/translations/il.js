@@ -195,7 +195,7 @@ export default {
   },
   agent: {
     title: 'הגדרות סוכן חכם',
-    reminderTime: 'מועדי קבלת התראות',    
+    reminderTime: 'מועדי קבלת התראות',
     destination: 'יעדי קבלת ההתראות',
     queries: 'שאילתות הסוכן',
     branch: 'ענף',
@@ -206,6 +206,10 @@ export default {
     phone: 'טלפון',
     submit: 'שמור הגדרות',
     definitionSubmit: 'שמור הגדרה',
-    enterEmailOrPhone: 'יש להזין מייל או מספר טלפון נייד'
+    cannotSaveDefinition: 'לא ניתן לשמור את ההגדרה',
+    duplicateDefinition: 'קיימת כבר הגדרה לאותו ענף',
+    enterEmailOrPhone: 'יש להזין מייל או מספר טלפון נייד',
+    emailNotValid: 'יש להזין מייל תקין',
+    phoneNotValid: 'יש להזין מספר טלפון תקין'
   }
 }

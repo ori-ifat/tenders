@@ -6,6 +6,7 @@ import moment from 'moment'
 import remove from 'lodash/remove'
 import find from 'lodash/find'
 import SearchInput from 'common/components/SearchInput'
+import {checkEmail, checkPhone} from 'common/utils/validation'
 import {publishTender} from 'common/services/apiService'
 import Definition from './Definition'
 import CSSModules from 'react-css-modules'
@@ -99,6 +100,12 @@ export default class SmartAgent extends Component {
     if (this.email == '' && this.phone == '') {
       errors += `${t('agent.enterEmailOrPhone')}; `
     }
+    else if (!checkEmail(this.email, true)) {
+      errors += `${t('agent.emailNotValid')}; `
+    }
+    else if (!checkPhone(this.phone, true)) {
+      errors += `${t('agent.phoneNotValid')}; `
+    }
 
     if (errors != '') {
       this.status = errors
@@ -138,8 +145,14 @@ export default class SmartAgent extends Component {
     //console.log(toJS(this.queries))
   }
 
-  onError = () => {
-    console.log('__cannot save')
+  onError = (isDuplicate) => {
+    const {t} = this.props
+    if (!isDuplicate) {
+      this.status = t('agent.cannotSaveDefinition')
+    }
+    else {
+      this.status = t('agent.duplicateDefinition')
+    }
   }
 
   render() {
@@ -226,6 +239,7 @@ export default class SmartAgent extends Component {
                         <Definition
                           key={index}
                           query={query}
+                          allQueries={toJS(this.queries)}
                           onError={this.onError}
                           onSave={this.onQuerySave}
                           onDelete={this.onDelete}
@@ -234,6 +248,7 @@ export default class SmartAgent extends Component {
                       <Definition
                         isNew={true}
                         query={null}
+                        allQueries={toJS(this.queries)}
                         onError={this.onError}
                         onSave={this.onQuerySave}
                         onDelete={this.onDelete}
