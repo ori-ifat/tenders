@@ -138,6 +138,7 @@ export default class ResultsItem extends React.Component {
     const logged = accountStore.profile ? true : false
     //display issues
     const publishDate = setDateLabel(item.PublishDate, 'DD-MM-YYYY', t('tender.noDate'))
+    const infoDate = setDateLabel(item.InfoDate, 'DD-MM-YYYY', t('tender.noDate'))
     const tenderStyle = checked ? 'tender_summery checked' : 'tender_summery'
     //infoDate
     const twoDaysLeft = isDateInRange(item.InfoDate, 2)
@@ -171,6 +172,8 @@ export default class ResultsItem extends React.Component {
                 <span styleName="divider">•</span>
                 { logged &&
                   <span>
+                    <span>{t('tender.deliveryAt')}: {infoDate}</span>
+                    <span styleName="divider">•</span>                  
                     <span>{item.Publisher}</span>
                     <span styleName="divider">•</span>
                   </span>
