@@ -31,13 +31,6 @@ export default class LoginDialog extends React.Component {
 
   }
 
-  navigate = route => () => {
-    const { routingStore: { push, location: { pathname: path } } } = this.props
-    if (path !== route) {
-      push(route)
-    }
-  }
-
   updateField = e => {
     //console.log('updateField', e.target.name, e.target.value)
     switch (e.target.name) {
@@ -55,12 +48,13 @@ export default class LoginDialog extends React.Component {
 
   login = () => {
     const {accountStore, onCancel} = this.props
+    const { routingStore: { push } } = this.props
     if (!accountStore.profile) {
       accountStore.login(this.userName, this.password, this.rememberMe).then(() => {
         if (accountStore.error == null && accountStore.profile != null) {
           //successful login made
           clearCache()
-          this.navigate('/')
+          push('/')
           onCancel()  //close modal
           setTimeout(() => {
             //allow element to be created.

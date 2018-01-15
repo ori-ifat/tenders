@@ -1,14 +1,16 @@
 import React, {Component} from 'react'
 import { withRouter } from 'react-router'
-import { observer } from 'mobx-react'
+import { inject, observer } from 'mobx-react'
 import { observable } from 'mobx'
 import {getImageUrl} from 'common/utils/util'
 import ResultsItemDetails from 'common/components/ResultsItemDetails'
 import ImageView from 'common/components/ImageView'
+import NotLogged from 'common/components/NotLogged'
 import CSSModules from 'react-css-modules'
 import styles from './tender.scss'
 
 @withRouter
+@inject('accountStore')
 @observer
 @CSSModules(styles)
 export default class Tender extends Component {
@@ -35,26 +37,31 @@ export default class Tender extends Component {
   }
 
   render() {
+    const {accountStore: {profile}} = this.props
     return (
       <div className="row">
-        <div className="column large-12">
-          <div>
-            {!this.showImage ?
-              <ResultsItemDetails
-                onClose={this.closeViewer}
-                itemID={this.itemID}
-                showViewer={this.showViewer}
-                mode="singleItem"
-              />
-              :
-              <ImageView
-                onClose={this.closeViewer}
-                url={this.imageUrl}
-                title={this.imageTitle}
-              />
-            }
+        {profile ?
+          <div className="column large-12">
+            <div>
+              {!this.showImage ?
+                <ResultsItemDetails
+                  onClose={this.closeViewer}
+                  itemID={this.itemID}
+                  showViewer={this.showViewer}
+                  mode="singleItem"
+                />
+                :
+                <ImageView
+                  onClose={this.closeViewer}
+                  url={this.imageUrl}
+                  title={this.imageTitle}
+                />
+              }
+            </div>
           </div>
-        </div>
+          :
+          <NotLogged />
+        }
       </div>
     )
   }

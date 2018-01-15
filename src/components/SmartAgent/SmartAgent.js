@@ -9,12 +9,14 @@ import SearchInput from 'common/components/SearchInput'
 import {checkEmail, checkPhone} from 'common/utils/validation'
 import {publishTender} from 'common/services/apiService'
 import Definition from './Definition'
+import NotLogged from 'common/components/NotLogged'
 import CSSModules from 'react-css-modules'
 import styles from './smartAgent.scss'
 
 const req = require.context('common/style/icons/', false)
 
 @translate()
+@inject('accountStore')
 @inject('smartAgentStore')
 @observer
 @CSSModules(styles)
@@ -156,7 +158,7 @@ export default class SmartAgent extends Component {
   }
 
   render() {
-    const {smartAgentStore: {resultsLoading, results, query}, t} = this.props
+    const {accountStore: {profile}, smartAgentStore: {resultsLoading, results, query}, t} = this.props
     const style = this.sent ? 'sent' : 'errors'
 
     return (
@@ -169,16 +171,16 @@ export default class SmartAgent extends Component {
             <h1 styleName="title">{t('agent.title')}</h1>
           </div>
         </div>
-
         <div className="row">
           <div className="column large-12">
-            <div styleName="wrapper">
-              {this.status != '' &&
-              <div className="callout alert" styleName={style}>
-                <p styleName={style} dangerouslySetInnerHTML={{__html: this.status}}></p>
-              </div>
-              }
-              {!resultsLoading &&
+            {profile ?
+              <div styleName="wrapper">
+                {this.status != '' &&
+                <div className="callout alert" styleName={style}>
+                  <p styleName={style} dangerouslySetInnerHTML={{__html: this.status}}></p>
+                </div>
+                }
+                {!resultsLoading &&
                 <div>
                   <div className="grid-x">
                     <div className="medium-3 cell">
@@ -280,8 +282,11 @@ export default class SmartAgent extends Component {
                     <button className="left" styleName="button-submit" onClick={this.onSave}>{t('agent.submit')}</button>
                   </div>
                 </div>
-              }
-            </div>
+                }
+              </div>
+              :
+              <NotLogged />
+            }
           </div>
         </div>
       </div>

@@ -44,7 +44,7 @@ export default class Topbar extends Component {
     //console.log('receive')
   }
 
-  navigate = route => () => {
+  navigate = route => () => {    
     const { routingStore: { push, location: { pathname: path } } } = this.props
     if (path !== route) {
       push(route)
@@ -53,26 +53,13 @@ export default class Topbar extends Component {
 
   login = () => {
     this.showLoginDialog = true
-    /*
-    //temp implementation - login assistant
-    const {accountStore} = this.props
-    if (!accountStore.profile) {
-      accountStore.login('r314g', 'r314g', true)
-      clearCache()
-      this.navigate('/')
-      setTimeout(() => {
-        //allow element to be created.
-        //console.log('init')
-        FoundationHelper.reInitElement('top_nav')
-      }, 200)
-    }*/
   }
 
   logout = () => {
-    const {accountStore} = this.props
+    const {accountStore, routingStore: {push}} = this.props
     accountStore.logout()
     clearCache()
-    this.navigate('/')
+    push('/')
   }
 
   continueUnlogged = () => {

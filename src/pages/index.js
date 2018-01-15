@@ -14,10 +14,7 @@ import PublishPage from 'pages/publish'
 import SmartAgentPage from 'pages/smartagent'
 import NotFound404 from 'pages/notFound404'
 
-class Pages extends React.Component {
-  ensureAuthentication(Component) {
-    return accountStore.profile ? <Component /> : <Redirect to="/home" />
-  }
+class Pages extends React.Component {  
 
   render() {
     return (
@@ -31,26 +28,25 @@ class Pages extends React.Component {
             <HomePage />
           </Route>
           <Route path="/main">
-            {this.ensureAuthentication(MainPage)}
+            <MainPage />
           </Route>
           <Route path="/search">
-            {this.ensureAuthentication(SearchPage)}
+            <SearchPage />
           </Route>
           <Route path="/results/:sort/:tags/:filters">
             <ResultsPage />
           </Route>
           <Route path="/tender/:itemId">
-            {this.ensureAuthentication(TenderPage)}
+            <TenderPage />
           </Route>
           <Route path="/smartagent">
-            {/*this.ensureAuthentication(SmartAgentPage)*/}
             <SmartAgentPage />
           </Route>
           <Route path="/favorites">
-            {this.ensureAuthentication(FavoritesPage)}
+            <FavoritesPage />
           </Route>
           <Route path="/reminders">
-            this.ensureAuthentication(RemindersPage)
+            <RemindersPage />
           </Route>
           <Route path="/category/:count/:id/:name">
             <CategoryPage />

@@ -8,6 +8,7 @@ import {translate} from 'react-polyglot'
 import ReminderItem from './ReminderItem/ReminderItem'
 import SearchInput from 'common/components/SearchInput'
 import Reminder from 'common/components/Reminder'
+import NotLogged from 'common/components/NotLogged'
 import CSSModules from 'react-css-modules'
 import styles from './reminders.scss'
 
@@ -16,6 +17,7 @@ import styles from './reminders.scss'
   remindersStore.loadAllReminders()
 })
 @inject('remindersStore')
+@inject('accountStore')
 @translate()
 @observer
 @CSSModules(styles)
@@ -38,7 +40,7 @@ export default class Reminders extends Component {
   }
 
   render() {
-    const {remindersStore, t} = this.props
+    const {accountStore: {profile}, remindersStore, t} = this.props
     const {resultsLoading, results} = remindersStore
     return (
       <div>
@@ -52,31 +54,34 @@ export default class Reminders extends Component {
             <h1 styleName="title">{t('reminders.title')}</h1>
           </div>
         </div>
-        <div className="row">
-          <div className="column large-12">
-            {!resultsLoading && results.map((reminder, index) =>
-              <ReminderItem
-                key={index}
-                reminderID={reminder.ReminderID}
-                title={reminder.Title}
-                date={reminder.ReminderDate}
-                infoDate={reminder.InfoDate}
-                selectItem={this.selectItem}
-                reload={this.reloadItems}
-              />
-            )}
-            {this.itemId > -1 && !remindersStore.reminderLoading &&
-              <div styleName="reminder-container">
-                <Reminder
-                  onClose={this.selectItem}
-                  reminderID={this.itemId}
+        {profile ?
+          <div className="row">
+            <div className="column large-12">
+              {!resultsLoading && results.map((reminder, index) =>
+                <ReminderItem
+                  key={index}
+                  reminderID={reminder.ReminderID}
+                  title={reminder.Title}
+                  date={reminder.ReminderDate}
+                  infoDate={reminder.InfoDate}
+                  selectItem={this.selectItem}
+                  reload={this.reloadItems}
                 />
-              </div>
-            }
-            {resultsLoading && <div>Loading...</div>}
+              )}
+              {this.itemId > -1 && !remindersStore.reminderLoading &&
+                <div styleName="reminder-container">
+                  <Reminder
+                    onClose={this.selectItem}
+                    reminderID={this.itemId}
+                  />
+                </div>
+              }
+              {resultsLoading && <div>Loading...</div>}
+            </div>
           </div>
-
-        </div>
+          :
+          <NotLogged />
+        }
       </div>
     )
   }

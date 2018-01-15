@@ -5,10 +5,11 @@ import {inject, observer} from 'mobx-react'
 import {observable, toJS} from 'mobx'
 import { whenRouted } from 'common/utils/withRouteHooks'
 import { withRouter } from 'react-router'
-import { mainStore, accountStore } from 'stores'
+import { mainStore } from 'stores'
 import { translate } from 'react-polyglot'
 import MainTitle from './MainTitle'
 import MainList from './MainList'
+import NotLogged from 'common/components/NotLogged'
 import CSSModules from 'react-css-modules'
 import styles from './main.scss'
 
@@ -32,7 +33,7 @@ export default class Main extends Component {
   }
 
   render() {
-    const { mainStore, t } = this.props
+    const { mainStore, accountStore: {profile}, t } = this.props
     const {onCheck, onFav} = this.props
     const {recordStore: {checkedItems}} = this.props
 
@@ -42,19 +43,25 @@ export default class Main extends Component {
           <div className="column large-12">
             <div styleName="search-div" >
               <SearchInput />
-              <MainTitle />
-              <MainList
-                items={mainStore.results}
-                onCheck={onCheck}
-                onFav={onFav}
-                checkedItems={checkedItems}
-              />
-              <Banner banner={toJS(mainStore.banner)} />
-              <h6 styleName="more-tenders-title">{t('main.moreTenders')}</h6>
-              <MainList
-                items={mainStore.resultsMore}
-                onFav={onFav}
-              />
+              {profile ?
+                <div>
+                  <MainTitle />
+                  <MainList
+                    items={mainStore.results}
+                    onCheck={onCheck}
+                    onFav={onFav}
+                    checkedItems={checkedItems}
+                  />
+                  <Banner banner={toJS(mainStore.banner)} />
+                  <h6 styleName="more-tenders-title">{t('main.moreTenders')}</h6>
+                  <MainList
+                    items={mainStore.resultsMore}
+                    onFav={onFav}
+                  />
+                </div>
+                :
+                <NotLogged />
+              }
             </div>
           </div>
         </div>
