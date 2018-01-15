@@ -1,9 +1,10 @@
 import React, {Component} from 'react'
-import { withRouter } from 'react-router'
-import { observer } from 'mobx-react'
+//import { withRouter } from 'react-router'
+import { inject, observer } from 'mobx-react'
 import { observable } from 'mobx'
 import {translate} from 'react-polyglot'
 import moment from 'moment'
+import {checkEmail, checkPhone} from 'common/utils/validation'
 import {publishTender} from 'common/services/apiService'
 import Calendar from 'common/components/Calendar'
 import CSSModules from 'react-css-modules'
@@ -13,7 +14,8 @@ const req = require.context('common/style/icons/', false)
 const addSrc = req('./add.svg')
 
 @translate()
-@withRouter
+//@withRouter
+@inject('routingStore')
 @observer
 @CSSModules(styles)
 export default class Publish extends Component {
@@ -94,12 +96,21 @@ export default class Publish extends Component {
     if (this.companyName == '') {
       errors += `${t('publish.enterCompanyName')}; `
     }
+
     if (this.email == '') {
       errors += `${t('publish.enterEmail')}; `
     }
+    else if (!checkEmail(this.email, false)) {
+      errors += `${t('publish.emailNotValid')}; `
+    }
+
     if (this.phone == '') {
       errors += `${t('publish.enterPhone')}; `
     }
+    else if (!checkPhone(this.phone, false)) {
+      errors += `${t('publish.phoneNotValid')}; `
+    }
+
     if (this.title == '') {
       errors += `${t('publish.enterTitle')}; `
     }
@@ -113,14 +124,16 @@ export default class Publish extends Component {
     else {
       //send data
       //console.log(this.toTime);
+      const { routingStore: { push } } = this.props
       const toDateVal = moment(this.endDate, 'DD-MM-YYYY').format('YYYY-MM-DD')
       const toDate = moment(`${toDateVal} ${this.toTime}`, 'YYYY-MM-DD HH:mm').format('YYYY-MM-DD HH:mm:ss')
       publishTender(this.firstName, this.lastName, this.companyName, this.companyPhone,
         toDate, this.email, this.phone, this.fax, this.address, this.title, this.description).then(res => {
         //show a message
-        this.sent = true
-        this.status = t('publish.sentSuccessfully')
-        console.log(res, this.sent, this.status)
+        //this.sent = true
+        //this.status = t('publish.sentSuccessfully')
+        //console.log(res, this.sent, this.status)
+        push('/')   //redirect to home
       })
     }
   }
