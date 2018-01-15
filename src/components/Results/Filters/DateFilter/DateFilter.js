@@ -49,6 +49,7 @@ export default class DateFilter extends React.Component {
 
   selectDate = (date, field) => {
     //set observables and doFilter
+    const {searchStore} = this.props
     switch (field) {
     case 'startDate':
       this.startDate = date
@@ -57,6 +58,7 @@ export default class DateFilter extends React.Component {
       this.endDate = date
       break
     }
+    searchStore.initialDate = false
     this.doFilter()
   }
 

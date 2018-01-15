@@ -3,6 +3,7 @@ import React from 'react'
 import { inject, observer } from 'mobx-react'
 import {observable, toJS} from 'mobx'
 import { translate } from 'react-polyglot'
+import moment from 'moment'
 import find from 'lodash/find'
 import filter from 'lodash/filter'
 import MultipleFilter from './MultipleFilter'
@@ -69,6 +70,7 @@ export default class Filters extends React.Component {
     searchStore.clearFilterLabels()
     //searchStore.clearResults()
     searchStore.fromRoute = true  //raise route flag
+    searchStore.initialDate = true //for last month label...
     searchStore.loadNextResults()
     searchStore.loadNextFilters() //cached, but will allow filters to be unchecked on child components
   }
@@ -79,7 +81,9 @@ export default class Filters extends React.Component {
     const subsubjects = selectedFilters ? selectedFilters.subsubjects : ''
     const publishers = selectedFilters ? selectedFilters.publishers : ''
     const dateField = selectedFilters ? selectedFilters.dateField || 'publishdate' : 'publishdate'
-    const dateValues = selectedFilters && selectedFilters.date ? selectedFilters.date[dateField] || [] : []
+    //const dateValues = selectedFilters && selectedFilters.date ? selectedFilters.date[dateField] || [] : []
+    const defaultDates = [moment().subtract(1, 'month').format('YYYY-MM-DD'), moment().format('YYYY-MM-DD')]
+    const dateValues = selectedFilters && selectedFilters.date ? selectedFilters.date[dateField] || defaultDates : defaultDates
     const text = selectedFilters ? selectedFilters.searchText : ''
     //console.log('filters', toJS(searchStore.availableFilters))
     return(

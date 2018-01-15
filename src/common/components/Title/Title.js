@@ -19,9 +19,8 @@ export default class Title extends React.Component {
     this.count = !resultsLoading ? resultsCount : this.count  //...save previous for opacity loading effect
   }
 
-
   render() {
-    const { mode, t, store, accountStore: { profile } } = this.props
+    const { mode, t, store, accountStore: { profile }, initial } = this.props
     const { resultsLoading, resultsCount } = store
     const title = mode == 'favorites' ? t('favorites.title') : t('results.title')
     const titleStyle = resultsLoading ? 'results_summery loading' : 'results_summery'
@@ -29,17 +28,17 @@ export default class Title extends React.Component {
       <div className="row">
         <div className="large-12 columns">
           <h1 styleName={titleStyle}><span styleName="num">{this.count}</span> {title}
-          {!resultsLoading &&
-            store.filters &&
-            store.filters.length == 0
-            && profile
-            && profile.restricted
-            &&
-            <ExtraCount
-              total={resultsCount}
-            />
-
-          }
+            {initial && <span style={{paddingRight: '8px'}}>{t('results.lastMonth')}</span>}
+            {!resultsLoading &&
+              store.filters &&
+              store.filters.length == 0
+              && profile
+              && profile.restricted
+              &&
+              <ExtraCount
+                total={resultsCount}
+              />
+            }
           </h1>
         </div>
 

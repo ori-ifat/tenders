@@ -29,6 +29,11 @@ export default class SearchInput extends Component {
     if (tags) this.selectedValues = tags
   }
 
+  componentWillReceiveProps(nextProps) {
+    const {tags} = nextProps
+    if (tags) this.selectedValues = tags
+  }
+
   onChange = values => {
     this.selectedValues = values
     setTimeout(() => {
@@ -47,26 +52,17 @@ export default class SearchInput extends Component {
   }
 
   optionRenderer = (item) => {
-
+    //can be used to override the options design
     let {ResType, Name} = item
     const {t} = this.props
-    //note implementation needed for the 'partial' search
-    const textWithApostrophes = ResType.indexOf('partial') > -1 ? t(`search.${ResType}_text`, { Name }) : Name // returns non translated type () if not found.
 
     ResType = (ResType)
       ? t(`search.${ResType}`)
       : null
 
-    Name = (Name && !textWithApostrophes.includes(Name) && textWithApostrophes.includes(Name))
-      ? textWithApostrophes
-      : Name
-
-    return <div className={item.disabled
-      ? 'separate-line'
-      : ''}>
+    return <div>
       <span>{Name}</span>
       <span className="type">{ResType}</span>
-
     </div>
 
   }
@@ -82,7 +78,7 @@ export default class SearchInput extends Component {
     }
   }
 
-  onSearch = () => {
+  onSearch = () => {    
     const { routingStore } = this.props
     const sort = 'publishDate'  //default sort. note, means that on every search action, sort will reset here
     const payload = JSON.stringify(this.selectedValues)
@@ -101,6 +97,7 @@ export default class SearchInput extends Component {
     recordStore.cleanChecked()
     //searchStore.clearResults()
     searchStore.fromRoute = true  //raise route flag - behave same as on route
+    searchStore.initialDate = true //raise initial date flag - for last month label
     searchStore.loadNextResults()
     searchStore.loadNextFilters()
   }

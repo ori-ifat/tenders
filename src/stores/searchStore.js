@@ -24,6 +24,7 @@ class Search {
   @observable tags = [];
   @observable sort = 'publishDate'
   @observable fromRoute = false
+  @observable initialDate = true
   @observable resultsLoading = false
   @observable filtersLoading = false
   @observable hasMoreResults = true
@@ -55,11 +56,20 @@ class Search {
   get serializedFilters() {
     const tags = toJS(this.tags)
     let filters = toJS(this.filters)
+    /* //add date filter to empty and text searches
     const reduced = filter(tags, tag => {
       return tag.ResType ==  'tender_partial'
     })
     //add date filter if partial search was done, or no tags have beed added (empty search)
     if (reduced.length > 0 || (tags.length == 0 && filters.length == 0)) {
+      const filter = getDefaultFilter(tags.length == 0 && filters.length == 0)
+      filters = [...filters, filter]
+    }*/
+    //add date filter always, only if it did not exist already on this.filters
+    const reduced = filter(filters, filter => {
+      return filter.field == 'publishdate' || filter.field == 'infodate'
+    })
+    if (reduced.length == 0 || (tags.length == 0 && filters.length == 0)) {
       const filter = getDefaultFilter(tags.length == 0 && filters.length == 0)
       filters = [...filters, filter]
     }
@@ -203,13 +213,18 @@ class Search {
       this.filtersError = null
       const tags = toJS(this.tags)
       let filters = []  //no drilldown - from tags only
+      /* //add date filter to empty and text searches
       const reduced = filter(tags, tag => {
         return tag.ResType ==  'tender_partial'
       })
       if (tags.length == 0 || reduced.length > 0) {
         const filter = getDefaultFilter(true)
         filters = [filter]
-      }
+      }*/
+      //add date filter always (start empty anyway)
+      const filter = getDefaultFilter(tags.length == 0 && filters.length == 0)
+      filters = [filter]
+
       const searchParams = {
         tags: this.serializedTags,
         filters,

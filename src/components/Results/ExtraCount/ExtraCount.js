@@ -28,13 +28,18 @@ export default class ExtraCount extends React.Component {
     this.loading = true
     const tags = toJS(searchStore.tags)
     let filters = []
+    /* //add date filter to empty and text searches
     const reduced = filter(tags, tag => {
       return tag.ResType ==  'tender_partial'
     })
     if (tags.length == 0 || reduced.length > 0) {
       const filter = getDefaultFilter(true)
       filters = [filter]
-    }
+    } */
+    //add date filter always (start empty anyway)
+    const filter = getDefaultFilter(tags.length == 0 && filters.length == 0)
+    filters = [filter]
+
     getExtraCount(searchStore.serializedTags, filters).then(res => {
       this.extraCount = res
       this.loading = false

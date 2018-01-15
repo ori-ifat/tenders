@@ -45,11 +45,12 @@ export default class Results extends Component {
     const {onCheck, onFav} = this.props
     const {recordStore: {checkedItems}} = this.props
     const divStyle = resultsLoading && searchStore.fromRoute ? 'loading' : ''
+    //console.log('tags', toJS(tags))
     return (
       <div style={{marginTop: '50px'}}>
         <SearchInput tags={toJS(tags)} />
         <div>
-          <Title store={searchStore} />
+          <Title store={searchStore} initial={searchStore.initialDate} />
           <div className="grid-container">
             <div className="grid-x grid-padding-x">
               <div className="cell large-3">
