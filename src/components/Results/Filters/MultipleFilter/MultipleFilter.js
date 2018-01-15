@@ -16,6 +16,7 @@ const editSrc = req('./icon_edit.svg')
 
 @translate()
 @inject('searchStore')
+@inject('routingStore')
 @CSSModules(styles)
 @observer
 export default class MultipleFilter extends React.Component {
@@ -38,17 +39,23 @@ export default class MultipleFilter extends React.Component {
   @observable label = ''
 
   componentWillMount() {
-    const {type, items, label} = this.props
-    this.type = type
-    this.items = items
-    this.label = label
-    this.checkSubsubjects()
+    this.init(this.props)
   }
 
-  componentWillReceiveProps(nextProps) {
-    const {type, items, label} = nextProps
+  componentWillReceiveProps(nextProps) {    
+    this.init(nextProps)
+  }
+
+  init = (props) => {
+    const {type, items, label} = props
     this.type = type
-    //this.items = items
+    this.label = label
+    this.items = items  //init for checkSubsubjects()...
+    this.checkSubsubjects()
+    this.sortChecked(items)
+  }
+
+  sortChecked = (items) => {
     //place checked items on top:
     const checked = filter(items, item => {
       return this.type == 'subsubjects' ?
@@ -62,8 +69,6 @@ export default class MultipleFilter extends React.Component {
     })  //<- the rest
     //concat:
     this.items = [...checked, ...unchecked]
-    this.label = label
-    this.checkSubsubjects()
   }
 
   checkSubsubjects = () => {
@@ -111,7 +116,22 @@ export default class MultipleFilter extends React.Component {
     //commit filters
     const { searchStore, t } = this.props
     const field = this.type == 'subsubjects' ? 'subsubject' : 'publisher'
-    doFilter(searchStore, field, this.selected, this.itemLabels, true, this.closeModal, t('filter.more'))
+    if (this.type == 'subsubjects') {
+      //subsubjects: act like a search, not like a filter ...
+      const tags = this.selected.map((item, index) => {
+        return {ID: item, Name: encodeURIComponent(this.itemLabels[index]), ResType: field}
+      })
+      //route list SearchInput, to enable a new search
+      const { routingStore } = this.props
+      const sort = 'publishDate'  //default sort. note, means that on every search action, sort will reset here
+      const payload = JSON.stringify(tags)
+      const filters = JSON.stringify([]) //...(searchStore.filters)
+      routingStore.push(`/results/${sort}/${payload}/${filters}`)
+    }
+    else {
+      //normal filter behavior
+      doFilter(searchStore, field, this.selected, this.itemLabels, true, this.closeModal, t('filter.more'))
+    }
   }
 
   filterItems = e => {
@@ -194,15 +214,15 @@ export default class MultipleFilter extends React.Component {
                       const id = this.type == 'subsubjects' ? item.SubSubjectID : item.PublisherID
                       const name = this.type == 'subsubjects' ? item.SubSubjectName : item.PublisherName
                       return <div styleName="checkbox" key={index}>
-                      <label styleName="cb-label">
-                        <input type="checkbox"
-                          styleName="checkbox"
-                          checked={this.selected.includes(id)}
-                          name={name}
-                          value={id}
-                          onChange={this.onCheck}
+                        <label styleName="cb-label">
+                          <input type="checkbox"
+                            styleName="checkbox"
+                            checked={this.selected.includes(id)}
+                            name={name}
+                            value={id}
+                            onChange={this.onCheck}
                           />
-                        <span>{name}</span></label>
+                          <span>{name}</span></label>
                       </div>}), this
                     )
                   }
