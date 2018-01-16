@@ -46,6 +46,13 @@ export default class LoginDialog extends React.Component {
     }
   }
 
+  onKeyDown = e => {
+    if (e.keyCode === 13) {
+      e.stopPropagation()
+      this.login()
+    }
+  }
+
   login = () => {
     const {accountStore, onCancel} = this.props
     const { routingStore: { push } } = this.props
@@ -62,7 +69,7 @@ export default class LoginDialog extends React.Component {
           }, 200)
         }
       }).catch(error => {
-        console.error('apiFetch Error:', error)
+        console.error('[Login] Error:', error)
         //notifyMessage(error)
       })
     }
@@ -81,31 +88,41 @@ export default class LoginDialog extends React.Component {
               {accountStore.error != null && accountStore.profile == null &&
                 <div styleName="error_box">{accountStore.errorMessage}</div>
               }
-
-              <div styleName="input-placeholder"><input type="text" name="userName" placeholder={t('login.usernameLabel')} value={this.userName} onChange={this.updateField}/></div>
-
-
-
-              <div styleName="input-placeholder"><input type="password" name="password" placeholder={t('login.passwordLabel')} value={this.password} onChange={this.updateField}/></div>
+              <div styleName="input-placeholder">
+                <input
+                  type="text"
+                  name="userName"
+                  placeholder={t('login.usernameLabel')}
+                  value={this.userName}
+                  onChange={this.updateField}
+                  onKeyDown={this.onKeyDown}
+                />
+              </div>
+              <div styleName="input-placeholder">
+                <input
+                  type="password"
+                  name="password"
+                  placeholder={t('login.passwordLabel')}
+                  value={this.password}
+                  onChange={this.updateField}
+                  onKeyDown={this.onKeyDown}
+                />
+              </div>
               <input type="checkbox" name="rememberMe" onChange={this.updateField}/>
               {t('login.rememberMe')}
-
               <div>
                 <button styleName="button-submit" onClick={this.login}>{t('login.login')}</button>
               </div>
-
             </div>
-
             <div styleName="sign_up">
               <a href="#/subscriptions" target="_blank">
-                <h3> רכישת מנוי</h3>
+                <h3>{t('login.buy')}</h3>
                 <p>{t('login.subscribe')}</p>
                 <ul className="no-bullet">
-                  <li>הטבות בלעדיות לנרשמים דרך האתר</li>
-                  <li>מגוון מסלולים רחב המתואם לכל עסק</li>
+                  <li>{t('login.benefit1')}</li>
+                  <li>{t('login.benefit2')}</li>
                 </ul>
-                <button styleName="button-submit" >להרשמה</button>
-
+                <button styleName="button-submit">{t('login.register')}</button>
               </a>
             </div>
           </div>
