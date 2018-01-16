@@ -28,6 +28,7 @@ export default class Reminder extends Component {
   @observable subject = '';
   @observable time = '';
   @observable reminderDate;
+  @observable infoDate;
   @observable remark = '';
   @observable email = '';
   @observable reminderID = 0
@@ -46,6 +47,7 @@ export default class Reminder extends Component {
       this.tenderID = tenderID
       this.subject = title
       this.reminderDate = infoDate != null ? moment(infoDate, 'YYYY-MM-DD HH:mm:ss').format('DD-MM-YYYY') : moment().format('DD-MM-YYYY')
+      this.infoDate = infoDate != null ? moment(infoDate, 'YYYY-MM-DD HH:mm:ss').format('DD-MM-YYYY') : moment().format('DD-MM-YYYY')
       this.time = '00:00'
       this.remark = ''
     }
@@ -63,6 +65,7 @@ export default class Reminder extends Component {
       this.tenderID = reminder[0].InfoID
       this.subject = reminder[0].Title
       this.reminderDate = moment(reminder[0].ReminderDate).format('DD-MM-YYYY')
+      this.infoDate = moment(reminder[0].InfoDate).format('DD-MM-YYYY')
       this.time = moment(reminder[0].ReminderDate).format('HH:mm')
       this.remark = reminder[0].Remark || ''
     })
@@ -132,7 +135,8 @@ export default class Reminder extends Component {
     const title = this.subject
     const dateVal = moment(this.reminderDate, 'DD-MM-YYYY').format('DD-MM-YYYY')
     const timeVal = this.time != '' ? this.time : moment(this.reminderDate, 'DD-MM-YYYY').format('HH:mm')
-    const infoDateVal = infoDate != null ? moment(infoDate, 'YYYY-MM-DD HH:mm:ss').format('DD-MM-YYYY') : t('reminder.noDate')
+    //const infoDateVal = infoDate != null ? moment(infoDate, 'YYYY-MM-DD HH:mm:ss').format('DD-MM-YYYY') : t('reminder.noDate')
+    const infoDateVal = this.infoDate != null ? this.infoDate : t('reminder.noDate')
 
     return (
       <div className="reveal-overlay" style={{display: 'block', zIndex: 1100}}>

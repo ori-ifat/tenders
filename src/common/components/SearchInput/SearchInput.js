@@ -44,6 +44,7 @@ export default class SearchInput extends Component {
   getOptions = (input) => {
     input = input.trim()
     return autocomplete(input).then((result) => {
+      //console.log('res', result)
       if (!result) {
         return
       }
@@ -51,8 +52,16 @@ export default class SearchInput extends Component {
     })
   }
 
+  filterOptions = (options, filterString, values) => {
+    if (!filterString) {
+      return []
+    }
+
+    return options.filter(option => !values.find(value => value.id + value.type + value.text === option.id + option.type + option.text))
+  }
+
   optionRenderer = (item) => {
-    //can be used to override the options design
+    //can be used to override the options design    
     let {ResType, Name} = item
     const {t} = this.props
 
@@ -126,6 +135,7 @@ export default class SearchInput extends Component {
               optionRenderer={this.optionRenderer}
               onChange={this.onChange}
               onInputKeyDown={this.onInputKeyDown}
+              filterOptions={this.filterOptions}
               value={selectedValues}
               labelKey={'Name'}
               valueKey={'ID'}
