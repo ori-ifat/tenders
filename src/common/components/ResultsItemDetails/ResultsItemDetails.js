@@ -88,9 +88,20 @@ export default class ResultsItemDetails extends React.Component {
   }
 
   formatText = text => {
-    //<a> tag fix
+    /* <a> tag fix for text */
+    const {t} = this.props
+    let title = '\$&' //regexp default
+    const arr = text.split('##URL##')
+    if (arr.length > 1 && arr[1] != '') {
+      //if originalUrl has passed to this method, need to set it here
+      const link = arr[1].split('_')  //it is built as ID_Title
+      title = link[1]  //set the title
+      //concat the url as is (regexp will fix it to be a link)
+      text = `${arr[0]}<br />${t('tender.originalTitle')}<br />http://www.tenders.co.il/#/tender/${link[0]}`
+    }
     const fixedText = text.replace(/((https|http):\/\/)?(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)/,
-      '<a target="_blank" href="\$&">\$&</a>')
+      `<a target="_blank" href="\$&">${title}</a>`)
+
     return {__html: fixedText}
   }
 
@@ -107,12 +118,14 @@ export default class ResultsItemDetails extends React.Component {
     //infoDate
     const twoDaysLeft = isDateInRange(item.InfoDate, 2)
     const oneDayLeft = isDateInRange(item.InfoDate, 1)
-    console.log(item.TenderID, twoDaysLeft, oneDayLeft)
     //tourDate
     const twoDaysLeftTour = isDateInRange(item.TourDate, 2)
     const oneDayLeftTour = isDateInRange(item.TourDate, 1)
     //fileName
     const fileName = item.File ? item.File.FileName : ''
+    //original tender
+    const originalUrl = item.OriginalID ? `##URL##${item.OriginalID}_${item.OriginalTitle}` : ''
+
     //for scroll pos of item
     const divTop = document.documentElement.scrollTop ? document.documentElement.scrollTop : document.body.scrollTop
     const className = !this.props.mode ? 'reveal-overlay' : ''
@@ -143,7 +156,7 @@ export default class ResultsItemDetails extends React.Component {
                   <Row label={t('tender.details')} html={this.formatText(item.Summery)} />
                   {
                     item.Comment && item.Comment.trim() != '' &&
-                    <Row label={t('tender.comment')} html={this.formatText(item.Comment)} />
+                    <Row label={t('tender.comment')} html={this.formatText(`${item.Comment}${originalUrl}`)} />
                   }
                   {
                     item.TourDetails && item.TourDetails.trim() != '' &&
