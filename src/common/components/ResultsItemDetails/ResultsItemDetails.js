@@ -107,6 +107,7 @@ export default class ResultsItemDetails extends React.Component {
     //infoDate
     const twoDaysLeft = isDateInRange(item.InfoDate, 2)
     const oneDayLeft = isDateInRange(item.InfoDate, 1)
+    console.log(item.TenderID, twoDaysLeft, oneDayLeft)
     //tourDate
     const twoDaysLeftTour = isDateInRange(item.TourDate, 2)
     const oneDayLeftTour = isDateInRange(item.TourDate, 1)
@@ -188,7 +189,9 @@ export default class ResultsItemDetails extends React.Component {
                       <img src={alertSrc}/>
                       {t('tender.remind')}</a></li>
                     {!this.props.mode &&
-                      <li><a onClick={this.fav}>{this.IsFavorite ? t('tender.removeFromFav') : t('tender.addToFav')}</a></li>
+                      <li><a onClick={this.fav}>
+                        <img src={favSrc}/>
+                        {this.IsFavorite ? t('tender.removeFromFav') : t('tender.addToFav')}</a></li>
                     }
                   </ul>
                 </div>

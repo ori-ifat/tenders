@@ -18,6 +18,11 @@ const serializeTags = ({ID, Name, ResType}) => {
 }
 
 class Search {
+/*
+  constructor() {
+    console.log('new searchStore')
+  }
+*/
   @observable filters = []; //chosen filters from filters component
   @observable availableFilters = [];  //all relevant filters;
   @observable selectedFilters = {};   //labels for the filters component
@@ -158,6 +163,9 @@ class Search {
     if (!this.resultsLoading) {
       this.resultsLoading = true
       this.searchError = null
+      if (this.fromRoute) {
+        this.clearResults() //this will allow opacity loader to show prev results until new ones appear
+      }
       const searchParams = {
         tags: this.serializedTags,
         filters: this.serializedFilters,  //toJS(this.filters),
@@ -186,7 +194,6 @@ class Search {
           this.lastResultsPage++
         }
         console.info('[loadNextResults]', this.lastResultsPage)
-        if (this.fromRoute) this.clearResults() //this will allow opacity loader to show prev results until new ones appear
         this.results = [...this.results, ...data.map(d => ({ ...d, key: d.TenderID }))]
         //this.availableFilters = filtersMeta  //no drilldown - from tags only
         this.resultsCount = total

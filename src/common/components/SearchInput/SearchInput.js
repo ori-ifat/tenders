@@ -78,7 +78,7 @@ export default class SearchInput extends Component {
     }
   }
 
-  onSearch = () => {    
+  onSearch = () => {
     const { routingStore } = this.props
     const sort = 'publishDate'  //default sort. note, means that on every search action, sort will reset here
     const payload = JSON.stringify(this.selectedValues)
@@ -116,6 +116,7 @@ export default class SearchInput extends Component {
               className="search-select"
               name="searchbox"
               placeholder={t('search.placeHolder')}
+              autoFocus
               noResultsText={null}
               searchPromptText=""
               multi={true}
