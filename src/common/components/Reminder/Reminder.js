@@ -19,6 +19,7 @@ export default class Reminder extends Component {
   static propTypes = {
     tenderID: number,
     onClose: func,
+    setReminderData: func,
     title: string,
     infoDate: string,
     reminderID: number
@@ -43,7 +44,7 @@ export default class Reminder extends Component {
 
   initReminder = () => {
     const {tenderID, title, infoDate, reminderID} = this.props
-    if (!reminderID) {
+    if (!reminderID || reminderID == -1) {
       this.tenderID = tenderID
       this.subject = title
       this.reminderDate = infoDate != null ? moment(infoDate, 'YYYY-MM-DD HH:mm:ss').format('DD-MM-YYYY') : moment().format('DD-MM-YYYY')
@@ -112,10 +113,12 @@ export default class Reminder extends Component {
     const selectedDate = moment(`${this.reminderDate} ${this.time}`, 'DD-MM-YYYY HH:mm').format('YYYY-MM-DD HH:mm:ss')
     console.log(this.reminderDate, selectedDate)
     const action = this.reminderID > 0 ? 'Update' : 'Add'
-    setReminder(action, this.reminderID, this.tenderID, this.remark, this.subject, this.email, selectedDate).then(saved => {
-      console.log('saved status:', saved) //implement if user should know something about save op
+    setReminder(action, this.reminderID, this.tenderID, this.remark, this.subject, this.email, selectedDate).then(newid => {
+      console.log('saved new reminderID:', newid) //implement if user should know something about save op
       clearCache()
-      this.props.onClose(-1, true) //...close the modal
+      const {setReminderData, onClose} = this.props
+      if (setReminderData) setReminderData(newid, this.reminderDate)
+      onClose(-1, true) //...close the modal
     })
     if (this.email != '') {
       setCookie('userEmail', this.email)
@@ -126,7 +129,9 @@ export default class Reminder extends Component {
     setReminder('Delete', this.reminderID, -1, '', '', '').then(deleted => {
       console.log('delete status:', deleted) //implement if user should know something about delete op
       clearCache()
-      this.props.onClose(-1, true) //...close the modal
+      const {setReminderData, onClose} = this.props
+      onClose(-1, true) //...close the modal
+      if (setReminderData) setReminderData(-1, null)
     })
   }
 

@@ -44,15 +44,21 @@ export default class ResultsItem extends React.Component {
   @observable imageTitle = ''
   @observable remindMe = false
   @observable showLoginMsg = false
+  @observable reminderID = -1
+  @observable newReminderDate = '';
 
   componentWillMount() {
     //set favorite state from props
-    this.IsFavorite = this.props.fav
+    const {fav, item: {ReminderID}} = this.props
+    this.IsFavorite = fav
+    this.reminderID = ReminderID
   }
 
   componentWillReceiveProps(nextProps, nextState) {
     //set favorite state from nextProps - ex. when Toolbar changes the item fav state
-    if (this.IsFavorite !== nextProps.fav) this.IsFavorite = nextProps.fav
+    const {fav, item: {ReminderID}} = nextProps
+    if (this.IsFavorite !== fav) this.IsFavorite = fav
+    this.reminderID = ReminderID
   }
 
   addFav = () => {
@@ -123,6 +129,13 @@ export default class ResultsItem extends React.Component {
     }
   }
 
+  setReminderData = (id, date) => {
+    //when reminder data changes (created\updated\deleted),
+    //need to update the date label and current reminderID
+    this.reminderID = id
+    this.newReminderDate = date
+  }
+
   notlogged = () => {
     this.showLoginMsg = true
   }
@@ -173,7 +186,7 @@ export default class ResultsItem extends React.Component {
                 { logged &&
                   <span>
                     <span>{t('tender.deliveryAt')}: {infoDate}</span>
-                    <span styleName="divider">•</span>                  
+                    <span styleName="divider">•</span>
                     <span>{item.Publisher}</span>
                     <span styleName="divider">•</span>
                   </span>
@@ -189,9 +202,11 @@ export default class ResultsItem extends React.Component {
             <div styleName="tender_action_wraper">
               <ul className="no-bullet">
                 <li><a onClick={() => this.remind(true)}><img src={timeSrc} alt="" />
-                  {item.ReminderDate ?
+                  {item.ReminderDate && this.newReminderDate == '' ?
                     moment(item.ReminderDate).format('DD-MM-YYYY') :
-                    t('tender.addReminder')}</a></li>
+                    this.newReminderDate && this.newReminderDate != null && this.newReminderDate != '' ?
+                      this.newReminderDate
+                      : t('tender.addReminder')}</a></li>
                 {onFav &&
                   <li>
                     <a onClick={this.addFav}>
@@ -220,9 +235,10 @@ export default class ResultsItem extends React.Component {
           <Reminder
             tenderID={item.TenderID}
             onClose={() => this.remind(false)}
+            setReminderData={this.setReminderData}
             title={item.Title}
             infoDate={item.InfoDate}
-            reminderID={item.ReminderID}
+            reminderID={this.reminderID}
           />
         }
         {this.showLoginMsg &&
