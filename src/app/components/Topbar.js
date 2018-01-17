@@ -37,18 +37,28 @@ export default class Topbar extends Component {
   @observable showLoginDialog = false
 
   componentWillMount() {
-    //console.log('mount')
+    //fix top nav foundation creation bug
+    setTimeout(() => {
+      //allow element to be created.
+      FoundationHelper.reInitElement('top_nav')
+    }, 400)
   }
 
   componentWillReceiveProps(nextProps) {
     //console.log('receive')
   }
 
-  navigate = route => () => {    
+  navigate = route => () => {
     const { routingStore: { push, location: { pathname: path } } } = this.props
     if (path !== route) {
       push(route)
     }
+  }
+
+  goToHome = () => {
+    const {accountStore, routingStore: {push}} = this.props
+    const homeLink = accountStore.profile ? '/main' : '/home'
+    push(homeLink)
   }
 
   login = () => {
@@ -69,12 +79,14 @@ export default class Topbar extends Component {
   render() {
     const {accountStore, t} = this.props
     const loginLabel = accountStore.profile ? decodeURIComponent(accountStore.profile.contactName).replace(/\+/g, ' ') : t('nav.pleaseLog')
+    //const homeLink = accountStore.profile ? '/main' : '/home'
+    //console.log(accountStore.profile, homeLink)
     return (
       <div styleName="header">
         <nav className="column row">
           <div className="top-bar" styleName="top-bar">
             <div className="top-bar-right">
-              <a onClick={this.navigate('/')}>
+              <a onClick={this.goToHome}>
                 <img src={logoSrc} alt={t('nav.logoAlt')} id="logo" />
               </a>
             </div>
