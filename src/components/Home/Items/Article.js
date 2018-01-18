@@ -7,7 +7,7 @@ const Article = ({articleID, title, imgSrc}) => {
   return  <div className="medium-4 columns">
     <a href={url}>
       <img src={imgSrc} alt="" />
-      <h3 styleName="one-article-title">{title}</h3>
+      <h3 styleName="one-article-title">{decodeURIComponent(title)}</h3>
     </a>
   </div>
 }

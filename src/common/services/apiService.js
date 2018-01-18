@@ -257,6 +257,15 @@ export function publishTender(firstName, lastName, companyName, companyPhone,
   }})
 }
 
+export function contactUs(firstName, email, phone) {
+  /*return apiFetch('bb/ss', {searchParams: {
+    FirstName: firstName,
+    Email: email,
+    Phone: phone
+  }})*/
+  return Promise.resolve('test')
+}
+
 export function getMainSubjects() {
   return apiFetch('FrontPage/getMainSubjects')
 }
@@ -269,11 +278,12 @@ export function getSampleTenders() {
   return apiFetch('FrontPage/GetSampleTenders')
 }
 
+/* //not in use
 export function getSampleTendersBySub(subSubjectID) {
   return apiFetch('FrontPage/GetSampleTendersBySub', {searchParams: {
     SubsubjectID: subSubjectID
   }})
-}
+}*/
 
 export function getAgentSettings() {
   return apiFetch('Agent/GetAgentSettings')
@@ -285,4 +295,46 @@ export function getSubSubjects() {
 
 export function updateAgentSettings(settings) {
   return apiFetch('Agent/UpdateSmartAgentParams', {body: settings, method: 'POST' }, true)
+}
+
+function fetchData(url) {
+  /* fetch a url that is not in api controllers, such as a json file */
+
+  const headers = new Headers()
+  headers.append('Accept', 'application/json')
+  headers.append('Content-Type', 'application/json')
+
+  //use credentials: 'include' to allow cookies to pass over cross-origin. needed for login data
+  const options = {
+    method: 'GET',
+    headers,
+    credentials: 'include'
+  }
+
+  return new Promise((resolve, reject) => {
+    fetch(url, options)
+      .then(response => {
+        if (response.ok) {
+          const json = response.json()
+          cache.add(url, json.response || json)
+          return resolve(json.response || json)
+        }
+        response.json()
+          .then((message) => {
+            //if (message.Message != 'Authorization has been denied for this request.')
+            //notifyMessage(message.Message, 'error')
+
+            return reject({ message: message.Message || message.error, error: response })
+          })
+          .catch(error => {
+            console.error('[fetchData] Error:', error)
+            //notifyMessage(error)
+          })
+      })
+  })
+}
+
+export function getHomeJSON(folderName, fileName) {
+  const url = createUrl(`HomeData/${folderName}/${fileName}.json`, {}, false)
+  return fetchData(url)
 }

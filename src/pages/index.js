@@ -9,12 +9,16 @@ import MainPage from 'pages/main'
 import TenderPage from 'pages/tender'
 import FavoritesPage from 'pages/favorites'
 import RemindersPage from 'pages/reminders'
-import CategoryPage from 'pages/category'
 import PublishPage from 'pages/publish'
+import ContactPage from 'pages/contact'
+import SubscriptionsPage from 'pages/subscriptions'
+import ServicesPage from 'pages/services'
+import ArticlesPage from 'pages/articles'
+import ArticlePage from 'pages/article'
 import SmartAgentPage from 'pages/smartagent'
 import NotFound404 from 'pages/notFound404'
 
-class Pages extends React.Component {  
+class Pages extends React.Component {
 
   render() {
     return (
@@ -48,11 +52,23 @@ class Pages extends React.Component {
           <Route path="/reminders">
             <RemindersPage />
           </Route>
-          <Route path="/category/:count/:id/:name">
-            <CategoryPage />
-          </Route>
           <Route path="/publish">
             <PublishPage />
+          </Route>
+          <Route path="/contact">
+            <ContactPage />
+          </Route>
+          <Route path="/subscriptions">
+            <SubscriptionsPage />
+          </Route>
+          <Route path="/services">
+            <ServicesPage />
+          </Route>
+          <Route path="/articles">
+            <ArticlesPage />
+          </Route>
+          <Route path="/article/:id">
+            <ArticlePage />
           </Route>
           <Route>
             <NotFound404 />

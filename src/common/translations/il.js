@@ -18,6 +18,7 @@ export default {
   nav: {
     logoAlt: 'לוגו מכרזים',
     subscriptions: 'מסלולים',
+    services: 'מוצרים ושירותים',
     smartagent: 'הגדרות סוכן',
     contactus: 'צור קשר',
     publish: 'פרסם מכרז',
@@ -34,7 +35,7 @@ export default {
     catTitle: 'כל המכרזים, כל התחומים',
     showAllCat: 'כל הקטגוריות',
     hideAllCat: 'סגור',
-    opportunities: 'ההזדמנויות זורמת אליך בכל דרך שתבחר',
+    opportunities: 'ההזדמנויות זורמות אליך בכל דרך שתבחר',
     testemonials: 'לקוחות מספרים',
     lastTenders: 'מכרזים אחרונים',
     articles: 'כתבות',
@@ -147,6 +148,19 @@ export default {
     promo2: 'לורם איפסום',
     promoDetails2: 'יפעת מכרזים מציגה בפנייך אפשרות מתאימה לכל חברה קטנה או גדולה, הגשת בקשה להצעת מחיר בחינם לכל שירות או מטרה וקבלת הצעות מחיר מספקים ונותני שירותים הרשומים במערכת.'
   },
+  contact: {
+    title: 'צור קשר',
+    firstName: 'שם',
+    email: 'אימייל',
+    phone: 'טלפון',
+    submit: 'שלח',
+    service: 'שירות לקוחות',
+    techsupport: 'תמיכה טכנית',
+    sales: 'מכירות',
+    smallTitle: 'רוצה לראות את כל ההזדמנויות העיסקיות עבורך?',
+    smallSubTitle: 'השאירו פרטים ונחזור אליך עם הצעה משתלמת',
+    sent: 'הפניה נשלחה! ניצור איתכם קשר בקרוב, תודה !'
+  },
   toolbar: {
     selectedTenders: 'מכרזים נבחרו',
     email: 'שלח במייל',
@@ -220,5 +234,30 @@ export default {
     enterEmailOrPhone: 'יש להזין מייל או מספר טלפון נייד',
     emailNotValid: 'יש להזין מייל תקין',
     phoneNotValid: 'יש להזין מספר טלפון תקין'
+  },
+  subscriptions: {
+    title: 'מסלולים ומחירים',
+    onecat: 'סיווג אחד',
+    twocat: 'שני סיווגים',
+    allcat: 'כל הסיווגים',
+    catPrice: '₪ / לחודש',
+    catCondition: 'המחיר בהצטרפות לשנה (לא כולל מע"מ)',
+    catConditionPartial: 'המחיר בהצטרפות לחצי שנה (לא כולל מע"מ)',
+    showPartial: 'הצג מחיר לתקופה של חצי שנה',
+    showFull: 'הצג מחיר לתקופה של שנה',
+    benefit1: 'חשיפה ל 100% מכרזים פומביים',
+    benefit2: 'תוצאות מכרזים',
+    benefit3: 'מכרזים בלעדיים',
+    benefit4: 'פטור ממכרז',
+    benefit5: 'סוכן חכם',
+    benefit6: 'ליווי בהגשת מכרז ללא עלות',
+    benefit7: 'שירות ותמיכה מלאים',
+    benefit8: 'אפליקציה'
+  },
+  services: {
+    title: 'מוצרים ושרותים'
+  },
+  articles: {
+    title: 'כתבות'
   }
 }

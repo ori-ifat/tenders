@@ -1,6 +1,6 @@
 import React, {Component, PropTypes} from 'react'
 import CSSModules from 'react-css-modules'
-import styles from '../Home.scss'
+import styles from './Footer.scss'
 
 const Footer = ({rights, service}) => {
   return  <footer styleName="footer">
