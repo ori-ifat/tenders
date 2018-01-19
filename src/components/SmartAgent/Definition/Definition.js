@@ -109,41 +109,57 @@ export default class Definition extends Component {
     const {smartAgentStore, query, isNew, t} = this.props
     const options = smartAgentStore.subSubjects
     return (
-      <div>
+      <div styleName="line" >
         {this.edit ?
-          <div>
-            {!smartAgentStore.subSubjectsLoading && <Select
-              styleName="subsubject-searchbox"
-              className="search-select"
-              name="searchbox"
-              noResultsText={null}
-              searchPromptText=""
-              multi={false}
-              cache={false}
-              clearable={false}
-              options={toJS(options)}
-              onChange={this.onChange}
-              onInputKeyDown={this.onInputKeyDown}
-              value={this.selectedValues}
-              labelKey={'SubSubjectName'}
-              valueKey={'SubSubjectID'}
-            />}
-            <input type="text" name="words" styleName="word-input" defaultValue={this.words} onChange={this.updateField} />
-            <a onClick={this.onCancel}>cancel</a>&nbsp;
-            <a onClick={this.onSave}>save</a>
+          <div className="grid-x">
+
+            {!smartAgentStore.subSubjectsLoading &&
+              <div styleName="fields" className="medium-3 cell">
+                <Select
+                styleName="branch"
+                className="search-select"
+                name="searchbox"
+                noResultsText={null}
+                searchPromptText=""
+                rtl={true}
+                multi={false}
+                cache={false}
+                clearable={false}
+                options={toJS(options)}
+                onChange={this.onChange}
+                onInputKeyDown={this.onInputKeyDown}
+                value={this.selectedValues}
+                labelKey={'SubSubjectName'}
+                valueKey={'SubSubjectID'}
+                />
+              </div>
+              }
+              <div styleName="fields" className="medium-7 cell">
+                <input type="text" name="words" styleName="word-input" defaultValue={this.words} onChange={this.updateField} />
+              </div>
+              <div styleName="links" className="medium-2 cell">
+                <a onClick={this.onCancel}>בטל</a>&nbsp;
+                <a onClick={this.onSave}>שמור</a>
+              </div>
+
             {smartAgentStore.subSubjectsLoading && <div>Loading...</div>}
           </div>
           :
           isNew ?
-            <a onClick={() => this.edit = true}>New</a>
+            <a styleName="add" onClick={() => this.edit = true}>הוסף</a>
             :
             <div className="grid-x">
-              <div className="medium-3 cell">
-                {query.SubSubjectName}
+              <div styleName="fields" className="medium-3 cell">
+              <span>{query.SubSubjectName}</span>
               </div>
-              <div className="medium-6 cell">
-                {query.SearchWords} <a onClick={this.onEdit}>edit</a>&nbsp;<a onClick={this.onDelete}>delete</a>
+              <div styleName="fields" className="medium-7 cell">
+                {query.SearchWords}
               </div>
+              <div styleName="links" className="medium-2 cell">
+                <a onClick={this.onEdit}>ערוך</a>
+                <a onClick={this.onDelete}>מחק</a>
+              </div>
+
             </div>
         }
       </div>

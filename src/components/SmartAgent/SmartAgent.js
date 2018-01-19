@@ -183,10 +183,10 @@ export default class SmartAgent extends Component {
                 {!resultsLoading &&
                 <div>
                   <div className="grid-x">
-                    <div className="medium-3 cell">
-                      {t('agent.reminderTime')}
+                    <div styleName="ttl_container" className="medium-3 cell">
+                    <h4>{t('agent.reminderTime')}</h4>
                     </div>
-                    <div className="medium-9 cell">
+                    <div styleName="agent_content" className="medium-9 cell">
                       {results.Frequencies.map((frequency, index) =>
                         <div key={index}>
                           <input type="radio"
@@ -202,10 +202,10 @@ export default class SmartAgent extends Component {
                   </div>
 
                   <div className="grid-x">
-                    <div className="medium-3 cell">
-                      {t('agent.destination')}
+                    <div styleName="ttl_container" className="medium-3 cell">
+                      <h4>{t('agent.destination')}</h4>
                     </div>
-                    <div className="medium-9 cell">
+                    <div styleName="agent_content" className="medium-9 cell">
                       <span>{t('agent.email')}:</span>
                       <input type="email"
                         name="email"
@@ -224,16 +224,17 @@ export default class SmartAgent extends Component {
                   </div>
 
                   <div className="grid-x">
-                    <div className="medium-3 cell">
-                      {t('agent.queries')}
+                    <div styleName="ttl_container" className="medium-3 cell">
+                      <h4>{t('agent.queries')}</h4>
                     </div>
-                    <div className="medium-9 cell">
+
+                    <div styleName="queryies" className="medium-9 cell" >
                       <div className="grid-x">
                         <div className="medium-3 cell">
-                          {t('agent.branch')}
+                          <h4>{t('agent.branch')}</h4>
                         </div>
-                        <div className="medium-6 cell">
-                          {t('agent.words')}
+                        <div className="medium-9 cell">
+                          <h4>{t('agent.words')}</h4>
                         </div>
                       </div>
 
@@ -259,10 +260,11 @@ export default class SmartAgent extends Component {
                   </div>
 
                   <div className="grid-x">
-                    <div className="medium-3 cell">
-                      {t('agent.infoTypes')}
+                    <div styleName="ttl_container" className="medium-3 cell">
+                      <h4>{t('agent.infoTypes')}</h4>
                     </div>
-                    <div className="medium-9 cell">
+
+                    <div styleName="agent_content" className="medium-9 cell">
                       {results.TenderTypes.map((tendertype, index) =>
                         <div key={index}>
                           <input type="checkbox"
