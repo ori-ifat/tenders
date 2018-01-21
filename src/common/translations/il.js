@@ -233,7 +233,13 @@ export default {
     duplicateDefinition: 'קיימת כבר הגדרה לאותו ענף',
     enterEmailOrPhone: 'יש להזין מייל או מספר טלפון נייד',
     emailNotValid: 'יש להזין מייל תקין',
-    phoneNotValid: 'יש להזין מספר טלפון תקין'
+    phoneNotValid: 'יש להזין מספר טלפון תקין',
+    placeHolder: 'בחר...',
+    cancel: 'בטל',
+    save: 'שמור',
+    add: 'הוסף',
+    edit: 'ערוך',
+    delete: 'מחק'
   },
   subscriptions: {
     title: 'מסלולים ומחירים',

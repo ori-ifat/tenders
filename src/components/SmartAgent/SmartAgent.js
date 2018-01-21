@@ -184,7 +184,7 @@ export default class SmartAgent extends Component {
                 <div>
                   <div className="grid-x">
                     <div styleName="ttl_container" className="medium-3 cell">
-                    <h4>{t('agent.reminderTime')}</h4>
+                      <h4>{t('agent.reminderTime')}</h4>
                     </div>
                     <div styleName="agent_content" className="medium-9 cell">
                       {results.Frequencies.map((frequency, index) =>

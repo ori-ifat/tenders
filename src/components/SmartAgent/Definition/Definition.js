@@ -116,48 +116,49 @@ export default class Definition extends Component {
             {!smartAgentStore.subSubjectsLoading &&
               <div styleName="fields" className="medium-3 cell">
                 <Select
-                styleName="branch"
-                className="search-select"
-                name="searchbox"
-                noResultsText={null}
-                searchPromptText=""
-                rtl={true}
-                multi={false}
-                cache={false}
-                clearable={false}
-                options={toJS(options)}
-                onChange={this.onChange}
-                onInputKeyDown={this.onInputKeyDown}
-                value={this.selectedValues}
-                labelKey={'SubSubjectName'}
-                valueKey={'SubSubjectID'}
+                  styleName="branch"
+                  className="search-select"
+                  name="searchbox"
+                  placeholder={t('agent.placeHolder')}
+                  noResultsText={null}
+                  searchPromptText=""
+                  rtl={true}
+                  multi={false}
+                  cache={false}
+                  clearable={false}
+                  options={toJS(options)}
+                  onChange={this.onChange}
+                  onInputKeyDown={this.onInputKeyDown}
+                  value={this.selectedValues}
+                  labelKey={'SubSubjectName'}
+                  valueKey={'SubSubjectID'}
                 />
               </div>
-              }
-              <div styleName="fields" className="medium-7 cell">
-                <input type="text" name="words" styleName="word-input" defaultValue={this.words} onChange={this.updateField} />
-              </div>
-              <div styleName="links" className="medium-2 cell">
-                <a onClick={this.onCancel}>בטל</a>&nbsp;
-                <a onClick={this.onSave}>שמור</a>
-              </div>
+            }
+            <div styleName="fields" className="medium-7 cell">
+              <input type="text" name="words" styleName="word-input" defaultValue={this.words} onChange={this.updateField} />
+            </div>
+            <div styleName="links" className="medium-2 cell">
+              <a onClick={this.onCancel}>{t('agent.cancel')}</a>&nbsp;
+              <a onClick={this.onSave}>{t('agent.save')}</a>
+            </div>
 
             {smartAgentStore.subSubjectsLoading && <div>Loading...</div>}
           </div>
           :
           isNew ?
-            <a styleName="add" onClick={() => this.edit = true}>הוסף</a>
+            <a styleName="add" onClick={() => this.edit = true}>{t('agent.add')}</a>
             :
             <div className="grid-x">
               <div styleName="fields" className="medium-3 cell">
-              <span>{query.SubSubjectName}</span>
+                <span>{query.SubSubjectName}</span>
               </div>
               <div styleName="fields" className="medium-7 cell">
                 {query.SearchWords}
               </div>
               <div styleName="links" className="medium-2 cell">
-                <a onClick={this.onEdit}>ערוך</a>
-                <a onClick={this.onDelete}>מחק</a>
+                <a onClick={this.onEdit}>{t('agent.edit')}</a>
+                <a onClick={this.onDelete}>{t('agent.delete')}</a>
               </div>
 
             </div>
