@@ -31,8 +31,35 @@ export default class Article extends Component {
 
     return (
       <div>
-      in progress ...
-        {this.article &&
+        {article &&
+        <section id="articals">
+          <div className="row">
+            <div className="large-8 columns">
+              <h1 styleName="title">{article.title}</h1>
+              <p styleName="meta-data">{article.date} <span styleName="v_line">|</span>{article.author}</p>
+            </div>
+          </div>
+          <div className="row">
+            <div className="large-8 columns">
+              <div styleName="post_wrapper">
+                <hr styleName="divider" />
+                <h3 styleName="subtitle">{article.subtitle}</h3>
+                <div dangerouslySetInnerHTML={{__html: article.textPart1}}>
+                </div>
+                <img src={article.image} alt="" />
+                <div dangerouslySetInnerHTML={{__html: article.textPart2}}>
+                </div>
+              </div>
+            </div>
+            <div className="large-4 columns">
+              <ContactForm
+                bigMode={true}
+              />
+            </div>
+          </div>
+        </section>
+        }
+        {article &&
           <Footer
             rights={t('home.rights')}
             service={t('home.service')}

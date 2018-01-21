@@ -38,13 +38,13 @@ export default class Home extends Component {
     })
     homeStore.loadSampleTenders()
     //json data for hard-coded stuff:
-    getHomeJSON('Articles', 'article1').then(res => {
+    getHomeJSON('Articles', 'article-preview1').then(res => {
       this.article1 = res
     })
-    getHomeJSON('Articles', 'article2').then(res => {
+    getHomeJSON('Articles', 'article-preview2').then(res => {
       this.article2 = res
     })
-    getHomeJSON('Articles', 'article3').then(res => {
+    getHomeJSON('Articles', 'article-preview3').then(res => {
       this.article3 = res
     })
     getHomeJSON('Opportunities', 'opportunities').then(res => {

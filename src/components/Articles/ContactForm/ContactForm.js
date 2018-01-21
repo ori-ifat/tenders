@@ -1,4 +1,5 @@
 import React, {Component} from 'react'
+import { bool } from 'prop-types'
 import { /*inject,*/ observer } from 'mobx-react'
 import { observable } from 'mobx'
 import {translate} from 'react-polyglot'
@@ -12,6 +13,10 @@ import styles from './ContactForm.scss'
 @observer
 @CSSModules(styles)
 export default class Contact extends Component {
+
+  static propTypes = {
+    bigMode: bool
+  }
 
   @observable sent = false
   @observable status = ''
@@ -79,12 +84,12 @@ export default class Contact extends Component {
   }
 
   render() {
-    const {t} = this.props
-    const style = this.sent ? 'sent' : 'errors'
+    const {bigMode, t} = this.props
+    const style = bigMode ? {marginTop: '0'} : {}
     return (
       <div>
 
-        <div className="sideform bottom">
+        <div className="sideform bottom" style={style}>
           <h2 styleName="sf_ttl">{t('contact.smallTitle')}</h2>
           <p styleName="sub_ttl">{t('contact.smallSubTitle')}</p>
           {this.status != '' &&
