@@ -7,7 +7,7 @@ import remove from 'lodash/remove'
 import find from 'lodash/find'
 import SearchInput from 'common/components/SearchInput'
 import {checkEmail, checkPhone} from 'common/utils/validation'
-import {publishTender} from 'common/services/apiService'
+import {publishTender, clearCache} from 'common/services/apiService'
 import Definition from './Definition'
 import NotLogged from 'common/components/NotLogged'
 import CSSModules from 'react-css-modules'
@@ -125,8 +125,9 @@ export default class SmartAgent extends Component {
       smartAgentStore.updateSettings(data)
         .then(res => {
           //show a message
+          clearCache()
           this.sent = true
-          this.status = t('publish.sentSuccessfully')
+          this.status = t('agent.sentSuccessfully')
           console.log(res, this.sent, this.status)
         })
     }

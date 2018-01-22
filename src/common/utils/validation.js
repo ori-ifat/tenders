@@ -5,12 +5,15 @@ export function checkEmail(email, allowEmpty) {
   }
 
   const filter=/^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/i
-  if (!(filter.test(email))) {
-    return false
+  const arr = email.split(';')
+  for (let i =0; i < arr.length; i++) {
+    if (!(filter.test(arr[i].trim()))) {
+      return false
+    }
   }
-  else {
-    return true
-  }
+
+  return true
+
 }
 
 export function checkPhone(phone, allowEmpty) {
@@ -18,7 +21,7 @@ export function checkPhone(phone, allowEmpty) {
   if (allowEmpty && phone == '') {
     return true
   }
-  
+
   phone = phone.replace(/ /g, '')
   //const filter = /^0(5[012345678]|6[47]){1}(\-)?[^0\D]{1}\d{6}$/
   const filter = /^0(5[012345678]){1}(\-)?[^0\D]{1}\d{6}$/

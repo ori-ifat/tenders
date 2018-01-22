@@ -61,7 +61,7 @@ export default class SearchInput extends Component {
   }
 
   optionRenderer = (item) => {
-    //can be used to override the options design    
+    //can be used to override the options design
     let {ResType, Name} = item
     const {t} = this.props
 
@@ -92,7 +92,7 @@ export default class SearchInput extends Component {
     const sort = 'publishDate'  //default sort. note, means that on every search action, sort will reset here
     const payload = JSON.stringify(this.selectedValues)
     //note: on new search, filters should be empty
-    routingStore.push(`/results/${sort}/${payload}/[]`)
+    routingStore.push(`/results/${sort}/${encodeURIComponent(payload)}/[]`)
   }
 
   onSearchClick = () => {

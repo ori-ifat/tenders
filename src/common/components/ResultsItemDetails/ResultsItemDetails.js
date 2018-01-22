@@ -9,7 +9,7 @@ import moment from 'moment'
 import ImageView from 'common/components/ImageView'
 import Row from './Row'
 import Reminder from 'common/components/Reminder'
-import LikeItem from './LikeItem'
+import Feedback from './Feedback'
 import CSSModules from 'react-css-modules'
 import styles from './ResultsItemDetails.scss'
 
@@ -186,7 +186,7 @@ export default class ResultsItemDetails extends React.Component {
                       </div>
                     </div>)
                   }
-                  <LikeItem />
+                  <Feedback feedback={item.Feedback} />
                 </div>
                 <div className="large-3 cell">
 

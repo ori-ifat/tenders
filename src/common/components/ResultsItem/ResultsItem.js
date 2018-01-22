@@ -38,6 +38,7 @@ export default class ResultsItem extends React.Component {
 
   @observable IsFavorite = false
   @observable viewBig = false
+  @observable viewed = false
   @observable showLoginMsg = false
   @observable showImage = false
   @observable imageUrl = ''
@@ -49,16 +50,18 @@ export default class ResultsItem extends React.Component {
 
   componentWillMount() {
     //set favorite state from props
-    const {fav, item: {ReminderID}} = this.props
+    const {fav, item: {ReminderID, Visited}} = this.props
     this.IsFavorite = fav
     this.reminderID = ReminderID
+    this.viewed = Visited
   }
 
   componentWillReceiveProps(nextProps, nextState) {
     //set favorite state from nextProps - ex. when Toolbar changes the item fav state
-    const {fav, item: {ReminderID}} = nextProps
+    const {fav, item: {ReminderID, Visited}} = nextProps
     if (this.IsFavorite !== fav) this.IsFavorite = fav
     this.reminderID = ReminderID
+    this.viewed = Visited
   }
 
   addFav = () => {
@@ -77,6 +80,7 @@ export default class ResultsItem extends React.Component {
     const {accountStore} = this.props
     if (accountStore.profile) {
       this.viewBig = true
+      this.viewed = true
     }
     else {
       this.showLoginMsg = true
@@ -159,6 +163,8 @@ export default class ResultsItem extends React.Component {
     //tourDate
     const twoDaysLeftTour = isDateInRange(item.TourDate, 2)
     const oneDayLeftTour = isDateInRange(item.TourDate, 1)
+    //visited
+    const visitedStyle = this.viewed ? ' visited' : ''
 
     return (
       <div styleName={tenderStyle} >
@@ -173,7 +179,7 @@ export default class ResultsItem extends React.Component {
               {oneDayLeftTour && <span styleName="label alert">{t('tender.oneDayLeftTour')}</span>}
               <h3
                 onClick={() => this.viewDetails(item.TenderID)}
-                styleName="item-title"
+                styleName={`item-title${visitedStyle}`}
                 dangerouslySetInnerHTML={this.markUpText(item.Title)}></h3>
               { logged &&
                 <div styleName="tender_desc">

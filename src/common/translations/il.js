@@ -228,6 +228,7 @@ export default {
     email: 'מייל',
     phone: 'טלפון',
     submit: 'שמור הגדרות',
+    sentSuccessfully: 'ההגדרות עודכנו בהצלחה',
     definitionSubmit: 'שמור הגדרה',
     cannotSaveDefinition: 'לא ניתן לשמור את ההגדרה',
     duplicateDefinition: 'קיימת כבר הגדרה לאותו ענף',
