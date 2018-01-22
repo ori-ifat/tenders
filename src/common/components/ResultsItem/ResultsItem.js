@@ -9,7 +9,8 @@ import moment from 'moment'
 import find from 'lodash/find'
 import replace from 'lodash/replace'
 import Checkbox from 'common/components/Checkbox'
-import ResultsItemDetails from 'common/components/ResultsItemDetails'
+//import ResultsItemDetails from 'common/components/ResultsItemDetails'
+import ItemDetailsModal from 'common/components/ItemDetailsModal'
 import ImageView from 'common/components/ImageView'
 import Reminder from 'common/components/Reminder'
 import LoginDialog from 'common/components/LoginDialog'
@@ -224,7 +225,7 @@ export default class ResultsItem extends React.Component {
           </div>
         </div>
         {this.viewBig && !this.showImage && logged &&
-          <ResultsItemDetails
+          <ItemDetailsModal
             itemID={item.TenderID}
             onClose={this.closeDetails}
             showViewer={this.showViewer}

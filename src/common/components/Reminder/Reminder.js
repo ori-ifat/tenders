@@ -7,6 +7,7 @@ import moment from 'moment'
 import {setReminder, getReminder, clearCache} from 'common/services/apiService'
 import {getCookie, setCookie} from 'common/utils/cookies'
 import Calendar from 'common/components/Calendar'
+import ReactModal from 'react-modal'
 import CSSModules from 'react-css-modules'
 import styles from './Reminder.scss'
 
@@ -35,6 +36,7 @@ export default class Reminder extends Component {
   @observable reminderID = 0
 
   componentWillMount() {
+    ReactModal.setAppElement('#root')
     this.initReminder()
   }
 
@@ -144,69 +146,74 @@ export default class Reminder extends Component {
     const infoDateVal = this.infoDate != null ? this.infoDate : t('reminder.noDate')
 
     return (
-      <div className="reveal-overlay" style={{display: 'block', zIndex: 1100}}>
-        <div className="reveal" styleName="reminder_lb" style={{display: 'block'}}>
-          <button styleName="button-cancel" onClick={() => onClose(-1)}>×</button>
-          <div className="grid-x grid-margin-x" styleName="pb">
-            <div className="small-12 cell">
-              <h2 styleName="remider_ttl">{t('reminder.title')}</h2>
+      <div>
+
+        <ReactModal
+          isOpen={true}
+          onRequestClose={() => onClose(-1)}
+          className="reveal-custom"
+          overlayClassName="reveal-overlay-custom">
+          <div styleName="reminder_lb" >
+            <button styleName="button-cancel" onClick={() => onClose(-1)}>×</button>
+            <div className="grid-x grid-margin-x" styleName="pb">
+              <div className="small-12 cell">
+                <h2 styleName="remider_ttl">{t('reminder.title')}</h2>
+              </div>
+            </div>
+
+            <div className="grid-x grid-margin-x" styleName="pb">
+              <div className="small-12 cell">
+                <span>{t('reminder.subject')}</span>
+                <input type="text" name="subject" value={title} onChange={this.updateField}/>
+              </div>
+            </div>
+
+            <div className="grid-x grid-margin-x" styleName="pb">
+
+              <div className="small-6 cell">
+                <span>{t('reminder.date')}</span>
+                <Calendar
+                  defaultDate={moment(this.reminderDate, 'DD-MM-YYYY')}
+                  todayLabel={t('reminder.today')}
+                  selectDate={this.selectDate}
+                  showMonths={false}
+                  showYears={false}
+                />
+                <span styleName="note">{t('reminder.delivery', {infoDateVal})}</span>
+              </div>
+
+              <div className="small-6 cell">
+                <span>{t('reminder.time')}</span>
+                <input type="text" name="time" value={timeVal} onChange={this.updateField} />
+              </div>
+            </div>
+
+            <div className="grid-x grid-margin-x" styleName="pb">
+              <div className="small-12 cell">
+                <span>{t('reminder.email')}</span>
+                <input type="email" name="email" value={this.email} onChange={this.updateField}/>
+              </div>
+            </div>
+
+            <div className="grid-x grid-margin-x" styleName="pb">
+              <div className="small-12 cell">
+                <span>{t('reminder.remark')}</span>
+                <textarea styleName="remark" name="remark" value={this.remark} onChange={this.updateField} />
+              </div>
+            </div>
+
+            <div className="grid-x grid-margin-x" styleName="buttons_cont">
+              <div className="small-12 cell">
+
+                {this.reminderID > 0 &&
+                  <button styleName="button-remove" onClick={this.delReminder}>{t('reminder.delete')}</button>
+                }
+                <button styleName="button-submit" onClick={this.addReminder}>{t('reminder.submit')}</button>
+              </div>
             </div>
           </div>
-
-          <div className="grid-x grid-margin-x" styleName="pb">
-            <div className="small-12 cell">
-              <span>{t('reminder.subject')}</span>
-              <input type="text" name="subject" value={title} onChange={this.updateField}/>
-            </div>
-          </div>
-
-          <div className="grid-x grid-margin-x" styleName="pb">
-
-            <div className="small-6 cell">
-              <span>{t('reminder.date')}</span>
-              <Calendar
-                defaultDate={moment(this.reminderDate, 'DD-MM-YYYY')}
-                todayLabel={t('reminder.today')}
-                selectDate={this.selectDate}
-                showMonths={false}
-                showYears={false}
-              />
-              <span styleName="note">{t('reminder.delivery', {infoDateVal})}</span>
-            </div>
-
-            <div className="small-6 cell">
-              <span>{t('reminder.time')}</span>
-              <input type="text" name="time" value={timeVal} onChange={this.updateField} />
-            </div>
-          </div>
-
-          <div className="grid-x grid-margin-x" styleName="pb">
-            <div className="small-12 cell">
-              <span>{t('reminder.email')}</span>
-              <input type="email" name="email" value={this.email} onChange={this.updateField}/>
-            </div>
-          </div>
-
-          <div className="grid-x grid-margin-x" styleName="pb">
-            <div className="small-12 cell">
-              <span>{t('reminder.remark')}</span>
-              <textarea styleName="remark" name="remark" value={this.remark} onChange={this.updateField} />
-            </div>
-          </div>
-
-          <div className="grid-x grid-margin-x" styleName="buttons_cont">
-            <div className="small-12 cell">
-
-              {this.reminderID > 0 &&
-                <button styleName="button-remove" onClick={this.delReminder}>{t('reminder.delete')}</button>
-              }
-              <button styleName="button-submit" onClick={this.addReminder}>{t('reminder.submit')}</button>
-            </div>
-          </div>
-
-        </div>
+        </ReactModal>
       </div>
-
     )
   }
 }

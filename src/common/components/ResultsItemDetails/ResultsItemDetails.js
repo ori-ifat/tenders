@@ -43,7 +43,7 @@ export default class ResultsItemDetails extends React.Component {
     itemStore.loadTender(itemID).then(() => {
       this.IsFavorite = itemStore.item.IsFavorite || false
       //console.log('mount', this.IsFavorite)
-    })
+    })    
   }
 
   componentWillReceiveProps(nextProps, nextState) {
@@ -128,13 +128,10 @@ export default class ResultsItemDetails extends React.Component {
 
     //for scroll pos of item
     const divTop = document.documentElement.scrollTop ? document.documentElement.scrollTop : document.body.scrollTop
-    const className = !this.props.mode ? 'reveal-overlay' : ''
-    const subClassName = !this.props.mode ? 'reveal large' : ''
 
     return (
-      <div className={className} style={{display: 'block'}}>
-        <div className={subClassName} style={{display: 'block'}}>
-          {!itemStore.resultsLoading &&
+      <div>
+        {!itemStore.resultsLoading &&
             <div styleName="view-details-wrapper" style={{top: (divTop + 10)}}>
               <div className="grid-x">
                 <div className="large-12 cell">
@@ -214,11 +211,9 @@ export default class ResultsItemDetails extends React.Component {
                   <span aria-hidden="true">&times;</span>
                 </button>
               }
-
             </div>
-          }
-          {itemStore.resultsLoading && <div>Loading...</div>}
-        </div>
+        }
+        {itemStore.resultsLoading && <div>Loading...</div>}
         {this.remindMe &&
           <Reminder
             tenderID={item.TenderID}

@@ -7,7 +7,8 @@ import * as stores from 'stores'
 import Foundation from 'lib/foundation' //import the foundation library to the app - top level
 import 'lib/foundationInit'   //initialize the foundation library with document.ready (occurs after all components are mounted)
 import './global.scss'  //important!! need to import that css here only!!
-//use className when needed instead of styleName (foundation stuff), otherwise css will be huge and app will be stuck .... 
+//use className when needed instead of styleName (foundation stuff), otherwise css will be huge and app will be stuck ....
+import 'common/style/reveal.css'
 
 function mount() {
   const App = require('./components/App').default

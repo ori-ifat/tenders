@@ -4,6 +4,7 @@ import { inject, observer } from 'mobx-react'
 import {observable, toJS} from 'mobx'
 import { translate } from 'react-polyglot'
 import {clearCache} from 'common/services/apiService'
+import ReactModal from 'react-modal'
 import FoundationHelper from 'lib/FoundationHelper'
 import CSSModules from 'react-css-modules'
 import styles from './LoginDialog.scss'
@@ -24,7 +25,7 @@ export default class LoginDialog extends React.Component {
   @observable rememberMe = true
 
   componentWillMount() {
-
+    ReactModal.setAppElement('#root')
   }
 
   componentWillReceiveProps(nextProps) {
@@ -78,8 +79,12 @@ export default class LoginDialog extends React.Component {
   render() {
     const {accountStore, onCancel, t} = this.props
     return (
-      <div className="reveal-overlay" style={{display: 'block', zIndex: 1200}}>
-        <div className="reveal" styleName="login_lb" style={{display: 'block'}}>
+      <ReactModal
+        isOpen={true}
+        onRequestClose={onCancel}
+        className="reveal-custom2"
+        overlayClassName="reveal-overlay-custom">
+        <div styleName="login_lb">
           <button styleName="button-cancel" onClick={onCancel}>×</button>
           <div styleName="pb">
             <div styleName="login_container">
@@ -127,7 +132,7 @@ export default class LoginDialog extends React.Component {
             </div>
           </div>
         </div>
-      </div>
+      </ReactModal>
     )
   }
 }
