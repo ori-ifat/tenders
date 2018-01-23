@@ -257,13 +257,13 @@ export function publishTender(firstName, lastName, companyName, companyPhone,
   }})
 }
 
-export function contactUs(firstName, email, phone) {
-  /*return apiFetch('bb/ss', {searchParams: {
-    FirstName: firstName,
+export function contactUs(name, email, phone) {
+  return apiFetch('Email/Register', {searchParams: {
+    Name: name,
     Email: email,
     Phone: phone
-  }})*/
-  return Promise.resolve('test')
+  }})
+  //return Promise.resolve('test')
 }
 
 export function getMainSubjects() {
