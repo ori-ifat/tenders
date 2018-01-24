@@ -124,7 +124,8 @@ export default class MultipleFilter extends React.Component {
       //route list SearchInput, to enable a new search
       const { routingStore } = this.props
       const sort = 'publishDate'  //default sort. note, means that on every search action, sort will reset here
-      const payload = JSON.stringify(tags)
+      const newTags = [...searchStore.tags, ...tags]
+      const payload = JSON.stringify(newTags)
       const filters = JSON.stringify([]) //...(searchStore.filters)
       routingStore.push(`/results/${sort}/${payload}/${filters}`)
     }

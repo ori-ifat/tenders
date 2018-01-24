@@ -75,7 +75,7 @@ export default class Home extends Component {
           <div className="row">
             <div className="columns large-12">
               <h1 styleName="hero_txt">{t('home.mainTitle')}<br /> {t('home.mainTitle2')}!</h1>
-              <p styleName="sub_head">{t('home.subTitle')}</p>
+              <p styleName="sub_head">{/*t('home.subTitle')*/}</p>
             </div>
           </div>
           <div className="row">

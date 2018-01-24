@@ -23,8 +23,8 @@ export function checkPhone(phone, allowEmpty) {
   }
 
   phone = phone.replace(/ /g, '')
-  //const filter = /^0(5[012345678]|6[47]){1}(\-)?[^0\D]{1}\d{6}$/
-  const filter = /^0(5[012345678]){1}(\-)?[^0\D]{1}\d{6}$/
+  //const filter = /^0(5[012345678]){1}(\-)?[^0\D]{1}\d{6}$/
+  const filter = /^0((5[012345678]){1}|[012345678]{1})(\-)?[^0\D]{1}\d{6}$/
 
   if (!filter.test(phone)) {
     //console.log('bad phone')

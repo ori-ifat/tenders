@@ -20,6 +20,7 @@ const printSrc = req('./print_gray.svg')
 const mailSrc = req('./mail_gray.svg')
 const alertSrc = req('./alert.svg')
 const favSrc = req('./fav.svg')
+const favActSrc = req('./action_fav.svg')
 
 @translate()
 @inject('itemStore')
@@ -113,8 +114,17 @@ export default class ResultsItemDetails extends React.Component {
       //concat the url as is (regexp will fix it to be a link)
       text = `${arr[0]}<br />${t('tender.originalTitle')}<br />http://www.tenders.co.il/#/tender/${link[0]}`
     }
-    const fixedText = text.replace(/((https|http):\/\/)?(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)/,
+    //with http
+    let fixedText = text.replace(/((https|http):\/\/)(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)/,
       `<a target="_blank" href="\$&">${title}</a>`)
+
+    //without http
+    fixedText = fixedText.replace(/(www\.)[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)/,
+      `<a target="_blank" href="http://\$&">${title}</a>`)
+
+    //mailto
+    fixedText = fixedText.replace(/([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)/,
+      '<a href="mailto:\$&">\$&</a>')
 
     return {__html: fixedText}
   }
@@ -222,11 +232,11 @@ export default class ResultsItemDetails extends React.Component {
                         this.newReminderDate && this.newReminderDate != null && this.newReminderDate != '' ?
                           this.newReminderDate
                           : t('tender.addReminder')}</a></li>
-                    {!this.props.mode &&
-                      <li><a onClick={this.fav}>
-                        <img src={favSrc}/>
-                        {this.IsFavorite ? t('tender.removeFromFav') : t('tender.addToFav')}</a></li>
-                    }
+
+                    <li><a onClick={this.fav}>
+                      <img src={this.IsFavorite ? favActSrc : favSrc}/>
+                      {this.IsFavorite ? t('tender.removeFromFav') : t('tender.addToFav')}</a></li>
+
                   </ul>
                 </div>
               </div>

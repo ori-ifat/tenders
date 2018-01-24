@@ -2,7 +2,7 @@ import React, {Component} from 'react'
 import { withRouter } from 'react-router'
 import { inject, observer } from 'mobx-react'
 import { observable } from 'mobx'
-import {getImageUrl} from 'common/utils/util'
+import {getImageUrl, setFavStatus} from 'common/utils/util'
 import ResultsItemDetails from 'common/components/ResultsItemDetails'
 import ImageView from 'common/components/ImageView'
 import NotLogged from 'common/components/NotLogged'
@@ -11,6 +11,7 @@ import styles from './tender.scss'
 
 @withRouter
 @inject('accountStore')
+@inject('recordStore')
 @observer
 @CSSModules(styles)
 export default class Tender extends Component {
@@ -36,6 +37,13 @@ export default class Tender extends Component {
     this.showImage = false
   }
 
+  onFav = (tenderID, add) => {
+    const {accountStore, recordStore} = this.props
+    if (accountStore.profile) {
+      setFavStatus(tenderID, add, recordStore.isInChecked, recordStore.push, recordStore.cut)
+    }
+  }
+
   render() {
     const {accountStore: {profile}} = this.props
     return (
@@ -49,6 +57,7 @@ export default class Tender extends Component {
                   itemID={this.itemID}
                   showViewer={this.showViewer}
                   mode="singleItem"
+                  onFav={this.onFav}
                 />
                 :
                 <ImageView
