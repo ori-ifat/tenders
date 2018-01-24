@@ -62,7 +62,7 @@ export default class LoginDialog extends React.Component {
         if (accountStore.error == null && accountStore.profile != null) {
           //successful login made
           clearCache()
-          push('/')
+          push('/main')
           onCancel()  //close modal
           setTimeout(() => {
             //allow element to be created.
