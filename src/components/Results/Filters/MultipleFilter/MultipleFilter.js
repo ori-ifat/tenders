@@ -42,7 +42,7 @@ export default class MultipleFilter extends React.Component {
     this.init(this.props)
   }
 
-  componentWillReceiveProps(nextProps) {    
+  componentWillReceiveProps(nextProps) {
     this.init(nextProps)
   }
 
@@ -190,18 +190,21 @@ export default class MultipleFilter extends React.Component {
   render() {
     const {t} = this.props
     const title = this.type == 'subsubjects' ? t('filter.subSubjectsTitle') : t('filter.publishersTitle')
+    const tileStyle = this.type != 'subsubjects' ? {marginBottom: '3px'} : {}
     return(
       <div styleName="cb-wrapper">
 
         {this.open &&
           <div className="reveal-overlay"  style={{display: 'block'}}>
-            <div className="reveal" styleName="multipal-selection" style={{display: 'block'}}>
+            <div className="reveal" styleName="multiple-selection" style={{display: 'block'}}>
               <div styleName="">
                 <h2>{title}
-                  <div styleName="selectAll_links">
-                    <a onClick={() => this.onCheckAll(true)}>{t('filter.selectAll')}</a><span styleName="sep">|</span>
-                    <a onClick={() => this.onCheckAll(false)}>{t('filter.clearAll')}</a>
-                  </div>
+                  {this.type == 'subsubjects' &&
+                    <div styleName="selectAll_links">
+                      <a onClick={() => this.onCheckAll(true)}>{t('filter.selectAll')}</a><span styleName="sep">|</span>
+                      <a onClick={() => this.onCheckAll(false)}>{t('filter.clearAll')}</a>
+                    </div>
+                  }
                 </h2>
                 <input type="text" placeholder={t('filter.search')} onChange={this.filterItems} />
                 {this.type == 'subsubjects' && <div>
@@ -230,7 +233,7 @@ export default class MultipleFilter extends React.Component {
                 <div styleName="selected">
                   {
                     take(this.itemLabels, 2).map((item, index) =>
-                      <div key={index} styleName="selected-tile">{item}</div>
+                      <div key={index} styleName="selected-tile" style={tileStyle}>{item}</div>
                     )
                   }
                   {

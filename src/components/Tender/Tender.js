@@ -55,6 +55,7 @@ export default class Tender extends Component {
                   onClose={this.closeViewer}
                   url={this.imageUrl}
                   title={this.imageTitle}
+                  tenderID={this.itemID}
                 />
               }
             </div>

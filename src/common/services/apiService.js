@@ -297,6 +297,12 @@ export function updateAgentSettings(settings) {
   return apiFetch('Agent/UpdateSmartAgentParams', {body: settings, method: 'POST' }, true)
 }
 
+export function logImageView(tenderID) {
+  return apiFetch('Tender/SetImgView', {searchParams: {
+    TenderID: tenderID
+  }})
+}
+
 function fetchData(url) {
   /* fetch a url that is not in api controllers, such as a json file */
 

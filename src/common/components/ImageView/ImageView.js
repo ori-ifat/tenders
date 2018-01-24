@@ -1,5 +1,6 @@
 import React, {Component} from 'react'
-import { string, func } from 'prop-types'
+import { string, number, func } from 'prop-types'
+import {logImageView} from 'common/services/apiService'
 import ImageViewer from 'react-image-viewer-zoom'
 import 'react-image-viewer-zoom/dist/style.css'
 import './style.scss'
@@ -12,7 +13,13 @@ class ImageView extends Component {
   static propTypes = {
     onClose: func,
     url: string,
-    title: string
+    title: string,
+    tenderID: number
+  }
+
+  componentWillMount() {
+    const {tenderID} = this.props
+    logImageView(tenderID)
   }
 
   render() {

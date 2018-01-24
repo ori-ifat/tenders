@@ -28,7 +28,6 @@
 }
 
 ul.tender_actions {
-
   li {
     padding: 0.5rem;
     border-bottom: 1px solid $light-gray;
@@ -37,10 +36,11 @@ ul.tender_actions {
       img {
         padding-left: 0.5rem;
       }
+      &:hover {
+        color: #34b44f !important;
+      }
     }
-
   }
-
 }
 
 .label {

@@ -5,6 +5,7 @@ import {observable, toJS} from 'mobx'
 import { whenRouted } from 'common/utils/withRouteHooks'
 import { withRouter } from 'react-router'
 import { favoritesStore } from 'stores'
+import {clearCache} from 'common/services/apiService'
 import SearchInput from 'common/components/SearchInput'
 import Title from 'common/components/Title'
 //import ResultsActions from 'components/Results/ResultsActions'
@@ -31,10 +32,20 @@ export default class Favorites extends Component {
     onFav: func
   }
 
+  onSetFav = (tenderID, add) => {
+    const {onFav, favoritesStore} = this.props
+    onFav(tenderID, add)
+    clearCache()
+    setTimeout(() => {
+      favoritesStore.clearResults()
+      favoritesStore.loadNextResults()
+    }, 200)
+  }
+
   render() {
 
     const {accountStore, favoritesStore, favoritesStore: {resultsLoading, resultsCount, tags}} = this.props
-    const {onCheck, onFav, recordStore: {checkedItems}} = this.props
+    const {onCheck, recordStore: {checkedItems}} = this.props
 
     return (
       <div style={{marginTop: '50px'}}>
@@ -54,14 +65,14 @@ export default class Favorites extends Component {
                       store={favoritesStore}
                       loadMore={favoritesStore.loadNextResults}
                       onCheck={onCheck}
-                      onFav={onFav}
+                      onFav={this.onSetFav}
                       checkedItems={checkedItems} />
                   </div>
                 </div>
               </div>
               :
               <NotLogged />
-            }            
+            }
           </div>
         }
       </div>

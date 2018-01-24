@@ -7,6 +7,7 @@ import moment from 'moment'
 import {setReminder, getReminder, clearCache} from 'common/services/apiService'
 import {getCookie, setCookie} from 'common/utils/cookies'
 import Calendar from 'common/components/Calendar'
+import Confirm from 'common/components/Confirm'
 import ReactModal from 'react-modal'
 import CSSModules from 'react-css-modules'
 import styles from './Reminder.scss'
@@ -34,6 +35,7 @@ export default class Reminder extends Component {
   @observable remark = '';
   @observable email = '';
   @observable reminderID = 0
+  @observable deleteMe = false
 
   componentWillMount() {
     ReactModal.setAppElement('#root')
@@ -128,13 +130,28 @@ export default class Reminder extends Component {
   }
 
   delReminder = () => {
+    /*
     setReminder('Delete', this.reminderID, -1, '', '', '').then(deleted => {
       console.log('delete status:', deleted) //implement if user should know something about delete op
       clearCache()
       const {setReminderData, onClose} = this.props
       onClose(-1, true) //...close the modal
       if (setReminderData) setReminderData(-1, null)
-    })
+    })*/
+    this.deleteMe = true
+  }
+
+  deleteConfirm = (del) => {
+    if (del && typeof(del) !== 'object') { //typeof(del) === 'object' means that user has cancelled dialog without choosing
+      setReminder('Delete', this.reminderID, -1, '', '', '').then(deleted => {
+        console.log('delete status:', deleted) //implement if user should know something about delete op
+        clearCache()
+        const {setReminderData, onClose} = this.props
+        onClose(-1, true) //...close the modal
+        if (setReminderData) setReminderData(-1, null)
+      })
+    }
+    this.deleteMe = false
   }
 
   render() {
@@ -202,6 +219,12 @@ export default class Reminder extends Component {
               </div>
             </div>
 
+            <div className="grid-x grid-margin-x" styleName="pb">
+              <div className="small-12 cell">
+                <a target="_blank" href={`#/tender/${this.tenderID}`}>{t('reminder.linkToItem')}</a>                
+              </div>
+            </div>
+
             <div className="grid-x grid-margin-x" styleName="buttons_cont">
               <div className="small-12 cell">
 
@@ -213,6 +236,9 @@ export default class Reminder extends Component {
             </div>
           </div>
         </ReactModal>
+        {
+          this.deleteMe && <Confirm onClose={this.deleteConfirm} />
+        }
       </div>
     )
   }

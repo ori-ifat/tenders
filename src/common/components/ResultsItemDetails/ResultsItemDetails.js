@@ -31,25 +31,30 @@ export default class ResultsItemDetails extends React.Component {
     itemID: number,
     onClose: func,
     showViewer: func,
+    setReminderData: func,
     mode: string,
     onFav: func
   }
 
   @observable remindMe = false
   @observable IsFavorite = false
+  @observable reminderID = -1
+  @observable newReminderDate = '';
 
   componentWillMount() {
     const {itemStore, itemID} = this.props
     itemStore.loadTender(itemID).then(() => {
       this.IsFavorite = itemStore.item.IsFavorite || false
+      this.reminderID = itemStore.item.ReminderID || -1
       //console.log('mount', this.IsFavorite)
-    })    
+    })
   }
 
   componentWillReceiveProps(nextProps, nextState) {
     const {itemStore, itemID} = nextProps
     itemStore.loadTender(itemID).then(() => {
       this.IsFavorite = itemStore.item.IsFavorite || false
+      this.reminderID = itemStore.item.ReminderID || -1
       //console.log('receive', this.IsFavorite)
     })
   }
@@ -87,6 +92,15 @@ export default class ResultsItemDetails extends React.Component {
     this.remindMe = open
   }
 
+  setReminderData = (id, date) => {
+    //when reminder data changes (created\updated\deleted),
+    //need to update the date label and current reminderID
+    const {setReminderData} = this.props
+    this.reminderID = id
+    this.newReminderDate = date
+    if (setReminderData) setReminderData(id, date)
+  }
+
   formatText = text => {
     /* <a> tag fix for text */
     const {t} = this.props
@@ -106,7 +120,7 @@ export default class ResultsItemDetails extends React.Component {
   }
 
   render() {
-    const { itemStore, onClose, t } = this.props
+    const { itemStore, showViewer, onClose, t } = this.props
     const item = toJS(itemStore.item)
     //console.log('render', this.IsFavorite)
     //for display
@@ -118,9 +132,12 @@ export default class ResultsItemDetails extends React.Component {
     //infoDate
     const twoDaysLeft = isDateInRange(item.InfoDate, 2)
     const oneDayLeft = isDateInRange(item.InfoDate, 1)
+    const noDaysLeft = isDateInRange(item.InfoDate, 0)
     //tourDate
     const twoDaysLeftTour = isDateInRange(item.TourDate, 2)
     const oneDayLeftTour = isDateInRange(item.TourDate, 1)
+    const tourToday = isDateInRange(item.TourDate, 0)
+    const mustDoTourLabel = (twoDaysLeftTour || oneDayLeftTour || tourToday) && item.MustDoTour ? ` - ${t('tender.mustTour')}` : ''
     //fileName
     const fileName = item.File ? item.File.FileName : ''
     //original tender
@@ -136,12 +153,15 @@ export default class ResultsItemDetails extends React.Component {
               <div className="grid-x">
                 <div className="large-12 cell">
                   {item.TenderType == t('tender.exclusive') && <span styleName="label" className="label">{t('tender.exclusive')}</span>}
-                  {twoDaysLeft && !oneDayLeft && <span styleName="label alert">{t('tender.twoDaysLeft')}</span>}
-                  {oneDayLeft && <span styleName="label alert">{t('tender.oneDayLeft')}</span>}
-                  {twoDaysLeftTour && !oneDayLeftTour && <span styleName="label alert">{t('tender.twoDaysLeftTour')}</span>}
-                  {oneDayLeftTour && <span styleName="label alert">{t('tender.oneDayLeftTour')}</span>}
+                  {twoDaysLeft && !oneDayLeft && !noDaysLeft && <span styleName="label alert">{t('tender.twoDaysLeft')}</span>}
+                  {oneDayLeft && !noDaysLeft && <span styleName="label alert">{t('tender.oneDayLeft')}</span>}
+                  {noDaysLeft && <span styleName="label alert">{t('tender.noDaysLeft')}</span>}
+                  {twoDaysLeftTour && !oneDayLeftTour && !tourToday && <span styleName="label alert">{`${t('tender.twoDaysLeftTour')}${mustDoTourLabel}`}</span>}
+                  {oneDayLeftTour && !tourToday  && <span styleName="label alert">{`${t('tender.oneDayLeftTour')}${mustDoTourLabel}`}</span>}
+                  {tourToday && <span styleName="label alert">{`${t('tender.noDaysLeftTour')}${mustDoTourLabel}`}</span>}
+                  {item.MustDoTour && !twoDaysLeftTour && !oneDayLeftTour && !tourToday && <span styleName="label alert">{t('tender.mustDoTour')}</span>}
                   <h1 styleName="item_title">{item.Title}</h1>
-                  <h6 styleName="item_meta">{t('tender.publishedAt')}: {publishDate} &middot; {item.TenderType} &middot; {item.TenderID}</h6>
+                  <h6 styleName="item_meta">{t('tender.publishedAt')}: {publishDate} &middot; {item.TenderType} &middot; {item.InfoCode}</h6>
                   <hr />
                 </div>
               </div>
@@ -188,7 +208,7 @@ export default class ResultsItemDetails extends React.Component {
                 <div className="large-3 cell">
 
                   <ul className="no-bullet" styleName="tender_actions">
-                    <li>{fileName != '' && <a onClick={() => this.props.showViewer(fileName, item.Title)}>
+                    <li>{fileName != '' && <a onClick={() => showViewer(fileName, item.Title)}>
                       <img src={thumbSrc} />{t('tender.viewImage')}</a>}
                     </li>
                     {item.TenderLink && <li><a href={item.TenderLink} target="_blank"><img src={docSrc}/>{t('tender.toTenderDetails')}</a></li>}
@@ -197,7 +217,11 @@ export default class ResultsItemDetails extends React.Component {
                     <li><a onClick={this.email}><img src={mailSrc}/>{t('tender.email')}</a></li>
                     <li><a onClick={() => this.remind(true)}>
                       <img src={alertSrc}/>
-                      {t('tender.remind')}</a></li>
+                      {item.ReminderDate && this.newReminderDate == '' ?
+                        moment(item.ReminderDate).format('DD-MM-YYYY') :
+                        this.newReminderDate && this.newReminderDate != null && this.newReminderDate != '' ?
+                          this.newReminderDate
+                          : t('tender.addReminder')}</a></li>
                     {!this.props.mode &&
                       <li><a onClick={this.fav}>
                         <img src={favSrc}/>
@@ -218,9 +242,10 @@ export default class ResultsItemDetails extends React.Component {
           <Reminder
             tenderID={item.TenderID}
             onClose={() => this.remind(false)}
+            setReminderData={this.setReminderData}
             title={item.Title}
             infoDate={item.InfoDate}
-            reminderID={item.ReminderID}
+            reminderID={this.reminderID}
           />
         }
       </div>

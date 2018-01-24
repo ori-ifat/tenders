@@ -161,9 +161,12 @@ export default class ResultsItem extends React.Component {
     //infoDate
     const twoDaysLeft = isDateInRange(item.InfoDate, 2)
     const oneDayLeft = isDateInRange(item.InfoDate, 1)
+    const noDaysLeft = isDateInRange(item.InfoDate, 0)
     //tourDate
     const twoDaysLeftTour = isDateInRange(item.TourDate, 2)
     const oneDayLeftTour = isDateInRange(item.TourDate, 1)
+    const tourToday = isDateInRange(item.TourDate, 0)
+    const mustDoTourLabel = (twoDaysLeftTour || oneDayLeftTour || tourToday) && item.MustDoTour ? ` - ${t('tender.mustTour')}` : ''
     //visited
     const visitedStyle = this.viewed ? ' visited' : ''
 
@@ -174,10 +177,13 @@ export default class ResultsItem extends React.Component {
             {onCheck && <Checkbox checked={checked} item={cbItem} onChange={onCheck} />}
             <div styleName="tender_txt_wraper">
               {item.TenderType == t('tender.exclusive') && <span styleName="label" className="label">{t('tender.exclusive')}</span>}
-              {twoDaysLeft && !oneDayLeft && <span styleName="label alert">{t('tender.twoDaysLeft')}</span>}
-              {oneDayLeft && <span styleName="label alert">{t('tender.oneDayLeft')}</span>}
-              {twoDaysLeftTour && !oneDayLeftTour && <span styleName="label alert">{t('tender.twoDaysLeftTour')}</span>}
-              {oneDayLeftTour && <span styleName="label alert">{t('tender.oneDayLeftTour')}</span>}
+              {twoDaysLeft && !oneDayLeft && !noDaysLeft && <span styleName="label alert">{t('tender.twoDaysLeft')}</span>}
+              {oneDayLeft && !noDaysLeft && <span styleName="label alert">{t('tender.oneDayLeft')}</span>}
+              {noDaysLeft && <span styleName="label alert">{t('tender.noDaysLeft')}</span>}
+              {twoDaysLeftTour && !oneDayLeftTour && !tourToday && <span styleName="label alert">{`${t('tender.twoDaysLeftTour')}${mustDoTourLabel}`}</span>}
+              {oneDayLeftTour && !tourToday  && <span styleName="label alert">{`${t('tender.oneDayLeftTour')}${mustDoTourLabel}`}</span>}
+              {tourToday && <span styleName="label alert">{`${t('tender.noDaysLeftTour')}${mustDoTourLabel}`}</span>}
+              {item.MustDoTour && !twoDaysLeftTour && !oneDayLeftTour && !tourToday && <span styleName="label alert">{t('tender.mustDoTour')}</span>}
               <h3
                 onClick={() => this.viewDetails(item.TenderID)}
                 styleName={`item-title${visitedStyle}`}
@@ -199,8 +205,8 @@ export default class ResultsItem extends React.Component {
                   </span>
                 }
                 <span>{item.TenderType}</span>
-                <span styleName="divider">•</span>
-                <span>#{item.TenderID}</span>
+                {/*<span styleName="divider">•</span>
+                <span>#{item.TenderID}</span>*/}
               </div>
             </div>
 
@@ -229,6 +235,7 @@ export default class ResultsItem extends React.Component {
             itemID={item.TenderID}
             onClose={this.closeDetails}
             showViewer={this.showViewer}
+            setReminderData={this.setReminderData}
             onFav={onFav}
           />}
         {this.viewBig && this.showImage && logged &&
@@ -236,6 +243,7 @@ export default class ResultsItem extends React.Component {
             onClose={this.closeViewer}
             url={this.imageUrl}
             title={this.imageTitle}
+            tenderID={item.TenderID}
           />
         }
         {this.remindMe && logged &&

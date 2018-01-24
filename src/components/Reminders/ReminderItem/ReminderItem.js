@@ -1,8 +1,11 @@
 import React from 'react'
 import { number, string, func } from 'prop-types'
+import { observer } from 'mobx-react'
+import { observable } from 'mobx'
 import { translate } from 'react-polyglot'
 import moment from 'moment'
 import {setReminder, clearCache} from 'common/services/apiService'
+import Confirm from 'common/components/Confirm'
 import CSSModules from 'react-css-modules'
 import styles from './ReminderItem.scss'
 
@@ -11,6 +14,7 @@ const alertSrc = req('./alert.svg')
 
 @translate()
 @CSSModules(styles, {allowMultiple: true})
+@observer
 export default class ReminderItem extends React.Component {
   static propTypes = {
     reminderID: number,
@@ -21,14 +25,34 @@ export default class ReminderItem extends React.Component {
     reload: func
   }
 
+  @observable reminderID = -1
+  @observable deleteMe = false
+
+  componentWillMount() {
+    const { reminderID } = this.props
+    this.reminderID = reminderID
+  }
+
   delReminder = (reminderID) => {
+    /*
     setReminder('Delete', reminderID, -1, '', '', '').then(deleted => {
       console.log('delete status:', deleted) //implement if user should know something about delete op
       clearCache()
       this.props.reload()
-    })
+    })*/
+    this.deleteMe = true
   }
 
+  deleteConfirm = (del) => {
+    if (del && typeof(del) !== 'object') { //typeof(del) === 'object' means that user has cancelled dialog without choosing
+      setReminder('Delete', this.reminderID, -1, '', '', '').then(deleted => {
+        console.log('delete status:', deleted) //implement if user should know something about delete op
+        clearCache()
+        this.props.reload()
+      })
+    }
+    this.deleteMe = false
+  }
 
   render() {
     const { reminderID, title, date, infoDate, selectItem, isSelected, t } = this.props
@@ -54,9 +78,10 @@ export default class ReminderItem extends React.Component {
             <a onClick={() => selectItem(reminderID)}>{t('reminders.edit')}</a>
             <a onClick={() => this.delReminder(reminderID)} style={{paddingLeft: '10px'}}>{t('reminders.delete')}</a>
           </div>
-
-
         </div>
+        {
+          this.deleteMe && <Confirm onClose={this.deleteConfirm} />
+        }
       </div>
     )
   }

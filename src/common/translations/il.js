@@ -28,6 +28,11 @@ export default {
     logout: 'התנתק',
     search: 'חיפוש'
   },
+  confirm: {
+    ask: 'האם את/ה בטוח/ה?',
+    yes: 'כן',
+    no: 'לא'
+  },
   home: {
     mainTitle: 'רק אנחנו נמצא את',
     mainTitle2: 'ההזדמנויות המתאימות עבורך',
@@ -92,8 +97,12 @@ export default {
     exclusive: 'בלעדי',
     twoDaysLeft: 'הגשה בעוד יומיים',
     oneDayLeft: 'הגשה בעוד יום',
+    noDaysLeft: 'הגשה היום',
     twoDaysLeftTour: 'סיור קבלנים בעוד יומיים',
     oneDayLeftTour: 'סיור קבלנים בעוד יום',
+    noDaysLeftTour: 'סיור קבלנים היום',
+    mustDoTour: 'סיור חובה',
+    mustTour: 'חובה',
     publisher: 'המפרסם',
     delivery: 'מועד ההגשה',
     tourDetails: 'סיור קבלנים',
@@ -181,7 +190,8 @@ export default {
     email: 'מייל לתזכורת',
     cancel: 'בטל',
     delete: 'מחק',
-    submit: 'שמור תזכורת'
+    submit: 'שמור תזכורת',
+    linkToItem: 'לינק למכרז'
   },
   filter: {
     title: 'הגדרות חיפוש',
