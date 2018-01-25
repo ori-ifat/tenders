@@ -6,6 +6,7 @@ import { translate } from 'react-polyglot'
 import filter from 'lodash/filter'
 import find from 'lodash/find'
 import remove from 'lodash/remove'
+//import forEach from 'lodash/forEach'
 import take from 'lodash/take'
 import {doFilter} from 'common/utils/filter'
 import CSSModules from 'react-css-modules'
@@ -124,6 +125,21 @@ export default class MultipleFilter extends React.Component {
       //route list SearchInput, to enable a new search
       const { routingStore } = this.props
       const sort = 'publishDate'  //default sort. note, means that on every search action, sort will reset here
+      /*
+      const tagsFiltered = []
+      forEach(tags, tag => {
+        const found = find(searchStore.tags, _tag => {
+          return _tag.ID === tag.ID && _tag.ResType === tag.ResType
+        })
+        if (!found) {
+          tagsFiltered.push(tag)
+        }
+      })
+      console.log(tagsFiltered)
+      */
+      remove(searchStore.tags, tag => {
+        return tag.ResType === 'subsubject'
+      })
       const newTags = [...searchStore.tags, ...tags]
       const payload = JSON.stringify(newTags)
       const filters = JSON.stringify([]) //...(searchStore.filters)

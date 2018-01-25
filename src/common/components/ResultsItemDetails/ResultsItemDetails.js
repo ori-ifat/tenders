@@ -118,11 +118,11 @@ export default class ResultsItemDetails extends React.Component {
     //with http
     let fixedText = text.replace(/((https|http):\/\/)(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)/,
       `<a target="_blank" href="\$&">${title}</a>`)
-    /*
+
     //without http - not working (non-http links)
-    fixedText = fixedText.replace(/^(?:(ftp|http|https):\/\/)?(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)/,
+    fixedText = fixedText.replace(/(www\.)[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)/,
       `<a target="_blank" href="http://\$&">${title}</a>`)
-    */
+
     //mailto
     fixedText = fixedText.replace(/([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)/,
       '<a href="mailto:\$&">\$&</a>')
