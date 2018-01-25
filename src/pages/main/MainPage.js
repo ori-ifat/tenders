@@ -7,6 +7,7 @@ export default class Main extends Component {
     return <div>
       <WrapperComponent
         use="main"
+        showNotification={this.props.showNotification}
       />
     </div>
   }

@@ -32,6 +32,11 @@ export default class Favorites extends Component {
     onFav: func
   }
 
+  componentWillMount() {
+    const {showNotification} = this.props
+    showNotification(true)
+  }
+
   onSetFav = (tenderID, add) => {
     const {onFav, favoritesStore} = this.props
     onFav(tenderID, add)

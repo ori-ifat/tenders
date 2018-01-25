@@ -47,6 +47,7 @@ export default class Wrapper extends Component {
         <Component
           onCheck={this.onCheck}
           onFav={this.onFav}
+          showNotification={this.props.showNotification}
         />
         <Toolbar />
       </div>

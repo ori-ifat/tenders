@@ -4,9 +4,11 @@ import styles from './Topbar.scss'
 import {translate} from 'react-polyglot'
 import {inject, observer} from 'mobx-react'
 import {observable} from 'mobx'
-import {clearCache} from 'common/services/apiService'
+import {clearCache, getRemindersCount, resetReminders} from 'common/services/apiService'
 import LoginDialog from 'common/components/LoginDialog'
 import FoundationHelper from 'lib/FoundationHelper'
+import NotificationBadge from 'react-notification-badge'
+import {Effect} from 'react-notification-badge'
 
 const req = require.context('common/style/icons/', false)
 const logoSrc = req('./logo.png')
@@ -19,9 +21,6 @@ const navbar = [  {
 }, {
   title: 'services',
   link: '/services'
-}, {
-  title: 'smartagent',
-  link: '/smartagent'
 }, {
   title: 'contactus',
   link: '/contact'
@@ -38,17 +37,28 @@ const navbar = [  {
 export default class Topbar extends Component {
 
   @observable showLoginDialog = false
-
+  @observable messageCount = 0
   componentWillMount() {
     //fix top nav foundation creation bug
     setTimeout(() => {
       //allow element to be created.
       FoundationHelper.reInitElement('top_nav')
-    }, 400)
+    }, 500)
   }
 
   componentWillReceiveProps(nextProps) {
-    //console.log('receive')
+    //console.log('receive', nextProps)
+    if (nextProps.notify) {
+      getRemindersCount().then(res =>
+        this.messageCount = res
+      )
+    }
+    else {
+      clearCache()
+      resetReminders().then(() =>
+        this.messageCount = 0
+      )
+    }    
   }
 
   navigate = route => () => {
@@ -103,6 +113,11 @@ export default class Topbar extends Component {
                   <li key={index}><a onClick={this.navigate(`${nav.link}`)}>{t(`nav.${nav.title}`)}</a></li>
                 ) }
                 <li>
+                  {this.messageCount > 0 &&
+                  <div style={{position: 'absolute', left: '0', top: '0'}}>
+                    <NotificationBadge count={this.messageCount} effect={Effect.SCALE}/>
+                  </div>
+                  }
                   {accountStore.profile ?
                     <a onClick={f => f}><img src={userSrc} alt="" />{loginLabel}</a>
                     :
@@ -110,6 +125,7 @@ export default class Topbar extends Component {
                   }
                   {accountStore.profile &&
                   <ul id="logout" className="submenu menu vertical" styleName="menu" data-dropdown-menu>
+                    <li><a onClick={this.navigate('/smartagent')}>{t('nav.smartagent')}</a></li>
                     <li><a onClick={this.navigate('/favorites')}>{t('nav.favorites')}</a></li>
                     <li><a onClick={this.navigate('/reminders')}>{t('nav.reminders')}</a></li>
                     <li><a onClick={this.logout}>{t('nav.logout')}</a></li>

@@ -6,7 +6,9 @@ export default class Favorites extends Component {
   render() {
     return <div>
       <WrapperComponent
-        use="favorites" />
+        use="favorites"
+        showNotification={this.props.showNotification}
+      />
     </div>
   }
 }

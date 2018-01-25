@@ -32,6 +32,11 @@ export default class Main extends Component {
     onFav: func
   }
 
+  componentWillMount() {
+    const {showNotification} = this.props
+    showNotification(true)
+  }
+
   render() {
     const { mainStore, accountStore: {profile}, t } = this.props
     const {onCheck, onFav} = this.props

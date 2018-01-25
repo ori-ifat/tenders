@@ -25,6 +25,11 @@ export default class Reminders extends Component {
 
   @observable itemId = -1
 
+  componentWillMount() {
+    const {showNotification} = this.props
+    showNotification(false)
+  }
+
   selectItem = (itemId, update) => {
     this.itemId = itemId
     if (itemId == -1 && update) {

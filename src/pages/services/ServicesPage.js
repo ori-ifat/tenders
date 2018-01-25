@@ -4,6 +4,8 @@ import ServicesComponent from 'components/Services'
 export default class Services extends Component {
 
   render(){
-    return <div><ServicesComponent/></div>
+    return <div><ServicesComponent
+      showNotification={this.props.showNotification}
+    /></div>
   }
 }

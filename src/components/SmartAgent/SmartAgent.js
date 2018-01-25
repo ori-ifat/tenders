@@ -32,7 +32,7 @@ export default class SmartAgent extends Component {
   @observable contacts = []
 
   componentWillMount() {
-    const {smartAgentStore} = this.props
+    const {smartAgentStore, showNotification} = this.props
     smartAgentStore.loadAgentSettings().then(() => {
       this.frequencies = smartAgentStore.results.Frequencies.filter(frequency => frequency.FrequencySelected == 1)
       this.tendertypes = smartAgentStore.results.TenderTypes.filter(tendertype => tendertype.TenderTypeSelected == 1)
@@ -41,7 +41,8 @@ export default class SmartAgent extends Component {
       this.email = smartAgentStore.results.Contacts[0].Email
       this.phone = smartAgentStore.results.Contacts[0].Cellular
     })
-    smartAgentStore.loadSubSubjects()
+    smartAgentStore.loadSubSubjects()    
+    showNotification(true)
   }
 
   onInputChange = e => {

@@ -21,6 +21,8 @@ export default class Services extends Component {
     getHomeJSON('Services', 'services').then(res => {
       this.services = res
     })
+    const {showNotification} = this.props
+    showNotification(true)
   }
 
 

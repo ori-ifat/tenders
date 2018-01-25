@@ -1,5 +1,4 @@
 import React, {Component} from 'react'
-//import { withRouter } from 'react-router'
 import { inject, observer } from 'mobx-react'
 import { observable } from 'mobx'
 import {translate} from 'react-polyglot'
@@ -14,7 +13,6 @@ const req = require.context('common/style/icons/', false)
 const addSrc = req('./add.svg')
 
 @translate()
-//@withRouter
 @inject('routingStore')
 @observer
 @CSSModules(styles)
@@ -36,7 +34,8 @@ export default class Publish extends Component {
   @observable description = ''
 
   componentWillMount() {
-    //const { match: {params: { itemId }} } = this.props
+    const {showNotification} = this.props
+    showNotification(true)
   }
 
   selectDate = (date, field) => {

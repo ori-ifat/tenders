@@ -303,6 +303,14 @@ export function logImageView(tenderID) {
   }})
 }
 
+export function getRemindersCount() {
+  return apiFetch('Reminder/CountUserReminders', {}, true)
+}
+
+export function resetReminders() {
+  return apiFetch('Reminder/ResetUserReminders', {}, true)
+}
+
 function fetchData(url) {
   /* fetch a url that is not in api controllers, such as a json file */
 

@@ -19,11 +19,19 @@ import SmartAgentPage from 'pages/smartagent'
 import NotFound404 from 'pages/notFound404'
 
 class Pages extends React.Component {
+  state = {
+    notify: false
+  }
+
+  showNotification = (notify) => {
+    this.setState({notify})
+    console.log('notify', notify)
+  }
 
   render() {
     return (
       <section>
-        <Topbar />
+        <Topbar notify={this.state.notify} />
         <Switch>
           <Route exact path="/">
             <Redirect to="/home" />
@@ -32,7 +40,9 @@ class Pages extends React.Component {
             <HomePage />
           </Route>
           <Route path="/main">
-            <MainPage />
+            <MainPage
+              showNotification={this.showNotification}
+            />
           </Route>
           <Route path="/search">
             <SearchPage />
@@ -44,25 +54,39 @@ class Pages extends React.Component {
             <TenderPage />
           </Route>
           <Route path="/smartagent">
-            <SmartAgentPage />
+            <SmartAgentPage
+              showNotification={this.showNotification}
+            />
           </Route>
           <Route path="/favorites">
-            <FavoritesPage />
+            <FavoritesPage
+              showNotification={this.showNotification}
+            />
           </Route>
           <Route path="/reminders">
-            <RemindersPage />
+            <RemindersPage
+              showNotification={this.showNotification}
+            />
           </Route>
           <Route path="/publish">
-            <PublishPage />
+            <PublishPage
+              showNotification={this.showNotification}
+            />
           </Route>
           <Route path="/contact">
-            <ContactPage />
+            <ContactPage
+              showNotification={this.showNotification}
+            />
           </Route>
           <Route path="/subscriptions">
-            <SubscriptionsPage />
+            <SubscriptionsPage
+              showNotification={this.showNotification}
+            />
           </Route>
           <Route path="/services">
-            <ServicesPage />
+            <ServicesPage
+              showNotification={this.showNotification}
+            />
           </Route>
           <Route path="/articles">
             <ArticlesPage />

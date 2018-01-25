@@ -4,6 +4,8 @@ import PublishComponent from 'components/Publish'
 export default class Publish extends Component {
 
   render(){
-    return <div><PublishComponent/></div>
+    return <div><PublishComponent
+      showNotification={this.props.showNotification}
+    /></div>
   }
 }

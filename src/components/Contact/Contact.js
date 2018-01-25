@@ -26,7 +26,8 @@ export default class Contact extends Component {
   @observable phone = ''
 
   componentWillMount() {
-
+    const {showNotification} = this.props
+    showNotification(true)
   }
 
   onChange = e => {
