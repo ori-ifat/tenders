@@ -50,13 +50,13 @@ export default class Toolbar extends React.Component {
     }
   }
 
-  print = () => {
+  print = (isBig) => {
     /* create pdf from selected tenders */
     const {accountStore, recordStore} = this.props
     if (accountStore.profile) {
       const itemsToAdd = recordStore.extractItems()
       window.open(createUrl('Export/ExportData', {
-        ExportType: 1,
+        ExportType: isBig ? 2 : 1,
         InfoList: itemsToAdd
       }, false), '_blank')
       //onClose()
@@ -118,7 +118,8 @@ export default class Toolbar extends React.Component {
               <div className="small-3 cell">
                 <ul className="menu align-left" styleName="align-left">
                   <li><a onClick={this.email}><img src={emailSrc} alt={t('toolbar.email')} /></a></li>
-                  <li><a onClick={this.print}><img src={printSrc} alt={t('toolbar.print')} /></a></li>
+                  <li><a onClick={() => this.print(false)}><img src={printSrc} alt={t('toolbar.print')} title={t('toolbar.print')} /></a></li>
+                  <li><a onClick={() => this.print(true)}><img src={printSrc} alt={t('toolbar.print')} title={t('toolbar.printBig')} /></a></li>
                   <li><a onClick={this.addFavorites}><img src={actionFavSrc} alt={t('toolbar.fav')} /></a></li>
                 </ul>
               </div>
