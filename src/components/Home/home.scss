@@ -1,3 +1,5 @@
+@import '~common/style/_settings.scss';
+
 .hide {
   display: none;
 }
@@ -35,6 +37,10 @@
 
 .blockitem {
   margin-bottom: 2px !important;
+}
+
+.blockitem_sub {
+  margin-bottom: 0 !important;
 }
 
 .cat_num {
@@ -172,6 +178,10 @@
   display: block;
   margin: 0 0.5rem;
   transition: all 0.35s ease;
+  span {
+    font-size: 13px;
+    color: $medium_gray
+  }
 }
 
 .news {
