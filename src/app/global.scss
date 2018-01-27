@@ -64,6 +64,10 @@ h1,h2, h3, h4, h5, h6 {
 
 /*checkbox*/
 
+.ReactModal__Body--open {
+    overflow: hidden;
+}
+
 /* shared between both checkbox and radio */
 
 .radio label, .checkbox label {
@@ -202,7 +206,7 @@ h1,h2, h3, h4, h5, h6 {
                 color:$dark-gray;
                 right: rem-calc(60);
                 padding: 0;
-                
+
             }
         }
         .Select-menu-outer {

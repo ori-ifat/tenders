@@ -6,7 +6,10 @@
   left: 0;
   z-index: 1005;
   background-color: rgba(0, 0, 0, 0.6);
-  overflow-y: scroll;
+  overflow-y: scroll !important;
+  display: flex;
+  flex-flow: column;
+  justify-content: center;
 }
 
 @media print, screen and (min-width: 40em){
@@ -60,10 +63,11 @@
   border-radius: 0;
   background-color: #fefefe;
   position: relative;
-  top: 100px;
+
   margin-right: auto;
   margin-left: auto;
   overflow-y: auto;
+
 }
 
 .reveal-custom2 {
@@ -75,7 +79,7 @@
   border-radius: 0;
   background-color: #fefefe;
   position: relative;
-  top: 100px;
+
   margin-right: auto;
   margin-left: auto;
   overflow-y: auto;

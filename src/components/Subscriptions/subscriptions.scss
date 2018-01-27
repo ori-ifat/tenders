@@ -76,9 +76,16 @@
 }
 
 .bottom_info {
-	margin: 2rem 0 4rem 0;
+	margin: 2rem 0 2rem 0;
   P {
     text-align: center;
 	  margin-bottom: 0.5rem;
   }
+}
+
+.signup_btn {
+	width: 80%;
+	margin-bottom: 2rem !important;
+	font-size: rem-calc(16);
+	font-weight: 500;
 }

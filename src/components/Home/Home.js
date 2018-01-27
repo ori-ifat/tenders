@@ -70,7 +70,7 @@ export default class Home extends Component {
     const catStyle = this.allCats ? '' : 'hide'
     const catLabel = this.allCats ? t('home.hideAllCat') : t('home.showAllCat')
     return (
-      <div>
+      <div className="bg">
         <section styleName="hero">
           <div className="row">
             <div className="columns large-12">
@@ -79,12 +79,13 @@ export default class Home extends Component {
             </div>
           </div>
           <div className="row">
-            <div className="column large-12">
+            <div className="column large-9 large-centered">
               <SearchInput />
             </div>
           </div>
+          
         </section>
-        <div className="row bg">&nbsp;</div>
+
         <section id="categories">
           <div className="row">
             <div className="large-12 columns">
