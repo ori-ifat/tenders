@@ -6,7 +6,7 @@ import styles from './Loading.scss'
 
 const Loading = ({}) => {
 
-  return <div className='sweet-loading'>
+  return <div styleName="loading_continer" className='sweet-loading'>
     <PulseLoader
       color="#3ECD5A"
       loading={true}
