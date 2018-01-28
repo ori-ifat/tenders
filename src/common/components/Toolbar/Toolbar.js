@@ -13,6 +13,7 @@ import styles from './Toolbar.scss'
 const req = require.context('common/style/icons/', false)
 const emailSrc = req('./mail.png')
 const printSrc = req('./print.svg')
+const printImageSrc = req('./image.svg')
 const actionFavSrc = req('./action_fav.svg')
 
 @translate()
@@ -118,8 +119,8 @@ export default class Toolbar extends React.Component {
               <div className="small-3 cell">
                 <ul className="menu align-left" styleName="align-left">
                   <li><a onClick={this.email}><img src={emailSrc} alt={t('toolbar.email')} /></a></li>
-                  <li><a onClick={() => this.print(false)}><img src={printSrc} alt={t('toolbar.print')} title={t('toolbar.print')} /></a></li>
-                  <li><a onClick={() => this.print(true)}><img src={printSrc} alt={t('toolbar.print')} title={t('toolbar.printBig')} /></a></li>
+                  <li><a onClick={() => this.print(false)}><img src={printSrc} alt={t('toolbar.print')} /></a></li>
+                  <li><a onClick={() => this.print(true)}><img src={printImageSrc} alt={t('toolbar.printBig')} /></a></li>
                   <li><a onClick={this.addFavorites}><img src={actionFavSrc} alt={t('toolbar.fav')} /></a></li>
                 </ul>
               </div>

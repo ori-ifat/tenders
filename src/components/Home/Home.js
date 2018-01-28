@@ -10,6 +10,7 @@ import Testemonial from './Items/Testemonial'
 import Tender from './Items/Tender'
 import Article from './Items/Article'
 import Footer from 'common/components/Footer'
+import Loading from 'common/components/Loading/Loading'
 import moment from 'moment'
 import {getHomeJSON} from 'common/services/apiService'
 import CSSModules from 'react-css-modules'
@@ -91,7 +92,7 @@ export default class Home extends Component {
             <div className="large-12 columns">
               <h2 styleName="cat-title" >{t('home.catTitle')}</h2>
               <div className="row collapse small-up-1 medium-up-2 large-up-4">
-                {resultsLoading && <div>Loading...</div>}
+                {resultsLoading && <Loading />}
                 {!resultsLoading && homeStore.catResults.map((cat, index) =>
                   <CatItem
                     key={index}

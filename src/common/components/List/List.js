@@ -6,6 +6,7 @@ import CSSModules from 'react-css-modules'
 import styles from './List.scss'
 import InfiniteScroll from 'react-infinite-scroller'
 import ResultsItem from 'common/components/ResultsItem'
+import Loading from 'common/components/Loading/Loading'
 import find from 'lodash/find'
 
 @translate()
@@ -35,7 +36,7 @@ export default class List extends React.Component {
 
       return <ResultsItem
         key={index}
-        item={item}        
+        item={item}
         onCheck={this.props.onCheck}
         onFav={this.props.onFav}
         checked={checked}
@@ -48,7 +49,7 @@ export default class List extends React.Component {
         pageStart={0}
         loadMore={loadMore}
         hasMore={hasMoreResults}
-        loader={<div>Loading...</div>}
+        loader={<Loading />}
       >
         {items}
       </InfiniteScroll>

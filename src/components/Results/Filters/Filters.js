@@ -11,6 +11,7 @@ import ComboFilter from './ComboFilter'
 import TenderTypeFilter from './TenderTypeFilter'
 import DateFilter from './DateFilter'
 import SearchTextFilter from './SearchTextFilter'
+import Loading from 'common/components/Loading/Loading'
 import CSSModules from 'react-css-modules'
 import styles from './Filters.scss'
 
@@ -92,7 +93,7 @@ export default class Filters extends React.Component {
           <a styleName="clean" onClick={this.cleanFilters}>{t('filter.clean')}</a>
           <h4>{t('filter.title')}:</h4>
         </div>
-        {filtersLoading && <div>Loading...</div>}
+        {filtersLoading && <Loading />}
         {!filtersLoading &&
 
           <div>

@@ -12,6 +12,7 @@ import Title from 'common/components/Title'
 import List from 'common/components/List'
 import NoData from 'components/NoData'
 import NotLogged from 'common/components/NotLogged'
+import Loading from 'common/components/Loading/Loading'
 import CSSModules from 'react-css-modules'
 import styles from './favorites.scss'
 
@@ -55,7 +56,7 @@ export default class Favorites extends Component {
     return (
       <div style={{marginTop: '50px'}}>
         <SearchInput tags={toJS(tags)} />
-        {resultsLoading && <div>Loading...</div>}
+        {resultsLoading && <Loading />}
         {resultsCount == 0 && !resultsLoading && <NoData error={favoritesStore.searchError} />}
         {resultsCount > 0 &&
           <div>

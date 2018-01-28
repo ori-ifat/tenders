@@ -10,6 +10,7 @@ import ImageView from 'common/components/ImageView'
 import Row from './Row'
 import Reminder from 'common/components/Reminder'
 import Feedback from './Feedback'
+import Loading from 'common/components/Loading/Loading'
 import CSSModules from 'react-css-modules'
 import styles from './ResultsItemDetails.scss'
 
@@ -248,7 +249,7 @@ export default class ResultsItemDetails extends React.Component {
               }
             </div>
         }
-        {itemStore.resultsLoading && <div>Loading...</div>}
+        {itemStore.resultsLoading && <Loading />}
         {this.remindMe &&
           <Reminder
             tenderID={item.TenderID}

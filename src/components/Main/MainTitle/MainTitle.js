@@ -1,6 +1,7 @@
 import React from 'react'
 import { inject, observer } from 'mobx-react'
 import { translate } from 'react-polyglot'
+import Loading from 'common/components/Loading/Loading'
 import CSSModules from 'react-css-modules'
 import styles from './MainTitle.scss'
 
@@ -27,7 +28,7 @@ export default class MainTitle extends React.Component {
             </div>
           }
           {resultsLoading &&
-            <div>Loading...</div>
+            <Loading />
           }
         </div>
 

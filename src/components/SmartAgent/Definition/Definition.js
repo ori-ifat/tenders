@@ -5,6 +5,7 @@ import { observable, toJS } from 'mobx'
 import { translate } from 'react-polyglot'
 import find from 'lodash/find'
 import Select from 'react-select'
+import Loading from 'common/components/Loading/Loading'
 import CSSModules from 'react-css-modules'
 import styles from './Definition.scss'
 
@@ -143,7 +144,7 @@ export default class Definition extends Component {
               <a onClick={this.onSave}>{t('agent.save')}</a>
             </div>
 
-            {smartAgentStore.subSubjectsLoading && <div>Loading...</div>}
+            {smartAgentStore.subSubjectsLoading && <Loading />}
           </div>
           :
           isNew ?

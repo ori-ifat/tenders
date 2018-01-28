@@ -9,6 +9,7 @@ import ReminderItem from './ReminderItem/ReminderItem'
 import SearchInput from 'common/components/SearchInput'
 import Reminder from 'common/components/Reminder'
 import NotLogged from 'common/components/NotLogged'
+import Loading from 'common/components/Loading/Loading'
 import CSSModules from 'react-css-modules'
 import styles from './reminders.scss'
 
@@ -81,7 +82,7 @@ export default class Reminders extends Component {
                   />
                 </div>
               }
-              {resultsLoading && <div>Loading...</div>}
+              {resultsLoading && <Loading />}
             </div>
           </div>
           :

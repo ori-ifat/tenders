@@ -29,6 +29,7 @@ $em-default: 10px;
   }
   .react-datepicker-popper {
     z-index: 1500 !important;
+    left: -40px !important;
   }
 
   .react-datepicker__header {
