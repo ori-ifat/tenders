@@ -73,16 +73,20 @@ export default class Contact extends Component {
     else {
       //send data
       //console.log(this.toTime);
-      const { routingStore: { push } } = this.props
-
+      //const { routingStore: { push } } = this.props
       contactUs(this.firstName, this.email, this.phone).then(res => {
         //show a message
-        //this.sent = true
-        //this.status = t('publish.sentSuccessfully')
+        this.sent = true
+        this.status = t('contact.success')
         //console.log(res, this.sent, this.status)
-        push('/')   //redirect to home
+        //push('/')   //redirect to home
       })
     }
+  }
+
+  goToHome = () => {
+    const { routingStore: { push } } = this.props
+    push('/')   //redirect to home
   }
 
   render() {
@@ -99,33 +103,41 @@ export default class Contact extends Component {
         <div className="row">
           <div className="column large-8">
             <div styleName="wrapper">
-              {this.status != '' &&
+              {!this.sent && this.status != '' &&
               <div className="callout alert" styleName={style}>
                 <p styleName={style} dangerouslySetInnerHTML={{__html: this.status}}></p>
               </div>
               }
+              {this.sent ?
+                <div styleName={style}>
+                  <b>{t('contact.success')}</b><br />
+                  <p>{t('contact.willCall')}</p>
+                  <button className="left" styleName="button-submit" onClick={this.goToHome}>{t('contact.toHome')}</button>
+                </div>
+                :
+                <div>
+                  <p>{t('contact.callUs')}</p>
+                  <div styleName="pl" className="medium-12 medium-centered cell">
+                    <span>{t('contact.firstName')}:</span>
+                    <input type="text" name="firstName" styleName="input-value" onChange={this.onChange} />
+                  </div>
 
-              <p>השאירו פרטים ונחזזור אליכם בהקדם</p>
-              <div styleName="pl" className="medium-12 medium-centered cell">
-                <span>{t('contact.firstName')}:</span>
-                <input type="text" name="firstName" styleName="input-value" onChange={this.onChange} />
-              </div>
 
 
+                  <div styleName="pl" >
+                    <span>{t('contact.email')}:</span>
+                    <input type="email" name="email" styleName="input-value" onChange={this.onChange} />
+                  </div>
+                  <div styleName="pr" >
+                    <span>{t('contact.phone')}:</span>
+                    <input type="tel" name="phone" styleName="input-value" onChange={this.onChange} />
+                  </div>
 
-              <div styleName="pl" >
-                <span>{t('contact.email')}:</span>
-                <input type="email" name="email" styleName="input-value" onChange={this.onChange} />
-              </div>
-              <div styleName="pr" >
-                <span>{t('contact.phone')}:</span>
-                <input type="tel" name="phone" styleName="input-value" onChange={this.onChange} />
-              </div>
-
-              <div styleName="btn_container">
-                <button className="left" styleName="button-submit" onClick={this.contactUs}>{t('contact.submit')}</button>
-              </div>
-
+                  <div styleName="btn_container">
+                    <button className="left" styleName="button-submit" onClick={this.contactUs}>{t('contact.submit')}</button>
+                  </div>
+                </div>
+              }
             </div>
           </div>
           <div className="medium-4 columns">
@@ -161,10 +173,7 @@ export default class Contact extends Component {
             </div>
           </div>
         </div>
-        <Footer
-          rights={t('home.rights')}
-          service={t('home.service')}
-        />
+        <Footer />
       </div>
     )
   }

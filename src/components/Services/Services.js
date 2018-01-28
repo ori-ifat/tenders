@@ -61,10 +61,7 @@ export default class Services extends Component {
           </div>
         </section>
         {this.services && this.services.length > 0 &&
-          <Footer
-            rights={t('home.rights')}
-            service={t('home.service')}
-          />
+          <Footer />
         }
       </div>
     )

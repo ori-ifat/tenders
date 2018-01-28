@@ -57,10 +57,7 @@ export default class Article extends Component {
 
           </div>
         </section>
-        <Footer
-          rights={t('home.rights')}
-          service={t('home.service')}
-        />
+        <Footer />
       </div>
     )
   }

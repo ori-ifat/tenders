@@ -123,18 +123,23 @@ export default class Publish extends Component {
     else {
       //send data
       //console.log(this.toTime);
-      const { routingStore: { push } } = this.props
+      //const { routingStore: { push } } = this.props
       const toDateVal = moment(this.endDate, 'DD-MM-YYYY').format('YYYY-MM-DD')
       const toDate = moment(`${toDateVal} ${this.toTime}`, 'YYYY-MM-DD HH:mm').format('YYYY-MM-DD HH:mm:ss')
       publishTender(this.firstName, this.lastName, this.companyName, this.companyPhone,
         toDate, this.email, this.phone, this.fax, this.address, this.title, this.description).then(res => {
         //show a message
-        //this.sent = true
-        //this.status = t('publish.sentSuccessfully')
+        this.sent = true
+        this.status = t('publish.sentSuccessfully')
         //console.log(res, this.sent, this.status)
-        push('/')   //redirect to home
+        //push('/')   //redirect to home
       })
     }
+  }
+
+  goToHome = () => {
+    const { routingStore: { push } } = this.props
+    push('/')   //redirect to home
   }
 
   render() {
@@ -151,87 +156,96 @@ export default class Publish extends Component {
         <div className="row">
           <div className="column large-8">
             <div styleName="wraper">
-              {this.status != '' &&
+              {!this.sent && this.status != '' &&
               <div className="callout alert" styleName={style}>
                 <p styleName={style} dangerouslySetInnerHTML={{__html: this.status}}></p>
               </div>
               }
-              <div styleName="tender">
-                <h2>{t('publish.titleSection1')}</h2>
-                <span>{t('publish.tenderTitle')}:</span>
-                <input type="text" name="title" styleName="input-value" onChange={this.onChange} />
-                <span>{t('publish.tenderDesc')}:</span>
-                <textarea name="description" styleName="input-value" style={{height: '300px'}} onChange={this.onChange} />
-              </div>
+              {this.sent ?
+                <div styleName={style}>
+                  <b>{t('publish.sentSuccessfully')}</b><br />
+                  <p>{t('publish.willCall')}</p>
+                  <button className="left" styleName="button-submit" onClick={this.goToHome}>{t('publish.toHome')}</button>
+                </div>
+                :
+                <div>
+                  <div styleName="tender">
+                    <h2>{t('publish.titleSection1')}</h2>
+                    <span>{t('publish.tenderTitle')}:</span>
+                    <input type="text" name="title" styleName="input-value" onChange={this.onChange} />
+                    <span>{t('publish.tenderDesc')}:</span>
+                    <textarea name="description" styleName="input-value" style={{height: '300px'}} onChange={this.onChange} />
+                  </div>
 
-              <h2>{t('publish.titleSection2')}</h2>
-              <div className="grid-x">
-                <div styleName="pl" className="medium-6 cell">
-                  <span>{t('publish.firstName')}:</span>
-                  <input type="text" name="firstName" styleName="input-value" onChange={this.onChange} />
-                </div>
-                <div styleName="pr" className="medium-6 cell">
-                  <span>{t('publish.lastName')}:</span>
-                  <input type="text" name="lastName" styleName="input-value" onChange={this.onChange} />
-                </div>
-              </div>
+                  <h2>{t('publish.titleSection2')}</h2>
+                  <div className="grid-x">
+                    <div styleName="pl" className="medium-6 cell">
+                      <span>{t('publish.firstName')}:</span>
+                      <input type="text" name="firstName" styleName="input-value" onChange={this.onChange} />
+                    </div>
+                    <div styleName="pr" className="medium-6 cell">
+                      <span>{t('publish.lastName')}:</span>
+                      <input type="text" name="lastName" styleName="input-value" onChange={this.onChange} />
+                    </div>
+                  </div>
 
-              <div className="grid-x">
-                <div styleName="pl" className="medium-6 cell">
-                  <span>{t('publish.companyName')}:</span>
-                  <input type="text" name="companyName" styleName="input-value" onChange={this.onChange} />
-                </div>
-                <div styleName="pr" className="medium-6 cell">
-                  <span>{t('publish.companyPhone')}:</span>
-                  <input type="tel" name="companyPhone" styleName="input-value" onChange={this.onChange} />
-                </div>
-              </div>
+                  <div className="grid-x">
+                    <div styleName="pl" className="medium-6 cell">
+                      <span>{t('publish.companyName')}:</span>
+                      <input type="text" name="companyName" styleName="input-value" onChange={this.onChange} />
+                    </div>
+                    <div styleName="pr" className="medium-6 cell">
+                      <span>{t('publish.companyPhone')}:</span>
+                      <input type="tel" name="companyPhone" styleName="input-value" onChange={this.onChange} />
+                    </div>
+                  </div>
 
-              <div className="grid-x">
-                <div styleName="pl" className="medium-6 cell">
-                  <span>{t('publish.toDate')}:</span>
-                  <div style={{paddingBottom: '0.5rem', marginBottom: '0.4rem'}}>
-                    <Calendar
-                      name="endDate"
-                      defaultDate={this.endDate}
-                      todayLabel={t('filter.today')}
-                      selectDate={this.selectDate}
-                      showMonths={true}
-                      showYears={true}
-                    />
+                  <div className="grid-x">
+                    <div styleName="pl" className="medium-6 cell">
+                      <span>{t('publish.toDate')}:</span>
+                      <div style={{paddingBottom: '0.5rem', marginBottom: '0.4rem'}}>
+                        <Calendar
+                          name="endDate"
+                          defaultDate={this.endDate}
+                          todayLabel={t('filter.today')}
+                          selectDate={this.selectDate}
+                          showMonths={true}
+                          showYears={true}
+                        />
+                      </div>
+                    </div>
+                    <div styleName="pr" className="medium-6 cell">
+                      <span>{t('publish.toTime')}:</span>
+                      <input type="time" name="toTime" onChange={this.onChange} />
+                    </div>
+                  </div>
+
+                  <div className="grid-x">
+                    <div styleName="pl" className="medium-6 cell">
+                      <span>{t('publish.email')}:</span>
+                      <input type="email" name="email" styleName="input-value" onChange={this.onChange} />
+                    </div>
+                    <div styleName="pr" className="medium-6 cell">
+                      <span>{t('publish.phone')}:</span>
+                      <input type="tel" name="phone" styleName="input-value" onChange={this.onChange} />
+                    </div>
+                  </div>
+
+                  <div className="grid-x">
+                    <div styleName="pl" className="medium-6 cell">
+                      <span>{t('publish.fax')}:</span>
+                      <input type="tel" name="fax" styleName="input-value" onChange={this.onChange} />
+                    </div>
+                    <div styleName="pr" className="medium-6 cell">
+                      <span>{t('publish.address')}:</span>
+                      <input type="text" name="address" styleName="input-value" onChange={this.onChange} />
+                    </div>
+                  </div>
+                  <div styleName="btn_container">
+                    <button className="left" styleName="button-submit" onClick={this.publishTender}>{t('publish.submit')}</button>
                   </div>
                 </div>
-                <div styleName="pr" className="medium-6 cell">
-                  <span>{t('publish.toTime')}:</span>
-                  <input type="time" name="toTime" onChange={this.onChange} />
-                </div>
-              </div>
-
-              <div className="grid-x">
-                <div styleName="pl" className="medium-6 cell">
-                  <span>{t('publish.email')}:</span>
-                  <input type="email" name="email" styleName="input-value" onChange={this.onChange} />
-                </div>
-                <div styleName="pr" className="medium-6 cell">
-                  <span>{t('publish.phone')}:</span>
-                  <input type="tel" name="phone" styleName="input-value" onChange={this.onChange} />
-                </div>
-              </div>
-
-              <div className="grid-x">
-                <div styleName="pl" className="medium-6 cell">
-                  <span>{t('publish.fax')}:</span>
-                  <input type="tel" name="fax" styleName="input-value" onChange={this.onChange} />
-                </div>
-                <div styleName="pr" className="medium-6 cell">
-                  <span>{t('publish.address')}:</span>
-                  <input type="text" name="address" styleName="input-value" onChange={this.onChange} />
-                </div>
-              </div>
-              <div styleName="btn_container">
-                <button className="left" styleName="button-submit" onClick={this.publishTender}>{t('publish.submit')}</button>
-              </div>
-
+              }
             </div>
           </div>
           <div className="column large-4">

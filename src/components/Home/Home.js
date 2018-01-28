@@ -83,7 +83,7 @@ export default class Home extends Component {
               <SearchInput />
             </div>
           </div>
-          
+
         </section>
 
         <section id="categories">
@@ -233,10 +233,7 @@ export default class Home extends Component {
           </div>
 
         </section>
-        <Footer
-          rights={t('home.rights')}
-          service={t('home.service')}
-        />
+        <Footer />
       </div>
     )
   }
