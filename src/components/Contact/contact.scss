@@ -39,10 +39,15 @@
   padding-bottom: 0.5rem;
   line-height: 1.2;
   display: block;
+  margin-bottom: 0 !important;
 }
 
 .sent {
   display: none;
+}
+
+.ci {
+  margin-bottom: 2.5rem !important;
 }
 
 .wrapper {
@@ -63,10 +68,10 @@
       margin-bottom: 1.5rem;
     }
     .pl {
-      padding-left: 1.5rem;
+      display: block;
     }
     .pr {
-      padding-right: 1.5rem;
+      display: block;
     }
 
     .tender {

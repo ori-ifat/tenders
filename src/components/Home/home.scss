@@ -1,9 +1,11 @@
+@import '~common/style/_settings.scss';
+
 .hide {
   display: none;
 }
 
 .hero {
-  margin-bottom: 2rem;
+  margin-bottom: 8rem;
 }
 
 .hero_txt {
@@ -15,6 +17,7 @@
 	margin-bottom: 1rem;
 	font-size: 3rem !important;
 	margin-top: 6rem !important;
+  margin-bottom: 2rem;
 }
 
 .sub_head {
@@ -30,6 +33,14 @@
   color: #444444;
   letter-spacing: -0.17px;
   font-weight: 600;
+}
+
+.blockitem {
+  margin-bottom: 2px !important;
+}
+
+.blockitem_sub {
+  margin-bottom: 0 !important;
 }
 
 .cat_num {
@@ -167,6 +178,10 @@
   display: block;
   margin: 0 0.5rem;
   transition: all 0.35s ease;
+  span {
+    font-size: 13px;
+    color: $medium_gray
+  }
 }
 
 .news {

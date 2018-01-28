@@ -7,7 +7,7 @@ import styles from '../Home.scss'
 const CatItem = ({count, subSubjectID, catName}) => {
   //const url = `#/category/${count}/${subSubjectID}/${catName}`
   const url = `#/results/publishDate/[{"ID":${subSubjectID},"Name":"${encodeURIComponent(catName)}","ResType":"subsubject"}]/[]`
-  return <div className="column column-block">
+  return <div styleName="blockitem" className="column column-block">
     <a href={url} target="_blank" className="main_cat">
       <span styleName="cat_num">{count}</span>
       <h3 styleName="cat_name">{catName}</h3>

@@ -105,22 +105,21 @@ export default class Contact extends Component {
               </div>
               }
 
-              <div className="grid-x">
-                <div styleName="pl" className="medium-6 cell">
-                  <span>{t('contact.firstName')}:</span>
-                  <input type="text" name="firstName" styleName="input-value" onChange={this.onChange} />
-                </div>
+              <p>השאירו פרטים ונחזזור אליכם בהקדם</p>
+              <div styleName="pl" className="medium-12 medium-centered cell">
+                <span>{t('contact.firstName')}:</span>
+                <input type="text" name="firstName" styleName="input-value" onChange={this.onChange} />
               </div>
 
-              <div className="grid-x">
-                <div styleName="pl" className="medium-6 cell">
-                  <span>{t('contact.email')}:</span>
-                  <input type="email" name="email" styleName="input-value" onChange={this.onChange} />
-                </div>
-                <div styleName="pr" className="medium-6 cell">
-                  <span>{t('contact.phone')}:</span>
-                  <input type="tel" name="phone" styleName="input-value" onChange={this.onChange} />
-                </div>
+
+
+              <div styleName="pl" >
+                <span>{t('contact.email')}:</span>
+                <input type="email" name="email" styleName="input-value" onChange={this.onChange} />
+              </div>
+              <div styleName="pr" >
+                <span>{t('contact.phone')}:</span>
+                <input type="tel" name="phone" styleName="input-value" onChange={this.onChange} />
               </div>
 
               <div styleName="btn_container">
@@ -132,7 +131,7 @@ export default class Contact extends Component {
           <div className="medium-4 columns">
             <div styleName="contact_info">
 
-              <div className="media-object">
+              <div styleName="ci" className="media-object">
                 <div className="media-object-section">
                   <img src={support} />
                 </div>
@@ -141,7 +140,7 @@ export default class Contact extends Component {
                 </div>
               </div>
 
-              <div className="media-object">
+              <div styleName="ci" className="media-object">
                 <div className="media-object-section">
                   <img src={tech_support} />
                 </div>
@@ -150,7 +149,7 @@ export default class Contact extends Component {
                 </div>
               </div>
 
-              <div className="media-object">
+              <div styleName="ci" className="media-object">
                 <div className="media-object-section">
                   <img src={sales} />
                 </div>

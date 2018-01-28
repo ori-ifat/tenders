@@ -86,6 +86,9 @@ export default class Subscriptions extends Component {
                       <p>{t('subscriptions.benefit7')}</p>
                       <p>{t('subscriptions.benefit8')}</p>
                     </div>
+                    <p className="text-center">
+                      <a className="button" styleName="signup_btn" href="">לֹהרשמה</a>
+                    </p>
 
                   </div>
                 </div>
@@ -110,6 +113,9 @@ export default class Subscriptions extends Component {
                       <p>{t('subscriptions.benefit7')}</p>
                       <p>{t('subscriptions.benefit8')}</p>
                     </div>
+                    <p className="text-center">
+                      <a className="button" styleName="signup_btn" href="">לֹהרשמה</a>
+                    </p>
 
                   </div>
                 </div>
@@ -134,6 +140,9 @@ export default class Subscriptions extends Component {
                       <p>{t('subscriptions.benefit7')}</p>
                       <p>{t('subscriptions.benefit8')}</p>
                     </div>
+                    <p className="text-center">
+                      <a className="button" styleName="signup_btn" href="">לֹהרשמה</a>
+                    </p>
 
                   </div>
                 </div>
