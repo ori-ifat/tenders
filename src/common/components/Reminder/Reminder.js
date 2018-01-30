@@ -20,6 +20,7 @@ export default class Reminder extends Component {
 
   static propTypes = {
     tenderID: number,
+    encryptedID: string,
     onClose: func,
     setReminderData: func,
     title: string,
@@ -155,7 +156,7 @@ export default class Reminder extends Component {
   }
 
   render() {
-    const {onClose, infoDate, t} = this.props
+    const {onClose, infoDate, encryptedID, t} = this.props
     const title = this.subject
     const dateVal = moment(this.reminderDate, 'DD-MM-YYYY').format('DD-MM-YYYY')
     const timeVal = this.time != '' ? this.time : moment(this.reminderDate, 'DD-MM-YYYY').format('HH:mm')
@@ -221,7 +222,7 @@ export default class Reminder extends Component {
 
             <div className="grid-x grid-margin-x" styleName="pb">
               <div className="small-12 cell">
-                <a target="_blank" href={`#/tender/${this.tenderID}`}>{t('reminder.linkToItem')}</a>                
+                <a target="_blank" href={`#/tender/${encodeURIComponent(encryptedID)}`}>{t('reminder.linkToItem')}</a>
               </div>
             </div>
 

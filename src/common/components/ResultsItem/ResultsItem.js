@@ -156,7 +156,8 @@ export default class ResultsItem extends React.Component {
     const logged = accountStore.profile ? true : false
     //display issues
     const publishDate = setDateLabel(item.PublishDate, 'DD-MM-YYYY', t('tender.noDate'))
-    const infoDate = setDateLabel(item.InfoDate, 'DD-MM-YYYY', t('tender.noDate'))
+    const tourDate = item.TourDate ? setDateLabel(item.TourDate, 'DD-MM-YYYY', t('tender.noDate')) : null
+    const infoDate = item.InfoDate ? setDateLabel(item.InfoDate, 'DD-MM-YYYY', t('tender.noDate')) : null
     const tenderStyle = checked ? 'tender_summery checked' : 'tender_summery'
     //infoDate
     const twoDaysLeft = isDateInRange(item.InfoDate, 2)
@@ -194,12 +195,20 @@ export default class ResultsItem extends React.Component {
                 </div>
               }
               <div className="tender_meta">
-                <span>{t('tender.publishedAt')}: {publishDate}</span>
-                <span styleName="divider">•</span>
+                {tourDate &&
+                  <span>
+                    <span>{t('tender.tourAt')}: {tourDate}</span>
+                    <span styleName="divider">•</span>
+                  </span>
+                }
                 { logged &&
                   <span>
-                    <span>{t('tender.deliveryAt')}: {infoDate}</span>
-                    <span styleName="divider">•</span>
+                    {infoDate &&
+                      <span>
+                        <span>{t('tender.deliveryAt')}: {infoDate}</span>
+                        <span styleName="divider">•</span>
+                      </span>
+                    }
                     <span>{item.Publisher}</span>
                     <span styleName="divider">•</span>
                   </span>
@@ -233,6 +242,7 @@ export default class ResultsItem extends React.Component {
         {this.viewBig && !this.showImage && logged &&
           <ItemDetailsModal
             itemID={item.TenderID}
+            encryptedID={item.EncID}
             onClose={this.closeDetails}
             showViewer={this.showViewer}
             setReminderData={this.setReminderData}
@@ -249,6 +259,7 @@ export default class ResultsItem extends React.Component {
         {this.remindMe && logged &&
           <Reminder
             tenderID={item.TenderID}
+            encryptedID={item.EncID}
             onClose={() => this.remind(false)}
             setReminderData={this.setReminderData}
             title={item.Title}

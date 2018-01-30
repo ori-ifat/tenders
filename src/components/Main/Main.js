@@ -18,7 +18,7 @@ import styles from './main.scss'
 @whenRouted(() => {
   mainStore.loadAgentResults()
   mainStore.getBanner()
-  mainStore.loadMoreTenders()
+  //mainStore.loadMoreTenders()
 })
 @inject('mainStore')
 @inject('accountStore')
@@ -58,11 +58,12 @@ export default class Main extends Component {
                     checkedItems={checkedItems}
                   />
                   <Banner banner={toJS(mainStore.banner)} />
-                  <h6 styleName="more-tenders-title">{t('main.moreTenders')}</h6>
+                  <br />
+                  {/*<h6 styleName="more-tenders-title">{t('main.moreTenders')}</h6>
                   <MainList
                     items={mainStore.resultsMore}
                     onFav={onFav}
-                  />
+                  />*/}
                 </div>
                 :
                 <NotLogged />

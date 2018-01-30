@@ -17,13 +17,15 @@ import styles from './tender.scss'
 export default class Tender extends Component {
 
   @observable itemID = -1
+  @observable encryptedID = ''
   @observable showImage = false
   @observable imageUrl = ''
   @observable imageTitle = ''
 
   componentWillMount() {
     const { match: {params: { itemId }} } = this.props
-    this.itemID = parseInt(itemId)
+    //this.itemID = parseInt(itemId)
+    this.encryptedID = itemId
   }
 
   showViewer = (fileName, title) => {
@@ -55,6 +57,7 @@ export default class Tender extends Component {
                 <ResultsItemDetails
                   onClose={this.closeViewer}
                   itemID={this.itemID}
+                  encryptedID={this.encryptedID}
                   showViewer={this.showViewer}
                   mode="singleItem"
                   onFav={this.onFav}

@@ -31,6 +31,7 @@ export default class ResultsItemDetails extends React.Component {
 
   static propTypes = {
     itemID: number,
+    encryptedID: string,
     onClose: func,
     showViewer: func,
     setReminderData: func,
@@ -44,8 +45,9 @@ export default class ResultsItemDetails extends React.Component {
   @observable newReminderDate = '';
 
   componentWillMount() {
-    const {itemStore, itemID} = this.props
-    itemStore.loadTender(itemID).then(() => {
+    const {itemStore, encryptedID /*, itemID*/} = this.props
+    //itemStore.loadTender(itemID).then(() => {
+    itemStore.loadTender(decodeURIComponent(encryptedID)).then(() => {
       this.IsFavorite = itemStore.item.IsFavorite || false
       this.reminderID = itemStore.item.ReminderID || -1
       //console.log('mount', this.IsFavorite)
@@ -53,8 +55,9 @@ export default class ResultsItemDetails extends React.Component {
   }
 
   componentWillReceiveProps(nextProps, nextState) {
-    const {itemStore, itemID} = nextProps
-    itemStore.loadTender(itemID).then(() => {
+    const {itemStore, encryptedID /*, itemID*/} = nextProps
+    //itemStore.loadTender(itemID).then(() => {
+    itemStore.loadTender(decodeURIComponent(encryptedID)).then(() => {
       this.IsFavorite = itemStore.item.IsFavorite || false
       this.reminderID = itemStore.item.ReminderID || -1
       //console.log('receive', this.IsFavorite)
@@ -121,8 +124,8 @@ export default class ResultsItemDetails extends React.Component {
       `<a target="_blank" href="\$&">${title}</a>`)
 
     //without http - not working (non-http links)
-    fixedText = fixedText.replace(/(www\.)[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)/,
-      `<a target="_blank" href="http://\$&">${title}</a>`)
+    //fixedText = fixedText.replace(/(www\.)[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)/,
+    //  `<a target="_blank" href="http://\$&">${title}</a>`)
 
     //mailto
     fixedText = fixedText.replace(/([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)/,

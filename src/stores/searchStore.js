@@ -53,7 +53,7 @@ class Search {
   @computed
   get serializedSort() {
     let sort = toJS(this.sort)
-    sort = [{field: sort, isAscending: false}]  //implement sort direction - from ui
+    sort = [{field: sort, isAscending: (this.sort == 'infoDate')}]  //implement sort direction - from ui
     return JSON.stringify(sort)
   }
 
