@@ -39,34 +39,42 @@ export default class ResultsItemDetails extends React.Component {
     onFav: func
   }
 
+  @observable itemID = -1
+  @observable loadError = false
   @observable remindMe = false
   @observable IsFavorite = false
   @observable reminderID = -1
   @observable newReminderDate = '';
 
   componentWillMount() {
-    const {itemStore, encryptedID /*, itemID*/} = this.props
-    //itemStore.loadTender(itemID).then(() => {
-    itemStore.loadTender(decodeURIComponent(encryptedID)).then(() => {
-      this.IsFavorite = itemStore.item.IsFavorite || false
-      this.reminderID = itemStore.item.ReminderID || -1
-      //console.log('mount', this.IsFavorite)
-    })
+    this.loadItem(this.props)
   }
 
   componentWillReceiveProps(nextProps, nextState) {
-    const {itemStore, encryptedID /*, itemID*/} = nextProps
-    //itemStore.loadTender(itemID).then(() => {
+    this.loadItem(nextProps)
+  }
+
+  loadItem = (props) => {
+    const {itemStore, encryptedID} = props
     itemStore.loadTender(decodeURIComponent(encryptedID)).then(() => {
-      this.IsFavorite = itemStore.item.IsFavorite || false
-      this.reminderID = itemStore.item.ReminderID || -1
-      //console.log('receive', this.IsFavorite)
+      if (!itemStore.item.TenderID) {
+        //something went wrong
+        this.loadError = true
+      }
+      else {
+        this.itemID = itemStore.item.TenderID
+        this.IsFavorite = itemStore.item.IsFavorite || false
+        this.reminderID = itemStore.item.ReminderID || -1
+      }
+    }).catch(error => {
+      console.error('[loadTender] Error:', error)
+      this.loadError = true
     })
   }
 
   email = () => {
-    const {itemID, t} = this.props
-    const item = [itemID]
+    const {t} = this.props
+    const item = [this.itemID]
     getEmailData(item).then(uid =>
       //console.log('email', uid)
       location.href = `mailto:someone@email.com?subject=${t('toolbar.emailSubject')}&body=${encodeURIComponent(t('toolbar.emailBody', {uid}))}`
@@ -74,8 +82,7 @@ export default class ResultsItemDetails extends React.Component {
   }
 
   print = isBig => {
-    const {itemID} = this.props
-    const item = [itemID]
+    const item = [this.itemID]
     const exportType = isBig ? 2 : 1
     window.open(createUrl('Export/ExportData', {
       ExportType: exportType,
@@ -109,29 +116,34 @@ export default class ResultsItemDetails extends React.Component {
   formatText = text => {
     /* <a> tag fix for text */
     const {t} = this.props
-    let title = '\$&' //regexp default
-    const arr = text.split('##URL##')
-    if (arr.length > 1 && arr[1] != '') {
-      //if originalUrl has passed to this method, need to set it here
-      const link = arr[1].split('_')  //it is built as ID_Title
-      title = link[1]  //set the title
-      //concat the url as is (regexp will fix it to be a link)
-      text = `${arr[0]}<br />${t('tender.originalTitle')}<br />http://www.tenders.co.il/#/tender/${link[0]}`
+    if (text) {
+      let title = '\$&' //regexp default
+      const arr = text.split('##URL##')
+      if (arr.length > 1 && arr[1] != '') {
+        //if originalUrl has passed to this method, need to set it here
+        const link = arr[1].split('_')  //it is built as ID_Title
+        title = link[1]  //set the title
+        //concat the url as is (regexp will fix it to be a link)
+        text = `${arr[0]}<br />${t('tender.originalTitle')}<br />http://www.tenders.co.il/#/tender/${link[0]}`
+      }
+
+      //with http
+      let fixedText = text.replace(/((https|http):\/\/)(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)/,
+        `<a target="_blank" href="\$&">${title}</a>`)
+
+      //without http - not working (non-http links)
+      //fixedText = fixedText.replace(/(www\.)[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)/,
+      //  `<a target="_blank" href="http://\$&">${title}</a>`)
+
+      //mailto
+      fixedText = fixedText.replace(/([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)/,
+        '<a href="mailto:\$&">\$&</a>')
+
+      return {__html: fixedText}
     }
-
-    //with http
-    let fixedText = text.replace(/((https|http):\/\/)(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)/,
-      `<a target="_blank" href="\$&">${title}</a>`)
-
-    //without http - not working (non-http links)
-    //fixedText = fixedText.replace(/(www\.)[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)/,
-    //  `<a target="_blank" href="http://\$&">${title}</a>`)
-
-    //mailto
-    fixedText = fixedText.replace(/([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)/,
-      '<a href="mailto:\$&">\$&</a>')
-
-    return {__html: fixedText}
+    else {
+      return {__html: ''}
+    }
   }
 
   render() {
@@ -163,7 +175,7 @@ export default class ResultsItemDetails extends React.Component {
 
     return (
       <div>
-        {!itemStore.resultsLoading &&
+        {!itemStore.resultsLoading && !this.loadError &&
             <div styleName="view-details-wrapper" style={{top: (divTop + 10)}}>
               <div className="grid-x">
                 <div className="large-12 cell">
@@ -203,11 +215,11 @@ export default class ResultsItemDetails extends React.Component {
                     <Row label={t('tender.subSubjects')} data={item.SubSubjects} />
                   }
                   {
-                    item.TD.length > 0 &&
+                    item.TD && item.TD.length > 0 &&
                     <Row label={t('tender.links')} data="&nbsp;" />
                   }
                   {
-                    item.TD.map((link, index) => <div key={index}>
+                    item.TD && item.TD.map((link, index) => <div key={index}>
                       <div className="grid-x">
                         <div className="medium-3 cell">
                           &nbsp;
@@ -252,6 +264,7 @@ export default class ResultsItemDetails extends React.Component {
               }
             </div>
         }
+        {this.loadError && <div styleName="errors">{t('tender.errors')}</div>}
         {itemStore.resultsLoading && <Loading />}
         {this.remindMe &&
           <Reminder

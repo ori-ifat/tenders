@@ -123,7 +123,8 @@ export default {
     didLikeSub: 'המידע יעזור לנו לשפר משהו',
     liked: 'בדיוק מה שחיפשתי',
     disliked: 'לא מתאים לי',
-    sentFeedback: 'תודה על פנייתך'
+    sentFeedback: 'תודה על פנייתך',
+    errors: 'חלה שגיאה בטעינת פרטי המכרז.'
   },
   publish: {
     titleSection1: 'פרטי המכרז',
