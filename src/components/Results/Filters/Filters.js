@@ -83,7 +83,7 @@ export default class Filters extends React.Component {
     const publishers = selectedFilters ? selectedFilters.publishers : ''
     const dateField = selectedFilters ? selectedFilters.dateField || 'publishdate' : 'publishdate'
     //const dateValues = selectedFilters && selectedFilters.date ? selectedFilters.date[dateField] || [] : []
-    const defaultDates = [moment().subtract(1, 'month').format('YYYY-MM-DD'), moment().format('YYYY-MM-DD')]
+    const defaultDates = [moment().subtract(1, 'year').format('YYYY-MM-DD'), moment().format('YYYY-MM-DD')]
     const dateValues = selectedFilters && selectedFilters.date ? selectedFilters.date[dateField] || defaultDates : defaultDates
     const text = selectedFilters ? selectedFilters.searchText : ''
     //console.log('filters', toJS(searchStore.availableFilters))

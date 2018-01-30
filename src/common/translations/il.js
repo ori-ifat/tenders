@@ -82,6 +82,7 @@ export default {
     publishDate: 'תאריך פרסום',
     noData: 'אין תוצאות להצגה',
     lastMonth: 'בחודש האחרון',
+    lastYear: 'בשנה האחרונה',
     login: 'יש להתחבר למערכת',
     error: 'חלה שגיאה בחיפוש, אנא נסה שנית',
     extraData: '(כמנוי לכל הסיווגים, תקבל %{count})'
@@ -89,6 +90,7 @@ export default {
   tender: {
     publishedAt: 'פורסם ב',
     deliveryAt: 'הגשה ב',
+    tourAt: 'סיור קבלנים ב',
     addToFav: 'הוסף למועדפים',
     removeFromFav: 'הסר ממועדפים',
     noDate: 'לא פורסם',
@@ -215,7 +217,7 @@ export default {
     selectAll: 'בחר הכל',
     clearAll: 'נקה הכל',
     more: '...עוד',
-    searchText: 'חפש בתוצאות',
+    searchText: 'הדגש בתוצאות',
     search: 'חפש',
     selectAll: 'בחר הכל',
     noData: 'לא נמצאו תוצאות'

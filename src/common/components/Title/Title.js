@@ -28,7 +28,7 @@ export default class Title extends React.Component {
       <div className="row">
         <div className="large-12 columns">
           <h1 styleName={titleStyle}><span styleName="num">{this.count}</span> {title}
-            {initial && <span style={{paddingRight: '8px'}}>{t('results.lastMonth')}</span>}
+            {initial && <span style={{paddingRight: '8px'}}>{t('results.lastYear')}</span>}
             {!resultsLoading &&
               store.filters &&
               store.filters.length == 0
