@@ -19,6 +19,7 @@ import styles from './ResultsItem.scss'
 
 const req = require.context('common/style/icons/', false)
 const timeSrc = req('./Time.svg')
+const timeActSrc = req('./alert_on.svg')
 const favSrc = req('./fav.svg')
 const favActSrc = req('./action_fav.svg')
 
@@ -170,6 +171,8 @@ export default class ResultsItem extends React.Component {
     const mustDoTourLabel = (twoDaysLeftTour || oneDayLeftTour || tourToday) && item.MustDoTour ? ` - ${t('tender.mustTour')}` : ''
     //visited
     const visitedStyle = this.viewed ? ' visited' : ''
+    //reminder state
+    const hasReminder = this.newReminderDate && this.newReminderDate != null && this.newReminderDate != ''
 
     return (
       <div styleName={tenderStyle} >
@@ -223,12 +226,16 @@ export default class ResultsItem extends React.Component {
           <div className="small-3 cell">
             <div styleName="tender_action_wraper">
               <ul className="no-bullet">
-                <li><a onClick={() => this.remind(true)}><img src={timeSrc} alt="" />
-                  {item.ReminderDate && this.newReminderDate == '' ?
-                    moment(item.ReminderDate).format('DD-MM-YYYY') :
-                    this.newReminderDate && this.newReminderDate != null && this.newReminderDate != '' ?
-                      this.newReminderDate
-                      : t('tender.addReminder')}</a></li>
+                <li>
+                  <a onClick={() => this.remind(true)}>
+                    <img src={item.ReminderDate && this.newReminderDate == '' || hasReminder ? timeActSrc : timeSrc} alt="" />
+                    {item.ReminderDate && this.newReminderDate == '' ?
+                      moment(item.ReminderDate).format('DD-MM-YYYY') :
+                      hasReminder ?
+                        this.newReminderDate
+                        : t('tender.addReminder')}
+                  </a>
+                </li>
                 {onFav &&
                   <li>
                     <a onClick={this.addFav}>

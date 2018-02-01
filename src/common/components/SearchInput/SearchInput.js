@@ -119,7 +119,7 @@ export default class SearchInput extends Component {
       <div className="row">
         <div className="medium-12 columns">
           <div id="searchbox_wrapper" styleName="wrapper">
-            <a styleName="search_btn" onClick={this.onSearchClick}><img src={search_go}/></a>
+            <a styleName="search_btn" onClick={this.onSearchClick}><img src={search_go} styleName="search-arrow" /></a>
             <Select.Async
               styleName="select-searchbox"
               className="search-select"

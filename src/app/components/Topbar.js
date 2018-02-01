@@ -42,8 +42,13 @@ export default class Topbar extends Component {
     //fix top nav foundation creation bug
     setTimeout(() => {
       //allow element to be created.
-      FoundationHelper.reInitElement('top_nav')
+      FoundationHelper.initElement('top_nav')
     }, 500)
+
+    setTimeout(() => {
+      //allow element to be created.
+      FoundationHelper.reInitElement('top_nav')
+    }, 1000)
   }
 
   componentWillReceiveProps(nextProps) {
@@ -58,7 +63,7 @@ export default class Topbar extends Component {
       resetReminders().then(() =>
         this.messageCount = 0
       )
-    }    
+    }
   }
 
   navigate = route => () => {

@@ -20,6 +20,7 @@ const docSrc = req('./doc.svg')
 const printSrc = req('./print_gray.svg')
 const mailSrc = req('./mail_gray.svg')
 const alertSrc = req('./alert.svg')
+const alertActSrc = req('./alert_on.svg')
 const favSrc = req('./fav.svg')
 const favActSrc = req('./action_fav.svg')
 
@@ -172,6 +173,8 @@ export default class ResultsItemDetails extends React.Component {
 
     //for scroll pos of item
     const divTop = document.documentElement.scrollTop ? document.documentElement.scrollTop : document.body.scrollTop
+    //reminder state
+    const hasReminder = this.newReminderDate && this.newReminderDate != null && this.newReminderDate != ''
 
     return (
       <div>
@@ -243,10 +246,10 @@ export default class ResultsItemDetails extends React.Component {
                     <li><a onClick={() => this.print(false)}><img src={printSrc}/>{t('tender.print')}</a></li>
                     <li><a onClick={this.email}><img src={mailSrc}/>{t('tender.email')}</a></li>
                     <li><a onClick={() => this.remind(true)}>
-                      <img src={alertSrc}/>
+                      <img src={item.ReminderDate && this.newReminderDate == '' || hasReminder ? alertActSrc : alertSrc}/>
                       {item.ReminderDate && this.newReminderDate == '' ?
                         moment(item.ReminderDate).format('DD-MM-YYYY') :
-                        this.newReminderDate && this.newReminderDate != null && this.newReminderDate != '' ?
+                        hasReminder ?
                           this.newReminderDate
                           : t('tender.addReminder')}</a></li>
 
