@@ -26,10 +26,11 @@ export default class Confirm extends React.Component {
         className="reveal-custom"
         overlayClassName="reveal-overlay-custom">
         <div styleName="container">
-          <div styleName="message">{t('confirm.ask')}</div>
+          <h3 styleName="message">מחיקת תזכורת</h3>
+          <p styleName="sub">האם אתה בטוח שברצונך למחוק את התזכורת? </p>
           <div styleName="button-container">
-            <button styleName="button" onClick={() => onClose(true)}>{t('confirm.yes')}</button>
-            <button styleName="button" onClick={() => onClose(false)}>{t('confirm.no')}</button>
+            <button className="button" styleName="btn" onClick={() => onClose(true)}>מחק</button>
+            <button className="clear button secondary" styleName="btn" onClick={() => onClose(false)}>בטל </button>
           </div>
         </div>
       </ReactModal>
