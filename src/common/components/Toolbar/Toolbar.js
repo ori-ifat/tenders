@@ -1,5 +1,4 @@
 import React from 'react'
-//import { object, func } from 'prop-types'
 import { inject, observer } from 'mobx-react'
 import { observable } from 'mobx'
 import { translate } from 'react-polyglot'
@@ -7,6 +6,7 @@ import remove from 'lodash/remove'
 import find from 'lodash/find'
 import {createUrl, addToFavorites, getEmailData, clearCache} from 'common/services/apiService'
 import LoginDialog from 'common/components/LoginDialog'
+import ReactTooltip from 'react-tooltip'
 import CSSModules from 'react-css-modules'
 import styles from './Toolbar.scss'
 
@@ -22,16 +22,7 @@ const actionFavSrc = req('./action_fav.svg')
 @CSSModules(styles, {allowMultiple: true})
 @observer
 export default class Toolbar extends React.Component {
-/*
-  static propTypes = {
-    checkedItems: object,
-    onClose: func,
-    extractItems: func,
-    isInChecked: func,
-    push: func,
-    cut: func
-  }
-*/
+
   @observable showLoginMsg = false
 
   email = () => {
@@ -77,13 +68,10 @@ export default class Toolbar extends React.Component {
       //(this will cause the list to re-render, and show fav state on ResultsItem)
       itemsToAdd.map(tenderID => {
         const found = recordStore.isInChecked(tenderID)
-        //if (found) {
-        //old way...: if item is in checkedItems array, need to update its fav state
         //new way: add it anyway because it was touched
         recordStore.cut(tenderID)
         //add the item again with new fav state
         recordStore.push((found && found.checked) || false, tenderID, true)
-        //}
       })
       //call api with items and add action
       addToFavorites('Favorite_add', itemsToAdd)
@@ -118,10 +106,10 @@ export default class Toolbar extends React.Component {
 
               <div className="small-3 cell">
                 <ul className="menu align-left" styleName="align-left">
-                  <li><a onClick={this.email}><img src={emailSrc} alt={t('toolbar.email')} /></a></li>
-                  <li><a onClick={() => this.print(false)}><img src={printSrc} alt={t('toolbar.print')} /></a></li>
-                  <li><a onClick={() => this.print(true)}><img src={printImageSrc} alt={t('toolbar.printBig')} /></a></li>
-                  <li><a onClick={this.addFavorites}><img src={actionFavSrc} alt={t('toolbar.fav')} /></a></li>
+                  <li><a onClick={this.email}><img src={emailSrc} alt={t('toolbar.email')} data-tip={t('toolbar.email')} /></a></li>
+                  <li><a onClick={() => this.print(false)}><img src={printSrc} alt={t('toolbar.print')} data-tip={t('toolbar.print')} /></a></li>
+                  <li><a onClick={() => this.print(true)}><img src={printImageSrc} alt={t('toolbar.printBig')} data-tip={t('toolbar.printBig')} /></a></li>
+                  <li><a onClick={this.addFavorites}><img src={actionFavSrc} alt={t('toolbar.fav')} data-tip={t('toolbar.fav')} /></a></li>
                 </ul>
               </div>
 
@@ -134,6 +122,7 @@ export default class Toolbar extends React.Component {
             onCancel={this.continueUnlogged}
           />
         }
+        <ReactTooltip />
       </div>
     )
   }

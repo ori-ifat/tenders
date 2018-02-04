@@ -66,8 +66,12 @@ export default class LoginDialog extends React.Component {
           onCancel()  //close modal
           setTimeout(() => {
             //allow element to be created.
+            FoundationHelper.initElement('top_nav')
+          }, 500)
+          setTimeout(() => {
+            //allow element to be created.
             FoundationHelper.reInitElement('top_nav')
-          }, 200)
+          }, 1000)
         }
       }).catch(error => {
         console.error('[Login] Error:', error)

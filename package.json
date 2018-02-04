@@ -103,6 +103,7 @@
     "react-select": "^1.2.1",
     "react-spinners": "^0.2.5",
     "react-tap-event-plugin": "^2.0.1",
+    "react-tooltip": "^3.4.0",
     "recompose": "^0.25.1",
     "uglifyjs-webpack-plugin": "^0.4.6",
     "whatwg-fetch": "^2.0.3"
