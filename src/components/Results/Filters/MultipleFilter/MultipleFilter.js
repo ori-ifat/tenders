@@ -120,7 +120,7 @@ export default class MultipleFilter extends React.Component {
     if (this.type == 'subsubjects') {
       //subsubjects: act like a search, not like a filter ...
       const tags = this.selected.map((item, index) => {
-        return {ID: item, Name: encodeURIComponent(this.itemLabels[index]), ResType: field}
+        return {ID: item, Name: encodeURIComponent(this.itemLabels[index]), ResType: field, UniqueID: parseFloat(`${item}.1`)}
       })
       //route list SearchInput, to enable a new search
       const { routingStore } = this.props

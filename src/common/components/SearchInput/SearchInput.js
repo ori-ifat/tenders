@@ -138,7 +138,7 @@ export default class SearchInput extends Component {
               filterOptions={this.filterOptions}
               value={selectedValues}
               labelKey={'Name'}
-              valueKey={'ID'}
+              valueKey={'UniqueID'}
             />
           </div>
         </div>
