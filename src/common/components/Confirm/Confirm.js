@@ -1,5 +1,5 @@
 import React from 'react'
-import { func } from 'prop-types'
+import { string, func } from 'prop-types'
 import { translate } from 'react-polyglot'
 import ReactModal from 'react-modal'
 import CSSModules from 'react-css-modules'
@@ -10,6 +10,9 @@ import styles from './Confirm.scss'
 export default class Confirm extends React.Component {
 
   static propTypes = {
+    title: string,
+    subTitle: string,
+    actLabel: string,
     onClose: func
   }
 
@@ -18,7 +21,7 @@ export default class Confirm extends React.Component {
   }
 
   render() {
-    const { onClose, t } = this.props
+    const { title, subTitle, actLabel, onClose, t } = this.props
     return (
       <ReactModal
         isOpen={true}
@@ -26,11 +29,11 @@ export default class Confirm extends React.Component {
         className="reveal-custom"
         overlayClassName="reveal-overlay-custom">
         <div styleName="container">
-          <h3 styleName="message">מחיקת תזכורת</h3>
-          <p styleName="sub">האם אתה בטוח שברצונך למחוק את התזכורת? </p>
+          <h3 styleName="message">{title}</h3>
+          <p styleName="sub">{subTitle}</p>
           <div styleName="button-container">
-            <button className="button" styleName="btn" onClick={() => onClose(true)}>מחק</button>
-            <button className="clear button secondary" styleName="btn" onClick={() => onClose(false)}>בטל </button>
+            <button className="button" styleName="btn" onClick={() => onClose(true)}>{actLabel}</button>
+            <button className="clear button secondary" styleName="btn" onClick={() => onClose(false)}>{t('confirm.cancel')}</button>
           </div>
         </div>
       </ReactModal>

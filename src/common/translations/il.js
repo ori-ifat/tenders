@@ -29,9 +29,7 @@ export default {
     search: 'חיפוש'
   },
   confirm: {
-    ask: 'האם את/ה בטוח/ה?',
-    yes: 'כן',
-    no: 'לא'
+    cancel: 'בטל'
   },
   home: {
     mainTitle: 'רק אנחנו נמצא את',
@@ -199,7 +197,9 @@ export default {
     cancel: 'בטל',
     delete: 'מחק',
     submit: 'שמור תזכורת',
-    linkToItem: 'לינק למכרז'
+    linkToItem: 'לינק למכרז',
+    deleteTitle: 'מחיקת תזכורת',
+    deleteSubTitle: 'האם אתה בטוח שברצונך למחוק את התזכורת?'
   },
   filter: {
     title: 'הגדרות חיפוש',

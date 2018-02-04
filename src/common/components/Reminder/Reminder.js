@@ -238,7 +238,13 @@ export default class Reminder extends Component {
           </div>
         </ReactModal>
         {
-          this.deleteMe && <Confirm onClose={this.deleteConfirm} />
+          this.deleteMe &&
+            <Confirm
+              title={t('reminder.deleteTitle')}
+              subTitle={t('reminder.deleteSubTitle')}
+              actLabel={t('reminder.delete')}
+              onClose={this.deleteConfirm}
+            />
         }
       </div>
     )
