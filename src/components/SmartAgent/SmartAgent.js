@@ -303,11 +303,6 @@ export default class SmartAgent extends Component {
                     </div>
                   </div>
                   {ifatUser.ifat &&
-                    <div styleName="btn_container">
-                      <button className="left" styleName="button-submit" onClick={this.onSave}>{t('agent.submit')}</button>
-                    </div>
-                  }
-                  {ifatUser.ifat &&
                     <div className="grid-x">
                       <div styleName="ttl_container" className="medium-3 cell">
                         <h4>{t('agent.estimate')}</h4>
@@ -317,6 +312,11 @@ export default class SmartAgent extends Component {
                         <button className="left" styleName="button-submit" onClick={this.checkCounts}>{t('agent.submitCounts')}</button>
                         {estimatedCount > -1 && <div styleName="estimation">{t('agent.estimatedCount', {estimatedCount})}</div>}
                       </div>
+                    </div>
+                  }
+                  {ifatUser.ifat &&
+                    <div styleName="btn_container">
+                      <button className="left" styleName="button-submit" onClick={this.onSave}>{t('agent.submit')}</button>
                     </div>
                   }
                   {!ifatUser.ifat && <div styleName="block"></div>}
