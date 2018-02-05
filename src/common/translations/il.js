@@ -218,7 +218,7 @@ export default {
     selectAll: 'בחר הכל',
     clearAll: 'נקה הכל',
     more: '...עוד',
-    searchText: 'הדגש בתוצאות',
+    searchText: 'סנן בתוצאות',
     search: 'חפש',
     selectAll: 'בחר הכל',
     noData: 'לא נמצאו תוצאות'
@@ -258,7 +258,8 @@ export default {
     save: 'שמור',
     add: 'הוסף',
     edit: 'ערוך',
-    delete: 'מחק'
+    delete: 'מחק',
+    readOnly: 'ניתן לערוך את הנתונים בעזרת מחלקת התמיכה בלבד'
   },
   subscriptions: {
     title: 'מסלולים ומחירים',

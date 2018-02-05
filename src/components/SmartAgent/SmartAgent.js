@@ -10,6 +10,7 @@ import {checkEmail, checkPhone} from 'common/utils/validation'
 import {publishTender, clearCache} from 'common/services/apiService'
 import Definition from './Definition'
 import NotLogged from 'common/components/NotLogged'
+import ReactTooltip from 'react-tooltip'
 import CSSModules from 'react-css-modules'
 import styles from './smartAgent.scss'
 
@@ -38,10 +39,11 @@ export default class SmartAgent extends Component {
       this.tendertypes = smartAgentStore.results.TenderTypes.filter(tendertype => tendertype.TenderTypeSelected == 1)
       this.queries = smartAgentStore.results.Queries
       this.contacts = smartAgentStore.results.Contacts
-      this.email = smartAgentStore.results.Contacts[0].Email
-      this.phone = smartAgentStore.results.Contacts[0].Cellular
+      this.email = smartAgentStore.results.Contacts.length > 0 ? smartAgentStore.results.Contacts[0].Email : ''
+      this.phone = smartAgentStore.results.Contacts.length > 0 ? smartAgentStore.results.Contacts[0].Cellular : ''
     })
-    smartAgentStore.loadSubSubjects()    
+    smartAgentStore.loadSubSubjects()
+    smartAgentStore.checkUser()
     showNotification(true)
   }
 
@@ -160,9 +162,11 @@ export default class SmartAgent extends Component {
   }
 
   render() {
-    const {accountStore: {profile}, smartAgentStore: {resultsLoading, results, query}, t} = this.props
+    const {accountStore: {profile}, smartAgentStore: {resultsLoading, results, query, ifatUser}, t} = this.props
     const style = this.sent ? 'sent' : 'errors'
-
+    const defaultEmail = results && results.Contacts && results.Contacts.length > 0 ? results.Contacts[0].Email : ''
+    const defaultPhone = results && results.Contacts && results.Contacts.length > 0 ? results.Contacts[0].Cellular : ''
+    const toolTipData = ifatUser.ifat ? '' : t('agent.readOnly')
     return (
       <div>
         <div styleName="search-div" >
@@ -170,7 +174,7 @@ export default class SmartAgent extends Component {
         </div>
         <div className="row" styleName="title-container">
           <div className="column large-12">
-            <h1 styleName="title">{t('agent.title')}</h1>
+            <h1 styleName="title" data-tip={toolTipData}>{t('agent.title')}</h1>
           </div>
         </div>
         <div className="row">
@@ -213,14 +217,14 @@ export default class SmartAgent extends Component {
                         name="email"
                         styleName="input-value"
                         onChange={this.onInputChange}
-                        defaultValue={results.Contacts[0].Email}
+                        defaultValue={defaultEmail}
                       />
                       <span>{t('agent.phone')}:</span>
                       <input type="text"
                         name="phone"
                         styleName="input-value"
                         onChange={this.onInputChange}
-                        defaultValue={results.Contacts[0].Cellular}
+                        defaultValue={defaultPhone}
                       />
                     </div>
                   </div>
@@ -281,10 +285,13 @@ export default class SmartAgent extends Component {
                       }
                     </div>
                   </div>
-
-                  <div styleName="btn_container">
-                    <button className="left" styleName="button-submit" onClick={this.onSave}>{t('agent.submit')}</button>
-                  </div>
+                  {ifatUser.ifat &&
+                    <div styleName="btn_container">
+                      <button className="left" styleName="button-submit" onClick={this.onSave}>{t('agent.submit')}</button>
+                    </div>
+                  }
+                  {!ifatUser.ifat && <div styleName="block"></div>}
+                  <ReactTooltip />
                 </div>
                 }
               </div>

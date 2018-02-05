@@ -89,6 +89,8 @@ export default class Definition extends Component {
         }
         onSave(query, newQuery)
         this.edit = false
+        this.selectedValues = null
+        this.words = ''
       }
     }
     else {
@@ -119,6 +121,7 @@ export default class Definition extends Component {
                 <Select
                   styleName="branch"
                   className="search-select"
+                  menuContainerStyle={{overflowY: 'visible', height: '200px'}}
                   name="searchbox"
                   placeholder={t('agent.placeHolder')}
                   noResultsText={null}

@@ -153,6 +153,10 @@ export function logout() {
   return apiFetch('Account/Logout', {}, true)
 }
 
+export function isIfatUser() {
+  return apiFetch('Account/IsIfat')
+}
+
 export async function getLastTenders(lastSeenTenderID) {
   return apiFetch('Tender/GetLastTenders', {searchParams: {
     LastSeenTenderID: lastSeenTenderID

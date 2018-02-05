@@ -1,5 +1,5 @@
 import { action, computed, observable, toJS } from 'mobx'
-import {getAgentSettings, getSubSubjects, updateAgentSettings} from 'common/services/apiService'
+import {getAgentSettings, getSubSubjects, updateAgentSettings, isIfatUser} from 'common/services/apiService'
 
 class SmartAgent {
   @observable resultsLoading = false
@@ -10,6 +10,9 @@ class SmartAgent {
   @observable subSubjects = []
   @observable settingsLoading = false
   @observable settingsData = -1
+  @observable isIfat = {};
+  @observable ifatUser = false
+  @observable userDataLoading = false
 
   @action.bound
   async loadAgentSettings() {
@@ -92,6 +95,32 @@ class SmartAgent {
         console.error(searchError)
       }
       this.settingsLoading = false
+    }
+  }
+
+  @action.bound
+  async checkUser() {
+    if (!this.userDataLoading) {
+      this.userDataLoading = true
+      let error = false
+
+      try {
+        this.isIfat = await isIfatUser()
+      }
+      catch(e) {
+        //an error occured on search
+        console.error(`[checkUser] search error: ${e.message} http status code ${e.error.status}`)
+        error = true
+      }
+
+      if (!error) {
+        console.info('[loadAgentSettings]')
+        this.ifatUser = this.isIfat
+      }
+      else {
+        this.ifatUser = false
+      }
+      this.userDataLoading = false
     }
   }
 
