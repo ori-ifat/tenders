@@ -161,8 +161,25 @@ export default class SmartAgent extends Component {
     }
   }
 
+  checkCounts = () => {
+    const {smartAgentStore} = this.props
+    const data = {
+      Subsubjects: toJS(this.queries),
+      Tenders_Type: toJS(this.tendertypes),
+      frequencies: toJS(this.frequencies),
+      Cellulars: toJS(this.phone) || '',
+      Emails: toJS(this.email) || ''
+    }
+    console.log(data)
+    smartAgentStore.checkEstimation(data) /*
+      .then(res => {
+        //show a message
+        this.estimationCount = res
+      })*/
+  }
+
   render() {
-    const {accountStore: {profile}, smartAgentStore: {resultsLoading, results, query, ifatUser}, t} = this.props
+    const {accountStore: {profile}, smartAgentStore: {resultsLoading, results, query, ifatUser, estimatedCount}, t} = this.props
     const style = this.sent ? 'sent' : 'errors'
     const defaultEmail = results && results.Contacts && results.Contacts.length > 0 ? results.Contacts[0].Email : ''
     const defaultPhone = results && results.Contacts && results.Contacts.length > 0 ? results.Contacts[0].Cellular : ''
@@ -288,6 +305,18 @@ export default class SmartAgent extends Component {
                   {ifatUser.ifat &&
                     <div styleName="btn_container">
                       <button className="left" styleName="button-submit" onClick={this.onSave}>{t('agent.submit')}</button>
+                    </div>
+                  }
+                  {ifatUser.ifat &&
+                    <div className="grid-x">
+                      <div styleName="ttl_container" className="medium-3 cell">
+                        <h4>{t('agent.estimate')}</h4>
+                      </div>
+
+                      <div styleName="agent_content" className="medium-9 cell">
+                        <button className="left" styleName="button-submit" onClick={this.checkCounts}>{t('agent.submitCounts')}</button>
+                        {estimatedCount > -1 && <div styleName="estimation">{t('agent.estimatedCount', {estimatedCount})}</div>}
+                      </div>
                     </div>
                   }
                   {!ifatUser.ifat && <div styleName="block"></div>}

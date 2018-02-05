@@ -1,5 +1,5 @@
 import { action, computed, observable, toJS } from 'mobx'
-import {getAgentSettings, getSubSubjects, updateAgentSettings, isIfatUser} from 'common/services/apiService'
+import {getAgentSettings, getSubSubjects, updateAgentSettings, isIfatUser, agentEstimate} from 'common/services/apiService'
 
 class SmartAgent {
   @observable resultsLoading = false
@@ -13,6 +13,9 @@ class SmartAgent {
   @observable isIfat = {};
   @observable ifatUser = false
   @observable userDataLoading = false
+  @observable estimatedDataLoading = false
+  @observable estimation = {}
+  @observable estimatedCount = -1
 
   @action.bound
   async loadAgentSettings() {
@@ -114,13 +117,40 @@ class SmartAgent {
       }
 
       if (!error) {
-        console.info('[loadAgentSettings]')
+        console.info('[checkUser]')
         this.ifatUser = this.isIfat
       }
       else {
         this.ifatUser = false
       }
       this.userDataLoading = false
+    }
+  }
+
+  @action.bound
+  async checkEstimation(settings) {
+    if (!this.estimatedDataLoading) {
+      this.estimatedDataLoading = true
+      this.estimatedCount = -1
+      let error = false
+
+      try {
+        this.estimation = await agentEstimate(settings)
+      }
+      catch(e) {
+        //an error occured on search
+        console.error(`[checkEstimation] search error: ${e.message} http status code ${e.error.status}`)
+        error = true
+      }
+
+      if (!error) {
+        console.info('[checkEstimation]')
+        this.estimatedCount = this.estimation.count
+      }
+      else {
+        this.estimatedCount = -1
+      }
+      this.estimatedDataLoading = false
     }
   }
 

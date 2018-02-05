@@ -259,7 +259,10 @@ export default {
     add: 'הוסף',
     edit: 'ערוך',
     delete: 'מחק',
-    readOnly: 'ניתן לערוך את הנתונים בעזרת מחלקת התמיכה בלבד'
+    readOnly: 'ניתן לערוך את הנתונים בעזרת מחלקת התמיכה בלבד',
+    estimate: 'הצג כמויות צפויות',
+    submitCounts: 'בדוק',
+    estimatedCount: 'הכמות הצפויה לפי ההגדרות היא %{estimatedCount}'
   },
   subscriptions: {
     title: 'מסלולים ומחירים',
