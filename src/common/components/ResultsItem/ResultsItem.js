@@ -8,6 +8,8 @@ import {getImageUrl} from 'common/utils/util'
 import moment from 'moment'
 import find from 'lodash/find'
 import replace from 'lodash/replace'
+import filter from 'lodash/filter'
+import forEach from 'lodash/forEach'
 import Checkbox from 'common/components/Checkbox'
 //import ResultsItemDetails from 'common/components/ResultsItemDetails'
 import ItemDetailsModal from 'common/components/ItemDetailsModal'
@@ -113,15 +115,23 @@ export default class ResultsItem extends React.Component {
     /* highlight text if text search\text filter was made */
     const {searchStore} = this.props
     //get text filter or text tag
-    const filter = find(searchStore.filters, filter => {
+    const filtered = find(searchStore.filters, filter => {
       return filter.field == 'searchtext'
     })
+    /*
     const tag = find(searchStore.tags, tag => {
+      return tag.ResType == 'tender_partial'
+    })*/
+    const tags = filter(searchStore.tags, tag => {
       return tag.ResType == 'tender_partial'
     })
     //alter the text to inject as html
-    let fixedText = filter ? replace(text, new RegExp(filter.values[0], 'g'), `<span style="background-color: yellow">${filter.values[0]}</span>`) : text
-    fixedText = tag ? replace(fixedText, new RegExp(tag.Name, 'g'), `<span style="background-color: yellow">${tag.Name}</span>`): fixedText
+    let fixedText = filtered && filtered.values[0].length > 2 ? replace(text, new RegExp(filtered.values[0], 'g'), `<span style="background-color: yellow">${filtered.values[0]}</span>`) : text
+    //fixedText = tag ? replace(fixedText, new RegExp(tag.Name, 'g'), `<span style="background-color: yellow">${tag.Name}</span>`): fixedText
+    forEach(tags, tag => {
+      fixedText = tag.Name.length > 2 ? replace(fixedText, new RegExp(tag.Name, 'g'), `<span style="background-color: yellow">${tag.Name}</span>`) : fixedText
+      //fixedText = replace(fixedText, new RegExp(`(\s|^)${tag.Name}(?=\s|$)`, 'g'), `<span style="background-color: yellow">${tag.Name}</span>`)
+    })
     return {__html: fixedText}
   }
 
