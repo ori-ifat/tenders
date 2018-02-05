@@ -74,8 +74,9 @@ class Search {
     const reduced = filter(filters, filter => {
       return filter.field == 'publishdate' || filter.field == 'infodate'
     })
-    if (reduced.length == 0 || (tags.length == 0 && filters.length == 0)) {
-      const filter = getDefaultFilter(tags.length == 0 && filters.length == 0)
+    if (reduced.length == 0 || tags.length == 0){ //(tags.length == 0 && filters.length == 0)) {
+      //const filter = getDefaultFilter(tags.length == 0 && filters.length == 0)
+      const filter = getDefaultFilter(tags.length == 0)
       filters = [...filters, filter]
     }
     return filters
@@ -229,7 +230,8 @@ class Search {
         filters = [filter]
       }*/
       //add date filter always (start empty anyway)
-      const filter = getDefaultFilter(tags.length == 0 && filters.length == 0)
+      //const filter = getDefaultFilter(tags.length == 0 && filters.length == 0)
+      const filter = getDefaultFilter(tags.length == 0)
       filters = [filter]
 
       const searchParams = {

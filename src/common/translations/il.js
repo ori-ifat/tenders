@@ -80,6 +80,7 @@ export default {
     publishDate: 'תאריך פרסום',
     noData: 'אין תוצאות להצגה',
     lastMonth: 'בחודש האחרון',
+    lastWeek: 'בשבוע האחרון',
     lastYear: 'בשנה האחרונה',
     login: 'יש להתחבר למערכת',
     error: 'חלה שגיאה בחיפוש, אנא נסה שנית',

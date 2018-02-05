@@ -37,7 +37,8 @@ export default class ExtraCount extends React.Component {
       filters = [filter]
     } */
     //add date filter always (start empty anyway)
-    const filter = getDefaultFilter(tags.length == 0 && filters.length == 0)
+    //const filter = getDefaultFilter(tags.length == 0 && filters.length == 0)
+    const filter = getDefaultFilter(tags.length == 0)
     filters = [filter]
 
     getExtraCount(searchStore.serializedTags, filters).then(res => {
