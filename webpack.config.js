@@ -17,6 +17,7 @@ const paths = {
   dist: relpath(`./dist/${NODE_ENV}`),
   appEntry: relpath('./src/app/index'),
   indexHtml: relpath('./src/app/index.html'),
+  icon: relpath('./src/app/favicon.ico'),
   src: relpath('./src'),
   lib: relpath('./node_modules')
 }
@@ -141,6 +142,7 @@ function getPlugins() {
     new webpack.NoEmitOnErrorsPlugin(),
     new HtmlWebpackPlugin({
       template: `html-loader!${paths.indexHtml}`,
+      favicon: paths.icon,
       inject: true
     }),
     new webpack.DefinePlugin({
