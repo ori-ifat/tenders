@@ -263,7 +263,11 @@ export default {
     readOnly: 'ניתן לערוך את הנתונים בעזרת מחלקת התמיכה בלבד',
     estimate: 'הצג כמויות צפויות',
     submitCounts: 'בדוק',
-    estimatedCount: 'הכמות הצפויה לפי ההגדרות היא %{estimatedCount}'
+    estimatedCount: 'הכמות הצפויה לפי ההגדרות היא %{estimatedCount}',
+    checkWords: 'בדיקת מילים לחיפוש',
+    word: 'מילה לחיפוש',
+    compareTo: 'טקסט להשוואה',
+    submitText: 'בדוק'
   },
   subscriptions: {
     title: 'מסלולים ומחירים',

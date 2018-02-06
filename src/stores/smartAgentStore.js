@@ -16,6 +16,9 @@ class SmartAgent {
   @observable estimatedDataLoading = false
   @observable estimation = {}
   @observable estimatedCount = -1
+  @observable textDataLoading = false
+  @observable text = {}
+  @observable textData = ''
 
   @action.bound
   async loadAgentSettings() {
@@ -151,6 +154,35 @@ class SmartAgent {
         this.estimatedCount = -1
       }
       this.estimatedDataLoading = false
+    }
+  }
+
+  @action.bound
+  async compareText(word, compareTo) {
+    if (!this.textDataLoading) {
+      this.textDataLoading = true
+      this.textData = ''
+      let error = false
+
+      try {
+        //this.estimation = await agentEstimate(settings)
+        console.log(word, compareTo)
+        this.textData = '<b>Test</b> test <b>test</b>tt'
+      }
+      catch(e) {
+        //an error occured on search
+        console.error(`[compareText] search error: ${e.message} http status code ${e.error.status}`)
+        error = true
+      }
+
+      if (!error) {
+        console.info('[compareText]')
+        //this.estimatedCount = this.estimation.count
+      }
+      else {
+        this.textData = ''
+      }
+      this.textDataLoading = false
     }
   }
 

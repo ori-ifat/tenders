@@ -31,6 +31,8 @@ export default class SmartAgent extends Component {
   @observable tendertypes = []
   @observable queries = []
   @observable contacts = []
+  @observable word = ''
+  @observable compareTo = ''
 
   componentWillMount() {
     const {smartAgentStore, showNotification} = this.props
@@ -178,8 +180,17 @@ export default class SmartAgent extends Component {
       })*/
   }
 
+  updateField = e => {
+    e.target.name == 'word' ? this.word = e.target.value : this.compareTo = e.target.value
+  }
+
+  compareText = () => {
+    const {smartAgentStore} = this.props
+    smartAgentStore.compareText(this.word, this.compareTo)
+  }
+
   render() {
-    const {accountStore: {profile}, smartAgentStore: {resultsLoading, results, query, ifatUser, estimatedCount}, t} = this.props
+    const {accountStore: {profile}, smartAgentStore: {resultsLoading, results, query, ifatUser, estimatedCount, textData}, t} = this.props
     const style = this.sent ? 'sent' : 'errors'
     const defaultEmail = results && results.Contacts && results.Contacts.length > 0 ? results.Contacts[0].Email : ''
     const defaultPhone = results && results.Contacts && results.Contacts.length > 0 ? results.Contacts[0].Cellular : ''
@@ -311,6 +322,20 @@ export default class SmartAgent extends Component {
                       <div styleName="agent_content" className="medium-9 cell">
                         <button className="left" styleName="button-submit" onClick={this.checkCounts}>{t('agent.submitCounts')}</button>
                         {estimatedCount > -1 && <div styleName="estimation">{t('agent.estimatedCount', {estimatedCount})}</div>}
+                      </div>
+                    </div>
+                  }
+                  {ifatUser.ifat &&
+                    <div className="grid-x">
+                      <div styleName="ttl_container" className="medium-3 cell">
+                        <h4>{t('agent.checkWords')}</h4>
+                      </div>
+
+                      <div styleName="agent_content" className="medium-9 cell">
+                        {t('agent.word')}<input type="text" name="word" onChange={this.updateField} />
+                        {t('agent.compareTo')}<textarea name="compare" onChange={this.updateField} />
+                        <button className="left" styleName="button-submit" onClick={this.compareText}>{t('agent.submitText')}</button>
+                        {textData != '' && <div styleName="text-compare" dangerouslySetInnerHTML={{__html: textData}}></div>}
                       </div>
                     </div>
                   }
