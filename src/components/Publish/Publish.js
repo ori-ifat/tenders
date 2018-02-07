@@ -250,15 +250,12 @@ export default class Publish extends Component {
           </div>
           <div className="column large-4">
             <div styleName="promoWraper">
-              <h4>נמאס לך מהחיפוש המתיש אחרי ספקים, נותני שירותים ויצרנים?</h4>
-
+              <h4>{t('publish.promo')}</h4>
               <p styleName="promo">
-הישען לאחור, הירגע... ותן להם לרדוף אחריך! גם אתה יכול לפרסם מכרזים, לאתר ספקים ולמצוא נותני שירות והכול בקלות וללא עלות! עשרות ספקים ונותני שירות מחכים לך כבר עכשיו
+                {t('publish.promoDetails')}
               </p>
             </div>
-
           </div>
-
         </div>
       </div>
     )
