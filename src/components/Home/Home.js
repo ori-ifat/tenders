@@ -13,6 +13,8 @@ import Footer from 'common/components/Footer'
 import Loading from 'common/components/Loading/Loading'
 import moment from 'moment'
 import {getHomeJSON} from 'common/services/apiService'
+import {getMetaData} from 'common/utils/meta'
+import DocumentMeta from 'react-document-meta'
 import CSSModules from 'react-css-modules'
 import styles from './home.scss'
 import 'common/style/home.css'
@@ -70,8 +72,11 @@ export default class Home extends Component {
     const {homeStore, homeStore: {resultsLoading},  t} = this.props
     const catStyle = this.allCats ? '' : 'hide'
     const catLabel = this.allCats ? t('home.hideAllCat') : t('home.showAllCat')
+    const meta = getMetaData(t('meta.homeTitle'), t('meta.homeDesc'), t('meta.homeKeywords'))
+
     return (
       <div className="bg">
+        <DocumentMeta {...meta} />
         <section styleName="hero">
           <div className="row">
             <div className="columns large-12">

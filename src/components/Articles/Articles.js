@@ -6,6 +6,8 @@ import {getHomeJSON} from 'common/services/apiService'
 import ArticleItem from './ArticleItem'
 import ContactForm from './ContactForm'
 import Footer from 'common/components/Footer'
+import DocumentMeta from 'react-document-meta'
+import {getMetaData} from 'common/utils/meta'
 import CSSModules from 'react-css-modules'
 import styles from './articles.scss'
 
@@ -28,13 +30,14 @@ export default class Article extends Component {
 
   render() {
     const {t} = this.props
+    const pageName = t('meta.articles')
+    const meta = getMetaData(t('meta.pageTitle', {pageName}), t('meta.pageDesc', {pageName}), t('meta.pageKW', {pageName}))
 
     return (
       <div>
+        <DocumentMeta {...meta} />
         <section id="articles">
-
           <div className="row">
-
             <div className="large-8 columns">
               <div styleName="post_wrapper">
                 <h1 styleName="title">{t('articles.title')}</h1>

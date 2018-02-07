@@ -5,6 +5,8 @@ import {translate} from 'react-polyglot'
 import {checkEmail, checkPhone} from 'common/utils/validation'
 import {contactUs} from 'common/services/apiService'
 import Footer from 'common/components/Footer'
+import DocumentMeta from 'react-document-meta'
+import {getMetaData} from 'common/utils/meta'
 import CSSModules from 'react-css-modules'
 import styles from './contact.scss'
 
@@ -92,8 +94,12 @@ export default class Contact extends Component {
   render() {
     const {t} = this.props
     const style = this.sent ? 'sent' : 'errors'
+    const pageName = t('meta.contact')
+    const meta = getMetaData(t('meta.pageTitle', {pageName}), t('meta.pageDesc', {pageName}), t('meta.pageKW', {pageName}))
+
     return (
       <div>
+        <DocumentMeta {...meta} />
         <div className="row" styleName="title-container">
           <div className="column large-12">
             <h1 styleName="title">{t('contact.title')}</h1>

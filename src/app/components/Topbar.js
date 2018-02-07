@@ -105,7 +105,7 @@ export default class Topbar extends Component {
           <div className="top-bar" styleName="top-bar">
             <div className="top-bar-right">
               <a onClick={this.goToHome}>
-                <img src={logoSrc} alt={t('nav.logoAlt')} id="logo" />
+                <img src={logoSrc} alt={t('nav.logoAlt')} title={t('nav.logoAlt')} id="logo" />
               </a>
             </div>
 

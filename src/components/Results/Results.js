@@ -4,6 +4,7 @@ import {inject, observer} from 'mobx-react'
 import {observable, toJS} from 'mobx'
 import { whenRouted } from 'common/utils/withRouteHooks'
 import { withRouter } from 'react-router'
+import {translate} from 'react-polyglot'
 import { searchStore, recordStore } from 'stores'
 import SearchInput from 'common/components/SearchInput'
 import Title from 'common/components/Title'
@@ -12,9 +13,13 @@ import List from 'common/components/List'
 import Filters from './Filters'
 import Banners from './Banners'
 import NoData from 'components/NoData'
+import filter from 'lodash/filter'
+import DocumentMeta from 'react-document-meta'
+import {getMetaData} from 'common/utils/meta'
 import CSSModules from 'react-css-modules'
 import styles from './results.scss'
 
+@translate()
 @withRouter
 @whenRouted(({ params: { sort, tags, filters } }) => {
   searchStore.applySort(sort)
@@ -39,15 +44,36 @@ export default class Results extends Component {
     onFav: func
   }
 
+  getMeta = () => {
+    const {searchStore, t} = this.props
+    const tags = filter(searchStore.tags, tag => {
+      return tag.ResType == 'subsubject'
+    })
+
+    let metaTitle = t('meta.homeTitle')
+    let metaDesc = t('meta.homeDesc')
+    let metaKW = t('meta.homeKeywords')
+    if (tags.length == 1) {
+      const tag = tags[0].Name
+      metaTitle = t('meta.catResultsTitle', {tag})
+      metaDesc = t('meta.catResultsDesc', {tag})
+      metaKW = t('meta.catKeywords', {tag})
+    }
+    return getMetaData(metaTitle, metaDesc, metaKW)
+  }
+
   render() {
 
-    const {accountStore, searchStore, searchStore: {resultsLoading, resultsCount, tags}} = this.props
+    const {accountStore, searchStore, searchStore: {resultsLoading, resultsCount, tags}, t} = this.props
     const {onCheck, onFav} = this.props
     const {recordStore: {checkedItems}} = this.props
     const divStyle = resultsLoading && searchStore.fromRoute ? 'loading' : ''
+    const meta = this.getMeta()
+
     //console.log('tags', toJS(tags))
     return (
       <div style={{marginTop: '50px'}}>
+        <DocumentMeta {...meta} />
         <SearchInput tags={toJS(tags)} />
         <div>
           <Title store={searchStore} initial={searchStore.initialDate} />

@@ -11,7 +11,7 @@ const CatItem = ({count, subSubjectID, catName}) => {
     <a href={url} className="main_cat">
       <span styleName="cat_num">{count}</span>
       <h3 styleName="cat_name">{catName}</h3>
-      <img src={getSrc(subSubjectID)} alt="" styleName="cat_icon" />
+      <img src={getSrc(subSubjectID)} alt={catName} styleName="cat_icon" />
     </a>
   </div>
 }

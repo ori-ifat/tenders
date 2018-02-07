@@ -1,12 +1,15 @@
 import React, {Component} from 'react'
-import {observer} from 'mobx-react'
+import {inject, observer} from 'mobx-react'
 import {observable} from 'mobx'
 import {translate} from 'react-polyglot'
 import Footer from 'common/components/Footer'
+import DocumentMeta from 'react-document-meta'
+import {getMetaData} from 'common/utils/meta'
 import CSSModules from 'react-css-modules'
 import styles from './subscriptions.scss'
 
 @translate()
+@inject('routingStore')
 @CSSModules(styles, {allowMultiple: true})
 @observer
 export default class Subscriptions extends Component {
@@ -36,6 +39,11 @@ export default class Subscriptions extends Component {
     }
   }
 
+  register = () => {
+    const {routingStore} = this.props
+    routingStore.push('/contact')
+  }
+
   render() {
     const {t} = this.props
     const oneCatPrice = this.oneCatPartial ? 155 : 129
@@ -51,8 +59,12 @@ export default class Subscriptions extends Component {
     const allCatLabel = this.allCatPartial ? t('subscriptions.catConditionPartial') : t('subscriptions.catCondition')
     const allCatLinkLabel = this.allCatPartial ? t('subscriptions.showFull') : t('subscriptions.showPartial')
 
+    const pageName = t('meta.subscriptions')
+    const meta = getMetaData(t('meta.pageTitle', {pageName}), t('meta.pageDesc', {pageName}), t('meta.pageKW', {pageName}))
+
     return (
       <div>
+        <DocumentMeta {...meta} />
         <div className="row" >
 
           <div className="large-12 columns" >
@@ -87,7 +99,7 @@ export default class Subscriptions extends Component {
                       <p>{t('subscriptions.benefit8')}</p>
                     </div>
                     <p className="text-center">
-                      <a className="button" styleName="signup_btn" href="">{t('subscriptions.register')}</a>
+                      <a className="button" styleName="signup_btn" onClick={this.register}>{t('subscriptions.register')}</a>
                     </p>
 
                   </div>
@@ -114,7 +126,7 @@ export default class Subscriptions extends Component {
                       <p>{t('subscriptions.benefit8')}</p>
                     </div>
                     <p className="text-center">
-                      <a className="button" styleName="signup_btn" href="">{t('subscriptions.register')}</a>
+                      <a className="button" styleName="signup_btn" onClick={this.register}>{t('subscriptions.register')}</a>
                     </p>
 
                   </div>
@@ -141,7 +153,7 @@ export default class Subscriptions extends Component {
                       <p>{t('subscriptions.benefit8')}</p>
                     </div>
                     <p className="text-center">
-                      <a className="button" styleName="signup_btn" href="">{t('subscriptions.register')}</a>
+                      <a className="button" styleName="signup_btn" onClick={this.register}>{t('subscriptions.register')}</a>
                     </p>
 
                   </div>

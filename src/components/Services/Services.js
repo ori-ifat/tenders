@@ -7,6 +7,8 @@ import takeRight from 'lodash/takeRight'
 import {getHomeJSON} from 'common/services/apiService'
 import ServiceItem from './ServiceItem'
 import Footer from 'common/components/Footer'
+import DocumentMeta from 'react-document-meta'
+import {getMetaData} from 'common/utils/meta'
 import CSSModules from 'react-css-modules'
 import styles from './services.scss'
 
@@ -28,9 +30,12 @@ export default class Services extends Component {
 
   render() {
     const {t} = this.props
+    const pageName = t('meta.services')
+    const meta = getMetaData(t('meta.pageTitle', {pageName}), t('meta.pageDesc', {pageName}), t('meta.pageKW', {pageName}))
 
     return (
       <div>
+        <DocumentMeta {...meta} />
         <section id="services">
           <div className="row" >
             <div className="large-12 columns" >

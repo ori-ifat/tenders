@@ -38,7 +38,7 @@ export default class Main extends Component {
   }
 
   render() {
-    const { mainStore, accountStore: {profile}, t } = this.props
+    const { mainStore, mainStore: {resultsLoading}, accountStore: {profile}, t } = this.props
     const {onCheck, onFav} = this.props
     const {recordStore: {checkedItems}} = this.props
 
@@ -51,12 +51,13 @@ export default class Main extends Component {
               {profile ?
                 <div>
                   <MainTitle />
+                  {!resultsLoading && 
                   <MainList
                     items={mainStore.results}
                     onCheck={onCheck}
                     onFav={onFav}
                     checkedItems={checkedItems}
-                  />
+                  />}
                   <Banner banner={toJS(mainStore.banner)} />
                   <br />
                   {/*<h6 styleName="more-tenders-title">{t('main.moreTenders')}</h6>

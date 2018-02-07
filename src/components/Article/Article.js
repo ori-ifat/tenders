@@ -6,6 +6,8 @@ import {translate} from 'react-polyglot'
 import {getHomeJSON} from 'common/services/apiService'
 import ContactForm from 'components/Articles/ContactForm'
 import Footer from 'common/components/Footer'
+import DocumentMeta from 'react-document-meta'
+import {getMetaData} from 'common/utils/meta'
 import CSSModules from 'react-css-modules'
 import styles from './article.scss'
 
@@ -28,11 +30,14 @@ export default class Article extends Component {
   render() {
     const {t} = this.props
     const {article} = this
+    const pageName = article ? article.title : ''
+    const meta = getMetaData(t('meta.pageTitle', {pageName}), t('meta.pageDesc', {pageName}), t('meta.pageKW', {pageName}))
 
     return (
       <div>
         {article &&
         <section id="articals">
+          <DocumentMeta {...meta} />
           <div className="row">
             <div className="large-8 columns">
               <h1 styleName="title">{article.title}</h1>
@@ -46,7 +51,7 @@ export default class Article extends Component {
                 <h3 styleName="subtitle">{article.subtitle}</h3>
                 <div dangerouslySetInnerHTML={{__html: article.textPart1}}>
                 </div>
-                <img src={article.image} alt="" />
+                <img src={article.image} alt={article.title} />
                 <div dangerouslySetInnerHTML={{__html: article.textPart2}}>
                 </div>
               </div>
