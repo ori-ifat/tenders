@@ -114,9 +114,12 @@ export default class Topbar extends Component {
                 <button type="button" data-toggle="top_nav"><img src={navIconSrc} alt="" /></button>
               </div>
               <ul className="dropdown vertical medium-horizontal menu" styleName="menu" id="top_nav" data-dropdown-menu>
-                {navbar.map((nav, index) =>
-                  <li key={index}><a onClick={this.navigate(`${nav.link}`)}>{t(`nav.${nav.title}`)}</a></li>
-                ) }
+                {
+                  navbar.map((nav, index) => {
+                    const style = nav.title == 'publish' ? 'publish-link' : ''
+                    return <li key={index}><a styleName={style} onClick={this.navigate(`${nav.link}`)}>{t(`nav.${nav.title}`)}</a></li>
+                  })
+                }
                 <li>
                   {this.messageCount > 0 &&
                   <div style={{position: 'absolute', left: '0', top: '0'}}>

@@ -7,7 +7,7 @@ const Opportunity = ({title, desc, imgSrc}) => {
     <div styleName="fet_wrapper">
       <img src={imgSrc} alt={title} />
       <h3 styleName="fet_ttl">{title}</h3>
-      <p className="fet_desc">{desc}</p>
+      <p className="fet_desc" dangerouslySetInnerHTML={{__html: desc}}></p>
     </div>
   </div>
 }
