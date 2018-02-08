@@ -1,5 +1,5 @@
 import { action, computed, observable, toJS } from 'mobx'
-import {getAgentSettings, getSubSubjects, updateAgentSettings, isIfatUser, agentEstimate} from 'common/services/apiService'
+import {getAgentSettings, getSubSubjects, updateAgentSettings, isIfatUser, agentEstimate, testLucene} from 'common/services/apiService'
 
 class SmartAgent {
   @observable resultsLoading = false
@@ -17,8 +17,8 @@ class SmartAgent {
   @observable estimation = {}
   @observable estimatedCount = -1
   @observable textDataLoading = false
-  @observable text = {}
-  @observable textData = ''
+  @observable textReq = {}
+  @observable text = ''
 
   @action.bound
   async loadAgentSettings() {
@@ -161,13 +161,11 @@ class SmartAgent {
   async compareText(word, compareTo) {
     if (!this.textDataLoading) {
       this.textDataLoading = true
-      this.textData = ''
+      this.text = ''
       let error = false
 
       try {
-        //this.estimation = await agentEstimate(settings)
-        console.log(word, compareTo)
-        this.textData = '<b>Test</b> test <b>test</b>tt'
+        this.textReq = await testLucene(word, compareTo)
       }
       catch(e) {
         //an error occured on search
@@ -177,10 +175,10 @@ class SmartAgent {
 
       if (!error) {
         console.info('[compareText]')
-        //this.estimatedCount = this.estimation.count
+        this.text = this.textReq.text
       }
       else {
-        this.textData = ''
+        this.text = ''
       }
       this.textDataLoading = false
     }

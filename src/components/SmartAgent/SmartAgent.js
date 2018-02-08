@@ -190,7 +190,7 @@ export default class SmartAgent extends Component {
   }
 
   render() {
-    const {accountStore: {profile}, smartAgentStore: {resultsLoading, results, query, ifatUser, estimatedCount, textData}, t} = this.props
+    const {accountStore: {profile}, smartAgentStore: {resultsLoading, results, query, ifatUser, estimatedCount, text}, t} = this.props
     const style = this.sent ? 'sent' : 'errors'
     const defaultEmail = results && results.Contacts && results.Contacts.length > 0 ? results.Contacts[0].Email : ''
     const defaultPhone = results && results.Contacts && results.Contacts.length > 0 ? results.Contacts[0].Cellular : ''
@@ -335,7 +335,7 @@ export default class SmartAgent extends Component {
                         {t('agent.word')}<input type="text" name="word" onChange={this.updateField} />
                         {t('agent.compareTo')}<textarea name="compare" onChange={this.updateField} />
                         <button className="left" styleName="button-submit" onClick={this.compareText}>{t('agent.submitText')}</button>
-                        {textData != '' && <div styleName="text-compare" dangerouslySetInnerHTML={{__html: textData}}></div>}
+                        {text != '' && <div styleName="text-compare" dangerouslySetInnerHTML={{__html: text}}></div>}
                       </div>
                     </div>
                   }

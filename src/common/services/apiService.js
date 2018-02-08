@@ -305,6 +305,13 @@ export function agentEstimate(settings) {
   return apiFetch('Agent/AgentEstimate', {body: settings, method: 'POST' }, true)
 }
 
+export function testLucene(query, text) {
+  return apiFetch('Agent/TestLucene', {searchParams: {
+    text,
+    query
+  }})
+}
+
 export function logImageView(tenderID) {
   return apiFetch('Tender/SetImgView', {searchParams: {
     TenderID: tenderID
