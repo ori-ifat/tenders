@@ -21,7 +21,7 @@ import 'common/style/home.css'
 
 @translate()
 @inject('homeStore')
-@CSSModules(styles)
+@CSSModules(styles, {allowMultiple: true})
 @observer
 export default class Home extends Component {
 

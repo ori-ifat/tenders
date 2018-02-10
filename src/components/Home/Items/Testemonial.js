@@ -3,7 +3,7 @@ import CSSModules from 'react-css-modules'
 import styles from '../Home.scss'
 
 const Testemonial = ({name, desc}) => {
-  return  <div className="large-4 columns">
+  return  <div className="large-4 medium-4 small-12 columns">
     <div className="tes_wrapper">
       <p>{desc}</p>
       <p styleName="tes_name">{name}</p>

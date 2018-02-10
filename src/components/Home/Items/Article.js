@@ -4,7 +4,7 @@ import styles from '../Home.scss'
 
 const Article = ({articleID, title, imgSrc}) => {
   const url = `#/article/${articleID}`
-  return  <div className="medium-4 columns">
+  return  <div className="medium-4 small-12 columns">
     <a href={url}>
       <img src={imgSrc} alt={title} />
       <h3 styleName="one-article-title">{decodeURIComponent(title)}</h3>

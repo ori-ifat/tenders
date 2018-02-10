@@ -1,5 +1,6 @@
 @import '~common/style/_settings.scss';
 
+
 .hide {
   display: none;
 }
@@ -18,6 +19,11 @@
 	font-size: 3rem !important;
 	margin-top: 6rem !important;
   margin-bottom: 2rem;
+}
+@media screen and (max-width: 39.9375em) {
+  .hero_txt{
+    font-size: 2rem !important;
+  }
 }
 
 .sub_head {
