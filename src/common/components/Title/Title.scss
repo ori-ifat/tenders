@@ -2,6 +2,8 @@
 
 .results_summery {
 	/*margin-top: 4rem;*/
+	margin-top: 0;
+	line-height: 1;
 	font-size: 2.5rem;
 	color: $black;
 	span.num {
@@ -14,6 +16,7 @@
 }
 
 .pre-title {
-	margin-top: 1rem;
+	margin-top: 2.5rem;
   color: #44c960;
+	margin-bottom: 0;
 }
