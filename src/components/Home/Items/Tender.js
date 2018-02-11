@@ -3,7 +3,8 @@ import CSSModules from 'react-css-modules'
 import styles from '../Home.scss'
 
 const Tender = ({date, subSubject, title}) => {
-  return    <div styleName="tender_wrapper">
+  return
+  <div styleName="tender_wrapper">
     <div styleName="ten_date">
       <p data-font-size="16">{date}</p>
     </div>

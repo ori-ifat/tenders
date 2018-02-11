@@ -150,5 +150,7 @@ if only settings are needed, import '~common/style/_settings.scss' instead. this
 }
 
 .publish-link {
-	background-color: pink;
+	border: 1px solid #ddd;
+	font-weight: 500;
+	border-radius: 2px;
 }

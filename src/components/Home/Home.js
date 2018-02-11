@@ -22,7 +22,7 @@ import 'common/style/home.css'
 
 @translate()
 @inject('homeStore')
-@CSSModules(styles)
+@CSSModules(styles, {allowMultiple: true})
 @observer
 export default class Home extends Component {
 
@@ -137,6 +137,9 @@ export default class Home extends Component {
           <div className="row">
             <div className="large-12 columns">
               <h2 styleName="fet_ttl_main" >{t('home.opportunities')}</h2>
+              <p styleName="sub_ttl">
+              יפעת מכרזים הינו מאגר מכרזים הגדול במדינה הכולל: מכרזים פומביים, מכרזי פטור, מכרזים בלעדיים, מכרזי כונס, תוצאות מכרזים ועוד...
+              </p>
             </div>
           </div>
 

@@ -1,5 +1,6 @@
 @import '~common/style/_settings.scss';
 
+
 .hide {
   display: none;
 }
@@ -19,12 +20,22 @@
 	margin-top: 6rem !important;
   margin-bottom: 2rem;
 }
+@media screen and (max-width: 39.9375em) {
+  .hero_txt{
+    font-size: 2rem !important;
+  }
+}
 
 .sub_head {
   font-family: 'Rubik', sans-serif;
   font-size: 1.5rem;
   text-align: center;
   color: #444945;
+}
+
+.sub_ttl {
+  text-align: center;
+  margin: 0 0 2rem 0;
 }
 
 .cat-title {
@@ -96,7 +107,7 @@
   color: #444444;
   letter-spacing: -0.17px;
   text-align: center;
-  margin-bottom: 2rem;
+  margin-bottom: 0.5rem;
 }
 
 .fet_ttl {
