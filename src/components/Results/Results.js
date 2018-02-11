@@ -44,6 +44,20 @@ export default class Results extends Component {
     onFav: func
   }
 
+  @observable isHomeResults = false
+
+  componentWillMount() {
+    const { match: {params: { isHome }} } = this.props
+    //console.log('isHome', isHome)
+    this.isHomeResults = isHome
+  }
+
+  componentWillReceiveProps(nextProps) {
+    const { match: {params: { isHome }} } = nextProps
+    //console.log('isHome', isHome)
+    this.isHomeResults = isHome
+  }
+
   getMeta = () => {
     const {searchStore, t} = this.props
     const tags = filter(searchStore.tags, tag => {
@@ -69,6 +83,8 @@ export default class Results extends Component {
     const {recordStore: {checkedItems}} = this.props
     const divStyle = resultsLoading && searchStore.fromRoute ? 'loading' : ''
     const meta = this.getMeta()
+    const subSubject = this.isHomeResults ? tags[0].Name : ''
+    const saleText = this.isHomeResults ? t('results.saleText', {subSubject}) : ''
 
     //console.log('tags', toJS(tags))
     return (
@@ -76,13 +92,19 @@ export default class Results extends Component {
         <DocumentMeta {...meta} />
         <SearchInput tags={toJS(tags)} />
         <div>
-          <Title store={searchStore} initial={searchStore.initialDate} />
+          <Title
+            store={searchStore}
+            initial={searchStore.initialDate}
+            isHome={this.isHomeResults}
+            preTitle={subSubject}
+          />
           <div className="grid-container">
             <div className="grid-x grid-padding-x">
               <div className="cell large-3">
                 <hr />
                 <Filters />
                 {/*<Banners />*/}
+                {saleText != '' && <div>{saleText}</div>}
               </div>
               <div className="cell large-9">
                 <hr />

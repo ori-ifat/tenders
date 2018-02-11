@@ -13,7 +13,7 @@ import CSSModules from 'react-css-modules'
 import styles from './services.scss'
 
 @translate()
-@CSSModules(styles, {allowMultiple: true})
+@CSSModules(styles)
 @observer
 export default class Services extends Component {
 

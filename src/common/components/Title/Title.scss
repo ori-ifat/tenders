@@ -1,8 +1,7 @@
-//@import '~app/global.scss';
 @import '~common/style/_settings.scss';
 
 .results_summery {
-	margin-top: 4rem;
+	/*margin-top: 4rem;*/
 	font-size: 2.5rem;
 	color: $black;
 	span.num {
@@ -12,4 +11,9 @@
 
 .loading {
 	opacity: 0.15
+}
+
+.pre-title {
+	margin-top: 1rem;
+  color: #44c960;
 }

@@ -17,4 +17,4 @@ const ArticleItem = ({id, title, date, author, image}) => {
   </a>
 }
 
-export default CSSModules(ArticleItem, styles, {allowMultiple: true})
+export default CSSModules(ArticleItem, styles)

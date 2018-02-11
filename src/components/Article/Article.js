@@ -13,7 +13,7 @@ import styles from './article.scss'
 
 @withRouter
 @translate()
-@CSSModules(styles, {allowMultiple: true})
+@CSSModules(styles)
 @observer
 export default class Article extends Component {
 

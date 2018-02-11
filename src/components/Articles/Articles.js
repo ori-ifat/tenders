@@ -12,7 +12,7 @@ import CSSModules from 'react-css-modules'
 import styles from './articles.scss'
 
 @translate()
-@CSSModules(styles, {allowMultiple: true})
+@CSSModules(styles)
 @observer
 export default class Article extends Component {
 

@@ -20,16 +20,18 @@ export default class Title extends React.Component {
   }
 
   render() {
-    const { mode, t, store, accountStore: { profile }, initial } = this.props
+    const { mode, t, store, accountStore: { profile }, initial, isHome, preTitle } = this.props
     const { resultsLoading, resultsCount } = store
     const title = mode == 'favorites' ? t('favorites.title') : t('results.title')
     const caption = mode == 'favorites' ? '' : store.tags.length == 0 ? t('results.lastWeek') : t('results.lastYear')
     const titleStyle = resultsLoading ? 'results_summery loading' : 'results_summery'
-
+    const catLabel = isHome ? preTitle : ''
+    const titleCss = !isHome ? {marginTop: '4rem'} : {}
     return (
       <div className="row">
         <div className="large-12 columns">
-          <h1 styleName={titleStyle}><span styleName="num">{this.count}</span> {title}
+          {catLabel != '' && <h3 styleName="pre-title">{t('results.preTitle', {catLabel})}</h3>}
+          <h1 styleName={titleStyle} style={titleCss}><span styleName="num">{this.count}</span> {title}
             {initial && <span style={{paddingRight: '8px'}}>{caption}</span>}
             {!resultsLoading &&
               store.filters &&

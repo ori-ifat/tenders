@@ -20,4 +20,4 @@ const ServiceItem = ({title, text, image}) => {
   </div>
 }
 
-export default CSSModules(ServiceItem, styles, {allowMultiple: true})
+export default CSSModules(ServiceItem, styles)

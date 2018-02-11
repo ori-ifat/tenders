@@ -13,7 +13,7 @@ const req = require.context('common/style/icons/', false)
 const alertSrc = req('./alert.svg')
 
 @translate()
-@CSSModules(styles, {allowMultiple: true})
+@CSSModules(styles)
 @observer
 export default class ReminderItem extends React.Component {
   static propTypes = {

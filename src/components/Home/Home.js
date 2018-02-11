@@ -22,7 +22,7 @@ import 'common/style/home.css'
 
 @translate()
 @inject('homeStore')
-@CSSModules(styles, {allowMultiple: true})
+@CSSModules(styles)
 @observer
 export default class Home extends Component {
 

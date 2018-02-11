@@ -48,7 +48,7 @@ class Pages extends React.Component {
           <Route path="/search">
             <SearchPage />
           </Route>
-          <Route path="/results/:sort/:tags/:filters">
+          <Route path="/results/:sort/:tags/:filters/:isHome?">
             <ResultsPage />
           </Route>
           <Route path="/tender/:itemId">
