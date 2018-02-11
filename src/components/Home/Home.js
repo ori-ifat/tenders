@@ -5,6 +5,7 @@ import {translate} from 'react-polyglot'
 import SearchInput from 'common/components/SearchInput'
 import CatItem from './Items/CatItem'
 import SubCatItem from './Items/SubCatItem'
+import ContactUs from './ContactUs'
 import Opportunity from './Items/Opportunity'
 import Testemonial from './Items/Testemonial'
 import Tender from './Items/Tender'
@@ -125,7 +126,13 @@ export default class Home extends Component {
             </div>
           </div>
         </section>
-
+        <section style={{marginTop: '5rem'}}>
+          <div className="row collapse">
+            <div className="large-12 columns">
+              <ContactUs />
+            </div>
+          </div>
+        </section>
         <section id="fetuers" styleName="fetuers">
           <div className="row">
             <div className="large-12 columns">

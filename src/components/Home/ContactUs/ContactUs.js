@@ -1,32 +1,24 @@
+
 import React, {Component} from 'react'
-import { bool } from 'prop-types'
 import { inject, observer } from 'mobx-react'
 import { observable } from 'mobx'
 import {translate} from 'react-polyglot'
 import {checkEmail, checkPhone} from 'common/utils/validation'
 import {contactUs} from 'common/services/apiService'
 import CSSModules from 'react-css-modules'
-import styles from './ContactForm.scss'
+import styles from './ContactUs.scss'
 
 @translate()
 @inject('routingStore')
 @observer
-@CSSModules(styles)
+@CSSModules(styles, {allowMultiple: true})
 export default class Contact extends Component {
-
-  static propTypes = {
-    bigMode: bool
-  }
 
   @observable sent = false
   @observable status = ''
   @observable firstName = ''
   @observable email = ''
   @observable phone = ''
-
-  componentWillMount() {
-
-  }
 
   onChange = e => {
     switch (e.target.name) {
@@ -70,7 +62,6 @@ export default class Contact extends Component {
     }
     else {
       //send data
-      //console.log(this.toTime);
       const { routingStore: { push } } = this.props
 
       contactUs(this.firstName, this.email, this.phone).then(res => {
@@ -85,40 +76,40 @@ export default class Contact extends Component {
   }
 
   render() {
-    const {bigMode, t} = this.props
-    const style = bigMode ? {marginTop: '0'} : {}
+    const {t} = this.props
     return (
       <div>
 
-        <div className="sideform bottom" style={style}>
-          <h2 styleName="sf_ttl">{t('contact.smallTitle')}</h2>
-          <p styleName="sub_ttl">{t('contact.smallSubTitle')}</p>
+        <div className="sa_container" styleName="form-container">
+          <h2 styleName="form-title">{t('cat.viewAll')}?</h2>
+          <p className="text-center" styleName="form-subtitle">{t('cat.leaveDetails')}</p>
           {this.status != '' &&
-              <p styleName="sub_ttl" dangerouslySetInnerHTML={{__html: this.status}}></p>
+            <p styleName="sub_ttl" dangerouslySetInnerHTML={{__html: this.status}}></p>
           }
-          <div id="lead" className="">
+          <div className="row">
+            <div className="medium-10 large-8 columns medium-centered">
+              <span className="success label hide">{t('cat.sent')}</span>
+              <div styleName="lead_form" className="clearfix">
+                <div styleName="form_input_hor form_input_container">
+                  <input name="firstName" type="text" onChange={this.onChange} />
+                  <label>{t('cat.name')}:</label>
+                </div>
 
-            {this.sent &&
-              <span styleName="label-success">{t('contact.sent')}</span>
-            }
-            <div styleName="form_input_vert ">
-              <input name="firstName" type="text" placeholder={t('contact.firstName')} onChange={this.onChange} />
+                <div styleName="form_input_hor form_input_container">
+                  <input name="email" type="email" onChange={this.onChange} />
+                  <label>{t('cat.email')} </label>
+                </div>
 
-            </div>
-
-            <div styleName="form_input_vert ">
-              <input name="email" type="email" placeholder={t('contact.email')} onChange={this.onChange} />
-            </div>
-
-            <div styleName="form_input_vert ">
-              <input name="phone" type="tel" placeholder={t('contact.phone')} onChange={this.onChange} />
-            </div>
-
-            <div styleName="form_input_vert">
-              <button name="send" className="button" styleName="send-button" onClick={this.contactUs}>{t('contact.submit')}</button>
+                <div styleName="form_input_hor form_input_container">
+                  <input name="phone" type="tel" onChange={this.onChange} />
+                  <label>{t('cat.phone')}</label>
+                </div>
+                <div styleName="form_input_hor form_input_container submit">
+                  <input type="submit" styleName="submit-button" className="button send-cat-form" value="" onClick={this.contactUs} />
+                </div>
+              </div>
             </div>
           </div>
-
         </div>
 
       </div>

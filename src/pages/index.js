@@ -13,6 +13,7 @@ import PublishPage from 'pages/publish'
 import ContactPage from 'pages/contact'
 import SubscriptionsPage from 'pages/subscriptions'
 import ServicesPage from 'pages/services'
+import ThankYouPage from 'pages/thankyou'
 import ArticlesPage from 'pages/articles'
 import ArticlePage from 'pages/article'
 import SmartAgentPage from 'pages/smartagent'
@@ -87,6 +88,9 @@ class Pages extends React.Component {
             <ServicesPage
               showNotification={this.showNotification}
             />
+          </Route>
+          <Route path="/thankyou">
+            <ThankYouPage />
           </Route>
           <Route path="/articles">
             <ArticlesPage />

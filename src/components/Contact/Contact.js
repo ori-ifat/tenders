@@ -75,13 +75,14 @@ export default class Contact extends Component {
     else {
       //send data
       //console.log(this.toTime);
-      //const { routingStore: { push } } = this.props
+      const { routingStore: { push } } = this.props
       contactUs(this.firstName, this.email, this.phone).then(res => {
         //show a message
         this.sent = true
         this.status = t('contact.success')
         //console.log(res, this.sent, this.status)
         //push('/')   //redirect to home
+        push('/thankyou') //means that local message wil not be displayed...
       })
     }
   }

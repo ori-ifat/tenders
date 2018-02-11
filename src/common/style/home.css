@@ -22,8 +22,10 @@
 }
 
 .send-cat-form {
-  background-color: #FED810;
-  background-image: url(icons/arow_left_dark.svg);
+  background-color: #FED810 !important;
+  background-image: url(icons/arow_left_dark.svg) !important;
+	background-position: center center !important;
+	background-repeat: no-repeat !important;
 }
 
 .sideform {
