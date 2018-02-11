@@ -16,6 +16,7 @@ import ServicesPage from 'pages/services'
 import ThankYouPage from 'pages/thankyou'
 import ArticlesPage from 'pages/articles'
 import ArticlePage from 'pages/article'
+import CategoryPage from 'pages/category'
 import SmartAgentPage from 'pages/smartagent'
 import NotFound404 from 'pages/notFound404'
 
@@ -97,6 +98,9 @@ class Pages extends React.Component {
           </Route>
           <Route path="/article/:id">
             <ArticlePage />
+          </Route>
+          <Route path="/category/:id/:name">
+            <CategoryPage />
           </Route>
           <Route>
             <NotFound404 />

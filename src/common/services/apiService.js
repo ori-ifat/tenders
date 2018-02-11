@@ -367,3 +367,13 @@ export function getHomeJSON(folderName, fileName) {
   const url = createUrl(`HomeData/${folderName}/${fileName}.json`, {}, false)
   return fetchData(url)
 }
+
+export function getFooterPublishers() {
+  return apiFetch('FrontPage/GetMainPublishers')
+}
+
+export function getSampleTenders2(id) {
+  return apiFetch('FrontPage/GetSampleTendersByMainPub', {searchParams: {
+    LinkID: id
+  }})
+}

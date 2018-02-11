@@ -2,6 +2,8 @@ import React, {Component} from 'react'
 import {inject /*,observer*/} from 'mobx-react'
 import {translate} from 'react-polyglot'
 //import SearchInput from 'common/components/SearchInput'
+import DocumentMeta from 'react-document-meta'
+import {getMetaData} from 'common/utils/meta'
 import CSSModules from 'react-css-modules'
 import styles from './thankYou.scss'
 
@@ -18,8 +20,10 @@ export default class ThankYou extends Component {
 
   render() {
     const {t} = this.props
+    const meta = getMetaData(t('meta.homeTitle'), t('meta.homeDesc'), t('meta.homeKeywords'))
     return (
       <div>
+        <DocumentMeta {...meta} />
         {/*<div className="row">
           <div className="column large-9 large-centered" style={{marginTop: '3rem'}}>
             <SearchInput />
