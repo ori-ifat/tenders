@@ -12,47 +12,47 @@ export default class Footer extends React.Component {
     return  <footer styleName="footer">
       <div className="row">
         <div className="medium-3 small-12  columns">
-          <p styleName="link_ttl">ראשי</p>
+          <p styleName="link_ttl">{t('footer.linkTitle')}</p>
           <ul className="no-bullet">
-            <li><a href="">אודות</a></li>
-            <li><a href="">מסלולים</a></li>
-            <li><a href="">מוצרים ושירותים</a></li>
-            <li><a href="">כניסה למנויים</a></li>
-            <li><a href="">צור קשר</a></li>
+            <li><a href="">{t('footer.about')}</a></li>
+            <li><a href="">{t('footer.subscriptions')}</a></li>
+            <li><a href="">{t('footer.services')}</a></li>
+            <li><a href="">{t('footer.login')}</a></li>
+            <li><a href="">{t('footer.contact')}</a></li>
           </ul>
         </div>
 
         <div className="medium-3 small-12  columns">
-          <p styleName="link_ttl">מכרזים לפי גופים</p>
+          <p styleName="link_ttl">{t('footer.bodies')}</p>
           <ul className="no-bullet">
-            <li><a href="">מכרזי ממשלה</a></li>
-            <li><a href="">מכרזי משרד הביטחון</a></li>
-            <li><a href="">מכרזי מנהל מקרקעי ישראל</a></li>
-            <li><a href="">מכרזי משרד החינוך</a></li>
-            <li><a href="">מכרזי משטרה</a></li>
+            <li><a href="">{t('footer.gov')}</a></li>
+            <li><a href="">{t('footer.defence')}</a></li>
+            <li><a href="">{t('footer.minhal')}</a></li>
+            <li><a href="">{t('footer.education')}</a></li>
+            <li><a href="">{t('footer.police')}</a></li>
           </ul>
         </div>
 
         <div className="medium-3 small-12  columns">
           <p styleName="link_ttl">&nbsp;</p>
           <ul className="no-bullet">
-            <li><a href="">מכרזי חברת החשמל</a></li>
-            <li><a href="">מכרזי שירות המדינה</a></li>
-            <li><a href="">מכרזי משרד הבריאות</a></li>
-            <li><a href="">מכרזי משרד הרווחה</a></li>
-            <li><a href="">מכרזי משרד השיכון והבינוי</a></li>
+            <li><a href="">{t('footer.electricity')}</a></li>
+            <li><a href="">{t('footer.country')}</a></li>
+            <li><a href="">{t('footer.health')}</a></li>
+            <li><a href="">{t('footer.welfare')}</a></li>
+            <li><a href="">{t('footer.binuy')}</a></li>
           </ul>
         </div>
 
         <div className="medium-3 small-12  columns">
-          <p styleName="link_ttl">מכרזים לפי קטגוריות</p>
+          <p styleName="link_ttl">{t('footer.categories')}</p>
           <ul className="no-bullet">
-            <li><a href="">מכרזי בניה</a></li>
-            <li><a href="">מכרזי מקרקעין</a></li>
-            <li><a href="">מכרזי נכסים</a></li>
-            <li><a href="">מכרזי עבודות חשמל</a></li>
-            <li><a href="">מכרזי הסעות</a></li>
-            <li><a href="">מכרזי רכב</a></li>
+            <li><a href="">{t('footer.building')}</a></li>
+            <li><a href="">{t('footer.land')}</a></li>
+            <li><a href="">{t('footer.assets')}</a></li>
+            <li><a href="">{t('footer.electricity2')}</a></li>
+            <li><a href="">{t('footer.drive')}</a></li>
+            <li><a href="">{t('footer.drive2')}</a></li>
           </ul>
         </div>
       </div>
