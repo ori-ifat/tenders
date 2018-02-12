@@ -4,7 +4,7 @@ import {observable} from 'mobx'
 import {translate} from 'react-polyglot'
 import {getHomeJSON} from 'common/services/apiService'
 import Footer from 'common/components/Footer'
-import ContactForm from 'components/Articles/ContactForm'
+import SmallContactForm from 'common/components/SmallContactForm'
 import DocumentMeta from 'react-document-meta'
 import {getMetaData} from 'common/utils/meta'
 import CSSModules from 'react-css-modules'
@@ -52,7 +52,7 @@ export default class Radar extends Component {
             </div>
 
             <div className="large-4 columns">
-              <ContactForm />
+              <SmallContactForm />
             </div>
 
           </div>

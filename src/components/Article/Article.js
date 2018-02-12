@@ -4,7 +4,7 @@ import {observer} from 'mobx-react'
 import {observable} from 'mobx'
 import {translate} from 'react-polyglot'
 import {getHomeJSON} from 'common/services/apiService'
-import ContactForm from 'components/Articles/ContactForm'
+import SmallContactForm from 'common/components/SmallContactForm'
 import Footer from 'common/components/Footer'
 import DocumentMeta from 'react-document-meta'
 import {getMetaData} from 'common/utils/meta'
@@ -57,7 +57,7 @@ export default class Article extends Component {
               </div>
             </div>
             <div className="large-4 columns">
-              <ContactForm
+              <SmallContactForm
                 bigMode={true}
               />
             </div>

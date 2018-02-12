@@ -6,13 +6,13 @@ import {translate} from 'react-polyglot'
 import {checkEmail, checkPhone} from 'common/utils/validation'
 import {contactUs} from 'common/services/apiService'
 import CSSModules from 'react-css-modules'
-import styles from './ContactForm.scss'
+import styles from './SmallContactForm.scss'
 
 @translate()
 @inject('routingStore')
 @observer
 @CSSModules(styles)
-export default class Contact extends Component {
+export default class SmallContactForm extends Component {
 
   static propTypes = {
     bigMode: bool

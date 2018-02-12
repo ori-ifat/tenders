@@ -4,7 +4,7 @@ import {observable} from 'mobx'
 import {translate} from 'react-polyglot'
 import {getHomeJSON} from 'common/services/apiService'
 import ArticleItem from './ArticleItem'
-import ContactForm from './ContactForm'
+import SmallContactForm from 'common/components/SmallContactForm'
 import Footer from 'common/components/Footer'
 import DocumentMeta from 'react-document-meta'
 import {getMetaData} from 'common/utils/meta'
@@ -58,7 +58,7 @@ export default class Article extends Component {
             </div>
 
             <div className="large-4 columns">
-              <ContactForm />
+              <SmallContactForm />
             </div>
 
           </div>
