@@ -69,7 +69,7 @@ export default class SmartAgent extends Component {
       FrequencyName: val[1],
       FrequencySelected: 1
     })
-    console.log(toJS(this.frequencies))
+    //console.log(toJS(this.frequencies))
   }
 
   onCheck = e => {
@@ -126,7 +126,7 @@ export default class SmartAgent extends Component {
         Cellulars: toJS(this.phone) || '',
         Emails: toJS(this.email) || ''
       }
-      console.log(data)
+      //console.log(data)
       smartAgentStore.updateSettings(data)
         .then(res => {
           //show a message
@@ -172,7 +172,7 @@ export default class SmartAgent extends Component {
       Cellulars: toJS(this.phone) || '',
       Emails: toJS(this.email) || ''
     }
-    console.log(data)
+    //console.log(data)
     smartAgentStore.checkEstimation(data) /*
       .then(res => {
         //show a message
@@ -209,11 +209,6 @@ export default class SmartAgent extends Component {
           <div className="column large-12">
             {profile ?
               <div styleName="wrapper">
-                {this.status != '' &&
-                <div className="callout alert" styleName={style}>
-                  <p styleName={style} dangerouslySetInnerHTML={{__html: this.status}}></p>
-                </div>
-                }
                 {!resultsLoading &&
                 <div>
                   <div className="grid-x">
@@ -341,6 +336,11 @@ export default class SmartAgent extends Component {
                   }
                   {ifatUser.ifat &&
                     <div styleName="btn_container">
+                      {this.status != '' &&
+                        <div className="callout alert" styleName={style}>
+                          <p styleName={style} dangerouslySetInnerHTML={{__html: this.status}}></p>
+                        </div>
+                      }
                       <button className="left" styleName="button-submit" onClick={this.onSave}>{t('agent.submit')}</button>
                     </div>
                   }

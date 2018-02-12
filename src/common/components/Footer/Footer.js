@@ -24,6 +24,9 @@ const navbar = [{
 }, {
   title: 'contact',
   link: '/contact'
+}, {
+  title: 'sitemap',
+  link: '/sitemap'
 }]
 
 @translate()

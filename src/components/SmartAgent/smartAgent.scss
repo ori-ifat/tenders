@@ -61,9 +61,15 @@
   font-size: 1rem;
   font-weight: 400;
   color: #e02113;
-  padding-bottom: 0.5rem;
+  /*padding-bottom: 0.5rem;*/
   line-height: 1.2;
   display: block;
+  width: 48%;
+  float: right;
+  padding: 0.3rem !important;
+  margin: 0 !important;
+  direction: rtl;
+  text-align: right;
 }
 
 .sent {

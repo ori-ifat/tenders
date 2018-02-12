@@ -65,6 +65,8 @@ export default class Calendar extends React.Component {
           todayButton={this.props.todayLabel}
           showMonthDropdown={showMonths}
           showYearDropdown={showYears}
+          minDate={moment().subtract(10, 'year')}
+          maxDate={moment().add(1, 'year')}
         />
       </div>
     )

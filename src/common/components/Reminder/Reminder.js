@@ -116,7 +116,7 @@ export default class Reminder extends Component {
   addReminder = () => {
     //take from DD-MM-YYYY HH:mm format
     const selectedDate = moment(`${this.reminderDate} ${this.time}`, 'DD-MM-YYYY HH:mm').format('YYYY-MM-DD HH:mm:ss')
-    console.log(this.reminderDate, selectedDate)
+    //console.log(this.reminderDate, selectedDate)
     const action = this.reminderID > 0 ? 'Update' : 'Add'
     setReminder(action, this.reminderID, this.tenderID, this.remark, this.subject, this.email, selectedDate).then(newid => {
       console.log('saved new reminderID:', newid) //implement if user should know something about save op

@@ -19,6 +19,7 @@ import ArticlePage from 'pages/article'
 import CategoryPage from 'pages/category'
 import SmartAgentPage from 'pages/smartagent'
 import RadarPage from 'pages/radar'
+import SiteMapPage from 'pages/sitemap'
 import NotFound404 from 'pages/notFound404'
 
 class Pages extends React.Component {
@@ -28,7 +29,7 @@ class Pages extends React.Component {
 
   showNotification = (notify) => {
     this.setState({notify})
-    console.log('notify', notify)
+    //console.log('notify', notify)
   }
 
   render() {
@@ -105,6 +106,9 @@ class Pages extends React.Component {
           </Route>
           <Route path="/radar">
             <RadarPage />
+          </Route>
+          <Route path="/sitemap">
+            <SiteMapPage />
           </Route>
           <Route>
             <NotFound404 />

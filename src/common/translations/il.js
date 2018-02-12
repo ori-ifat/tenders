@@ -335,6 +335,7 @@ export default {
     electricity: 'מכרזי עבודות חשמל',
     transport: 'מכרזי הסעות',
     cars: 'מכרזי רכב',
+    sitemap: 'מפת אתר',
     tenders: 'מכרזי'
   }
 }

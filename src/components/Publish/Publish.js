@@ -156,11 +156,6 @@ export default class Publish extends Component {
         <div className="row">
           <div className="column large-8">
             <div styleName="wraper">
-              {!this.sent && this.status != '' &&
-              <div className="callout alert" styleName={style}>
-                <p styleName={style} dangerouslySetInnerHTML={{__html: this.status}}></p>
-              </div>
-              }
               {this.sent ?
                 <div styleName={style}>
                   <b>{t('publish.sentSuccessfully')}</b><br />
@@ -242,6 +237,11 @@ export default class Publish extends Component {
                     </div>
                   </div>
                   <div styleName="btn_container">
+                    {!this.sent && this.status != '' &&
+                    <div className="callout alert" styleName={style}>
+                      <p styleName={style} dangerouslySetInnerHTML={{__html: this.status}}></p>
+                    </div>
+                    }
                     <button className="left" styleName="button-submit" onClick={this.publishTender}>{t('publish.submit')}</button>
                   </div>
                 </div>
