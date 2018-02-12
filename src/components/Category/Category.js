@@ -3,7 +3,7 @@ import { withRouter } from 'react-router'
 import {observer} from 'mobx-react'
 import {observable} from 'mobx'
 import {translate} from 'react-polyglot'
-import {getHomeJSON, getSampleTenders2} from 'common/services/apiService'
+import {getHomeJSON, getSampleTenders2, getSampleTendersBySub} from 'common/services/apiService'
 import ContactUs from '../Home/ContactUs'
 import Footer from 'common/components/Footer'
 import DocumentMeta from 'react-document-meta'
@@ -21,20 +21,27 @@ export default class Category extends Component {
   @observable tenders = []
 
   componentWillMount() {
-    const { match: {params: { id, name }} } = this.props
+    const { match: {params: { id, name, mode }} } = this.props
     getHomeJSON('Categories', name).then(res => {
       this.data = res
     })
-    getSampleTenders2(id).then(res => {
-      this.tenders = res
-    })
+    if(mode && mode == 'cat') {
+      getSampleTendersBySub(id).then(res => {
+        this.tenders = res
+      })
+    }
+    else {
+      getSampleTenders2(id).then(res => {
+        this.tenders = res
+      })
+    }
   }
 
 
   render() {
     const {t} = this.props
     const {data} = this
-    const short = data ? data.title.replace(/t('footer.tenders')\s/g, '') : ''
+    const short = data ? data.title.replace(/`${t('footer.tenders')}`\s/g, '') : ''
     const meta = getMetaData(t('meta.homeTitle'), t('meta.homeDesc'), t('meta.homeKeywords'))
 
     return (

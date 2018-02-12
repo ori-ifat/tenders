@@ -49,11 +49,11 @@ export default class Footer extends React.Component {
       this.showLoginDialog = true
     }
   }
-
+  /*
   navigate2 = (id, shortName) => {
     const url = `Category/${id}/${shortName}`
     this.goTo(url)
-  }
+  }*/
 
   goTo = (route) => {
     const { routingStore: { push } } = this.props
@@ -84,7 +84,7 @@ export default class Footer extends React.Component {
           <ul className="no-bullet">
             {
               this.publishers && this.publishers.length > 0 && take(this.publishers, 5).map((publisher, index) =>
-                <li key={index}><a onClick={() => this.navigate2(publisher.id, publisher.shortName)}>{publisher.name}</a></li>
+                <li key={index}><a target="_blank" href={`#/Category/${publisher.id}/${publisher.shortName}`}>{publisher.name}</a></li>
               )
             }
           </ul>
@@ -95,7 +95,7 @@ export default class Footer extends React.Component {
           <ul className="no-bullet">
             {
               this.publishers && this.publishers.length > 0 && takeRight(this.publishers, 5).map((publisher, index) =>
-                <li key={index}><a onClick={() => this.navigate2(publisher.id, publisher.shortName)}>{publisher.name}</a></li>
+                <li key={index}><a target="_blank" href={`#/Category/${publisher.id}/${publisher.shortName}`}>{publisher.name}</a></li>
               )
             }
           </ul>
@@ -104,12 +104,12 @@ export default class Footer extends React.Component {
         <div className="medium-3 small-12  columns">
           <p styleName="link_ttl">{t('footer.categories')}</p>
           <ul className="no-bullet">
-            <li><a href="">{t('footer.building')}</a></li>
-            <li><a href="">{t('footer.land')}</a></li>
-            <li><a href="">{t('footer.assets')}</a></li>
-            <li><a href="">{t('footer.electricity')}</a></li>
-            <li><a href="">{t('footer.drive')}</a></li>
-            <li><a href="">{t('footer.drive2')}</a></li>
+            <li><a target="_blank" href="#/Category/2/building/cat">{t('footer.building')}</a></li>
+            <li><a target="_blank" href="#/Category/5/land/cat">{t('footer.land')}</a></li>
+            <li><a target="_blank" href="#/Category/14/assets/cat">{t('footer.assets')}</a></li>
+            <li><a target="_blank" href="#/Category/40/electricity/cat">{t('footer.electricity')}</a></li>
+            <li><a target="_blank" href="#/Category/26/transport/cat">{t('footer.transport')}</a></li>
+            <li><a target="_blank" href="#/Category/24/cars/cat">{t('footer.cars')}</a></li>
           </ul>
         </div>
       </div>

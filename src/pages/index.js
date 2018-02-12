@@ -99,7 +99,7 @@ class Pages extends React.Component {
           <Route path="/article/:id">
             <ArticlePage />
           </Route>
-          <Route path="/category/:id/:name">
+          <Route path="/category/:id/:name/:mode?">
             <CategoryPage />
           </Route>
           <Route>

@@ -282,12 +282,11 @@ export function getSampleTenders() {
   return apiFetch('FrontPage/GetSampleTenders')
 }
 
-/* //not in use
 export function getSampleTendersBySub(subSubjectID) {
   return apiFetch('FrontPage/GetSampleTendersBySub', {searchParams: {
     SubsubjectID: subSubjectID
   }})
-}*/
+}
 
 export function getAgentSettings() {
   return apiFetch('Agent/GetAgentSettings')

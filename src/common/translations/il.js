@@ -328,8 +328,8 @@ export default {
     land: 'מכרזי מקרקעין',
     assets: 'מכרזי נכסים',
     electricity: 'מכרזי עבודות חשמל',
-    drive: 'מכרזי הסעות',
-    drive2: 'מכרזי רכב',
+    transport: 'מכרזי הסעות',
+    cars: 'מכרזי רכב',
     tenders: 'מכרזי'
   }
 }
