@@ -1,0 +1,31 @@
+.title {
+	font-family: 'Rubik', sans-serif;
+	font-size: 2.6rem;
+	font-weight: 700;
+	color: #44C960;
+	/*text-shadow: 0 2px 3px rgba(0,0,0,0.2);*/
+	margin-top: 3rem;
+  line-height: 1.1;
+}
+
+.subtitle {
+	font-family: 'Rubik', sans-serif;
+	font-size: 2rem;
+	font-weight: normal;
+	color: #444945;
+	/*text-shadow: 0 2px 3px rgba(0,0,0,0.2);*/
+	margin-top: 0;
+  line-height: 1.1;
+}
+
+.post_wrapper {
+	margin-bottom: 6rem;
+}
+
+.divider {
+	height: 0.25rem;
+	background-color: #red;
+	border-bottom: 4px solid #EAEAEA;
+	margin-top: 0;
+	margin-bottom: 20px;
+}
