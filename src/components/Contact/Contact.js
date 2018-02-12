@@ -108,7 +108,7 @@ export default class Contact extends Component {
         </div>
 
         <div className="row">
-          <div className="column large-8">
+          <div className="column large-8 small-12">
             <div styleName="wrapper">
               {!this.sent && this.status != '' &&
               <div className="callout alert" styleName={style}>
@@ -147,7 +147,7 @@ export default class Contact extends Component {
               }
             </div>
           </div>
-          <div className="medium-4 columns">
+          <div className="medium-4 small-12 columns">
             <div styleName="contact_info">
 
               <div styleName="ci" className="media-object">

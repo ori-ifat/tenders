@@ -17,6 +17,15 @@
   line-height: 1.1;
 }
 
+@media screen and (max-width: 39.9375em) {
+  .wrapper{
+    padding: 2rem 1rem 2rem 1rem !important;
+  }
+  .contact_info {
+    margin-top: 0rem !important;
+  }
+}
+
 .btn_container {
   text-align: left;
 }

@@ -3,7 +3,7 @@ import CSSModules from 'react-css-modules'
 import styles from './services.scss'
 
 const ServiceItem = ({title, text, image}) => {
-  return <div className="medium-6 columns">
+  return <div className="medium-6 small-12 columns">
     <div styleName="service_container">
       <div className="media-object">
         <div className="media-object-section">
