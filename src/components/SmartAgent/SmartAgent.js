@@ -25,6 +25,7 @@ export default class SmartAgent extends Component {
 
   @observable sent = false
   @observable status = ''
+  @observable definitionError = false
   @observable email = ''
   @observable phone = ''
   @observable frequencies = []
@@ -103,11 +104,13 @@ export default class SmartAgent extends Component {
     const {smartAgentStore, t} = this.props
     this.sent = false
     this.status = ''
+    this.definitionError = false
     let errors = ''
+    /*  //allow save without mail or phone
     if (this.email == '' && this.phone == '') {
       errors += `${t('agent.enterEmailOrPhone')}; `
-    }
-    else if (!checkEmail(this.email, true)) {
+    }*/
+    if (!checkEmail(this.email, true)) {
       errors += `${t('agent.emailNotValid')}; `
     }
     else if (!checkPhone(this.phone, true)) {
@@ -155,6 +158,10 @@ export default class SmartAgent extends Component {
 
   onError = (isDuplicate) => {
     const {t} = this.props
+    //init:
+    this.sent = false
+    this.status = ''
+    this.definitionError = true
     if (!isDuplicate) {
       this.status = t('agent.cannotSaveDefinition')
     }
@@ -285,6 +292,11 @@ export default class SmartAgent extends Component {
                         onSave={this.onQuerySave}
                         onDelete={this.onDelete}
                       />
+                      {this.status != '' && this.definitionError &&
+                        <div className="callout alert" styleName={style} style={{width: '100%'}}>
+                          <p styleName={style} dangerouslySetInnerHTML={{__html: this.status}}></p>
+                        </div>
+                      }
                     </div>
                   </div>
 
