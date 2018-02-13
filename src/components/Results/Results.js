@@ -104,7 +104,7 @@ export default class Results extends Component {
                 <hr />
                 <Filters />
                 {/*<Banners />*/}
-                {saleText != '' && <div>{saleText}</div>}
+                {saleText != '' && <div styleName="promotext">{saleText}</div>}
               </div>
               <div className="cell large-9">
                 <hr />

@@ -94,13 +94,18 @@ ul.tender_actions {
   color: crimson;
 }
 
-.radar {
-  margin: 1px;
-  background-color: #44C960;
-  text-align: center;
-  padding: 6px;
-}
+
 
 .radar-link {
-  color: white;
+display: block !important;
+font-family: 'Rubik', sans-serif !important;
+font-weight: 500 !important;
+font-size: 15px !important;
+letter-spacing: -0.02rem;
+border-radius: 3px;
+line-height: 1.2 !important;
+padding: 0.5rem 2rem !important
+  &:hover {
+        color:white;
+    }
 }

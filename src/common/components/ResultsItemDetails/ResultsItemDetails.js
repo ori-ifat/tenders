@@ -258,8 +258,8 @@ export default class ResultsItemDetails extends React.Component {
                       {this.IsFavorite ? t('tender.removeFromFav') : t('tender.addToFav')}</a></li>
 
                   </ul>
-                  <div styleName="radar">
-                    <a styleName="radar-link" href='#/radar' target="_blank">{t('tender.radar')}</a>
+                  <div >
+                    <a styleName="radar-link" className="button" href='#/radar' target="_blank">{t('tender.radar')}</a>
                   </div>
                 </div>
               </div>
