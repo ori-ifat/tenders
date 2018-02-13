@@ -8,7 +8,7 @@ import SubCatItem from './Items/SubCatItem'
 import ContactUs from 'common/components/ContactUs'
 import Opportunity from './Items/Opportunity'
 import Testemonial from './Items/Testemonial'
-import Tender from './Items/Tender'
+import TenderItem from 'common/components/TenderItem/TenderItem'
 import Article from './Items/Article'
 import Footer from 'common/components/Footer'
 import Loading from 'common/components/Loading/Loading'
@@ -189,7 +189,7 @@ export default class Home extends Component {
             <div className="large-12 columns">
               {
                 homeStore.sampleTenders.map(tender =>
-                  <Tender
+                  <TenderItem
                     key={tender.infoId}
                     date={moment(tender.releaseDate).format('DD/MM/YYYY')}
                     title={tender.title}

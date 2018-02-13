@@ -13,7 +13,6 @@ import styles from './radar.scss'
 const req = require.context('common/style/icons/', false)
 const vIcon = req('./vIcon.svg')
 
-
 @translate()
 @CSSModules(styles)
 @observer
@@ -38,12 +37,8 @@ export default class Radar extends Component {
         <section id="articles">
           <div className="row">
             <div className="large-8 small-12 columns">
-
-                <h1 styleName="title">{t('radar.title')}</h1>
-                <h2 styleName="subtitle">{t('radar.subTitle')}</h2>
-
-
-
+              <h1 styleName="title">{t('radar.title')}</h1>
+              <h2 styleName="subtitle">{t('radar.subTitle')}</h2>
               {data &&
               <div styleName="content">
                 <div styleName="item"><img src={vIcon}/> <p dangerouslySetInnerHTML={{__html: data.line1}}></p></div>
@@ -54,15 +49,12 @@ export default class Radar extends Component {
               </div>
               }
             </div>
-
             <div className="large-4 small-12 columns">
               <SmallContactForm />
             </div>
-
           </div>
         </section>
         <Footer />
-
       </div>
     )
   }
