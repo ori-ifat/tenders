@@ -26,6 +26,7 @@ export default class Contact extends Component {
   @observable firstName = ''
   @observable email = ''
   @observable phone = ''
+  @observable comment = ''
 
   componentWillMount() {
     const {showNotification} = this.props
@@ -42,6 +43,9 @@ export default class Contact extends Component {
       break
     case 'phone':
       this.phone = e.target.value
+      break
+    case 'comment':
+      this.comment = e.target.value
       break
     }
   }
@@ -76,7 +80,7 @@ export default class Contact extends Component {
       //send data
       //console.log(this.toTime);
       const { routingStore: { push } } = this.props
-      contactUs(this.firstName, this.email, this.phone).then(res => {
+      contactUs(this.firstName, this.email, this.phone, this.comment).then(res => {
         //show a message
         this.sent = true
         this.status = t('contact.success')
@@ -138,6 +142,11 @@ export default class Contact extends Component {
                   <div styleName="pr" >
                     <span>{t('contact.phone')}:</span>
                     <input type="tel" name="phone" styleName="input-value" onChange={this.onChange} />
+                  </div>
+
+                  <div styleName="pr" >
+                    <span>{t('contact.why')}:</span>
+                    <textarea name="comment" styleName="input-value" onChange={this.onChange} />
                   </div>
 
                   <div styleName="btn_container">

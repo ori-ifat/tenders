@@ -183,6 +183,7 @@ export default {
     firstName: 'שם',
     email: 'אימייל',
     phone: 'טלפון',
+    why: 'מהות הפניה',
     submit: 'שלח',
     service: 'שירות לקוחות',
     techsupport: 'תמיכה טכנית',

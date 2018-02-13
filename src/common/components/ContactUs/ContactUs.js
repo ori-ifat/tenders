@@ -91,18 +91,18 @@ export default class Contact extends Component {
               <span className="success label hide">{t('cat.sent')}</span>
               <div styleName="lead_form" className="clearfix">
                 <div styleName="form_input_hor form_input_container">
-                  <input name="firstName" type="text" onChange={this.onChange} />
-                  <label>{t('cat.name')}:</label>
+                  <input name="firstName" type="text" onChange={this.onChange} placeholder={t('cat.name')} />
+                  {/*<label>{t('cat.name')}:</label>*/}
                 </div>
 
                 <div styleName="form_input_hor form_input_container">
-                  <input name="email" type="email" onChange={this.onChange} />
-                  <label>{t('cat.email')} </label>
+                  <input name="email" type="email" onChange={this.onChange} placeholder={t('cat.email')} />
+                  {/*<label>{t('cat.email')} </label>*/}
                 </div>
 
                 <div styleName="form_input_hor form_input_container">
-                  <input name="phone" type="tel" onChange={this.onChange} />
-                  <label>{t('cat.phone')}</label>
+                  <input name="phone" type="tel" onChange={this.onChange} placeholder={t('cat.phone')} />
+                  {/*<label>{t('cat.phone')}</label>*/}
                 </div>
                 <div styleName="form_input_hor form_input_container submit">
                   <input type="submit" styleName="submit-button" className="button send-cat-form" value="" onClick={this.contactUs} />

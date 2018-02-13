@@ -261,11 +261,12 @@ export function publishTender(firstName, lastName, companyName, companyPhone,
   }})
 }
 
-export function contactUs(name, email, phone) {
+export function contactUs(name, email, phone, text = '') {
   return apiFetch('Email/Register', {searchParams: {
     Name: name,
     Email: email,
-    Phone: phone
+    Phone: phone,
+    Text: text
   }})
   //return Promise.resolve('test')
 }
