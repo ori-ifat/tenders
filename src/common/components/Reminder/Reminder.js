@@ -196,6 +196,8 @@ export default class Reminder extends Component {
                   selectDate={this.selectDate}
                   showMonths={false}
                   showYears={false}
+                  minDate={moment()}
+                  maxDate={moment().add(1, 'year')}
                 />
                 <span styleName="note">{t('reminder.delivery', {infoDateVal})}</span>
               </div>

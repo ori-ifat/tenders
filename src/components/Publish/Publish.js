@@ -206,6 +206,8 @@ export default class Publish extends Component {
                           selectDate={this.selectDate}
                           showMonths={true}
                           showYears={true}
+                          minDate={moment()}
+                          maxDate={moment().add(1, 'year')}
                         />
                       </div>
                     </div>

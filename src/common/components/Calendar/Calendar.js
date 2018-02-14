@@ -16,6 +16,8 @@ export default class Calendar extends React.Component {
   static propTypes = {
     name: string,
     defaultDate: object,
+    minDate: object,
+    maxDate: object,
     todayLabel: string,
     selectDate: func,
     showMonths: bool,
@@ -53,7 +55,7 @@ export default class Calendar extends React.Component {
 
   render() {
     //console.log('render calendar', this.selectedDate)
-    const {showMonths, showYears} = this.props
+    const {showMonths, showYears, minDate, maxDate} = this.props
     return (
       <div styleName="datepicker-container">
         <DatePicker
@@ -65,8 +67,8 @@ export default class Calendar extends React.Component {
           todayButton={this.props.todayLabel}
           showMonthDropdown={showMonths}
           showYearDropdown={showYears}
-          minDate={moment().subtract(10, 'year')}
-          maxDate={moment().add(1, 'year')}
+          minDate={minDate}
+          maxDate={maxDate}
         />
       </div>
     )

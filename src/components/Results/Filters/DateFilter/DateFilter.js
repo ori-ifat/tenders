@@ -108,6 +108,8 @@ export default class DateFilter extends React.Component {
                 selectDate={this.selectDate}
                 showMonths={true}
                 showYears={true}
+                minDate={moment().subtract(10, 'year')}
+                maxDate={moment().add(1, 'year')}
               />
             </div>
           </div>
@@ -123,6 +125,8 @@ export default class DateFilter extends React.Component {
                 selectDate={this.selectDate}
                 showMonths={true}
                 showYears={true}
+                minDate={moment().subtract(10, 'year')}
+                maxDate={moment().add(1, 'year')}
               />
             </div>
           </div>

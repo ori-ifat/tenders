@@ -5,6 +5,7 @@ import {translate} from 'react-polyglot'
 import moment from 'moment'
 import remove from 'lodash/remove'
 import find from 'lodash/find'
+import sortBy from 'lodash/sortBy'
 import SearchInput from 'common/components/SearchInput'
 import {checkEmail, checkPhone} from 'common/utils/validation'
 import {publishTender, clearCache} from 'common/services/apiService'
@@ -97,6 +98,9 @@ export default class SmartAgent extends Component {
   onQuerySave = (query, newQuery) => {
     if (query) this.onDelete(query)
     this.queries.push(newQuery)
+    this.queries = sortBy(this.queries, query => {
+      return query.SubsubjectID
+    })
     //console.log(toJS(this.queries))
   }
 
@@ -143,14 +147,14 @@ export default class SmartAgent extends Component {
 
   onDelete = (query) => {
     const found = find(this.queries, current => {
-      return current.SubsubjectID == query.SubsubjectID &&
-        current.SearchWords == query.SearchWords
+      return current.SubsubjectID == query.SubsubjectID
+      //&& current.SearchWords == query.SearchWords
     })
 
     if (found) {
       remove(this.queries, current => {
-        return current.SubsubjectID == query.SubsubjectID &&
-          current.SearchWords == query.SearchWords
+        return current.SubsubjectID == query.SubsubjectID
+        //&& current.SearchWords == query.SearchWords
       })
     }
     //console.log(toJS(this.queries))
@@ -274,7 +278,7 @@ export default class SmartAgent extends Component {
                         </div>
                       </div>
 
-                      {results.Queries.map((query, index) =>
+                      {this.queries.map((query, index) =>
                         <Definition
                           key={index}
                           query={query}

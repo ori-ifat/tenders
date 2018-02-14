@@ -199,7 +199,7 @@ export default class ResultsItemDetails extends React.Component {
               <div className="grid-x" styleName="tender_data">
                 <div className="large-9 cell">
                   <Row label={t('tender.publisher')} data={item.Publisher} />
-                  <Row label={t('tender.delivery')} data={infoDate} dir="ltr" />
+                  {item.InfoDate && <Row label={t('tender.delivery')} data={infoDate} dir="ltr" />}
                   <Row label={t('tender.details')} html={this.formatText(item.Summery)} />
                   {
                     item.Comment && item.Comment.trim() != '' &&
