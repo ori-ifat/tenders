@@ -1,5 +1,5 @@
 import React, {Component, PropTypes} from 'react'
-import {inject, observer} from 'mobx-react'
+import {/*inject,*/ observer} from 'mobx-react'
 import {observable} from 'mobx'
 import {translate} from 'react-polyglot'
 import LoginDialog from 'common/components/LoginDialog'
@@ -30,7 +30,7 @@ const navbar = [{
 }]
 
 @translate()
-@inject('routingStore')
+//@inject('routingStore')
 @CSSModules(styles)
 @observer
 export default class Footer extends React.Component {
@@ -43,7 +43,7 @@ export default class Footer extends React.Component {
       this.publishers = res
     )
   }
-
+  /*
   navigate = (title, route) => {
     if (title != 'login') {
       this.goTo(route)
@@ -52,15 +52,19 @@ export default class Footer extends React.Component {
       this.showLoginDialog = true
     }
   }
-  /*
+
   navigate2 = (id, shortName) => {
     const url = `Category/${id}/${shortName}`
     this.goTo(url)
-  }*/
+  }
 
   goTo = (route) => {
     const { routingStore: { push } } = this.props
     push(route)
+  }*/
+
+  login = () => {
+    this.showLoginDialog = true
   }
 
   continueUnlogged = () => {
@@ -76,7 +80,13 @@ export default class Footer extends React.Component {
           <ul className="no-bullet">
             {
               navbar.map((nav, index) => {
-                return <li key={index}><a onClick={() => this.navigate(nav.title, nav.link)}>{t(`footer.${nav.title}`)}</a></li>
+                //return <li key={index}><a onClick={() => this.navigate(nav.title, nav.link)}>{t(`footer.${nav.title}`)}</a></li>
+                if (nav.title != 'login') {
+                  return <li key={index}><a href={`#${nav.link}`}>{t(`footer.${nav.title}`)}</a></li>
+                }
+                else {
+                  return <li key={index}><a onClick={this.login}>{t(`footer.${nav.title}`)}</a></li>
+                }
               })
             }
           </ul>

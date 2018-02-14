@@ -41,10 +41,14 @@ export default class Category extends Component {
 
 
   render() {
-    const {t} = this.props
+    const {match: {params: { name }}, t} = this.props
     const {data} = this
     const short = data ? data.title.replace(/`${t('footer.tenders')}`\s/g, '') : ''
-    const meta = getMetaData(t('meta.homeTitle'), t('meta.homeDesc'), t('meta.homeKeywords'))
+    const tag = t(`footer.${name}`)
+    const metaTitle = t('meta.catResultsTitle', {tag})
+    const metaDesc = t('meta.catResultsDesc', {tag})
+    const metaKW = t('meta.catKeywords', {tag})
+    const meta = getMetaData(metaTitle, metaDesc, metaKW)
 
     return (
       <div>
