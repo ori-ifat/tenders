@@ -218,7 +218,7 @@ export default {
     cancel: 'בטל',
     delete: 'מחק',
     submit: 'שמור תזכורת',
-    linkToItem: 'לינק למכרז',
+    linkToItem: 'קישור למכרז',
     deleteTitle: 'מחיקת תזכורת',
     deleteSubTitle: 'האם אתה בטוח שברצונך למחוק את התזכורת?'
   },
