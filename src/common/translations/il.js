@@ -193,7 +193,8 @@ export default {
     sent: 'הפניה נשלחה! ניצור איתכם קשר בקרוב, תודה !',
     success: 'הודעתך נשלחה בהצלחה!',
     willCall: 'ניצור איתך קשר בהקדם',
-    toHome: 'לעמוד הבית'
+    toHome: 'לעמוד הבית',
+    radar: 'פניה מדף רדאר'
   },
   toolbar: {
     selectedTenders: 'מכרזים נבחרו',

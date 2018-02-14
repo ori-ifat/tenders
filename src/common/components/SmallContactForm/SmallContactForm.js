@@ -1,5 +1,5 @@
 import React, {Component} from 'react'
-import { bool } from 'prop-types'
+import { bool, string } from 'prop-types'
 import { inject, observer } from 'mobx-react'
 import { observable } from 'mobx'
 import {translate} from 'react-polyglot'
@@ -15,7 +15,9 @@ import styles from './SmallContactForm.scss'
 export default class SmallContactForm extends Component {
 
   static propTypes = {
-    bigMode: bool
+    bigMode: bool,
+    isRadar: bool,
+    tenderID: string
   }
 
   @observable sent = false
@@ -71,9 +73,14 @@ export default class SmallContactForm extends Component {
     else {
       //send data
       //console.log(this.toTime);
-      const { routingStore: { push } } = this.props
-
-      contactUs(this.firstName, this.email, this.phone).then(res => {
+      const { routingStore: { push }, isRadar, tenderID, t } = this.props
+      let text = '', subject = '', msgType = ''
+      if (isRadar) {
+        text = t('contact.radar')   //implement something else if needed
+        subject = `${t('contact.radar')} `
+        msgType = 'radar'
+      }
+      contactUs(this.firstName, this.email, this.phone, text, subject, msgType, tenderID).then(res => {
         //show a message
         this.sent = true
         //this.status = t('publish.sentSuccessfully')

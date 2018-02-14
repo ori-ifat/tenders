@@ -104,7 +104,7 @@ class Pages extends React.Component {
           <Route path="/category/:id/:name/:mode?">
             <CategoryPage />
           </Route>
-          <Route path="/radar">
+          <Route path="/radar/:tender?">
             <RadarPage />
           </Route>
           <Route path="/sitemap">

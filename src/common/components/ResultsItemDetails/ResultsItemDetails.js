@@ -148,7 +148,7 @@ export default class ResultsItemDetails extends React.Component {
   }
 
   render() {
-    const { itemStore, showViewer, onClose, t } = this.props
+    const { itemStore, encryptedID, showViewer, onClose, t } = this.props
     const item = toJS(itemStore.item)
     //console.log('render', this.IsFavorite)
     //for display
@@ -259,7 +259,7 @@ export default class ResultsItemDetails extends React.Component {
 
                   </ul>
                   <div >
-                    <a styleName="radar-link" className="button" href='#/radar' target="_blank">{t('tender.radar')}</a>
+                    <a styleName="radar-link" className="button" href={`#/radar/${encryptedID}`} target="_blank">{t('tender.radar')}</a>
                   </div>
                 </div>
               </div>

@@ -1,6 +1,7 @@
 import React, {Component} from 'react'
 import {observer} from 'mobx-react'
 import {observable} from 'mobx'
+import { withRouter } from 'react-router'
 import {translate} from 'react-polyglot'
 import {getHomeJSON} from 'common/services/apiService'
 import Footer from 'common/components/Footer'
@@ -13,14 +14,18 @@ import styles from './radar.scss'
 const req = require.context('common/style/icons/', false)
 const vIcon = req('./vIcon.svg')
 
+@withRouter
 @translate()
 @CSSModules(styles)
 @observer
 export default class Radar extends Component {
 
   @observable data;
+  @observable tenderID = ''
 
   componentWillMount() {
+    const { match: {params: { tender }} } = this.props
+    if (tender) this.tenderID = tender
     getHomeJSON('Radar', 'radar').then(res => {
       this.data = res
     })
@@ -50,7 +55,10 @@ export default class Radar extends Component {
               }
             </div>
             <div className="large-4 small-12 columns">
-              <SmallContactForm />
+              <SmallContactForm
+                isRadar={true}
+                tenderID={this.tenderID}
+              />
             </div>
           </div>
         </section>
