@@ -21,6 +21,7 @@ export default class Definition extends Component {
     allQueries: array,
     onError: func,
     onSave: func,
+    onClear: func,
     onDelete: func
   }
 
@@ -71,8 +72,9 @@ export default class Definition extends Component {
   }
 
   onSave = () => {
-    const {isNew, onError, onSave, query, allQueries} = this.props
+    const {isNew, onError, onSave, onClear, query, allQueries} = this.props
     if (this.selectedValues || (this.selectedValues == null && this.words != '')) {
+      onClear()
       const found = find(allQueries, current => {
         return this.selectedValues && current.SubsubjectID == this.selectedValues.SubSubjectID
       })
@@ -99,6 +101,8 @@ export default class Definition extends Component {
   }
 
   onCancel = () => {
+    const {onClear} = this.props
+    onClear()
     this.edit = false
   }
 

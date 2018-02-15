@@ -10,6 +10,7 @@ import { translate } from 'react-polyglot'
 import MainTitle from './MainTitle'
 import MainList from './MainList'
 import NotLogged from 'common/components/NotLogged'
+import FoundationHelper from 'lib/FoundationHelper'
 import CSSModules from 'react-css-modules'
 import styles from './main.scss'
 
@@ -35,6 +36,15 @@ export default class Main extends Component {
   componentWillMount() {
     const {showNotification} = this.props
     showNotification(true)
+    setTimeout(() => {
+      //allow element to be created.
+      FoundationHelper.initElement('top_nav')
+    }, 500)
+
+    setTimeout(() => {
+      //allow element to be created.
+      FoundationHelper.reInitElement('top_nav')
+    }, 1000)
   }
 
   render() {
@@ -51,7 +61,7 @@ export default class Main extends Component {
               {profile ?
                 <div>
                   <MainTitle />
-                  {!resultsLoading && 
+                  {!resultsLoading &&
                   <MainList
                     items={mainStore.results}
                     onCheck={onCheck}

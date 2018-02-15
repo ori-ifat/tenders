@@ -99,7 +99,8 @@ export default class SmartAgent extends Component {
     if (query) this.onDelete(query)
     this.queries.push(newQuery)
     this.queries = sortBy(this.queries, query => {
-      return query.SubsubjectID
+      //return query.SubsubjectID
+      return query.SubSubjectName
     })
     //console.log(toJS(this.queries))
   }
@@ -172,6 +173,11 @@ export default class SmartAgent extends Component {
     else {
       this.status = t('agent.duplicateDefinition')
     }
+  }
+
+  clearErrors = () => {
+    this.sent = false
+    this.status = ''
   }
 
   checkCounts = () => {
@@ -286,6 +292,7 @@ export default class SmartAgent extends Component {
                           onError={this.onError}
                           onSave={this.onQuerySave}
                           onDelete={this.onDelete}
+                          onClear={this.clearErrors}
                         />)
                       }
                       <Definition
@@ -295,6 +302,7 @@ export default class SmartAgent extends Component {
                         onError={this.onError}
                         onSave={this.onQuerySave}
                         onDelete={this.onDelete}
+                        onClear={this.clearErrors}
                       />
                       {this.status != '' && this.definitionError &&
                         <div className="callout alert" styleName={style} style={{width: '100%'}}>

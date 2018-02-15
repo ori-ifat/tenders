@@ -129,11 +129,11 @@ export default {
     details: 'פרטים',
     comment: 'פרטים נוספים',
     originalTitle: 'המכרז המקורי:',
-    viewImage: 'לצפיה במכרז המקורי',
+    viewImage: 'לצפיה במודעת המכרז',
     links: 'מסמכים מקושרים למכרז',
     toTenderDetails: 'למסמכי המכרז',
     print: 'הדפסה',
-    printImage: 'הדפסת תמונה',
+    printImage: 'הדפסת מודעת מכרז',
     email: 'שלח במייל',
     remind: 'צור התראה',
     addReminder: 'הוסף תזכורת',
@@ -143,7 +143,8 @@ export default {
     disliked: 'לא מתאים לי',
     sentFeedback: 'תודה על פנייתך',
     errors: 'חלה שגיאה בטעינת פרטי המכרז.',
-    radar: 'לליווי אישי ומקצועי ועזרה בהגשת המכרז'
+    radar: 'לליווי אישי ומקצועי ועזרה בהגשת המכרז',
+    tenderEndLabel: 'תוצאות מכרזים'
   },
   publish: {
     titleSection1: 'פרטי המכרז',
@@ -200,7 +201,7 @@ export default {
     selectedTenders: 'מכרזים נבחרו',
     email: 'שלח במייל',
     print: 'הדפס',
-    printBig: 'הדפס תמונות',
+    printBig: 'הדפס מודעות מכרזים',
     fav: 'הוסף למועדפים',
     emailSubject: 'משלוח עבורך מיפעת מכרזים',
     emailBody: 'לצפיה במכרזים, לחצו כאן: http://www.tenders.co.il/DistAgent/DistAgent.aspx?uid=%{uid}'
