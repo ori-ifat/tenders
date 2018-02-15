@@ -47,10 +47,10 @@ export default class About extends Component {
                 <div styleName="item"><p dangerouslySetInnerHTML={{__html: data.line4}}></p></div>
                 <div styleName="item"><p dangerouslySetInnerHTML={{__html: data.line5}}></p></div>
 
-                <div>
-                  <div>{data.customers.title}</div>
+                <div style={{marginBottom: '50px'}}>
+                  <div style={{fontWeight: 'bold', marginTop: '20px', marginBottom: '10px'}}>{data.customers.title}</div>
                   {
-                    data.customers.map(customer => <div><img src={vIcon} />{customer.title}</div>)
+                    data.customers.items.map(customer => <div><img src={vIcon} />{customer.title}</div>)
                   }
                 </div>
               </div>
