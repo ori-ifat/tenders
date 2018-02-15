@@ -15,6 +15,7 @@ import Loading from 'common/components/Loading/Loading'
 import moment from 'moment'
 import {getHomeJSON} from 'common/services/apiService'
 import {getMetaData} from 'common/utils/meta'
+import {fixTopMenu} from 'common/utils/topMenu'
 import DocumentMeta from 'react-document-meta'
 import CSSModules from 'react-css-modules'
 import styles from './home.scss'
@@ -63,6 +64,7 @@ export default class Home extends Component {
     getHomeJSON('Testemonials', 'testemonial3').then(res => {
       this.testemonial3 = res
     })
+    fixTopMenu()
   }
 
   showAllCats = () => {

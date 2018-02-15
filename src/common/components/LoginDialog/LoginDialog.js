@@ -5,7 +5,7 @@ import {observable, toJS} from 'mobx'
 import { translate } from 'react-polyglot'
 import {clearCache} from 'common/services/apiService'
 import ReactModal from 'react-modal'
-import FoundationHelper from 'lib/FoundationHelper'
+import {fixTopMenu} from 'common/utils/topMenu'
 import CSSModules from 'react-css-modules'
 import styles from './LoginDialog.scss'
 
@@ -64,14 +64,7 @@ export default class LoginDialog extends React.Component {
           clearCache()
           push('/main')
           onCancel()  //close modal
-          setTimeout(() => {
-            //allow element to be created.
-            FoundationHelper.initElement('top_nav')
-          }, 500)
-          setTimeout(() => {
-            //allow element to be created.
-            FoundationHelper.reInitElement('top_nav')
-          }, 1000)
+          fixTopMenu()
         }
       }).catch(error => {
         console.error('[Login] Error:', error)

@@ -6,7 +6,7 @@ import {inject, observer} from 'mobx-react'
 import {observable} from 'mobx'
 import {clearCache, getRemindersCount, resetReminders} from 'common/services/apiService'
 import LoginDialog from 'common/components/LoginDialog'
-import FoundationHelper from 'lib/FoundationHelper'
+import {fixTopMenu} from 'common/utils/topMenu'
 import NotificationBadge from 'react-notification-badge'
 import {Effect} from 'react-notification-badge'
 
@@ -40,15 +40,7 @@ export default class Topbar extends Component {
   @observable messageCount = 0
   componentWillMount() {
     //fix top nav foundation creation bug
-    setTimeout(() => {
-      //allow element to be created.
-      FoundationHelper.initElement('top_nav')
-    }, 500)
-
-    setTimeout(() => {
-      //allow element to be created.
-      FoundationHelper.reInitElement('top_nav')
-    }, 1000)
+    fixTopMenu()
   }
 
   componentWillReceiveProps(nextProps) {
