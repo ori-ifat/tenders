@@ -19,6 +19,7 @@ import ArticlePage from 'pages/article'
 import CategoryPage from 'pages/category'
 import SmartAgentPage from 'pages/smartagent'
 import RadarPage from 'pages/radar'
+import AboutPage from 'pages/about'
 import SiteMapPage from 'pages/sitemap'
 import NotFound404 from 'pages/notFound404'
 
@@ -106,6 +107,9 @@ class Pages extends React.Component {
           </Route>
           <Route path="/radar/:tender?">
             <RadarPage />
+          </Route>
+          <Route path="/about">
+            <AboutPage />
           </Route>
           <Route path="/sitemap">
             <SiteMapPage />

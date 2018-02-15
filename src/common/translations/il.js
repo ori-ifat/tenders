@@ -60,6 +60,10 @@ export default {
     contact: 'צור קשר',
     articles: 'כתבות'
   },
+  about: {
+    title: 'יפעת מכרזים',
+    subTitle: 'פותחים עוד ועוד דלתות בפניך'
+  },
   cat: {
     opportunities: 'הזדמנויות עיסקיות',
     viewAll: 'רוצה לראות את כל ההזדמנויות העיסקיות עבורך',
