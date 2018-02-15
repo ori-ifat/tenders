@@ -79,7 +79,7 @@ export default class LoginDialog extends React.Component {
       <ReactModal
         isOpen={true}
         onRequestClose={onCancel}
-        className="reveal-custom2"
+        className="reveal-custom reveal-custom-login"
         overlayClassName="reveal-overlay-custom">
         <div styleName="login_lb">
           <button styleName="button-cancel" onClick={onCancel}>×</button>
