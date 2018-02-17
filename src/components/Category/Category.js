@@ -58,13 +58,11 @@ export default class Category extends Component {
           <div className="row">
             <div className="large-12 columns">
               <h1 styleName="title">{data.title}</h1>
+              <p styleName="subttl">{t('cat.subTitle', {short})}</p>
+              <hr/>
             </div>
           </div>
-          <div className="row">
-            <div className="large-12 columns">
-              <div>{t('cat.subTitle', {short})}</div>
-            </div>
-          </div>
+
           <div className="row">
             <div className="large-12 columns">
               {this.tenders && this.tenders.length > 0 && this.tenders.map((tender, index) =>
@@ -77,16 +75,18 @@ export default class Category extends Component {
               )}
             </div>
           </div>
-          <div className="row collapse" style={{marginTop: '5rem'}}>
+          <div className="row" style={{marginTop: '3rem'}}>
             <div className="large-12 columns">
               <ContactUs />
             </div>
           </div>
-          <div className="row collapse" style={{marginTop: '5rem'}}>
+          <div className="row" style={{marginTop: '3rem'}}>
             <div className="large-12 columns">
+            <div styleName="wraper">
               {
                 data.text && <div dangerouslySetInnerHTML={{__html: data.text}}></div>
               }
+              </div>
             </div>
           </div>
         </section>
