@@ -200,7 +200,10 @@ export default class ResultsItemDetails extends React.Component {
                 <div className="large-9 cell">
                   <Row label={t('tender.publisher')} data={item.Publisher} />
                   {item.InfoDate && <Row label={t('tender.delivery')} data={infoDate} dir="ltr" />}
-                  <Row label={t('tender.details')} html={this.formatText(item.Summery)} />
+                  {
+                    item.Summery && item.Summery.trim() != '' &&
+                    <Row label={t('tender.details')} html={this.formatText(item.Summery)} />
+                  }
                   {
                     item.Comment && item.Comment.trim() != '' &&
                     <Row label={t('tender.comment')} html={this.formatText(`${item.Comment}${originalUrl}`)} />
