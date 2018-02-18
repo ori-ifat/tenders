@@ -163,6 +163,21 @@ export async function getLastTenders(lastSeenTenderID) {
   }}, true)
 }
 
+export async function getAgentResults({page, pageSize}) {
+  return apiFetch('Agent/GetAgentResults', {
+    searchParams: {
+      page,
+      pageSize      
+    }
+  }).then(res => {
+    return {
+      total: res.info.count,
+      page: res.info.page,
+      data: res.data
+    }
+  })
+}
+
 export function getTender(tenderID) {
   return apiFetch('Tender/GetTender', {searchParams: {
     tenderID

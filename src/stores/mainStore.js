@@ -1,5 +1,5 @@
 import { action, computed, observable, toJS } from 'mobx'
-import {getLastTenders, getBanners, getMoreTenders} from 'common/services/apiService'
+import {getAgentResults, getLastTenders, getBanners, getMoreTenders} from 'common/services/apiService'
 
 class Main {
   @observable resultsLoading = false
@@ -7,7 +7,10 @@ class Main {
   @observable results = []
   @observable requestMore = {};
   @observable resultsMore = []
+  @observable lastResultsPage = 0
+  @observable resultsPageSize = 10
   @observable resultsCount = 0
+  @observable hasMoreResults = true
   @observable banner = {};
 
   @action.bound
@@ -34,6 +37,55 @@ class Main {
       else {
         this.results = []
         this.resultsCount = 0
+      }
+      this.resultsLoading = false
+    }
+  }
+
+  @action.bound
+  async loadAgentResults2() {
+    if (!this.resultsLoading) {
+      this.resultsLoading = true
+      let searchError = null
+
+      const searchParams = {
+        page: this.lastResultsPage + 1,
+        pageSize: this.resultsPageSize
+      }
+
+      try {
+        //this.request = await search(searchParams)
+        this.request = await getAgentResults(searchParams)
+      }
+      catch(e) {
+        //an error occured on search
+        searchError = {
+          message: `[loadAgentResults2] search error: ${e.message} http status code ${e.error.status}`,
+          statusCode: e.error.status
+        }
+      }
+
+      if (searchError == null) {
+        //if no errors occured, continue:
+        //const {resultsPage: {data, total}, filtersMeta} = this.request
+        const {data, total} = this.request
+        if (data.length > 0) {
+          this.lastResultsPage++
+        }
+        console.info('[loadAgentResults2]', this.lastResultsPage)
+        this.results = [...this.results, ...data.map(d => ({ ...d, key: d.TenderID }))]
+        //this.availableFilters = filtersMeta  //no drilldown - from tags only
+        this.resultsCount = total
+        this.hasMoreResults = data.length > 0 && this.results.length < this.resultsCount
+      }
+      else {
+        //error handle.
+        console.error(searchError) //a flag has been raised. implement what to do with it
+        //set as there is no data (actually there is none...)
+        this.results = []
+        //this.availableFilters = []
+        this.resultsCount = 0
+        this.hasMoreResults = false
       }
       this.resultsLoading = false
     }

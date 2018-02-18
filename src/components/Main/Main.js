@@ -8,7 +8,8 @@ import { withRouter } from 'react-router'
 import { mainStore } from 'stores'
 import { translate } from 'react-polyglot'
 import MainTitle from './MainTitle'
-import MainList from './MainList'
+//import MainList from './MainList'
+import List from 'common/components/List'
 import NotLogged from 'common/components/NotLogged'
 import {fixTopMenu} from 'common/utils/topMenu'
 import CSSModules from 'react-css-modules'
@@ -17,8 +18,8 @@ import styles from './main.scss'
 @translate()
 @withRouter
 @whenRouted(() => {
-  mainStore.loadAgentResults()
-  mainStore.getBanner()
+  mainStore.loadAgentResults2()
+  //mainStore.getBanner()
   //mainStore.loadMoreTenders()
 })
 @inject('mainStore')
@@ -53,16 +54,23 @@ export default class Main extends Component {
               {profile ?
                 <div>
                   <MainTitle />
-                  {!resultsLoading &&
+                  {/*!resultsLoading &&
                   <MainList
                     items={mainStore.results}
                     onCheck={onCheck}
                     onFav={onFav}
                     checkedItems={checkedItems}
-                  />}
-                  <Banner banner={toJS(mainStore.banner)} />
+                  />*/}
+                  <List
+                    store={mainStore}
+                    loadMore={mainStore.loadAgentResults2}
+                    onCheck={onCheck}
+                    onFav={onFav}
+                    checkedItems={checkedItems} />
+
+                  {/*<Banner banner={toJS(mainStore.banner)} />
                   <br />
-                  {/*<h6 styleName="more-tenders-title">{t('main.moreTenders')}</h6>
+                  <h6 styleName="more-tenders-title">{t('main.moreTenders')}</h6>
                   <MainList
                     items={mainStore.resultsMore}
                     onFav={onFav}
