@@ -78,7 +78,7 @@ export default class Subscriptions extends Component {
             <div className="large-12 columns" >
               <div className="row collapse" >
 
-                <div className="medium-4 columns" >
+                <div className="medium-4 small-12 columns" >
                   <div styleName="plan" >
                     <h2>{t('subscriptions.onecat')}</h2>
 
@@ -105,7 +105,7 @@ export default class Subscriptions extends Component {
                   </div>
                 </div>
 
-                <div className="medium-4 columns" >
+                <div className="medium-4 small-12 columns" >
                   <div styleName="plan" >
                     <h2>{t('subscriptions.twocat')}</h2>
 
@@ -132,7 +132,7 @@ export default class Subscriptions extends Component {
                   </div>
                 </div>
 
-                <div className="medium-4 columns" >
+                <div className="medium-4 small-12 columns" >
                   <div styleName="plan hilight" >
                     <h2>{t('subscriptions.allcat')}</h2>
 

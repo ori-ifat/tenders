@@ -154,7 +154,7 @@ export default class Publish extends Component {
         </div>
 
         <div className="row">
-          <div className="column large-8">
+          <div className="column large-8 small-12">
             <div styleName="wraper">
               {this.sent ?
                 <div styleName={style}>
@@ -250,7 +250,7 @@ export default class Publish extends Component {
               }
             </div>
           </div>
-          <div className="column large-4">
+          <div className="column large-4 small-12">
             <div styleName="promoWraper">
               <h4>{t('publish.promo')}</h4>
               <p styleName="promo">

@@ -23,6 +23,12 @@
 	padding: 2rem;
 }
 
+@media screen and (max-width: 39.9375em) {
+	.plan {
+		margin-bottom: 2rem !important;
+	}
+}
+
 
 .plan {
 	border: 1px solid #979797;
