@@ -126,7 +126,7 @@ export default class ResultsItem extends React.Component {
       return tag.ResType == 'tender_partial'
     })
     //alter the text to inject as html
-    let fixedText = filtered && filtered.values[0].length > 2 ? replace(text, new RegExp(filtered.values[0], 'g'), `<span style="background-color: yellow">${filtered.values[0]}</span>`) : text
+    let fixedText = filtered && filtered.values[0] && filtered.values[0].length > 2 ? replace(text, new RegExp(filtered.values[0], 'g'), `<span style="background-color: yellow">${filtered.values[0]}</span>`) : text
     //fixedText = tag ? replace(fixedText, new RegExp(tag.Name, 'g'), `<span style="background-color: yellow">${tag.Name}</span>`): fixedText
     forEach(tags, tag => {
       fixedText = tag.Name.length > 2 ? replace(fixedText, new RegExp(tag.Name, 'g'), `<span style="background-color: yellow">${tag.Name}</span>`) : fixedText

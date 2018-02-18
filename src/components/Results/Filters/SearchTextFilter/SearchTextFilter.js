@@ -34,21 +34,31 @@ export default class SearchTextFilter extends React.Component {
 
   doFilter = () => {
     const { searchStore } = this.props
+    //if (!this.text || this.text == null) this.text = ''
     doFilter(searchStore, 'searchtext', [this.text])
   }
 
   onChange = e => {
     this.text = e.target.value
-    //console.log(toJS(this.selected))
+    //console.log(toJS(this.text))
     //this.doFilter()  //too slow
   }
 
   onKeyDown = e => {
+    this.text = e.target.value  //may cause null if it does not happen here
     if (e.keyCode === 13) {
       setTimeout(() => {
         this.doFilter()
       }, 150) //to allow action to complete
     }
+  }
+
+  onBlur = e => {
+    this.text = e.target.value  //may cause null if it does not happen here
+    //console.log(toJS(this.text))
+    setTimeout(() => {
+      this.doFilter()
+    }, 150) //to allow action to complete
   }
 
   render() {
@@ -59,7 +69,8 @@ export default class SearchTextFilter extends React.Component {
         <input type="text"
           placeholder={t('filter.search')}
           onChange={this.onChange}
-          onKeyDown={this.onKeyDown} />
+          onKeyDown={this.onKeyDown}
+          onBlur={this.onBlur} />
       </div>
     )
   }

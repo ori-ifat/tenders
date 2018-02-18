@@ -247,7 +247,10 @@ export default {
     searchText: 'סנן בתוצאות',
     search: 'חפש',
     selectAll: 'בחר הכל',
-    noData: 'לא נמצאו תוצאות'
+    noData: 'לא נמצאו תוצאות',
+    lastDay: 'יום אחרון',
+    lastWeek: 'שבוע אחרון',
+    lastMonth: 'חודש אחרון'
   },
   favorites: {
     title: 'מועדפים נמצאו'

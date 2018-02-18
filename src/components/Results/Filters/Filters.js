@@ -10,6 +10,7 @@ import MultipleFilter from './MultipleFilter'
 import ComboFilter from './ComboFilter'
 import TenderTypeFilter from './TenderTypeFilter'
 import DateFilter from './DateFilter'
+import DateButtons from './DateButtons'
 import SearchTextFilter from './SearchTextFilter'
 import Loading from 'common/components/Loading/Loading'
 import CSSModules from 'react-css-modules'
@@ -117,6 +118,9 @@ export default class Filters extends React.Component {
             <DateFilter
               dateField={dateField}
               dateValues={dateValues}
+            />
+            <DateButtons
+              dateField={dateField}
             />
             <SearchTextFilter
               text={text}
