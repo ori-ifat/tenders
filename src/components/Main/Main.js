@@ -18,6 +18,7 @@ import styles from './main.scss'
 @translate()
 @withRouter
 @whenRouted(() => {
+  mainStore.clearResults()
   mainStore.loadAgentResults2()
   //mainStore.getBanner()
   //mainStore.loadMoreTenders()

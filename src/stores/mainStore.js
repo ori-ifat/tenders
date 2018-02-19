@@ -43,6 +43,14 @@ class Main {
   }
 
   @action.bound
+  clearResults() {
+    this.results.clear()
+    this.lastResultsPage = 0
+    this.hasMoreResults = true
+    this.resultsCount = 0
+  }
+
+  @action.bound
   async loadAgentResults2() {
     if (!this.resultsLoading) {
       this.resultsLoading = true
@@ -54,7 +62,6 @@ class Main {
       }
 
       try {
-        //this.request = await search(searchParams)
         this.request = await getAgentResults(searchParams)
       }
       catch(e) {
@@ -72,11 +79,12 @@ class Main {
         if (data.length > 0) {
           this.lastResultsPage++
         }
-        console.info('[loadAgentResults2]', this.lastResultsPage)
         this.results = [...this.results, ...data.map(d => ({ ...d, key: d.TenderID }))]
-        //this.availableFilters = filtersMeta  //no drilldown - from tags only
-        this.resultsCount = total
-        this.hasMoreResults = data.length > 0 && this.results.length < this.resultsCount
+        //this.resultsCount = total   //total returns 0 from that api
+        this.resultsCount = data.length
+        //this.hasMoreResults = data.length > 0 && this.results.length < this.resultsCount
+        this.hasMoreResults = !(data.length == 0 || data.length < this.resultsPageSize) //use that because total returns 0,
+        console.info('[loadAgentResults2]', this.lastResultsPage, this.hasMoreResults)
       }
       else {
         //error handle.

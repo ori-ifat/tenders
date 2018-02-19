@@ -14,17 +14,18 @@ export default class MainTitle extends React.Component {
 
   render() {
     const { t, mainStore, accountStore: { profile } } = this.props
-    const { resultsLoading, resultsCount } = mainStore
-    const count = resultsCount
+    const { resultsLoading /*, resultsCount*/ } = mainStore
+    const resultsCount = mainStore.results.length
     const user = profile ? decodeURIComponent(profile.contactName).replace(/\+/g, ' ') : ''
-
+    //const count = resultsCount
+    //t('main.title', {count})
     return (
       <div className="row">
         <div className="large-12 columns">
           {!resultsLoading &&
             <div>
               <h5 styleName="user-greet">{t('main.greet', {user})}</h5>
-              <h1 styleName="results_summery">{resultsCount > 0 ? t('main.title', {count}) : t('main.noResults')}</h1>
+              <h1 styleName="results_summery">{resultsCount > 0 ? t('main.title2') : t('main.noResults')}</h1>
             </div>
           }
           {resultsLoading &&
