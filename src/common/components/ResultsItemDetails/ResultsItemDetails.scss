@@ -12,6 +12,27 @@
   padding: 0.5rem 1rem 0.5rem 3rem;
 }
 
+table {
+  margin: 2rem !important;
+  table-layout:fixed;
+  width: auto !important;
+  thead {
+    font-weight: 400 !important;
+    font-size: 0.8125rem;
+    background: $xlight-gray;
+
+  }
+  tbody{
+    tr:nth-child(even){
+      background: #fff;
+
+    }
+    tr {
+      border-bottom: 1px solid $xlight-gray;
+    }
+  }
+}
+
 .item_ltr {
   direction: ltr;
   text-align: right;
