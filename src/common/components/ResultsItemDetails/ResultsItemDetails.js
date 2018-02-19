@@ -202,7 +202,7 @@ export default class ResultsItemDetails extends React.Component {
                   {item.InfoDate && <Row label={t('tender.delivery')} data={infoDate} dir="ltr" />}
                   {
                     item.Summery && item.Summery.trim() != '' &&
-                    <Row label={t('tender.details')} html={this.formatText(item.Summery)} />
+                    <Row label={t('tender.details')} html={this.formatText(item.Summery)} table={item.GT} />
                   }
                   {
                     item.Comment && item.Comment.trim() != '' &&
