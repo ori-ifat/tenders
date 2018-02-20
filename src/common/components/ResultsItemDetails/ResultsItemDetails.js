@@ -122,7 +122,7 @@ export default class ResultsItemDetails extends React.Component {
       const arr = text.split('##URL##')
       if (arr.length > 1 && arr[1] != '') {
         //if originalUrl has passed to this method, need to set it here
-        const link = arr[1].split('_')  //it is built as ID_Title
+        const link = arr[1].split('[[SEP]]')  //it is built as ID[[SEP]]Title
         title = link[1]  //set the title
         //concat the url as is (regexp will fix it to be a link)
         text = `${arr[0]}<br />${t('tender.originalTitle')}<br />http://www.tenders.co.il/#/tender/${link[0]}`
@@ -169,7 +169,7 @@ export default class ResultsItemDetails extends React.Component {
     //fileName
     const fileName = item.File ? item.File.FileName : ''
     //original tender
-    const originalUrl = item.OriginalID ? `##URL##${item.OriginalID}_${item.OriginalTitle}` : ''
+    const originalUrl = item.OriginalID ? `##URL##${item.OriginalID}[[SEP]]${item.OriginalTitle}` : ''
 
     //for scroll pos of item
     const divTop = document.documentElement.scrollTop ? document.documentElement.scrollTop : document.body.scrollTop
@@ -261,7 +261,7 @@ export default class ResultsItemDetails extends React.Component {
                       {this.IsFavorite ? t('tender.removeFromFav') : t('tender.addToFav')}</a></li>
 
                   </ul>
-                  {item.TenderType != t('tender.tenderEndLabel') &&
+                  {item.TenderType == t('tender.tenderPublicLabel') &&
                   <div>
                     <a styleName="radar-link" className="button" href={`#/radar/${encryptedID}`} target="_blank">{t('tender.radar')}</a>
                   </div>

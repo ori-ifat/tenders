@@ -130,7 +130,7 @@ export default {
     delivery: 'מועד ההגשה',
     tourDetails: 'סיור קבלנים',
     tenderConditions: 'תנאי סף למכרז',
-    subSubjects: 'סיווגים',
+    subSubjects: 'ענפים',
     details: 'פרטים',
     comment: 'פרטים נוספים',
     originalTitle: 'המכרז המקורי:',
@@ -149,7 +149,7 @@ export default {
     sentFeedback: 'תודה על פנייתך',
     errors: 'חלה שגיאה בטעינת פרטי המכרז.',
     radar: 'לליווי אישי ומקצועי ועזרה בהגשת המכרז',
-    tenderEndLabel: 'תוצאות מכרזים'
+    tenderPublicLabel: 'פומבי/כללי'
   },
   publish: {
     titleSection1: 'פרטי המכרז',

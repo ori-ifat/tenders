@@ -9,6 +9,7 @@ import 'lib/foundationInit'   //initialize the foundation library with document.
 import './global.scss'  //important!! need to import that css here only!!
 //use className when needed instead of styleName (foundation stuff), otherwise css will be huge and app will be stuck ....
 import 'common/style/reveal.css'
+import 'react-select/dist/react-select.css'
 
 function mount() {
   const App = require('./components/App').default
