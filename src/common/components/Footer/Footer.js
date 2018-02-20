@@ -12,10 +12,10 @@ import styles from './Footer.scss'
 const navbar = [{
   title: 'about',
   link: '/about'
-}, {
+}, /*{
   title: 'subscriptions',
   link: '/subscriptions'
-}, {
+},*/ {
   title: 'services',
   link: '/services'
 }, {

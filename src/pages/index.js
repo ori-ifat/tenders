@@ -11,7 +11,7 @@ import FavoritesPage from 'pages/favorites'
 import RemindersPage from 'pages/reminders'
 import PublishPage from 'pages/publish'
 import ContactPage from 'pages/contact'
-import SubscriptionsPage from 'pages/subscriptions'
+//import SubscriptionsPage from 'pages/subscriptions'
 import ServicesPage from 'pages/services'
 import ThankYouPage from 'pages/thankyou'
 import ArticlesPage from 'pages/articles'
@@ -83,11 +83,11 @@ class Pages extends React.Component {
               showNotification={this.showNotification}
             />
           </Route>
-          <Route path="/subscriptions">
+          {/*<Route path="/subscriptions">
             <SubscriptionsPage
               showNotification={this.showNotification}
             />
-          </Route>
+          </Route>*/}
           <Route path="/services">
             <ServicesPage
               showNotification={this.showNotification}

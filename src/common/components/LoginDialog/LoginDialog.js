@@ -117,7 +117,7 @@ export default class LoginDialog extends React.Component {
               </div>
             </div>
             <div styleName="sign_up">
-              <a href="#/subscriptions" target="_blank">
+              <a href="#/contact" target="_blank">
                 <h3>{t('login.buy')}</h3>
                 <p>{t('login.subscribe')}</p>
                 <ul className="no-bullet">
