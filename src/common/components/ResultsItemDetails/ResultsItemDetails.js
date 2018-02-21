@@ -320,6 +320,7 @@ export default class ResultsItemDetails extends React.Component {
         {this.remindMe &&
           <Reminder
             tenderID={item.TenderID}
+            encryptedID={encryptedID}
             onClose={() => this.remind(false)}
             setReminderData={this.setReminderData}
             title={item.Title}

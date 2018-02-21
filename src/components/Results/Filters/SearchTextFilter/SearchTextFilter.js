@@ -1,23 +1,21 @@
 import React from 'react'
-import { string } from 'prop-types'
-import { inject, observer } from 'mobx-react'
-import {observable, toJS} from 'mobx'
+import { string, object } from 'prop-types'
+import { /*inject,*/ observer } from 'mobx-react'
+import {observable} from 'mobx'
 import { translate } from 'react-polyglot'
-import filter from 'lodash/filter'
-import remove from 'lodash/remove'
-import find from 'lodash/find'
 import {doFilter} from 'common/utils/filter'
 import CSSModules from 'react-css-modules'
 import styles from './SearchTextFilter.scss'
 
 @translate()
-@inject('searchStore')
+//@inject('searchStore')
 @CSSModules(styles)
 @observer
 export default class SearchTextFilter extends React.Component {
 
   static propTypes = {
-    text: string
+    text: string,
+    store: object
   }
 
   @observable text = ''
@@ -33,9 +31,9 @@ export default class SearchTextFilter extends React.Component {
   }
 
   doFilter = () => {
-    const { searchStore } = this.props
+    const { store } = this.props
     //if (!this.text || this.text == null) this.text = ''
-    doFilter(searchStore, 'searchtext', [this.text])
+    doFilter(store, 'searchtext', [this.text])
   }
 
   onChange = e => {

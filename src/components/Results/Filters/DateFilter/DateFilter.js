@@ -1,7 +1,7 @@
 import React from 'react'
-import { string, array } from 'prop-types'
-import { inject, observer } from 'mobx-react'
-import {observable, toJS} from 'mobx'
+import { string, array, object } from 'prop-types'
+import { /*inject,*/ observer } from 'mobx-react'
+import {observable} from 'mobx'
 import { translate } from 'react-polyglot'
 import {doFilter} from 'common/utils/filter'
 import moment from 'moment'
@@ -10,7 +10,7 @@ import CSSModules from 'react-css-modules'
 import styles from './DateFilter.scss'
 
 @translate()
-@inject('searchStore')
+//@inject('searchStore')
 @CSSModules(styles, { allowMultiple: true })
 @observer
 export default class DateFilter extends React.Component {
@@ -18,7 +18,8 @@ export default class DateFilter extends React.Component {
 
   static propTypes = {
     dateField: string,
-    dateValues: array
+    dateValues: array,
+    store: object
   }
 
   @observable dateField = 'publishdate'
@@ -49,7 +50,7 @@ export default class DateFilter extends React.Component {
 
   selectDate = (date, field) => {
     //set observables and doFilter
-    const {searchStore} = this.props
+    const {store} = this.props
     switch (field) {
     case 'startDate':
       this.startDate = date
@@ -58,25 +59,25 @@ export default class DateFilter extends React.Component {
       this.endDate = date
       break
     }
-    searchStore.initialDate = false
+    if(store.initialDate) store.initialDate = false
     this.doFilter()
   }
 
   doFilter = () => {
     //filter commit
-    const { searchStore, t } = this.props
+    const { store, t } = this.props
     this.endDate = this.endDate.hour(23).minute(59).second(59)  //include all last day.
     const values = [
       moment(this.startDate).format('YYYY-MM-DD'),
       moment(this.endDate).format('YYYY-MM-DD HH:mm:ss')
     ]
     //console.log('values', values)
-    doFilter(searchStore, this.dateField, values)
+    doFilter(store, this.dateField, values)
     //set the state-like object:
     //...the date field name,
-    searchStore.setSelectedFilters('dateField', this.dateField, t('filter.more'))
+    store.setSelectedFilters('dateField', this.dateField, t('filter.more'))
     //the actual values
-    searchStore.setSelectedFilters(this.dateField, values, t('filter.more'))
+    store.setSelectedFilters(this.dateField, values, t('filter.more'))
   }
 
   render() {

@@ -1,12 +1,11 @@
 import React from 'react'
 import { string, object } from 'prop-types'
 import { inject, observer } from 'mobx-react'
-import {observable, toJS} from 'mobx'
+import {observable} from 'mobx'
 import { translate } from 'react-polyglot'
 import filter from 'lodash/filter'
 import find from 'lodash/find'
 import remove from 'lodash/remove'
-//import forEach from 'lodash/forEach'
 import take from 'lodash/take'
 import {doFilter} from 'common/utils/filter'
 import CSSModules from 'react-css-modules'
@@ -16,7 +15,7 @@ const req = require.context('common/style/icons/', false)
 const editSrc = req('./icon_edit.svg')
 
 @translate()
-@inject('searchStore')
+//@inject('searchStore')
 @inject('routingStore')
 @CSSModules(styles)
 @observer
@@ -28,7 +27,9 @@ export default class MultipleFilter extends React.Component {
   static propTypes = {
     type: string,
     items: object,
-    label: string
+    label: string,
+    store: object,
+    search: string
   }
 
   @observable open = false
@@ -74,10 +75,10 @@ export default class MultipleFilter extends React.Component {
 
   checkSubsubjects = () => {
     //check if store filters contain subsubject filter
-    if (this.type == 'subsubjects') {
-      const {searchStore, t} = this.props
+    const {store, search, t} = this.props
+    if (this.type == 'subsubjects' && search == 'standard') {
       //find it on current filters
-      const filter = find(searchStore.filters, item => {
+      const filter = find(store.filters, item => {
         return item.field == 'subsubject'
       })
       if (filter) {
@@ -95,7 +96,7 @@ export default class MultipleFilter extends React.Component {
               const labels = this.itemLabels.join(',')
               //update the 'selectedFilters' object on wrapper
               //onClose('subsubject', labels)
-              searchStore.setSelectedFilters('subsubject', labels, t('filter.more'))
+              store.setSelectedFilters('subsubject', labels, t('filter.more'))
               //update current label - somehow it is not affected
               this.label = labels
             }
@@ -115,9 +116,9 @@ export default class MultipleFilter extends React.Component {
 
   doFilter = () => {
     //commit filters
-    const { searchStore, t } = this.props
+    const { store, search, t } = this.props
     const field = this.type == 'subsubjects' ? 'subsubject' : 'publisher'
-    if (this.type == 'subsubjects') {
+    if (this.type == 'subsubjects' && search == 'standard') {
       //subsubjects: act like a search, not like a filter ...
       const tags = this.selected.map((item, index) => {
         return {ID: item, Name: encodeURIComponent(this.itemLabels[index]), ResType: field, UniqueID: parseFloat(`${item}.1`)}
@@ -125,29 +126,18 @@ export default class MultipleFilter extends React.Component {
       //route list SearchInput, to enable a new search
       const { routingStore } = this.props
       const sort = 'publishDate'  //default sort. note, means that on every search action, sort will reset here
-      /*
-      const tagsFiltered = []
-      forEach(tags, tag => {
-        const found = find(searchStore.tags, _tag => {
-          return _tag.ID === tag.ID && _tag.ResType === tag.ResType
-        })
-        if (!found) {
-          tagsFiltered.push(tag)
-        }
-      })
-      console.log(tagsFiltered)
-      */
-      remove(searchStore.tags, tag => {
+
+      remove(store.tags, tag => {
         return tag.ResType === 'subsubject'
       })
-      const newTags = [...searchStore.tags, ...tags]
+      const newTags = [...store.tags, ...tags]
       const payload = JSON.stringify(newTags)
-      const filters = JSON.stringify([]) //...(searchStore.filters)
+      const filters = JSON.stringify([]) //...(store.filters)
       routingStore.push(`/results/${sort}/${payload}/${filters}`)
     }
     else {
       //normal filter behavior
-      doFilter(searchStore, field, this.selected, this.itemLabels, true, this.closeModal, t('filter.more'))
+      doFilter(store, field, this.selected, this.itemLabels, true, this.closeModal, t('filter.more'))
     }
   }
 

@@ -7,6 +7,7 @@ import {translate} from 'react-polyglot'
 import Main from 'components/Main'
 import Results from 'components/Results'
 import Favorites from 'components/Favorites'
+import AgentResults from 'components/AgentResults'
 import Toolbar from 'common/components/Toolbar'
 import CSSModules from 'react-css-modules'
 import styles from './wrapper.scss'
@@ -40,7 +41,9 @@ export default class Wrapper extends Component {
       Results :
       use == 'favorites' ?
         Favorites :
-        Main
+        use == 'agent' ?
+          AgentResults :
+          Main
 
     return (
       <div>

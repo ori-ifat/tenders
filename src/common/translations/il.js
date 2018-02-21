@@ -299,6 +299,9 @@ export default {
     compareTo: 'טקסט להשוואה',
     submitText: 'בדוק'
   },
+  agentRes: {
+    title: 'תוצאות סוכן חכם'
+  },
   subscriptions: {
     title: 'מסלולים ומחירים',
     onecat: 'סיווג אחד',

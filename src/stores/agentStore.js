@@ -1,34 +1,17 @@
 import { action, computed, observable, toJS } from 'mobx'
 import isObject from 'lodash/isObject'
-import map from 'lodash/map'
 import filter from 'lodash/filter'
 import {extractLabel} from 'common/utils/util'
-import {/*search*/ fetchResultsPage, fetchFilters } from 'common/services/apiService'
+import {/*getAgentResults, fetchAgentFilters*/ fetchResultsPage, fetchFilters } from 'common/services/apiService'
 import {getDefaultFilter} from 'common/utils/filter'
 
-const serializeTags = ({ID, Name, ResType}) => {
-  return ResType.indexOf('_partial') > -1 ? {
-    id: Name,
-    type: ResType
-  } : {
-    id: ID,
-    type: ResType
-  }
-}
+class Agent {
 
-class Search {
-/*
-  constructor() {
-    console.log('new searchStore')
-  }
-*/
   @observable filters = []; //chosen filters from filters component
   @observable availableFilters = [];  //all relevant filters;
   @observable selectedFilters = {};   //labels for the filters component
-  @observable tags = [];
   @observable sort = 'publishDate'
   @observable fromRoute = false
-  @observable initialDate = true
   @observable resultsLoading = false
   @observable filtersLoading = false
   @observable hasMoreResults = true
@@ -41,13 +24,6 @@ class Search {
   @observable resultsPageSize = 10
   @observable resultsCount = 0
 
-  @computed
-  get serializedTags() {
-    let tags = toJS(this.tags)
-    tags = map(tags, serializeTags)
-    return JSON.stringify(tags)
-  }
-
   //[{field:%20"TenderID",isAscending:%20true}]
   @computed
   get serializedSort() {
@@ -58,24 +34,13 @@ class Search {
 
   @computed
   get serializedFilters() {
-    const tags = toJS(this.tags)
     let filters = toJS(this.filters)
-    /* //add date filter to empty and text searches
-    const reduced = filter(tags, tag => {
-      return tag.ResType ==  'tender_partial'
-    })
-    //add date filter if partial search was done, or no tags have beed added (empty search)
-    if (reduced.length > 0 || (tags.length == 0 && filters.length == 0)) {
-      const filter = getDefaultFilter(tags.length == 0 && filters.length == 0)
-      filters = [...filters, filter]
-    }*/
     //add date filter always, only if it did not exist already on this.filters
     const reduced = filter(filters, filter => {
       return filter.field == 'publishdate' || filter.field == 'infodate'
     })
-    if (reduced.length == 0 || tags.length == 0){ //(tags.length == 0 && filters.length == 0)) {
-      //const filter = getDefaultFilter(tags.length == 0 && filters.length == 0)
-      const filter = getDefaultFilter(tags.length == 0)
+    if (reduced.length == 0) {
+      const filter = getDefaultFilter(false, 6)
       filters = [...filters, filter]
     }
     return filters
@@ -99,17 +64,6 @@ class Search {
     } else {
       //implement error handle
       console.error('[searchStore]applyFilters', 'could not load filters from query')
-    }
-  }
-
-  @action.bound
-  applyTags(queryTags) {
-    const tags = JSON.parse(decodeURIComponent(queryTags))
-    if (isObject(tags)) {
-      this.tags.replace(tags)
-    } else {
-      //implement error handle
-      console.error('[searchStore]applyTags', 'could not load tags from query')
     }
   }
 
@@ -167,16 +121,16 @@ class Search {
         this.clearResults() //this will allow opacity loader to show prev results until new ones appear
       }
       const searchParams = {
-        tags: this.serializedTags,
-        filters: this.serializedFilters,  //toJS(this.filters),
+        tags: [{'id':4, 'type':'area'}], //debug
+        filters: this.serializedFilters,
         page: this.lastResultsPage + 1,
         pageSize: this.resultsPageSize,
         sort: this.serializedSort
       }
 
       try {
-        //this.request = await search(searchParams)
-        this.request = await fetchResultsPage(searchParams)
+        //this.request = await getAgentResults(searchParams)
+        this.request = await fetchResultsPage(searchParams) //debug
       }
       catch(e) {
         //an error occured on search
@@ -218,29 +172,19 @@ class Search {
     if (!this.filtersLoading) {
       this.filtersLoading = true
       this.filtersError = null
-      const tags = toJS(this.tags)
-      let filters = []  //no drilldown - from tags only
-      /* //add date filter to empty and text searches
-      const reduced = filter(tags, tag => {
-        return tag.ResType ==  'tender_partial'
-      })
-      if (tags.length == 0 || reduced.length > 0) {
-        const filter = getDefaultFilter(true)
-        filters = [filter]
-      }*/
-      //add date filter always (start empty anyway)
-      //const filter = getDefaultFilter(tags.length == 0 && filters.length == 0)
-      const filter = getDefaultFilter(tags.length == 0)
+      let filters = []  //no drilldown
+      const filter = getDefaultFilter(false, 6)
       filters = [filter]
 
       const searchParams = {
-        tags: this.serializedTags,
+        tags: [{'id':4, 'type':'area'}], //debug
         filters,
         sort: this.serializedSort
       }
 
       try {
-        this.requestFilters = await fetchFilters(searchParams)
+        //this.requestFilters = await fetchAgentFilters(searchParams)
+        this.requestFilters = await fetchFilters(searchParams)  //debug
       }
       catch(e) {
         //an error occured on search
@@ -263,4 +207,4 @@ class Search {
   }
 }
 
-export const searchStore = new Search()
+export const agentStore = new Agent()

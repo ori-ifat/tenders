@@ -1,5 +1,5 @@
 import React from 'react'
-import { object, func, array } from 'prop-types'
+import { object, func } from 'prop-types'
 import { observer } from 'mobx-react'
 import { translate } from 'react-polyglot'
 import CSSModules from 'react-css-modules'
@@ -23,8 +23,8 @@ export default class List extends React.Component {
   }
 
   render() {
-    const { t, store, loadMore, checkedItems } = this.props
-    const { resultsPageSize, resultsLoading, results, hasMoreResults } = store
+    const { store, loadMore } = this.props
+    const { results, hasMoreResults } = store
     //console.log('hasMoreResults', hasMoreResults)
     const items = results.map((item, index) => {
       const found = find(this.props.checkedItems, chk => {

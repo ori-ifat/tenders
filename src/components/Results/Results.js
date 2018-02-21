@@ -11,7 +11,7 @@ import Title from 'common/components/Title'
 import ResultsActions from './ResultsActions'
 import List from 'common/components/List'
 import Filters from './Filters'
-import Banners from './Banners'
+//import Banners from './Banners'
 import NoData from 'components/NoData'
 import filter from 'lodash/filter'
 import DocumentMeta from 'react-document-meta'
@@ -78,7 +78,7 @@ export default class Results extends Component {
 
   render() {
 
-    const {accountStore, searchStore, searchStore: {resultsLoading, resultsCount, tags}, t} = this.props
+    const {searchStore, searchStore: {resultsLoading, resultsCount, tags}, t} = this.props
     const {onCheck, onFav} = this.props
     const {recordStore: {checkedItems}} = this.props
     const divStyle = resultsLoading && searchStore.fromRoute ? 'loading' : ''

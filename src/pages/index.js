@@ -18,6 +18,7 @@ import ArticlesPage from 'pages/articles'
 import ArticlePage from 'pages/article'
 import CategoryPage from 'pages/category'
 import SmartAgentPage from 'pages/smartagent'
+import AgentResultsPage from 'pages/agentresults'
 import RadarPage from 'pages/radar'
 import AboutPage from 'pages/about'
 import SiteMapPage from 'pages/sitemap'
@@ -62,6 +63,9 @@ class Pages extends React.Component {
             <SmartAgentPage
               showNotification={this.showNotification}
             />
+          </Route>
+          <Route path="/agentresults/:filters">
+            <AgentResultsPage />
           </Route>
           <Route path="/favorites">
             <FavoritesPage

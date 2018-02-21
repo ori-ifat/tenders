@@ -1,9 +1,9 @@
 import React from 'react'
 import { object } from 'prop-types'
-import { inject, observer } from 'mobx-react'
-import {observable, toJS} from 'mobx'
+import { /*inject,*/ observer } from 'mobx-react'
+import {observable} from 'mobx'
 import { translate } from 'react-polyglot'
-import filter from 'lodash/filter'
+//import filter from 'lodash/filter'
 import remove from 'lodash/remove'
 import find from 'lodash/find'
 import {doFilter} from 'common/utils/filter'
@@ -11,13 +11,14 @@ import CSSModules from 'react-css-modules'
 import styles from './TenderTypeFilter.scss'
 
 @translate()
-@inject('searchStore')
+//@inject('searchStore')
 @CSSModules(styles)
 @observer
 export default class TenderTypeFilter extends React.Component {
 
   static propTypes = {
-    items: object
+    items: object,
+    store: object
   }
 
   @observable items = []
@@ -25,15 +26,15 @@ export default class TenderTypeFilter extends React.Component {
   searching = false
 
   componentWillMount() {
-    const {items, searchStore} = this.props
+    const {items, store} = this.props
     this.items = items
-    this.addSelected(searchStore.filters)
+    this.addSelected(store.filters)
   }
 
   componentWillReceiveProps(nextProps) {
-    const {items, searchStore} = nextProps
+    const {items, store} = nextProps
     this.items = items
-    this.addSelected(searchStore.filters)
+    this.addSelected(store.filters)
   }
 
   addSelected = (filters) => {
@@ -52,8 +53,8 @@ export default class TenderTypeFilter extends React.Component {
   }
 
   doFilter = () => {
-    const { searchStore } = this.props
-    doFilter(searchStore, 'tendertype', this.selected)
+    const { store } = this.props
+    doFilter(store, 'tendertype', this.selected)
   }
 
   onCheck = e => {
@@ -80,12 +81,12 @@ export default class TenderTypeFilter extends React.Component {
   }
 
   render() {
-    const {searchStore, searchStore: {resultsLoading}, t} = this.props
-    const divStyle = resultsLoading && searchStore.fromRoute ? 'loading' : ''
+    const {store, store: {resultsLoading}, t} = this.props
+    const divStyle = resultsLoading && store.fromRoute ? 'loading' : ''
     return(
       <div styleName="tender_type">
         <h4>{t('filter.tenderTypeTitle')}</h4>
-        {/*!searchStore.resultsLoading &&*/
+        {/*!store.resultsLoading &&*/
           <div styleName={divStyle} style={{paddingBottom: '20px'}}>
             {
               this.items.map(((item, index) =>
@@ -103,7 +104,7 @@ export default class TenderTypeFilter extends React.Component {
             }
           </div>
         }
-        {searchStore.resultsLoading &&  //mask the checkboxes when loading - for opacity loader
+        {store.resultsLoading &&  //mask the checkboxes when loading - for opacity loader
           <div styleName="loading-mask">
             &nbsp;
           </div>

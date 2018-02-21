@@ -15,15 +15,22 @@ export default class Title extends React.Component {
   @observable count = 0
 
   componentWillReceiveProps(nextProps) {
-    const {store: {resultsLoading, resultsCount}} = this.props
+    const {store: {resultsLoading, resultsCount}} = nextProps
     this.count = !resultsLoading ? resultsCount : this.count  //...save previous for opacity loading effect
   }
 
   render() {
     const { mode, t, store, accountStore: { profile }, initial, isHome, preTitle } = this.props
     const { resultsLoading, resultsCount } = store
-    const title = mode == 'favorites' ? t('favorites.title') : t('results.title')
-    const caption = mode == 'favorites' ? '' : store.tags.length == 0 ? t('results.lastWeek') : t('results.lastYear')
+    const title = mode == 'favorites' ?
+      t('favorites.title') :
+      mode == 'agent' ?
+        t('agentRes.title') :
+        t('results.title')
+
+    const caption = (mode == 'favorites' || mode == 'agent') ? '' :
+      store.tags.length == 0 ? t('results.lastWeek') : t('results.lastYear')
+
     const titleStyle = resultsLoading ? 'results_summery loading' : 'results_summery'
     const catLabel = isHome ? preTitle : ''
     const titleCss = !isHome ? {marginTop: '4rem'} : {}

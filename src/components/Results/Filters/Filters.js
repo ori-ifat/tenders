@@ -1,13 +1,13 @@
 import React from 'react'
 //import { object, func } from 'prop-types'
 import { inject, observer } from 'mobx-react'
-import {observable, toJS} from 'mobx'
+//import {observable, toJS} from 'mobx'
 import { translate } from 'react-polyglot'
 import moment from 'moment'
 import find from 'lodash/find'
 import filter from 'lodash/filter'
 import MultipleFilter from './MultipleFilter'
-import ComboFilter from './ComboFilter'
+//import ComboFilter from './ComboFilter'
 import TenderTypeFilter from './TenderTypeFilter'
 import DateFilter from './DateFilter'
 import DateButtons from './DateButtons'
@@ -35,7 +35,7 @@ export default class Filters extends React.Component {
 
   componentWillReceiveProps(nextProps) {
     //console.log('filters receive')
-    const {searchStore} = this.props
+    const {searchStore} = nextProps //this.props
     //only if not committed: create a new filter from subsubject tags - to mark them on MultipleFilter
     if (searchStore.filters.length == 0) {
       //get current tags and check if there are subsubjects in it
@@ -94,7 +94,7 @@ export default class Filters extends React.Component {
           <a styleName="clean" onClick={this.cleanFilters}>{t('filter.clean')}</a>
           <h4>{t('filter.title')}:</h4>
         </div>
-        {filtersLoading && <Loading />}
+        {(filtersLoading || resultsLoading) && <Loading />}
         {!filtersLoading &&
 
           <div>
@@ -102,14 +102,19 @@ export default class Filters extends React.Component {
               type="subsubjects"
               items={searchStore.availableFilters.SubSubjects}
               label={subsubjects}
+              store={searchStore}
+              search="standard"
             />
             <TenderTypeFilter
               items={searchStore.availableFilters.TenderTypes}
+              store={searchStore}
             />
             <MultipleFilter
               type="publishers"
               items={searchStore.availableFilters.Publishers}
               label={publishers}
+              store={searchStore}
+              search="standard"
             />
             {/*<ComboFilter
               type="publishers"
@@ -118,12 +123,15 @@ export default class Filters extends React.Component {
             <DateFilter
               dateField={dateField}
               dateValues={dateValues}
+              store={searchStore}
             />
             <DateButtons
               dateField={dateField}
+              store={searchStore}
             />
             <SearchTextFilter
               text={text}
+              store={searchStore}
             />
 
           </div>
