@@ -38,6 +38,10 @@ table {
   text-align: right;
 }
 
+.item_left {
+  text-align: left !important;
+}
+
 .item_meta {
   font-family: 'Heebo', sans-serif;
   margin-bottom: 1rem;
@@ -89,6 +93,11 @@ ul.tender_actions {
 	span {
 		font-size: 2.15rem;
 	}
+}
+
+.title_left {
+  text-align: left !important;
+  direction: ltr !important;
 }
 
 .thender_thumb {

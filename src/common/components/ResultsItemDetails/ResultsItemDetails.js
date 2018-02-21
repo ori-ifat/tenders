@@ -147,6 +147,14 @@ export default class ResultsItemDetails extends React.Component {
     }
   }
 
+  htmlDirection = (text, type) => {
+    const filter=/[א-ת]/gi
+    if (!filter.test(text))
+      return type == 'dir' ? 'ltr' : 'left'
+    else
+      return type == 'dir' ? 'rtl' : 'right'
+  }
+
   render() {
     const { itemStore, encryptedID, showViewer, onClose, t } = this.props
     const item = toJS(itemStore.item)
@@ -156,6 +164,8 @@ export default class ResultsItemDetails extends React.Component {
     const infoDateChk = moment(item.InfoDate)
     const format = infoDateChk.hour() == 0 && infoDateChk.minute() == 0 ? 'DD/MM/YYYY' : 'DD/MM/YYYY HH:mm'
     const infoDate = setDateLabel(item.InfoDate, format, t('tender.noDate'))
+    const titleDir = this.htmlDirection(item.Title, 'dir')
+    const titleStyle = titleDir == 'ltr' ? 'item_title title_left' : 'item_title'
     //
     //infoDate
     const twoDaysLeft = isDateInRange(item.InfoDate, 2)
@@ -190,7 +200,7 @@ export default class ResultsItemDetails extends React.Component {
                   {oneDayLeftTour && !tourToday  && <span styleName="label alert">{`${t('tender.oneDayLeftTour')}${mustDoTourLabel}`}</span>}
                   {tourToday && <span styleName="label alert">{`${t('tender.noDaysLeftTour')}${mustDoTourLabel}`}</span>}
                   {item.MustDoTour && !twoDaysLeftTour && !oneDayLeftTour && !tourToday && <span styleName="label alert">{t('tender.mustDoTour')}</span>}
-                  <h1 styleName="item_title">{item.Title}</h1>
+                  <h1 styleName={titleStyle}>{item.Title}</h1>
                   <h6 styleName="item_meta">{t('tender.publishedAt')}: {publishDate} &middot; {item.TenderType} &middot; {item.InfoCode}</h6>
                   <hr />
                 </div>
@@ -201,20 +211,50 @@ export default class ResultsItemDetails extends React.Component {
                   <Row label={t('tender.publisher')} data={item.Publisher} />
                   {item.InfoDate && <Row label={t('tender.delivery')} data={infoDate} dir="ltr" />}
                   {
+                    item.PresentationPlace && item.PresentationPlace.trim() != '' &&
+                    <Row
+                      label={t('tender.presentationPlace')}
+                      data={item.PresentationPlace}
+                      dir={this.htmlDirection(item.PresentationPlace, 'dir')}
+                      align={this.htmlDirection(item.PresentationPlace, 'align')}
+                    />
+                  }
+                  {
                     item.Summery && item.Summery.trim() != '' &&
-                    <Row label={t('tender.details')} html={this.formatText(item.Summery)} table={item.GT} />
+                    <Row
+                      label={t('tender.details')}
+                      html={this.formatText(item.Summery)}
+                      table={item.GT}
+                      dir={this.htmlDirection(item.Summery, 'dir')}
+                      align={this.htmlDirection(item.Summery, 'align')}
+                    />
                   }
                   {
                     item.Comment && item.Comment.trim() != '' &&
-                    <Row label={t('tender.comment')} html={this.formatText(`${item.Comment}${originalUrl}`)} />
+                    <Row
+                      label={t('tender.comment')}
+                      html={this.formatText(`${item.Comment}${originalUrl}`)}
+                      dir={this.htmlDirection(item.Comment, 'dir')}
+                      align={this.htmlDirection(item.Comment, 'align')}
+                    />
                   }
                   {
                     item.TourDetails && item.TourDetails.trim() != '' &&
-                    <Row label={t('tender.tourDetails')} data={item.TourDetails} />
+                    <Row
+                      label={t('tender.tourDetails')}
+                      data={item.TourDetails}
+                      dir={this.htmlDirection(item.TourDetails, 'dir')}
+                      align={this.htmlDirection(item.TourDetails, 'align')}
+                    />
                   }
                   {
                     item.TenderConditions && item.TenderConditions.trim() != '' &&
-                    <Row label={t('tender.tenderConditions')} data={item.TenderConditions} />
+                    <Row
+                      label={t('tender.tenderConditions')}
+                      data={item.TenderConditions}
+                      dir={this.htmlDirection(item.TenderConditions, 'dir')}
+                      align={this.htmlDirection(item.TenderConditions, 'align')}
+                    />
                   }
                   {
                     item.SubSubjects && item.SubSubjects.trim() != '' &&

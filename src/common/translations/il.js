@@ -130,6 +130,7 @@ export default {
     delivery: 'מועד ההגשה',
     tourDetails: 'סיור קבלנים',
     tenderConditions: 'תנאי סף למכרז',
+    presentationPlace: 'הערות הגשה',
     subSubjects: 'ענפים',
     details: 'פרטים',
     comment: 'פרטים נוספים',
