@@ -214,7 +214,7 @@ export default class ResultsItemDetails extends React.Component {
                     item.PresentationPlace && item.PresentationPlace.trim() != '' &&
                     <Row
                       label={t('tender.presentationPlace')}
-                      data={item.PresentationPlace}
+                      html={this.formatText(item.PresentationPlace)}
                       dir={this.htmlDirection(item.PresentationPlace, 'dir')}
                       align={this.htmlDirection(item.PresentationPlace, 'align')}
                     />
