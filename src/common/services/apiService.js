@@ -57,6 +57,7 @@ export function apiFetch(relUrl, {body, method, searchParams = {}} = {}, noCache
           })
           .catch(error => {
             console.error('apiFetch Error:', error)
+            return reject({ message: error, error: response })
             //notifyMessage(error)
           })
       })

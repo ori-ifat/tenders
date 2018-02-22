@@ -315,7 +315,11 @@ export default class ResultsItemDetails extends React.Component {
               }
             </div>
         }
-        {this.loadError && <div styleName="errors">{t('tender.errors')}</div>}
+        {this.loadError &&
+          <div styleName="errors">
+            {itemStore.searchError.statusCode == 401 ?  t('login.subscribeTitle') : t('tender.errors')}
+          </div>
+        }
         {itemStore.resultsLoading && <Loading />}
         {this.remindMe &&
           <Reminder

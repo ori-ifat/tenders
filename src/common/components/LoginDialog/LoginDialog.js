@@ -85,8 +85,8 @@ export default class LoginDialog extends React.Component {
           <button styleName="button-cancel" onClick={onCancel}>×</button>
           <div styleName="pb">
             <div styleName="login_container">
-              <h3 styleName="login_ttl">{t('login.subscibeTitle')}</h3>
-              <p styleName="subttl">{t('login.subscibeSubTitle')}</p>
+              <h3 styleName="login_ttl">{t('login.subscribeTitle')}</h3>
+              <p styleName="subttl">{t('login.subscribeSubTitle')}</p>
               {accountStore.error != null && accountStore.profile == null &&
                 <div styleName="error_box">{accountStore.errorMessage}</div>
               }

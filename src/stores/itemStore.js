@@ -25,7 +25,7 @@ class Item {
         console.info('[loadTender]', tenderID)
       }
       else {
-        console.error(this.searchError)
+        console.error(toJS(this.searchError))
         this.item = {}
       }
       this.resultsLoading = false

@@ -12,7 +12,7 @@ export default class NotLogged extends React.Component {
     return (
       <div className="row">
         <div className="large-12 columns">
-          <h3>{t('login.subscibeTitle')}</h3>
+          <h3>{t('login.subscribeTitle')}</h3>
         </div>
       </div>
     )
