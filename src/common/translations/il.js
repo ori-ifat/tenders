@@ -127,6 +127,7 @@ export default {
     mustDoTour: 'סיור חובה',
     mustTour: 'חובה',
     publisher: 'המפרסם',
+    publisherSite: 'אתר המפרסם',
     delivery: 'מועד ההגשה',
     tourDetails: 'סיור קבלנים',
     tenderConditions: 'תנאי סף למכרז',

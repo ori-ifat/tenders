@@ -178,6 +178,9 @@ export default class ResultsItemDetails extends React.Component {
     const mustDoTourLabel = (twoDaysLeftTour || oneDayLeftTour || tourToday) && item.MustDoTour ? ` - ${t('tender.mustTour')}` : ''
     //fileName
     const fileName = item.File ? item.File.FileName : ''
+    //publisher site
+    let publisherSite = item.PublisherSite && item.PublisherSite.trim() != '' ? item.PublisherSite : ''
+    if (publisherSite != '' && publisherSite.substring(0, 4) != 'http') publisherSite = `http://${publisherSite}`
     //original tender
     const originalUrl = item.OriginalID ? `##URL##${item.OriginalID}[[SEP]]${item.OriginalTitle}` : ''
 
@@ -209,6 +212,14 @@ export default class ResultsItemDetails extends React.Component {
               <div className="grid-x" styleName="tender_data">
                 <div className="large-9 cell">
                   <Row label={t('tender.publisher')} data={item.Publisher} />
+                  {
+                    publisherSite != '' &&
+                    <Row
+                      label={t('tender.publisherSite')}
+                      html={this.formatText(publisherSite)}
+                      dir={this.htmlDirection(publisherSite, 'dir')}
+                    />
+                  }
                   {item.InfoDate && <Row label={t('tender.delivery')} data={infoDate} dir="ltr" />}
                   {
                     item.PresentationPlace && item.PresentationPlace.trim() != '' &&
