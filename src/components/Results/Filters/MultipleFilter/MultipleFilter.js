@@ -52,7 +52,7 @@ export default class MultipleFilter extends React.Component {
     this.type = type
     this.label = label
     this.items = items  //init for checkSubsubjects()...
-    this.checkSubsubjects()
+    //this.checkSubsubjects()   //subsubject -> tag crap
     this.sortChecked(items)
   }
 
@@ -117,7 +117,7 @@ export default class MultipleFilter extends React.Component {
     //commit filters
     const { searchStore, t } = this.props
     const field = this.type == 'subsubjects' ? 'subsubject' : 'publisher'
-    if (this.type == 'subsubjects') {
+    /* if (this.type == 'subsubjects') {  //subsubject -> tag crap
       //subsubjects: act like a search, not like a filter ...
       const tags = this.selected.map((item, index) => {
         return {ID: item, Name: encodeURIComponent(this.itemLabels[index]), ResType: field, UniqueID: parseFloat(`${item}.1`)}
@@ -125,18 +125,6 @@ export default class MultipleFilter extends React.Component {
       //route list SearchInput, to enable a new search
       const { routingStore } = this.props
       const sort = 'publishDate'  //default sort. note, means that on every search action, sort will reset here
-      /*
-      const tagsFiltered = []
-      forEach(tags, tag => {
-        const found = find(searchStore.tags, _tag => {
-          return _tag.ID === tag.ID && _tag.ResType === tag.ResType
-        })
-        if (!found) {
-          tagsFiltered.push(tag)
-        }
-      })
-      console.log(tagsFiltered)
-      */
       remove(searchStore.tags, tag => {
         return tag.ResType === 'subsubject'
       })
@@ -145,10 +133,10 @@ export default class MultipleFilter extends React.Component {
       const filters = JSON.stringify([]) //...(searchStore.filters)
       routingStore.push(`/results/${sort}/${payload}/${filters}`)
     }
-    else {
+    else { */
       //normal filter behavior
       doFilter(searchStore, field, this.selected, this.itemLabels, true, this.closeModal, t('filter.more'))
-    }
+    //}
   }
 
   filterItems = e => {

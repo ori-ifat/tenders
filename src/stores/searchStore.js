@@ -4,7 +4,7 @@ import map from 'lodash/map'
 import filter from 'lodash/filter'
 import moment from 'moment'
 import {extractLabel} from 'common/utils/util'
-import {/*search*/ fetchResultsPage, fetchFilters } from 'common/services/apiService'
+import {/*search*/ fetchResultsPage, fetchFilters, getSubSubjects } from 'common/services/apiService'
 import {getDefaultFilter} from 'common/utils/filter'
 
 const serializeTags = ({ID, Name, ResType}) => {
@@ -25,6 +25,7 @@ class Search {
 */
   @observable filters = []; //chosen filters from filters component
   @observable availableFilters = [];  //all relevant filters;
+  @observable subSubjects = [];  //all available subsubjects of the user
   @observable selectedFilters = {};   //labels for the filters component
   @observable tags = [];
   @observable sort = 'publishDate'
@@ -32,6 +33,7 @@ class Search {
   @observable initialDate = true
   @observable resultsLoading = false
   @observable filtersLoading = false
+  @observable subSubjectsLoading = false
   @observable hasMoreResults = true
   @observable request = {};
   @observable requestFilters = {};
@@ -260,6 +262,34 @@ class Search {
         this.availableFilters = []
       }
       this.filtersLoading = false
+    }
+  }
+
+  @action.bound
+  async loadSubSubjects() {
+    if (!this.subSubjectsLoading) {
+      this.subSubjectsLoading = true
+      let searchError = null
+
+      try {
+        this.subSubjects = await getSubSubjects()
+      }
+      catch(e) {
+        //an error occured on search
+        searchError = {
+          message: `[loadSubSubjects] search error: ${e.message} http status code ${e.error.status}`,
+          statusCode: e.error.status
+        }
+      }
+
+      if (searchError == null) {
+        console.info('[loadSubSubjects]')
+      }
+      else {
+        console.error(searchError)
+        this.subSubjects = []
+      }
+      this.subSubjectsLoading = false
     }
   }
 }
