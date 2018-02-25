@@ -21,15 +21,18 @@ const navbar = [  /*{
   title: 'subscriptions',
   link: '/subscriptions'
 },*/ {
-  title: 'services',
-  link: '/services'
-}, {
-  title: 'contactus',
-  link: '/contact'
-}, {
-  title: 'publish',
-  link: '/publish'
-}]
+    title: 'about',
+    link: '/about'
+  }, {
+    title: 'services',
+    link: '/services'
+  }, {
+    title: 'contactus',
+    link: '/contact'
+  }, {
+    title: 'publish',
+    link: '/publish'
+  }]
 
 @translate()
 @inject('routingStore')

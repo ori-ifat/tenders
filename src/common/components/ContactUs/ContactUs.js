@@ -1,5 +1,5 @@
-
 import React, {Component} from 'react'
+import { string } from 'prop-types'
 import { inject, observer } from 'mobx-react'
 import { observable } from 'mobx'
 import {translate} from 'react-polyglot'
@@ -13,6 +13,10 @@ import styles from './ContactUs.scss'
 @observer
 @CSSModules(styles, {allowMultiple: true})
 export default class Contact extends Component {
+
+  static propTypes = {
+    title: string
+  }
 
   @observable sent = false
   @observable status = ''
@@ -76,13 +80,13 @@ export default class Contact extends Component {
   }
 
   render() {
-    const {t} = this.props
+    const {title, t} = this.props
     return (
       <div>
 
         <div className="sa_container" styleName="form-container">
-          <h2 styleName="form-title">{t('cat.viewAll')}?</h2>
-          <p className="text-center" styleName="form-subtitle">{t('cat.leaveDetails')}</p>
+          <h2 styleName="form-title">{title ? title : `${t('cat.viewAll')}?`}</h2>
+          <p className="text-center" styleName="form-subtitle">{title ? '' : t('cat.leaveDetails')}</p>
           {this.status != '' &&
             <p styleName="sub_ttl" dangerouslySetInnerHTML={{__html: this.status}}></p>
           }

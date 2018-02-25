@@ -58,8 +58,8 @@ export default class SearchInput extends Component {
     if (!filterString) {
       return []
     }
-
-    return options.filter(option => !values.find(value => value.id + value.type + value.text === option.id + option.type + option.text))
+    //that function will remove values that were already selected on previous action - to eliminate duplicates
+    return options.filter(option => !values.find(value => value.ID + value.ResType + value.Name === option.ID + option.ResType + option.Name))
   }
 
   optionRenderer = (item) => {

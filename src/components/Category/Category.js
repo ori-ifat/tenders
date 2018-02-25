@@ -43,7 +43,10 @@ export default class Category extends Component {
   render() {
     const {match: {params: { name }}, t} = this.props
     const {data} = this
-    const short = data ? data.title.replace(/`${t('footer.tenders')}`\s/g, '') : ''
+    const title = data ? data.title : ''
+    const caption = t('footer.tenders')
+    const reg = new RegExp(`${caption} `, 'g')
+    const short = data ? title.replace(reg, '') : ''
     const tag = t(`footer.${name}`)
     const metaTitle = t('meta.catResultsTitle', {tag})
     const metaDesc = t('meta.catResultsDesc', {tag})
@@ -57,7 +60,7 @@ export default class Category extends Component {
           <DocumentMeta {...meta} />
           <div className="row">
             <div className="large-12 columns">
-              <h1 styleName="title">{data.title}</h1>
+              <h1 styleName="title">{title}</h1>
               <p styleName="subttl">{t('cat.subTitle', {short})}</p>
               <hr/>
             </div>
@@ -77,15 +80,15 @@ export default class Category extends Component {
           </div>
           <div className="row" style={{marginTop: '3rem'}}>
             <div className="large-12 columns">
-              <ContactUs />
+              <ContactUs title={t('cat.contactTitle', {title})} />
             </div>
           </div>
           <div className="row" style={{marginTop: '3rem'}}>
             <div className="large-12 columns">
-            <div styleName="wraper">
-              {
-                data.text && <div dangerouslySetInnerHTML={{__html: data.text}}></div>
-              }
+              <div styleName="wraper">
+                {
+                  data.text && <div dangerouslySetInnerHTML={{__html: data.text}}></div>
+                }
               </div>
             </div>
           </div>
