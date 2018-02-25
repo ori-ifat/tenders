@@ -50,7 +50,7 @@ export default class About extends Component {
                 <div style={{marginBottom: '50px'}}>
                   <div style={{fontWeight: 'bold', marginTop: '20px', marginBottom: '10px'}}>{data.customers.title}</div>
                   {
-                    data.customers.items.map(customer => <div styleName="costomer_types"><img src={vIcon} />{customer.title}</div>)
+                    data.customers.items.map((customer, index) => <div key={index} styleName="costomer_types"><img src={vIcon} />{customer.title}</div>)
                   }
                 </div>
               </div>
