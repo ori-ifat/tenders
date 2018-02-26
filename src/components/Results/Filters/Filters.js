@@ -3,6 +3,7 @@ import React from 'react'
 import { inject, observer } from 'mobx-react'
 import {observable, toJS} from 'mobx'
 import { translate } from 'react-polyglot'
+import { getDefaultDates } from 'common/utils/filter'
 import moment from 'moment'
 import find from 'lodash/find'
 import filter from 'lodash/filter'
@@ -28,6 +29,8 @@ export default class Filters extends React.Component {
     setSelected: func
   }
   */
+
+  @observable dateField = 'publishdate'
 
   componentWillMount() {
     //console.log('filters mount')
@@ -77,14 +80,20 @@ export default class Filters extends React.Component {
     searchStore.loadNextFilters() //cached, but will allow filters to be unchecked on child components
   }
 
+  chooseDateField = field => {
+    this.dateField = field
+    //set the date field name
+    const { searchStore, t } = this.props
+    searchStore.setSelectedFilters('dateField', this.dateField, t('filter.more'))
+  }
+
   render() {
     const {searchStore, searchStore: {resultsLoading, filtersLoading, selectedFilters, tags}, t} = this.props
     //note: selectedFilters - should maintain the state of child filter components, after this component recreates;
     const subsubjects = selectedFilters ? selectedFilters.subsubjects : ''
     const publishers = selectedFilters ? selectedFilters.publishers : ''
     const dateField = selectedFilters ? selectedFilters.dateField || 'publishdate' : 'publishdate'
-    //const dateValues = selectedFilters && selectedFilters.date ? selectedFilters.date[dateField] || [] : []
-    const defaultDates = tags.length == 0 ? [moment().subtract(1, 'week').format('YYYY-MM-DD'), moment().format('YYYY-MM-DD')] : [moment().subtract(1, 'year').format('YYYY-MM-DD'), moment().format('YYYY-MM-DD')]
+    const defaultDates = getDefaultDates(tags)
     const dateValues = selectedFilters && selectedFilters.date ? selectedFilters.date[dateField] || defaultDates : defaultDates
     const text = selectedFilters ? selectedFilters.searchText : ''
     //console.log('filters', toJS(searchStore.availableFilters))
@@ -116,11 +125,13 @@ export default class Filters extends React.Component {
               items={searchStore.availableFilters.Publishers}
             />*/}
             <DateFilter
-              dateField={dateField}
+              dateField={this.dateField}
+              chooseDateField={this.chooseDateField}
               dateValues={dateValues}
             />
             <DateButtons
-              dateField={dateField}
+              dateField={this.dateField}
+              chooseDateField={this.chooseDateField}
             />
             <SearchTextFilter
               text={text}
