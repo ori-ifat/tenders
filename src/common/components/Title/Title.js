@@ -2,9 +2,23 @@ import React from 'react'
 import { inject, observer } from 'mobx-react'
 import { observable } from 'mobx'
 import { translate } from 'react-polyglot'
+import filter from 'lodash/filter'
 import ExtraCount from 'components/results/ExtraCount'
 import CSSModules from 'react-css-modules'
 import styles from './Title.scss'
+
+const getCaption = (mode, tags, lastWeekLabel, lastYearLabel) => {
+  //check for the 'daysBack' tag:
+  const reducedTags = filter(tags, tag => {
+    return tag.ResType == 'daysBack'
+  })
+  if (mode == 'favorites' || reducedTags.length > 0)
+    return ''
+  else if (tags.length == 0)
+    return lastWeekLabel
+  else
+    return lastYearLabel
+}
 
 @translate()
 @inject('accountStore')
@@ -23,7 +37,8 @@ export default class Title extends React.Component {
     const { mode, t, store, accountStore: { profile }, initial, isHome, preTitle } = this.props
     const { resultsLoading, resultsCount } = store
     const title = mode == 'favorites' ? t('favorites.title') : t('results.title')
-    const caption = mode == 'favorites' ? '' : store.tags.length == 0 ? t('results.lastWeek') : t('results.lastYear')
+    //const caption = mode == 'favorites' ? '' : store.tags.length == 0 ? t('results.lastWeek') : t('results.lastYear')
+    const caption = getCaption(mode, store.tags, t('results.lastWeek'), t('results.lastYear'))
     const titleStyle = resultsLoading ? 'results_summery loading' : 'results_summery'
     const catLabel = isHome ? preTitle : ''
     const titleCss = !isHome ? {marginTop: '4rem'} : {}
