@@ -89,6 +89,7 @@
     "prop-types": "^15.6.0",
     "querystring": "^0.2.0",
     "react": "^15.6.1",
+    "react-click-outside": "^3.0.1",
     "react-datepicker": "^0.58.0",
     "react-document-meta": "^2.1.2",
     "react-dom": "^15.6.1",

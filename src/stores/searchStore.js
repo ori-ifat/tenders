@@ -10,10 +10,12 @@ import {getDefaultFilter} from 'common/utils/filter'
 const serializeTags = ({ID, Name, ResType}) => {
   return ResType.indexOf('_partial') > -1 ? {
     id: Name,
-    type: ResType
+    type: ResType,
+    text: Name
   } : {
     id: ID,
-    type: ResType
+    type: ResType,
+    text: Name
   }
 }
 

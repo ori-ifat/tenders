@@ -24,6 +24,7 @@ export default class SearchInput extends Component {
   }
 
   @observable selectedValues =[]
+  @observable showSaved = false
 
   componentWillMount() {
     const {searchStore, tags} = this.props
@@ -78,7 +79,16 @@ export default class SearchInput extends Component {
 
   }
 
+  onFocus = () => {
+    if(this.selectedValues.length == 0) this.showSaved = true
+  }
+
+  onBlur = () => {
+    this.showSaved = false
+  }
+
   onInputKeyDown = (e) => {
+    if(this.showSaved) this.showSaved = false
     if (e.keyCode === 13) {
       //ori s setTimeout to solve a bug, when search is committed before Select actually chose an item ...
       //e.preventDefault()  //fucks up the search.
@@ -128,7 +138,7 @@ export default class SearchInput extends Component {
                 className="search-select"
                 name="searchbox"
                 placeholder={t('search.placeHolder')}
-                autoFocus
+                autoFocus={(this.selectedValues.length > 0)}
                 noResultsText={null}
                 searchPromptText=""
                 multi={true}
@@ -137,6 +147,7 @@ export default class SearchInput extends Component {
                 loadOptions={this.getOptions}
                 optionRenderer={this.optionRenderer}
                 onChange={this.onChange}
+                onFocus={this.onFocus}                
                 onInputKeyDown={this.onInputKeyDown}
                 filterOptions={this.filterOptions}
                 value={selectedValues}
@@ -153,6 +164,11 @@ export default class SearchInput extends Component {
             />
           </div>
         </div>
+        {this.showSaved &&
+          <div className="row"
+            style={{backgroundColor: 'yellow', position: 'absolute', zIndex: '1000', width: '97%', height: '1000px'}}>
+            <div className="medium-12 columns">aaa</div>
+          </div>}
       </div>
     )
   }
