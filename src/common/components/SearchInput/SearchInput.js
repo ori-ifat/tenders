@@ -5,6 +5,7 @@ import styles from './SearchInput.scss'
 import {translate} from 'react-polyglot'
 import {inject, observer} from 'mobx-react'
 import Select from 'react-select'
+import SubSearch from './SubSearch'
 import {observable, toJS} from 'mobx'
 import {autocomplete} from 'common/services/apiService'
 
@@ -25,8 +26,9 @@ export default class SearchInput extends Component {
   @observable selectedValues =[]
 
   componentWillMount() {
-    const {tags} = this.props
+    const {searchStore, tags} = this.props
     if (tags) this.selectedValues = tags
+    searchStore.loadSubSubjects()
   }
 
   componentWillReceiveProps(nextProps) {
@@ -113,32 +115,41 @@ export default class SearchInput extends Component {
 
   render() {
     const selectedValues = toJS(this.selectedValues)
-    const {t} = this.props
+    const {searchStore, t} = this.props
 
     return (
-      <div className="row">
-        <div className="medium-12 columns">
-          <div id="searchbox_wrapper" styleName="wrapper">
-            <a styleName="search_btn" onClick={this.onSearchClick}><img src={search_go} styleName="search-arrow" /></a>
-            <Select.Async
-              styleName="select-searchbox"
-              className="search-select"
-              name="searchbox"
-              placeholder={t('search.placeHolder')}
-              autoFocus
-              noResultsText={null}
-              searchPromptText=""
-              multi={true}
-              cache={false}
-              clearable={false}
-              loadOptions={this.getOptions}
-              optionRenderer={this.optionRenderer}
-              onChange={this.onChange}
-              onInputKeyDown={this.onInputKeyDown}
-              filterOptions={this.filterOptions}
-              value={selectedValues}
-              labelKey={'Name'}
-              valueKey={'UniqueID'}
+      <div>
+        <div className="row">
+          <div className="medium-12 columns">
+            <div id="searchbox_wrapper" styleName="wrapper">
+              <a styleName="search_btn" onClick={this.onSearchClick}><img src={search_go} styleName="search-arrow" /></a>
+              <Select.Async
+                styleName="select-searchbox"
+                className="search-select"
+                name="searchbox"
+                placeholder={t('search.placeHolder')}
+                autoFocus
+                noResultsText={null}
+                searchPromptText=""
+                multi={true}
+                cache={false}
+                clearable={false}
+                loadOptions={this.getOptions}
+                optionRenderer={this.optionRenderer}
+                onChange={this.onChange}
+                onInputKeyDown={this.onInputKeyDown}
+                filterOptions={this.filterOptions}
+                value={selectedValues}
+                labelKey={'Name'}
+                valueKey={'UniqueID'}
+              />
+            </div>
+          </div>
+        </div>
+        <div className="row">
+          <div styleName="subsubjects">
+            <SubSearch
+              items={searchStore.subSubjects}
             />
           </div>
         </div>

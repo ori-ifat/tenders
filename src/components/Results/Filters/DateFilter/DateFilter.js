@@ -1,5 +1,5 @@
 import React from 'react'
-import { string, array } from 'prop-types'
+import { string, array, func } from 'prop-types'
 import { inject, observer } from 'mobx-react'
 import {observable, toJS} from 'mobx'
 import { translate } from 'react-polyglot'
@@ -18,27 +18,23 @@ export default class DateFilter extends React.Component {
 
   static propTypes = {
     dateField: string,
-    dateValues: array
+    dateValues: array,
+    chooseDateField: func
   }
 
-  @observable dateField = 'publishdate'
   @observable startDate = moment()
   @observable endDate = moment()
 
   componentWillMount() {
-    const {dateField, dateValues} = this.props
-    this.chooseDateField(dateField)
+    const {dateField, dateValues, chooseDateField} = this.props
+    chooseDateField(dateField)
     this.setDefaultDates(dateValues)
   }
 
   componentWillReceiveProps(nextProps) {
-    const {dateField, dateValues} = nextProps
-    this.chooseDateField(dateField)
+    const {dateField, dateValues, chooseDateField} = nextProps
+    chooseDateField(dateField)
     this.setDefaultDates(dateValues)
-  }
-
-  chooseDateField = field => {
-    this.dateField = field
   }
 
   setDefaultDates = dateValues => {
@@ -64,34 +60,32 @@ export default class DateFilter extends React.Component {
 
   doFilter = () => {
     //filter commit
-    const { searchStore, t } = this.props
+    const { searchStore, dateField, t } = this.props
     this.endDate = this.endDate.hour(23).minute(59).second(59)  //include all last day.
     const values = [
       moment(this.startDate).format('YYYY-MM-DD'),
       moment(this.endDate).format('YYYY-MM-DD HH:mm:ss')
     ]
     //console.log('values', values)
-    doFilter(searchStore, this.dateField, values)
+    doFilter(searchStore, dateField, values)
     //set the state-like object:
-    //...the date field name,
-    searchStore.setSelectedFilters('dateField', this.dateField, t('filter.more'))
-    //the actual values
-    searchStore.setSelectedFilters(this.dateField, values, t('filter.more'))
+    //the actual values (date field name was already set on DateFilter)
+    searchStore.setSelectedFilters(dateField, values, t('filter.more'))
   }
 
   render() {
-    const {t} = this.props
-    const clsLeft = this.dateField == 'infodate' ? 'dates-left selected' : 'dates-left'
-    const clsRight = this.dateField == 'publishdate' ? 'dates-right selected' : 'dates-right'
+    const {dateField, chooseDateField, t} = this.props    
+    const clsLeft = dateField == 'infodate' ? 'dates-left selected' : 'dates-left'
+    const clsRight = dateField == 'publishdate' ? 'dates-right selected' : 'dates-right'
 
     return(
       <div styleName="dateContainer">
         <div styleName="tabs_container">
-          <div styleName={clsRight} onClick={() => this.chooseDateField('publishdate')} style={{cursor: 'pointer'}}>
+          <div styleName={clsRight} onClick={() => chooseDateField('publishdate')} style={{cursor: 'pointer'}}>
             {t('filter.publishDate')}
           </div>
 
-          <div styleName={clsLeft} onClick={() => this.chooseDateField('infodate')} style={{cursor: 'pointer'}}>
+          <div styleName={clsLeft} onClick={() => chooseDateField('infodate')} style={{cursor: 'pointer'}}>
             {t('filter.infoDate')}
           </div>
         </div>

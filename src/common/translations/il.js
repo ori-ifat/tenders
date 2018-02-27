@@ -91,6 +91,7 @@ export default {
     subsubject: 'ענף',
     tendertype: 'סוג',
     publisher: 'מפרסם',
+    daysBack: 'טווח זמן',
     tender_partial: 'בטקסט של מכרז',
     tender_partial_text: '%{text}',
     publisher_partial: 'בטקסט של מפרסם',
@@ -255,7 +256,10 @@ export default {
     noData: 'לא נמצאו תוצאות',
     lastDay: 'יום אחרון',
     lastWeek: 'שבוע אחרון',
-    lastMonth: 'חודש אחרון'
+    lastMonth: 'חודש אחרון',
+    nextDay: 'עד מחר',
+    nextWeek: 'השבוע הקרוב',
+    nextMonth: 'החודש הקרוב'
   },
   favorites: {
     title: 'מועדפים נמצאו'

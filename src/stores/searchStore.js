@@ -4,16 +4,18 @@ import map from 'lodash/map'
 import filter from 'lodash/filter'
 import moment from 'moment'
 import {extractLabel} from 'common/utils/util'
-import {/*search*/ fetchResultsPage, fetchFilters } from 'common/services/apiService'
+import {/*search*/ fetchResultsPage, fetchFilters, getSubSubjects } from 'common/services/apiService'
 import {getDefaultFilter} from 'common/utils/filter'
 
 const serializeTags = ({ID, Name, ResType}) => {
   return ResType.indexOf('_partial') > -1 ? {
     id: Name,
-    type: ResType
+    type: ResType,
+    text: Name
   } : {
     id: ID,
-    type: ResType
+    type: ResType,
+    text: Name
   }
 }
 
@@ -25,6 +27,7 @@ class Search {
 */
   @observable filters = []; //chosen filters from filters component
   @observable availableFilters = [];  //all relevant filters;
+  @observable subSubjects = [];  //all available subsubjects of the user
   @observable selectedFilters = {};   //labels for the filters component
   @observable tags = [];
   @observable sort = 'publishDate'
@@ -32,6 +35,7 @@ class Search {
   @observable initialDate = true
   @observable resultsLoading = false
   @observable filtersLoading = false
+  @observable subSubjectsLoading = false
   @observable hasMoreResults = true
   @observable request = {};
   @observable requestFilters = {};
@@ -61,20 +65,14 @@ class Search {
   get serializedFilters() {
     const tags = toJS(this.tags)
     let filters = toJS(this.filters)
-    /* //add date filter to empty and text searches
-    const reduced = filter(tags, tag => {
-      return tag.ResType ==  'tender_partial'
-    })
-    //add date filter if partial search was done, or no tags have beed added (empty search)
-    if (reduced.length > 0 || (tags.length == 0 && filters.length == 0)) {
-      const filter = getDefaultFilter(tags.length == 0 && filters.length == 0)
-      filters = [...filters, filter]
-    }*/
-    //add date filter always, only if it did not exist already on this.filters
+    //add date filter: if it did not exist already on this.filters, or as 'daysBack' on this.tags
     const reduced = filter(filters, filter => {
       return filter.field == 'publishdate' || filter.field == 'infodate'
     })
-    if (reduced.length == 0 || tags.length == 0){ //(tags.length == 0 && filters.length == 0)) {
+    const reducedTags = filter(tags, tag => {
+      return tag.ResType == 'daysBack'
+    })
+    if ((reduced.length == 0 && reducedTags.length == 0) || (tags.length == 0 && reduced.length == 0)){ //(tags.length == 0 && filters.length == 0)) {
       //const filter = getDefaultFilter(tags.length == 0 && filters.length == 0)
       const filter = getDefaultFilter(tags.length == 0)
       filters = [...filters, filter]
@@ -260,6 +258,34 @@ class Search {
         this.availableFilters = []
       }
       this.filtersLoading = false
+    }
+  }
+
+  @action.bound
+  async loadSubSubjects() {
+    if (!this.subSubjectsLoading) {
+      this.subSubjectsLoading = true
+      let searchError = null
+
+      try {
+        this.subSubjects = await getSubSubjects()
+      }
+      catch(e) {
+        //an error occured on search
+        searchError = {
+          message: `[loadSubSubjects] search error: ${e.message} http status code ${e.error.status}`,
+          statusCode: e.error.status
+        }
+      }
+
+      if (searchError == null) {
+        console.info('[loadSubSubjects]')
+      }
+      else {
+        console.error(searchError)
+        this.subSubjects = []
+      }
+      this.subSubjectsLoading = false
     }
   }
 }
