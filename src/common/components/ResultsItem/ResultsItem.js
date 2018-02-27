@@ -24,6 +24,7 @@ const timeSrc = req('./Time.svg')
 const timeActSrc = req('./alert_on.svg')
 const favSrc = req('./fav.svg')
 const favActSrc = req('./action_fav.svg')
+const newTabSrc = req('./new_tab.svg')
 
 @translate()
 @inject('accountStore')
@@ -201,7 +202,7 @@ export default class ResultsItem extends React.Component {
               <h3
                 onClick={() => this.viewDetails(item.TenderID)}
                 styleName={`item-title${visitedStyle}`}
-                dangerouslySetInnerHTML={this.markUpText(item.Title)}></h3>
+                dangerouslySetInnerHTML={this.markUpText(item.Title)}></h3><a href={`#/tender/${item.EncID}`} target="_blank"><img src={newTabSrc} /></a>
               { logged &&
                 <div styleName="tender_desc">
                   <p dangerouslySetInnerHTML={this.markUpText(item.Summery)}></p>
