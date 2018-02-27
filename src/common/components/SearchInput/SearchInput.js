@@ -6,8 +6,10 @@ import {translate} from 'react-polyglot'
 import {inject, observer} from 'mobx-react'
 import Select from 'react-select'
 import SubSearch from './SubSearch'
+import SavedSearches from './SavedSearches'
 import {observable, toJS} from 'mobx'
 import {autocomplete} from 'common/services/apiService'
+import enhanceWithClickOutside from 'react-click-outside'
 
 const req = require.context('common/style/icons/', false)
 const search_go = req('./search_go.svg')
@@ -16,6 +18,7 @@ const search_go = req('./search_go.svg')
 @inject('routingStore')
 @inject('searchStore')
 @inject('recordStore')
+@enhanceWithClickOutside
 @observer
 @CSSModules(styles)
 export default class SearchInput extends Component {
@@ -35,6 +38,11 @@ export default class SearchInput extends Component {
   componentWillReceiveProps(nextProps) {
     const {tags} = nextProps
     if (tags) this.selectedValues = tags
+  }
+
+  handleClickOutside() {
+    //console.log('handleClickOutside')
+    this.onBlur()
   }
 
   onChange = values => {
@@ -147,7 +155,7 @@ export default class SearchInput extends Component {
                 loadOptions={this.getOptions}
                 optionRenderer={this.optionRenderer}
                 onChange={this.onChange}
-                onFocus={this.onFocus}                
+                onFocus={this.onFocus}
                 onInputKeyDown={this.onInputKeyDown}
                 filterOptions={this.filterOptions}
                 value={selectedValues}
@@ -165,10 +173,7 @@ export default class SearchInput extends Component {
           </div>
         </div>
         {this.showSaved &&
-          <div className="row"
-            style={{backgroundColor: 'yellow', position: 'absolute', zIndex: '1000', width: '97%', height: '1000px'}}>
-            <div className="medium-12 columns">aaa</div>
-          </div>}
+          <SavedSearches close={this.onBlur} />}
       </div>
     )
   }
