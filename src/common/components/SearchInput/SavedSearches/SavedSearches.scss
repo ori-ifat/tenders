@@ -1,0 +1,19 @@
+.container {
+  z-index: 1000;
+  background-color: whitesmoke;
+  width: 90%;
+  height: 600px;
+  position: absolute;
+  box-shadow: grey 2px 5px 5px;
+  padding: 15px;
+  line-height: 1.8;
+}
+
+.title {
+  font-size: 1rem;
+}
+
+.link {
+  color: gray;
+  font-size: 1.5rem;
+}

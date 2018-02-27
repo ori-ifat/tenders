@@ -165,15 +165,16 @@ export default class SearchInput extends Component {
             </div>
           </div>
         </div>
+        {this.showSaved &&
+          <SavedSearches close={this.onBlur} />
+        }
         <div className="row">
           <div styleName="subsubjects">
             <SubSearch
               items={searchStore.subSubjects}
             />
           </div>
-        </div>
-        {this.showSaved &&
-          <SavedSearches close={this.onBlur} />}
+        </div>        
       </div>
     )
   }

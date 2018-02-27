@@ -345,6 +345,10 @@ export function resetReminders() {
   return apiFetch('Reminder/ResetUserReminders', {}, true)
 }
 
+export function mySearches() {
+  return apiFetch('Search/MySearches', {}, true)
+}
+
 function fetchData(url) {
   /* fetch a url that is not in api controllers, such as a json file */
 

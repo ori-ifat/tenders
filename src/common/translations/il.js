@@ -306,6 +306,9 @@ export default {
     compareTo: 'טקסט להשוואה',
     submitText: 'בדוק'
   },
+  searches: {
+    title: 'חיפושים אחרונים:'
+  },
   subscriptions: {
     title: 'מסלולים ומחירים',
     onecat: 'סיווג אחד',
