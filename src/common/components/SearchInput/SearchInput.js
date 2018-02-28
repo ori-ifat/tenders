@@ -32,17 +32,19 @@ export default class SearchInput extends Component {
   componentWillMount() {
     const {searchStore, tags} = this.props
     if (tags) this.selectedValues = tags
+    this.showSaved = false
     searchStore.loadSubSubjects()
   }
 
   componentWillReceiveProps(nextProps) {
     const {tags} = nextProps
+    this.showSaved = false
     if (tags) this.selectedValues = tags
   }
 
   handleClickOutside() {
     //console.log('handleClickOutside')
-    this.onBlur()
+    this.showSaved = false
   }
 
   onChange = values => {
@@ -88,12 +90,12 @@ export default class SearchInput extends Component {
   }
 
   onFocus = () => {
-    if(this.selectedValues.length == 0) this.showSaved = true
+    if (this.selectedValues.length == 0) this.showSaved = true
   }
-
+  /*
   onBlur = () => {
     this.showSaved = false
-  }
+  }*/
 
   onInputKeyDown = (e) => {
     if(this.showSaved) this.showSaved = false
@@ -166,7 +168,7 @@ export default class SearchInput extends Component {
           </div>
         </div>
         {this.showSaved &&
-          <SavedSearches close={this.onBlur} />
+          <SavedSearches />
         }
         <div className="row">
           <div styleName="subsubjects">
@@ -174,7 +176,7 @@ export default class SearchInput extends Component {
               items={searchStore.subSubjects}
             />
           </div>
-        </div>        
+        </div>
       </div>
     )
   }

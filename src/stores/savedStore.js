@@ -10,6 +10,7 @@ class Saved {
   async loadSavedSearches() {
     if (!this.resultsLoading) {
       this.resultsLoading = true
+      this.searchError = null
       try {
         this.searches = await mySearches()
       }
@@ -26,7 +27,7 @@ class Saved {
       }
       else {
         console.error(toJS(this.searchError))
-        this.item = {}
+        this.searches = []
       }
       this.resultsLoading = false
     }
