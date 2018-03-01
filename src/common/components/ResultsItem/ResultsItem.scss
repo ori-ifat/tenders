@@ -2,6 +2,7 @@
 @import '~common/style/_settings.scss';
 
 .item-title {
+	display: inline;
 	cursor: pointer;
 	span {
 		font-size: 1.25rem !important;
@@ -10,6 +11,10 @@
     font-weight: 500 !important;
     transition: all 0.25s !important;
 	}
+}
+
+.new_tab {
+	padding-right: 0.5rem;
 }
 
 .tender_summery {

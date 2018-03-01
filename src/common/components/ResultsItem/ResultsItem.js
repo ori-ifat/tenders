@@ -202,7 +202,7 @@ export default class ResultsItem extends React.Component {
               <h3
                 onClick={() => this.viewDetails(item.TenderID)}
                 styleName={`item-title${visitedStyle}`}
-                dangerouslySetInnerHTML={this.markUpText(item.Title)}></h3><a href={`#/tender/${item.EncID}`} target="_blank"><img src={newTabSrc} /></a>
+                dangerouslySetInnerHTML={this.markUpText(item.Title)}></h3><a href={`#/tender/${item.EncID}`} target="_blank" styleName="new_tab"><img src={newTabSrc} /></a>
               { logged &&
                 <div styleName="tender_desc">
                   <p dangerouslySetInnerHTML={this.markUpText(item.Summery)}></p>
