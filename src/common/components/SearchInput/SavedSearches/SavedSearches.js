@@ -38,11 +38,11 @@ export default class SavedSearches extends Component {
       <div className="row">
         <div className="medium-12 columns">
           <div styleName="container">
-            <h1 styleName="title">{t('searches.title')}</h1>
+            <h3 styleName="title">{t('searches.title')}</h3>
             {
               !resultsLoading && savedStore.searches.map((search, index) =>
                 <div key={index}>
-                  <a onClick={() => this.goToSearch(search)} styleName="link">&larr; {
+                  <a onClick={() => this.goToSearch(search)} styleName="link"> {
                     search.map(item => `${item.Name}, `)
                   }</a>
                 </div>

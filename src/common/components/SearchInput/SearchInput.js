@@ -164,12 +164,14 @@ export default class SearchInput extends Component {
                 labelKey={'Name'}
                 valueKey={'UniqueID'}
               />
+              {this.showSaved &&
+                <SavedSearches />
+              }
             </div>
+
           </div>
         </div>
-        {this.showSaved &&
-          <SavedSearches />
-        }
+
         <div className="row">
           <div styleName="subsubjects">
             <SubSearch

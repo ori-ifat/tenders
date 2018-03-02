@@ -1,19 +1,30 @@
+@import '~common/style/_settings.scss';
 .container {
   z-index: 1000;
-  background-color: whitesmoke;
-  width: 90%;
-  height: 600px;
+  width: 100%;
+  background-color: #fff;
   position: absolute;
-  box-shadow: grey 2px 5px 5px;
-  padding: 15px;
+  box-shadow: 1px 3px 5px 0 rgba(0,0,0,0.20);
   line-height: 1.8;
+  padding: 0.75rem 0;
 }
 
 .title {
   font-size: 1rem;
+  font-family: 'Heebo', sans-serif;
+  padding: 0.075rem 3.8rem;
+  margin: 0;
+  color: $dark-gray;
+  font-weight: 600;
 }
 
 .link {
   color: gray;
-  font-size: 1.5rem;
+  font-size: 1rem;
+  display: block;
+  padding: 0.1rem 3.8rem;
+  color: $dark-gray;
+  &:hover {
+    background-color: $xlight-gray;
+  }
 }
