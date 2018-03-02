@@ -100,11 +100,11 @@ export default class Toolbar extends React.Component {
 
             <div className="grid-x">
 
-              <div className="small-9 cell">
+              <div className="medium-9 cell">
                 <span>{relevantItems.length} {t('toolbar.selectedTenders')}</span>
               </div>
 
-              <div className="small-3 cell">
+              <div className="medium-3 cell">
                 <ul className="menu align-left" styleName="align-left">
                   <li><a onClick={this.email}><img src={emailSrc} alt={t('toolbar.email')} data-tip={t('toolbar.email')} /></a></li>
                   <li><a onClick={() => this.print(false)}><img src={printSrc} alt={t('toolbar.print')} data-tip={t('toolbar.print')} /></a></li>
