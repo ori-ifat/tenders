@@ -95,6 +95,16 @@
 	}
 }
 
+@media screen and (max-width: 39.9375em) {
+	.tender_action_wraper {
+		padding: 0 3.5rem !important;
+	}
+	li {
+    display: inline-block;
+    margin-left: 1.5rem !important;
+	}
+}
+
 .tender_action_wraper {
 	padding: 1rem 1rem 0 0;
 	border-right: 1px solid $light-gray;
