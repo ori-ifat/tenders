@@ -208,7 +208,7 @@ export default class ResultsItem extends React.Component {
                   <p dangerouslySetInnerHTML={this.markUpText(item.Summery)}></p>
                 </div>
               }
-              <div className="tender_meta">
+              <div styleName="tender_meta">
                 {tourDate &&
                   <span>
                     <span>{t('tender.tourAt')}: {tourDate}</span>

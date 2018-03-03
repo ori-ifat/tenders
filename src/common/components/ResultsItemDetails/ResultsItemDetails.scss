@@ -12,6 +12,26 @@
   padding: 0.5rem 1rem 0.5rem 3rem;
 }
 
+@media screen and (max-width: 39.9375em){
+  .item_key {
+    padding: 0!important;
+    margin-bottom: 0.5rem;
+  }
+  .item_lable {
+    padding: 0;
+    background-color: transparent;
+    height: 100%;
+    border-bottom: 1px solid #fff;
+    color: $medium-gray;
+  }
+  ul.tender_actions{
+    li {
+      width: 100%;
+    }
+  }
+
+}
+
 table {
   margin: 2rem !important;
   table-layout:fixed;
