@@ -145,7 +145,7 @@ export default class Topbar extends Component {
                     <a onClick={this.login}><img src={userSrc} alt="" />{loginLabel}</a>
                   }
                   {accountStore.profile &&
-                  <ul id="logout" className="submenu menu vertical" styleName="menu" data-dropdown-menu>
+                  <ul id="logout" className="menu vertical" styleName="menu" data-dropdown-menu>
                     <li><a onClick={this.navigate('/smartagent')}>{t('nav.smartagent')}</a></li>
                     <li><a onClick={this.navigate('/favorites')}>{t('nav.favorites')}</a></li>
                     <li><a onClick={this.navigate('/reminders')}>{t('nav.reminders')}</a></li>

@@ -10,6 +10,14 @@ if only settings are needed, import '~common/style/_settings.scss' instead. this
 @media screen and (max-width: 39.9375em) {
 	.menu {
 		padding-top: 2rem !important;
+		li {
+			margin-left: 0 !important;
+		}
+	}
+	ul.menu {
+
+			right: 0!important;
+
 	}
 	.top-navigation {
 		display: block;
