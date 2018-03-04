@@ -33,20 +33,21 @@ export default class SavedSearches extends Component {
 
   render() {
     const {savedStore, savedStore: {resultsLoading}, t} = this.props
-    //console.log(toJS(savedStore.searches))
+    console.log(toJS(savedStore.searches))
     return (
       <div className="row">
         <div className="medium-12 columns">
           <div styleName="container">
             <h3 styleName="title">{t('searches.title')}</h3>
             {
-              !resultsLoading && savedStore.searches.map((search, index) =>
-                <div key={index}>
-                  <a onClick={() => this.goToSearch(search)} styleName="link"> {
-                    search.map(item => `${item.Name}, `)
-                  }</a>
+              !resultsLoading && savedStore.searches.map((search, index) => {
+                let label = ''
+                search.map(item => {label += `${item.Name}, `})
+                label = label.substring(0, label.length - 2)
+                return <div key={index}>
+                  <a onClick={() => this.goToSearch(search)} styleName="link">{label}</a>
                 </div>
-              )
+              })
             }
           </div>
         </div>

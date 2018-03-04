@@ -51,7 +51,7 @@ export default class Topbar extends Component {
     fixTopMenu()
     //handle cookie for 'Welcome' component...
     this.cookVal = getCookie('WelcomeShown')
-    console.log(this.cookVal)
+    //console.log(this.cookVal)
     if (this.cookVal && this.cookVal != '' && parseInt(this.cookVal) >= 2) this.isWelcomeOpen = false
   }
 
@@ -99,7 +99,7 @@ export default class Topbar extends Component {
   }
 
   closeWelcomeDialog = () => {
-    console.log('closeWelcomeDialog')
+    //console.log('closeWelcomeDialog')
     this.isWelcomeOpen = false
     const cnt = this.cookVal || 0
     setCookie('WelcomeShown', parseInt(cnt) + 1)
