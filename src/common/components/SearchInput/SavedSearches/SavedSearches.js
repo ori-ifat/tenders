@@ -31,6 +31,14 @@ export default class SavedSearches extends Component {
     routingStore.push(`/results/${sort}/${encodeURIComponent(payload)}/[]`)
   }
 
+  pinItem = () => {
+    console.log('pin')
+  }
+
+  deleteItem = () => {
+    console.log('del')
+  }
+
   render() {
     const {savedStore, savedStore: {resultsLoading}, t} = this.props
     console.log(toJS(savedStore.searches))
@@ -46,6 +54,8 @@ export default class SavedSearches extends Component {
                 label = label.substring(0, label.length - 2)
                 return <div key={index}>
                   <a onClick={() => this.goToSearch(search)} styleName="link">{label}</a>
+                  <a styleName="action-link" onClick={this.pinItem}>pin</a>
+                  <a styleName="action-link" onClick={this.deleteItem}>delete</a>
                 </div>
               })
             }

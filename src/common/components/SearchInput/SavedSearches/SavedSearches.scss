@@ -21,7 +21,22 @@
 .link {
   color: gray;
   font-size: 1rem;
-  display: block;
+  /*display: block;*/
+  display: inline-block;
+  padding: 0.1rem 3.8rem;
+  color: $dark-gray;
+  &:hover {
+    background-color: $xlight-gray;
+  }
+}
+
+.action-link {
+  float:left;
+  display: inline;
+  color: gray;
+  font-size: 1rem;
+  /*display: block;*/
+  display: inline-block;
   padding: 0.1rem 3.8rem;
   color: $dark-gray;
   &:hover {

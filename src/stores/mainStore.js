@@ -24,7 +24,8 @@ class Main {
       }
       catch(e) {
         //an error occured on search
-        console.error(`[loadAgentResults] search error: ${e.message} http status code ${e.error.status}`)
+        const status = e.error ? e.error.status : -1
+        console.error(`[loadAgentResults] search error: ${e.message} http status code ${status}`)
         error = e.message
       }
 
@@ -66,9 +67,10 @@ class Main {
       }
       catch(e) {
         //an error occured on search
+        const status = e.error ? e.error.status : -1
         searchError = {
-          message: `[loadAgentResults2] search error: ${e.message} http status code ${e.error.status}`,
-          statusCode: e.error.status
+          message: `[loadAgentResults2] search error: ${e.message} http status code ${status}`,
+          statusCode: status
         }
       }
 
