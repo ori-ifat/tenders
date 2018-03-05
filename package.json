@@ -78,6 +78,7 @@
     "foundation-sites": "^6.4.3",
     "foundation-sites-loader": "^1.0.1",
     "history": "^4.7.2",
+    "is-mobile": "^0.2.2",
     "material-ui": "^0.19.1",
     "mobx": "^3.2.2",
     "mobx-react": "^4.2.2",

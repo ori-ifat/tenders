@@ -52,10 +52,14 @@ export default class SavedSearches extends Component {
                 let label = ''
                 search.map(item => {label += `${item.Name}, `})
                 label = label.substring(0, label.length - 2)
-                return <div key={index}>
-                  <a onClick={() => this.goToSearch(search)} styleName="link">{label}</a>
-                  <a styleName="action-link" onClick={this.pinItem}>pin</a>
-                  <a styleName="action-link" onClick={this.deleteItem}>delete</a>
+                return <div key={index} styleName="clearfix">
+                  <div styleName="action-links">
+                    <a styleName="image-buttons" className="image-pin" onClick={this.pinItem}>&nbsp;</a>
+                    <a styleName="image-buttons" className="image-trash" onClick={this.deleteItem}>&nbsp;</a>
+                  </div>
+                  <div styleName="search-links">
+                    <a onClick={() => this.goToSearch(search)} styleName="link">{label}</a>
+                  </div>
                 </div>
               })
             }
