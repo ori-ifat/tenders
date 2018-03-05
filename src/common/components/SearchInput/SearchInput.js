@@ -133,6 +133,12 @@ export default class SearchInput extends Component {
     searchStore.loadNextFilters()
   }
 
+  onClear = () => {
+    const { routingStore } = this.props
+    const sort = 'publishDate'  //default sort.
+    routingStore.push(`/results/${sort}/[]/[]`)
+  }
+
   render() {
     const selectedValues = toJS(this.selectedValues)
     const {searchStore, t} = this.props
@@ -173,10 +179,17 @@ export default class SearchInput extends Component {
         </div>
 
         <div className="row">
-          <div styleName="subsubjects">
-            <SubSearch
-              items={searchStore.subSubjects}
-            />
+          <div className="medium-1 columns">
+            <div styleName="subsubjects">
+              <SubSearch
+                items={searchStore.subSubjects}
+              />
+            </div>
+          </div>
+          <div className="medium-2 columns">
+            <div style={{marginTop: '15px'}}>
+              <a style={{paddingRight: '20px'}} onClick={this.onClear}>{t('search.cleanSearch')}</a>
+            </div>
           </div>
         </div>
       </div>
