@@ -41,6 +41,14 @@
   padding-right: 3.8rem;
 }
 
+@media screen and (max-width: 39.9375em){
+  .action-links {
+    float: right;
+    width: 10%;
+    padding-right: 0;
+  }
+}
+
 .search-links {
   float: left;
   width: 90%;
