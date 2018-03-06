@@ -3,6 +3,8 @@ import {inject, observer} from 'mobx-react'
 import {observable, toJS} from 'mobx'
 import {translate} from 'react-polyglot'
 import remove from 'lodash/remove'
+import { saveSearch, unSaveSearch, delSearch } from 'common/services/apiService'
+//import Loading from 'common/components/Loading/Loading'
 import CSSModules from 'react-css-modules'
 import styles from './SavedSearches.scss'
 
@@ -16,8 +18,7 @@ export default class SavedSearches extends Component {
   @observable pinned = []
 
   componentWillMount() {
-    const {savedStore} = this.props
-    savedStore.loadSavedSearches()
+    this.loadSearches()
   }
   /*
   componentWillReceiveProps(nextProps) {
@@ -25,6 +26,14 @@ export default class SavedSearches extends Component {
     savedStore.loadSavedSearches()
   }*/
 
+  loadSearches = () => {
+    const {savedStore} = this.props
+    savedStore.loadSavedSearches().then(() => {
+      savedStore.searches.map((query) => {
+        if(query.Saved && !this.pinned.includes(query.ID)) this.pinned.push(query.ID)
+      })
+    })
+  }
   goToSearch = (query) => {
     //console.log(toJS(search))
     const { routingStore } = this.props
@@ -35,24 +44,39 @@ export default class SavedSearches extends Component {
   }
 
   pinItem = (id, pin) => {
+    //const {savedStore} = this.props
     if (pin) {
-      if (!this.pinned.includes(id)) this.pinned.push(id)
+      saveSearch(id).then(() => {
+        console.log('pinned', id)
+        if (!this.pinned.includes(id)) this.pinned.push(id)
+      }, this)
     }
     else {
-      remove(this.pinned, item => {
-        return item === id
-      })
+      unSaveSearch(id).then(() => {
+        console.log('unpinned', id)
+        remove(this.pinned, item => {
+          return item === id
+        })
+      }, this)
     }
-    console.log('pin', toJS(this.pinned))
+    //console.log('pin', toJS(this.pinned), pin)
   }
 
   deleteItem = (id) => {
-    console.log('del', id)
+    const {savedStore} = this.props
+    savedStore.deleteSearch(id).then(() => {
+      console.log('deleted', id)
+      remove(this.pinned, item => {
+        return item === id
+      })
+      this.loadSearches()
+    }, this)
+    //console.log('del', id)
   }
 
   render() {
     const {savedStore, savedStore: {resultsLoading}, t} = this.props
-    console.log(toJS(savedStore.searches))
+    //console.log(toJS(savedStore.searches))
     return (
       <div className="row">
         <div className="medium-12 columns">
@@ -64,6 +88,7 @@ export default class SavedSearches extends Component {
                 query.Search.map(item => {label += `${item.Name}, `})
                 label = label.substring(0, label.length - 2)
                 const isPinned = this.pinned.includes(query.ID)
+                //if (isPinned && !this.pinned.includes(query.ID)) this.pinned.push(query.ID)
                 const pinnedStyle = isPinned ? 'pinned' : 'image-pin'
                 return <div key={index} styleName="clearfix">
                   <div styleName="action-links">
@@ -75,6 +100,9 @@ export default class SavedSearches extends Component {
                   </div>
                 </div>
               })
+            }
+            {
+              resultsLoading && <div style={{height:'188px'}}>&nbsp;</div>
             }
           </div>
         </div>

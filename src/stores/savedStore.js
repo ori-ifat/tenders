@@ -1,8 +1,11 @@
 import { action, computed, observable, toJS } from 'mobx'
-import { mySearches } from 'common/services/apiService'
+import { mySearches, saveSearch, unSaveSearch, delSearch } from 'common/services/apiService'
 
 class Saved {
   @observable resultsLoading = false
+  @observable saving = false
+  @observable unsaving = false
+  @observable deleting = false
   @observable searches = [];
   @observable searchError = null
 
@@ -30,6 +33,88 @@ class Saved {
         this.searches = []
       }
       this.resultsLoading = false
+    }
+  }
+
+  @action.bound
+  async saveSearch(searchID) {
+    if (!this.saving) {
+      this.saving = true
+      let saveError = null
+      try {
+        await saveSearch(searchID)
+      }
+      catch(e) {
+        //an error occured on search
+        const status = e.error ? e.error.status : -1
+        saveError = {
+          message: `[saveSearch] error: ${e.message} http status code ${status}`,
+          statusCode: status
+        }
+      }
+
+      if (saveError == null) {
+        console.info('[saveSearch]')
+      }
+      else {
+        console.error(saveError)
+      }
+      this.saving = false
+    }
+  }
+
+  @action.bound
+  async unSaveSearch(searchID) {
+    if (!this.unsaving) {
+      this.unsaving = true
+      let saveError = null
+      try {
+        await unSaveSearch(searchID)
+      }
+      catch(e) {
+        //an error occured on search
+        const status = e.error ? e.error.status : -1
+        saveError = {
+          message: `[unSaveSearch] error: ${e.message} http status code ${status}`,
+          statusCode: status
+        }
+      }
+
+      if (saveError == null) {
+        console.info('[unSaveSearch]')
+      }
+      else {
+        console.error(saveError)
+      }
+      this.unsaving = false
+    }
+  }
+
+
+  @action.bound
+  async deleteSearch(searchID) {
+    if (!this.deleting) {
+      this.deleting = true
+      let delError = null
+      try {
+        await delSearch(searchID)
+      }
+      catch(e) {
+        //an error occured on search
+        const status = e.error ? e.error.status : -1
+        delError = {
+          message: `[deleteSearch] error: ${e.message} http status code ${status}`,
+          statusCode: status
+        }
+      }
+
+      if (delError == null) {
+        console.info('[deleteSearch]')
+      }
+      else {
+        console.error(delError)
+      }
+      this.deleting = false
     }
   }
 }

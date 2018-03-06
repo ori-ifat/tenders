@@ -351,6 +351,24 @@ export function mySearches() {
   return apiFetch('Search/MySearches', {}, true)
 }
 
+export function saveSearch(searchID) {
+  return apiFetch('Search/SaveSearch', {searchParams: {
+    SearchID: searchID
+  }}, true)
+}
+
+export function unSaveSearch(searchID) {
+  return apiFetch('Search/UnPinSearch', {searchParams: {
+    SearchID: searchID
+  }}, true)
+}
+
+export function delSearch(searchID) {
+  return apiFetch('Search/DelSearch', {searchParams: {
+    SearchID: searchID
+  }}, true)
+}
+
 function fetchData(url) {
   /* fetch a url that is not in api controllers, such as a json file */
 
