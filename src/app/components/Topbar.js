@@ -7,10 +7,12 @@ import {observable} from 'mobx'
 import {clearCache, getRemindersCount, resetReminders} from 'common/services/apiService'
 import LoginDialog from 'common/components/LoginDialog'
 import {fixTopMenu} from 'common/utils/topMenu'
-//import {getCookie, setCookie} from 'common/utils/cookies'
+import {getCookie, setCookie} from 'common/utils/cookies'
 import NotificationBadge from 'react-notification-badge'
 import {Effect} from 'react-notification-badge'
-//import Welcome from './Welcome'
+import Welcome from './Welcome'
+import mobile from 'is-mobile'
+import {getHomeJSON} from 'common/services/apiService'
 
 const req = require.context('common/style/icons/', false)
 const logoSrc = req('./logo.png')
@@ -42,18 +44,30 @@ const navbar = [  /*{
 export default class Topbar extends Component {
 
   @observable showLoginDialog = false
+  @observable message = {}
   @observable messageCount = 0
-  //@observable isWelcomeOpen = true
+  @observable isMobile = false
+  @observable isWelcomeOpen = false
   //cookVal;
 
   componentWillMount() {
     //fix top nav foundation creation bug
     fixTopMenu()
     //handle cookie for 'Welcome' component...
-    /*
-    this.cookVal = getCookie('WelcomeShown')
-    //console.log(this.cookVal)
-    if (this.cookVal && this.cookVal != '' && parseInt(this.cookVal) >= 2) this.isWelcomeOpen = false */
+    this.isMobile = mobile()
+    if (!this.isMobile) {
+      this.cookVal = getCookie('WelcomeShown-060318')
+      //console.log(this.cookVal)
+      if (this.cookVal && this.cookVal != '' && parseInt(this.cookVal) >= 2)
+        this.isWelcomeOpen = false
+      else {
+        this.isWelcomeOpen = true
+        //get message
+        getHomeJSON('Welcome', 'welcome').then(res => {
+          this.message = res
+        })
+      }
+    }
   }
 
   componentWillReceiveProps(nextProps) {
@@ -98,13 +112,13 @@ export default class Topbar extends Component {
   continueUnlogged = () => {
     this.showLoginDialog = false
   }
-  /*
+
   closeWelcomeDialog = () => {
     //console.log('closeWelcomeDialog')
     this.isWelcomeOpen = false
     const cnt = this.cookVal || 0
-    setCookie('WelcomeShown', parseInt(cnt) + 1)
-  } */
+    setCookie('WelcomeShown-060318', parseInt(cnt) + 1)
+  }
 
   render() {
     const {accountStore, t} = this.props
@@ -115,7 +129,11 @@ export default class Topbar extends Component {
       <div styleName="header">
         <nav className="column row">
           <div className="top-bar" styleName="top-bar">
-            {/*<Welcome isDialogOpened={this.isWelcomeOpen} closeDialog={this.closeWelcomeDialog} />*/}
+            <Welcome
+              isDialogOpened={this.isWelcomeOpen}
+              closeDialog={this.closeWelcomeDialog}
+              message={this.message}
+            />
 
             <div className="top-bar-right">
               <a onClick={this.goToHome}>

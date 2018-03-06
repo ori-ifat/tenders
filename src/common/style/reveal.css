@@ -76,7 +76,10 @@
 }
 
 .reveal-custom-welcome {
-  width: 553px !important;
+  /*width: 553px !important;
   height: 553px !important;
-  text-align: center;
+  text-align: center;*/
+  width: 653px !important;
+  height: 753px !important;
+  padding: 10px;
 }
