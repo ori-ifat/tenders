@@ -7,6 +7,21 @@
   display: block;
 }
 
+@media screen and (max-width: 39.9375em){
+  .likeitem {
+
+    padding: 0;
+    margin-left: 0 !important;
+    .text {
+      margin-bottom: 1rem; 
+    }
+    a {
+      height: 100% !important;
+    }
+  }
+}
+
+
 .likeitem {
   border-right: 4px solid $green;
   border-top: 1px solid $light-gray;

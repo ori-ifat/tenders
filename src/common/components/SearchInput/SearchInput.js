@@ -6,8 +6,10 @@ import {translate} from 'react-polyglot'
 import {inject, observer} from 'mobx-react'
 import Select from 'react-select'
 import SubSearch from './SubSearch'
+import SavedSearches from './SavedSearches'
 import {observable, toJS} from 'mobx'
 import {autocomplete} from 'common/services/apiService'
+import enhanceWithClickOutside from 'react-click-outside'
 
 const req = require.context('common/style/icons/', false)
 const search_go = req('./search_go.svg')
@@ -16,6 +18,7 @@ const search_go = req('./search_go.svg')
 @inject('routingStore')
 @inject('searchStore')
 @inject('recordStore')
+@enhanceWithClickOutside
 @observer
 @CSSModules(styles)
 export default class SearchInput extends Component {
@@ -24,16 +27,24 @@ export default class SearchInput extends Component {
   }
 
   @observable selectedValues =[]
+  @observable showSaved = false
 
   componentWillMount() {
     const {searchStore, tags} = this.props
     if (tags) this.selectedValues = tags
+    this.showSaved = false
     searchStore.loadSubSubjects()
   }
 
   componentWillReceiveProps(nextProps) {
     const {tags} = nextProps
+    this.showSaved = false
     if (tags) this.selectedValues = tags
+  }
+
+  handleClickOutside() {
+    //console.log('handleClickOutside')
+    this.showSaved = false
   }
 
   onChange = values => {
@@ -78,7 +89,16 @@ export default class SearchInput extends Component {
 
   }
 
+  onFocus = () => {
+    if (this.selectedValues.length == 0) this.showSaved = true
+  }
+  /*
+  onBlur = () => {
+    this.showSaved = false
+  }*/
+
   onInputKeyDown = (e) => {
+    if(this.showSaved) this.showSaved = false
     if (e.keyCode === 13) {
       //ori s setTimeout to solve a bug, when search is committed before Select actually chose an item ...
       //e.preventDefault()  //fucks up the search.
@@ -113,6 +133,12 @@ export default class SearchInput extends Component {
     searchStore.loadNextFilters()
   }
 
+  onClear = () => {
+    const { routingStore } = this.props
+    const sort = 'publishDate'  //default sort.
+    routingStore.push(`/results/${sort}/[]/[]`)
+  }
+
   render() {
     const selectedValues = toJS(this.selectedValues)
     const {searchStore, t} = this.props
@@ -128,7 +154,7 @@ export default class SearchInput extends Component {
                 className="search-select"
                 name="searchbox"
                 placeholder={t('search.placeHolder')}
-                autoFocus
+                autoFocus={(this.selectedValues.length > 0)}
                 noResultsText={null}
                 searchPromptText=""
                 multi={true}
@@ -137,20 +163,33 @@ export default class SearchInput extends Component {
                 loadOptions={this.getOptions}
                 optionRenderer={this.optionRenderer}
                 onChange={this.onChange}
+                onFocus={this.onFocus}
                 onInputKeyDown={this.onInputKeyDown}
                 filterOptions={this.filterOptions}
                 value={selectedValues}
                 labelKey={'Name'}
                 valueKey={'UniqueID'}
               />
+              {this.showSaved &&
+                <SavedSearches />
+              }
             </div>
+
           </div>
         </div>
+
         <div className="row">
-          <div styleName="subsubjects">
-            <SubSearch
-              items={searchStore.subSubjects}
-            />
+          <div className="medium-1 columns">
+            <div styleName="subsubjects">
+              <SubSearch
+                items={searchStore.subSubjects}
+              />
+            </div>
+          </div>
+          <div className="medium-2 columns">
+            <div style={{marginTop: '15px'}}>
+              <a style={{paddingRight: '20px'}} onClick={this.onClear}>{t('search.cleanSearch')}</a>
+            </div>
           </div>
         </div>
       </div>

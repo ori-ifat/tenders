@@ -4,9 +4,11 @@ import cache from 'common/utils/cache'
 
 let apiBaseUrl
 let baseUrl
-if (process.env.NODE_ENV === 'development' || location.href.indexOf('iis-test/') > -1) {
+if (process.env.NODE_ENV === 'development'|| location.href.indexOf('iis-test/') > -1) {
   apiBaseUrl = 'http://iis-test/TendersSiteApi/api'
   baseUrl = 'http://iis-test/TendersSiteApi'
+  //apiBaseUrl = 'http://192.118.60.25/TendersDevApi/api'
+  //baseUrl = 'http://192.118.60.25/TendersDevApi'
 }
 else {
   apiBaseUrl = 'http://www.tenders.co.il/Data/api'
@@ -343,6 +345,28 @@ export function getRemindersCount() {
 
 export function resetReminders() {
   return apiFetch('Reminder/ResetUserReminders', {}, true)
+}
+
+export function mySearches() {
+  return apiFetch('Search/MySearches', {}, true)
+}
+
+export function saveSearch(searchID) {
+  return apiFetch('Search/SaveSearch', {searchParams: {
+    SearchID: searchID
+  }}, true)
+}
+
+export function unSaveSearch(searchID) {
+  return apiFetch('Search/UnPinSearch', {searchParams: {
+    SearchID: searchID
+  }}, true)
+}
+
+export function delSearch(searchID) {
+  return apiFetch('Search/DelSearch', {searchParams: {
+    SearchID: searchID
+  }}, true)
 }
 
 function fetchData(url) {

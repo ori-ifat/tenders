@@ -62,9 +62,9 @@ export default class LoginDialog extends React.Component {
         if (accountStore.error == null && accountStore.profile != null) {
           //successful login made
           clearCache()
+          fixTopMenu()
           push('/main')
           onCancel()  //close modal
-          fixTopMenu()
         }
       }).catch(error => {
         console.error('[Login] Error:', error)

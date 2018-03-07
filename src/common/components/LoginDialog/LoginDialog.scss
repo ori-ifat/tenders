@@ -15,6 +15,25 @@
   }
 }
 
+@media screen and (max-width: 39.9375em){
+  .pb {
+    flex-direction: column !important;
+    .sign_up {
+      width: auto !important;
+      .button-submit {
+        margin-top: 1rem;
+      }
+    }
+    .login_container {
+      padding: 2rem !important;
+      .button-submit {
+        width: 100%;
+      }
+    }
+
+  }
+}
+
 .pb {
   display: flex;
   flex-direction: row;

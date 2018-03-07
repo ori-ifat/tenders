@@ -40,13 +40,13 @@ export default class ResultsActions extends React.Component {
     return (
       <div styleName="select_all">
         <div className="grid-x">
-          <div className="small-6 cell">
+          <div className="medium-6 cell">
             {/*<div styleName="checkbox">
               <input type="checkbox" />
               <label>{t('results.selectAll')}</label>
             </div>*/}
           </div>
-          <div className="small-6 cell">
+          <div className="medium-6 cell">
             <ul className="dropdown menu align-left sort" styleName="sort" id="sort" data-dropdown-menu data-disable-hover="true" data-click-open="true">
               <li>
                 <a href="#">{t('results.sortBy')}: {sortBy}</a>

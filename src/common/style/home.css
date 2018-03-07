@@ -62,3 +62,33 @@ a.main_cat:hover {
 	background: #D3EFD9;
 	color: #444 !important;
 }
+
+.image-trash {
+	background-image: url(icons/trash.svg);
+	background-repeat: no-repeat;
+	background-position: center;
+}
+
+.image-pin {
+	background-image: url(icons/pin.svg);
+	background-repeat: no-repeat;
+	background-position: center;
+}
+
+.pinned {
+  background-image: url(icons/pin_active.svg) !important;
+	background-repeat: no-repeat !important;
+	background-position: center !important;
+}
+
+a.image-trash:hover {
+	background-image: url(icons/trash_hover.svg);
+	background-repeat: no-repeat;
+	background-position: center;
+}
+
+a.image-pin:hover {
+	background-image: url(icons/pin_active.svg);
+	background-repeat: no-repeat;
+	background-position: center;
+}

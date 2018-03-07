@@ -1,7 +1,9 @@
 //@import '~app/global.scss';
 @import '~common/style/_settings.scss';
 
+
 .item-title {
+	display: inline;
 	cursor: pointer;
 	span {
 		font-size: 1.25rem !important;
@@ -10,6 +12,10 @@
     font-weight: 500 !important;
     transition: all 0.25s !important;
 	}
+}
+
+.new_tab {
+	padding-right: 0.5rem;
 }
 
 .tender_summery {
@@ -84,9 +90,26 @@
 	span {
 		font-size: rem-calc(14);
 		color: $dark-gray;
+		margin-left: 0.5rem;
 	}
 	span.divider {
 		padding: 0 0.25rem;
+	}
+}
+
+@media screen and (max-width: 39.9375em) {
+	.tender_action_wraper {
+		padding: 0 3.5rem !important;
+	}
+	li {
+    display: inline-block;
+    margin-left: 1.5rem !important;
+	}
+	.tender_meta {
+		margin-top: 0.5rem;
+		span {
+			font-size: 15px !important;
+		}
 	}
 }
 

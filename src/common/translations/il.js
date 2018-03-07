@@ -95,7 +95,8 @@ export default {
     tender_partial: 'בטקסט של מכרז',
     tender_partial_text: '%{text}',
     publisher_partial: 'בטקסט של מפרסם',
-    publisher_partial_text: '%{text}'
+    publisher_partial_text: '%{text}',
+    cleanSearch: 'נקה חיפוש'
   },
   results: {
     title: 'הזדמנויות עיסקיות נמצאו',
@@ -305,6 +306,9 @@ export default {
     word: 'מילה לחיפוש',
     compareTo: 'טקסט להשוואה',
     submitText: 'בדוק'
+  },
+  searches: {
+    title: 'חיפושים אחרונים:'
   },
   subscriptions: {
     title: 'מסלולים ומחירים',

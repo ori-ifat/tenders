@@ -1,7 +1,7 @@
 import React, {Component} from 'react'
 import { withRouter } from 'react-router'
 import {observer} from 'mobx-react'
-import {observable} from 'mobx'
+import {observable, toJS} from 'mobx'
 import {translate} from 'react-polyglot'
 import {getHomeJSON} from 'common/services/apiService'
 import SmallContactForm from 'common/components/SmallContactForm'
@@ -30,7 +30,7 @@ export default class SiteMap extends Component {
     const {t} = this.props
     const {data} = this
     const meta = getMetaData(t('meta.homeTitle'), t('meta.homeDesc'), t('meta.homeKeywords'))
-
+    
     return (
       <div>
         {data &&

@@ -24,6 +24,7 @@ const timeSrc = req('./Time.svg')
 const timeActSrc = req('./alert_on.svg')
 const favSrc = req('./fav.svg')
 const favActSrc = req('./action_fav.svg')
+const newTabSrc = req('./new_tab.svg')
 
 @translate()
 @inject('accountStore')
@@ -187,7 +188,7 @@ export default class ResultsItem extends React.Component {
     return (
       <div styleName={tenderStyle} >
         <div className="grid-x">
-          <div className="small-9 cell">
+          <div className="medium-9 cell">
             {onCheck && <Checkbox checked={checked} item={cbItem} onChange={onCheck} />}
             <div styleName="tender_txt_wraper">
               {item.TenderType == t('tender.exclusive') && <span styleName="label" className="label">{t('tender.exclusive')}</span>}
@@ -201,13 +202,13 @@ export default class ResultsItem extends React.Component {
               <h3
                 onClick={() => this.viewDetails(item.TenderID)}
                 styleName={`item-title${visitedStyle}`}
-                dangerouslySetInnerHTML={this.markUpText(item.Title)}></h3>
+                dangerouslySetInnerHTML={this.markUpText(item.Title)}></h3><a href={`#/tender/${item.EncID}`} target="_blank" styleName="new_tab"><img src={newTabSrc} /></a>
               { logged &&
                 <div styleName="tender_desc">
                   <p dangerouslySetInnerHTML={this.markUpText(item.Summery)}></p>
                 </div>
               }
-              <div className="tender_meta">
+              <div styleName="tender_meta">
                 {tourDate &&
                   <span>
                     <span>{t('tender.tourAt')}: {tourDate}</span>
@@ -233,7 +234,7 @@ export default class ResultsItem extends React.Component {
             </div>
 
           </div>
-          <div className="small-3 cell">
+          <div className="medium-3 cell">
             <div styleName="tender_action_wraper">
               <ul className="no-bullet">
                 <li>

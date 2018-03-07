@@ -160,11 +160,11 @@ h1,h2, h3, h4, h5, h6 {
                 border: inherit !important;
                 border-radius: 4px !important;
                 direction: ltr;
-                padding: 3px 5px 3px 3px;
-                font-size: 16px;
+                padding: 4px 5px 4px 3px;
+                font-size: 15px;
                 span {
                     border: inherit !important;
-                    line-height: 16px !important;
+                    line-height: 15px !important;
                     color: $black;
                 }
                 .Select-value-icon {
@@ -219,14 +219,15 @@ h1,h2, h3, h4, h5, h6 {
             .Select-menu {
                 .Select-option {
                     border-radius: 0 !important;
-                    padding: 0.5rem rem-calc(60) 0.5rem rem-calc(60) !important;
+                    padding: 0px 60px 0px 60px !important;
+										line-height: 1 !important;
                     &.is-focused {
                         background-color: $xlight-gray !important;
                         color: $black !important;
                     }
-                    font-size: 16px;
+                    font-size: 15px !important;
                     span.type {
-                        color: $light_gray;
+                        color: $medium_gray !important;
                     }
                 }
                 max-height: 380px;
@@ -263,7 +264,7 @@ h1,h2, h3, h4, h5, h6 {
                     .Select-option {
                         padding: 0 !important;
                         & > div {
-                            padding: 8px 20px;
+                            padding: 8px 60px;
                         }
                         .separate-line {
                             border-bottom: 1px solid $black;
@@ -277,7 +278,7 @@ h1,h2, h3, h4, h5, h6 {
                             font-size: 14px;
                             font-weight: normal;
                         }
-                        font-size: 16px;
+                        font-size: 15px;
                     }
                     /*max-height: 380px*/
                     @media (max-height: 768px) {
