@@ -44,7 +44,7 @@ const navbar = [  /*{
 export default class Topbar extends Component {
 
   @observable showLoginDialog = false
-  @observable message = {}
+  //@observable message = {}
   @observable messageCount = 0
   @observable isMobile = false
   @observable isWelcomeOpen = false
@@ -56,16 +56,17 @@ export default class Topbar extends Component {
     //handle cookie for 'Welcome' component...
     this.isMobile = mobile()
     if (!this.isMobile) {
-      this.cookVal = getCookie('WelcomeShown-060318')
+      this.cookVal = getCookie('WelcomeShown-070318')
       //console.log(this.cookVal)
       if (this.cookVal && this.cookVal != '' && parseInt(this.cookVal) >= 2)
         this.isWelcomeOpen = false
       else {
         this.isWelcomeOpen = true
+        /*
         //get message
         getHomeJSON('Welcome', 'welcome').then(res => {
           this.message = res
-        })
+        })*/
       }
     }
   }
@@ -117,7 +118,7 @@ export default class Topbar extends Component {
     //console.log('closeWelcomeDialog')
     this.isWelcomeOpen = false
     const cnt = this.cookVal || 0
-    setCookie('WelcomeShown-060318', parseInt(cnt) + 1)
+    setCookie('WelcomeShown-070318', parseInt(cnt) + 1)
   }
 
   render() {
@@ -132,7 +133,7 @@ export default class Topbar extends Component {
             <Welcome
               isDialogOpened={this.isWelcomeOpen}
               closeDialog={this.closeWelcomeDialog}
-              message={this.message}
+              /*message={this.message}*/
             />
 
             <div className="top-bar-right">

@@ -2,8 +2,9 @@ import React from 'react'
 import { object, bool, func } from 'prop-types'
 import ReactModal from 'react-modal'
 
-//const req = require.context('common/style/icons/', false)
+const req = require.context('common/style/icons/', false)
 //const logoSrc = req('./Welcome.png')
+const logoSrc = req('./message.png')
 
 export default class Welcome extends React.Component {
   /* that component is used to show a 'welcome' image to clients. open status of dialog is set on callee (Topbar.js) */
@@ -26,22 +27,24 @@ export default class Welcome extends React.Component {
         onRequestClose={closeDialog}
         className="reveal-custom reveal-custom-welcome"
         overlayClassName="reveal-overlay-custom">
+        {/* image message with X close div */}
         <div style={{width: '600px', height: '700px'}}>
-          {/*<div
+          <div
             style={{position: 'absolute', top: '0', right: '0', zIndex: '2000', width: '40px', height: '40px', cursor: 'pointer'}}
             onClick={closeDialog}
           >
             &nbsp;
           </div>
-          <img src={logoSrc} />*/}
-          {message &&
+          <img src={logoSrc} />
+          {/* text message */}
+          {/*message &&
             <div>
               <h3>{message.title}</h3>
               <h5>{message.subtitle}</h5>
               <div dangerouslySetInnerHTML={{__html: message.text}}>
               </div>
             </div>
-          }
+          */}
         </div>
       </ReactModal>
     )

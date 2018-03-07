@@ -40,18 +40,6 @@
     border: 0;
     border-radius: 0;
   }
-/*
-  .reveal-custom2 {
-      top: 0 !important;
-      left: 0 !important;
-      width: 100% !important;
-      max-width: none;
-      height: 100vh;
-      min-height: 100vh;
-      margin-left: 0 !important;
-      border: 0;
-      border-radius: 0;
-  }*/
 }
 
 .reveal-custom {
@@ -78,8 +66,13 @@
 .reveal-custom-welcome {
   /*width: 553px !important;
   height: 553px !important;
-  text-align: center;*/
+  text-align: center;*//* -> welcome image */
+  /*
   width: 653px !important;
   height: 753px !important;
-  padding: 10px;
+  padding: 10px;*//* -> welcome text message */
+
+  width: 603px !important;
+  height: 815px !important;
+  text-align: center; /* -> welcome message image */
 }
