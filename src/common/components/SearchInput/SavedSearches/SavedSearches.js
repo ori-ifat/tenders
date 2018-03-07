@@ -75,7 +75,8 @@ export default class SavedSearches extends Component {
   }
 
   render() {
-    const {savedStore, savedStore: {resultsLoading}, t} = this.props
+    const {routingStore: {location: {pathname}}, savedStore, savedStore: {resultsLoading}, t} = this.props
+    const linkStyle = pathname.indexOf('home') > -1 ? 'action-links-min' : 'action-links'
     //console.log(toJS(savedStore.searches))
     return (
       <div className="row">
@@ -91,7 +92,7 @@ export default class SavedSearches extends Component {
                 //if (isPinned && !this.pinned.includes(query.ID)) this.pinned.push(query.ID)
                 const pinnedStyle = isPinned ? 'pinned' : 'image-pin'
                 return <div key={index} styleName="clearfix">
-                  <div styleName="action-links">
+                  <div styleName={linkStyle}>
                     <a styleName="image-buttons" className={pinnedStyle} onClick={() => this.pinItem(query.ID, !isPinned)}>&nbsp;</a>
                     <a styleName="image-buttons" className="image-trash" onClick={() => this.deleteItem(query.ID)}>&nbsp;</a>
                   </div>

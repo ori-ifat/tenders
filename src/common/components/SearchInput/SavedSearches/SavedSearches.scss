@@ -41,8 +41,20 @@
   padding-right: 3.8rem;
 }
 
+.action-links-min {
+  float: right;
+  width: 10%;
+  padding-right: 1.8rem;
+}
+
 @media screen and (max-width: 39.9375em){
   .action-links {
+    float: right;
+    width: 10%;
+    padding-right: 0;
+  }
+
+  .action-links-min {
     float: right;
     width: 10%;
     padding-right: 0;
