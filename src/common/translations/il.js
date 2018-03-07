@@ -235,7 +235,7 @@ export default {
     deleteSubTitle: 'האם אתה בטוח שברצונך למחוק את התזכורת?'
   },
   filter: {
-    title: 'הגדרות חיפוש',
+    title: 'הגדרות סינון',
     subSubjectsTitle: 'בחר ענפים',
     tenderTypeTitle: 'סוג מכרז',
     publishersTitle: 'בחר מפרסמים',

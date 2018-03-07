@@ -51,12 +51,13 @@ class Account {
   }
 
   @action.bound
-  logout() {
-    logout()
+  async logout() {
+    this.profile = await logout()
+
     //clean the userdata cookie
     document.cookie = 'UserData=; expires=Thu, 01 Jan 1970 00:00:01 GMT;'
     this.error = null
-    this.profile = null
+    this.profile = null  
   }
 }
 

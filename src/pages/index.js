@@ -21,6 +21,7 @@ import SmartAgentPage from 'pages/smartagent'
 import RadarPage from 'pages/radar'
 import AboutPage from 'pages/about'
 import SiteMapPage from 'pages/sitemap'
+import LoginPage from 'pages/login'
 import NotFound404 from 'pages/notFound404'
 
 class Pages extends React.Component {
@@ -113,6 +114,9 @@ class Pages extends React.Component {
           </Route>
           <Route path="/sitemap">
             <SiteMapPage />
+          </Route>
+          <Route path="/login/:user/:pass">
+            <LoginPage />
           </Route>
           <Route>
             <NotFound404 />
