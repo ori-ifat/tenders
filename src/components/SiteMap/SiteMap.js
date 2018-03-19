@@ -30,7 +30,7 @@ export default class SiteMap extends Component {
     const {t} = this.props
     const {data} = this
     const meta = getMetaData(t('meta.homeTitle'), t('meta.homeDesc'), t('meta.homeKeywords'))
-    
+
     return (
       <div>
         {data &&
@@ -42,16 +42,31 @@ export default class SiteMap extends Component {
               <hr styleName="divider" />
             </div>
           </div>
-          <div style={{direction: 'rtl', textAlign: 'right'}}>
-            {
-              data.urlset.url.map((url, index) => {
-                return <div key={index} className="row">
-                  <div className="large-12 columns" style={{margin: '5px'}}>
-                    <a href={url.loc} target="_blank">{url.name}</a>
-                  </div>
-                </div>
-              })
-            }
+          <div className="row">
+            <div className="medium-3 columns" styleName="section">
+              <h3 styleName="cat">{t('sitemap.categories')}</h3>
+              {data.urlset.categories.map((url, index) =>
+                <div key={index}><a href={url.loc} target="_blank">{url.name}</a></div>
+              )}
+            </div>
+            <div className="medium-3 columns" styleName="section">
+              <h3 styleName="cat">{t('sitemap.publishers')}</h3>
+              {data.urlset.publishers.map((url, index) =>
+                <div key={index}><a href={url.loc} target="_blank">{url.name}</a></div>
+              )}
+            </div>
+            <div className="medium-3 columns" styleName="section">
+              <h3 styleName="cat">{t('sitemap.publishers')}</h3>
+              {data.urlset.othercats.map((url, index) =>
+                <div key={index}><a href={url.loc} target="_blank">{url.name}</a></div>
+              )}
+            </div>
+            <div className="medium-3 columns" styleName="section">
+              <h3 styleName="cat">{t('sitemap.general')}</h3>
+              {data.urlset.home.map((url, index) =>
+                <div key={index}><a href={url.loc} target="_blank">{url.name}</a></div>
+              )}
+            </div>
           </div>
         </section>
         }

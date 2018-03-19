@@ -20,6 +20,7 @@ import styles from './category.scss'
 export default class Category extends Component {
 
   @observable data;
+  @observable count = 0;
   @observable tenders = []
 
   componentWillMount() {
@@ -29,12 +30,14 @@ export default class Category extends Component {
     })
     if(mode && mode == 'cat') {
       getSampleTendersBySub(id).then(res => {
-        this.tenders = res
+        this.tenders = res.list
+        this.count = res.lastYear
       })
     }
     else {
       getSampleTenders2(id).then(res => {
-        this.tenders = res
+        this.tenders = res.list
+        this.count = res.lastYear
       })
     }
   }
@@ -60,8 +63,9 @@ export default class Category extends Component {
           <DocumentMeta {...meta} />
           <div className="row">
             <div className="large-12 columns">
-              <h1 styleName="title">{title}</h1>
-              <p styleName="subttl">{t('cat.subTitle', {short})}</p>
+              <h3 styleName="pre-title">{title}</h3>
+              <h1 styleName="title"><span styleName="num">{this.count}</span> {t('results.title')} {t('results.lastYear')}</h1>
+              <p styleName="subttl" dangerouslySetInnerHTML={{__html: t('cat.subTitle', {short})}}></p>
               <hr/>
             </div>
           </div>

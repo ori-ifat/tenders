@@ -81,17 +81,20 @@ export default class Contact extends Component {
 
   render() {
     const {title, t} = this.props
+    const pad = title ? {paddingTop: '1rem', paddingBottom: '1rem'} : {}
+    const font = title ? {fontSize: '1.7rem'} : {}
+    const size = title ? 6 : 8
     return (
       <div>
 
-        <div className="sa_container" styleName="form-container">
-          <h2 styleName="form-title">{title ? title : `${t('cat.viewAll')}?`}</h2>
-          <p className="text-center" styleName="form-subtitle">{title ? '' : t('cat.leaveDetails')}</p>
-          {this.status != '' &&
+        <div className="sa_container" styleName="form-container" style={pad}>
+          <h2 styleName="form-title" style={font}>{title ? title : `${t('cat.viewAll')}?`}</h2>
+          {!title && <p className="text-center" styleName="form-subtitle">{t('cat.leaveDetails')}</p>}
+          {(title || this.status != '') &&
             <p styleName="sub_ttl" dangerouslySetInnerHTML={{__html: this.status}}></p>
           }
           <div className="row">
-            <div className="medium-10 large-8 columns medium-centered">
+            <div className={`medium-10 large-${size} columns medium-centered`}>
               <span className="success label hide">{t('cat.sent')}</span>
               <div styleName="lead_form" className="clearfix">
                 <div styleName="form_input_hor form_input_container">
