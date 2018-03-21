@@ -47,3 +47,9 @@ export function extractLabel(value, more) {
   const label = arr.length > 2 ? `${arr.slice(0, 2).join(',')  } ${more}` : value
   return label
 }
+
+export function randomNumber(min, max) {
+  min = Math.ceil(min)
+  max = Math.floor(max)
+  return Math.floor(Math.random() * (max - min)) + min //The maximum is exclusive and the minimum is inclusive
+}

@@ -406,8 +406,9 @@ function fetchData(url) {
   })
 }
 
-export function getHomeJSON(folderName, fileName) {
-  const url = createUrl(`HomeData/${folderName}/${fileName}.json`, {}, false)
+export function getHomeJSON(folderName, fileName, cache = 0) {
+  const query = cache != 0 ? `?cache=${cache}` : ''
+  const url = createUrl(`HomeData/${folderName}/${fileName}.json${query}`, {}, false)
   return fetchData(url)
 }
 

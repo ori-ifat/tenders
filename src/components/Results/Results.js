@@ -103,7 +103,7 @@ export default class Results extends Component {
               <div className="cell large-3">
                 <hr />
                 <Filters />
-                {/*<Banners />*/}
+                <Banners />
                 {saleText != '' && <div styleName="promotext">{saleText}</div>}
               </div>
               <div className="cell large-9">
