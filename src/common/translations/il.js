@@ -359,7 +359,7 @@ export default {
     nezivut: 'שירות המדינה',
     helth: 'משרד הבריאות',
     welfare: 'משרד הרווחה',
-    house: 'משרד השיכון והבינוי',
+    house: 'משרד הבינוי והשיכון',
     categories: 'מכרזים לפי קטגוריות',
     transport: 'מכרזי תחבורה',
     building: 'מכרזי בניה',
