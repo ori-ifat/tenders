@@ -5,14 +5,14 @@ import cache from 'common/utils/cache'
 let apiBaseUrl
 let baseUrl
 if (process.env.NODE_ENV === 'development'|| location.href.indexOf('iis-test/') > -1) {
-  apiBaseUrl = 'http://iis-test/TendersSiteApi/api'
-  baseUrl = 'http://iis-test/TendersSiteApi'
+  apiBaseUrl = '//iis-test/TendersSiteApi/api'
+  baseUrl = '//iis-test/TendersSiteApi'
   //apiBaseUrl = 'http://192.118.60.25/TendersDevApi/api'
   //baseUrl = 'http://192.118.60.25/TendersDevApi'
 }
 else {
-  apiBaseUrl = 'http://www.tenders.co.il/Data/api'
-  baseUrl = 'http://www.tenders.co.il/Data'
+  apiBaseUrl = '//www.tenders.co.il/Data/api'
+  baseUrl = '//www.tenders.co.il/Data'
 }
 
 /// important notes for POST (added by ori):
