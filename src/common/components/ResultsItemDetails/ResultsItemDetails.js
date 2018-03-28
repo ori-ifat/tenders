@@ -183,7 +183,9 @@ export default class ResultsItemDetails extends React.Component {
     if (publisherSite != '' && publisherSite.substring(0, 4) != 'http') publisherSite = `http://${publisherSite}`
     //original tender
     const originalUrl = item.OriginalID ? `##URL##${item.OriginalID}[[SEP]]${item.OriginalTitle}` : ''
-
+    const comment = item.Comment && item.Comment.trim() != '' ? item.Comment :
+      item.OriginalID ? ' ' : null  //if comment is null, original tender will not be printed out
+    const commentFix = comment == ' ' ? 'א' : comment   //for htmlDirection
     //for scroll pos of item
     const divTop = document.documentElement.scrollTop ? document.documentElement.scrollTop : document.body.scrollTop
     //reminder state
@@ -241,12 +243,12 @@ export default class ResultsItemDetails extends React.Component {
                     />
                   }
                   {
-                    item.Comment && item.Comment.trim() != '' &&
+                    comment &&
                     <Row
                       label={t('tender.comment')}
-                      html={this.formatText(`${item.Comment}${originalUrl}`)}
-                      dir={this.htmlDirection(item.Comment, 'dir')}
-                      align={this.htmlDirection(item.Comment, 'align')}
+                      html={this.formatText(`${comment}${originalUrl}`)}
+                      dir={this.htmlDirection(commentFix, 'dir')}
+                      align={this.htmlDirection(commentFix, 'align')}
                     />
                   }
                   {
