@@ -8,6 +8,7 @@ import {clearCache, getRemindersCount, resetReminders} from 'common/services/api
 import LoginDialog from 'common/components/LoginDialog'
 import {fixTopMenu} from 'common/utils/topMenu'
 import {getCookie, setCookie} from 'common/utils/cookies'
+import ReactInterval from 'react-interval'
 import NotificationBadge from 'react-notification-badge'
 import {Effect} from 'react-notification-badge'
 import Welcome from './Welcome'
@@ -110,6 +111,17 @@ export default class Topbar extends Component {
     push('/')
   }
 
+  validate = () => {
+    const {accountStore} = this.props
+    if (accountStore.profile) {
+      //if logged, call api to validate account (in case user is frozen\cancelled but cookie is still present)
+      accountStore.validateAccount()
+    }
+    /*else {
+      console.log('not logged')
+    }*/
+  }
+
   continueUnlogged = () => {
     this.showLoginDialog = false
   }
@@ -128,6 +140,8 @@ export default class Topbar extends Component {
     //console.log(accountStore.profile, homeLink)
     return (
       <div styleName="header">
+        <ReactInterval timeout={3600000} enabled={true}
+          callback={() => this.validate()} />
         <nav className="column row">
           <div className="top-bar" styleName="top-bar">
             <Welcome

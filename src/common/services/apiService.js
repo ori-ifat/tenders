@@ -156,6 +156,10 @@ export function logout() {
   return apiFetch('Account/Logout', {}, true)
 }
 
+export function validateAccount() {
+  return apiFetch('Account/Validate', {}, true)
+}
+
 export function isIfatUser() {
   return apiFetch('Account/IsIfat')
 }

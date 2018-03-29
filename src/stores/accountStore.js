@@ -1,5 +1,5 @@
 import { action, computed, observable, toJS } from 'mobx'
-import { me, login, logout } from 'common/services/apiService'
+import { me, login, logout, validateAccount } from 'common/services/apiService'
 
 class Account {
 
@@ -18,6 +18,20 @@ class Account {
     me().then(profile => {
       this.profile = profile
       //console.log('Me', this.profile)
+    })
+  }
+
+  @action.bound
+  validateAccount() {
+    validateAccount().then(profile => {
+      this.profile = profile
+      //console.log('validated', profile)
+    }).catch(error => {
+      const {error: {status}} = error
+      if (status == 401) {
+        //unauthorized: clear the profile. this will raise 'not-logged' flag all over site
+        this.profile = null
+      }
     })
   }
 
@@ -57,7 +71,7 @@ class Account {
     //clean the userdata cookie
     document.cookie = 'UserData=; expires=Thu, 01 Jan 1970 00:00:01 GMT;'
     this.error = null
-    this.profile = null  
+    this.profile = null
   }
 }
 
