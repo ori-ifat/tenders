@@ -114,8 +114,10 @@ export default class Reminder extends Component {
   }
 
   addReminder = () => {
+    //check if time has passed: add 10 minutes to current time, to avoid a time that has passed already
+    const selectedTime = moment(`${this.reminderDate} ${this.time}`, 'DD-MM-YYYY HH:mm') < moment() ? moment().add(10, 'minutes').format('HH:mm') : this.time
     //take from DD-MM-YYYY HH:mm format
-    const selectedDate = moment(`${this.reminderDate} ${this.time}`, 'DD-MM-YYYY HH:mm').format('YYYY-MM-DD HH:mm:ss')
+    const selectedDate = moment(`${this.reminderDate} ${selectedTime}`, 'DD-MM-YYYY HH:mm').format('YYYY-MM-DD HH:mm:ss')
     //console.log(this.reminderDate, selectedDate)
     const action = this.reminderID > 0 ? 'Update' : 'Add'
     setReminder(action, this.reminderID, this.tenderID, this.remark, this.subject, this.email, selectedDate).then(newid => {

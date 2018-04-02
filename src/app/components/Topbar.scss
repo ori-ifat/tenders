@@ -91,16 +91,16 @@ if only settings are needed, import '~common/style/_settings.scss' instead. this
 		}
 	}
 
+	.menu {
+		z-index: 1002 !important;
+	}
 
-.is-dropdown-submenu-parent.opens-right > .is-dropdown-submenu {
+	.is-dropdown-submenu-parent.opens-right > .is-dropdown-submenu {
 		left: 0;
 		top: 100%;
 	}
 
 }
-
-
-
 
 .top-navigation .button {
 	border-radius: 3px;

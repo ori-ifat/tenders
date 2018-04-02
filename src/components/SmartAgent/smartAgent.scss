@@ -148,6 +148,12 @@
   height: 1100px;
 }
 
+@media screen and (max-width: 39.9375em) {
+  .block {
+    min-height: 1300px !important;
+  }
+}
+
 .estimation {
   float: left;
   width: 600px;

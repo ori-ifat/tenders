@@ -44,7 +44,7 @@ export function getImageUrl(fileName) {
 
 export function extractLabel(value, more) {
   const arr = value.split(',')
-  const label = arr.length > 2 ? `${arr.slice(0, 2).join(',')  } ${more}` : value
+  const label = arr.length > 2 ? `${arr.slice(0, 2).join(',')  } ${more} ${arr.length - 2}` : value
   return label
 }
 
