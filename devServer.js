@@ -28,6 +28,7 @@ if(argv.verbose){
 }
 
 app.use(historyFallback({verbose: argv.verbose, index: '/'}))
+//app.use(historyFallback({verbose: argv.verbose, index: '/index.html'}))
 
 app.use(devMiddleware(compiler, {
   quiet: true,
@@ -54,4 +55,3 @@ freeport(argv.port, maxPort, function(err, port){
     console.log(`server listening on http://${address.address}:${address.port}`)
   })
 })
-

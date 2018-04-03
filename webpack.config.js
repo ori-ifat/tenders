@@ -28,7 +28,8 @@ module.exports = {
   entry: getEntryPoints(),
   output: {
     path: paths.dist,
-    filename: '[name].[hash].bundle.js'
+    filename: '[name].[hash].bundle.js',
+    publicPath: '/'
   },
   plugins: getPlugins(),
   resolve: {
