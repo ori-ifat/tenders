@@ -24,9 +24,18 @@ export default class Category extends Component {
   @observable tenders = []
 
   componentWillMount() {
-    const { match: {params: { id, name, mode }} } = this.props
+    this.getCatData(this.props)
+  }
+
+  componentWillReceiveProps(nextProps) {
+    this.getCatData(nextProps)
+  }
+
+  getCatData = (props) => {
+    const { match: {params: { id, name, mode }} } = props
     getHomeJSON('Categories', name).then(res => {
       this.data = res
+      window.scrollTo(0, 0)
     })
     if(mode && mode == 'cat') {
       getSampleTendersBySub(id).then(res => {

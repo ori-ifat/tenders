@@ -16,6 +16,7 @@ import moment from 'moment'
 import {getHomeJSON} from 'common/services/apiService'
 import {getMetaData} from 'common/utils/meta'
 import {fixTopMenu} from 'common/utils/topMenu'
+import { Link } from 'react-router-dom'
 import DocumentMeta from 'react-document-meta'
 import CSSModules from 'react-css-modules'
 import styles from './home.scss'
@@ -206,8 +207,9 @@ export default class Home extends Component {
         <section className="banner show-for-medium">
         	<div className="row">
         		<div className="large-12 columns">
-              <a href="#/publish">
-        			<img src="http://www.tenders.co.il/images/home/banner.png" alt="" /></a>
+              <Link to="/publish">
+        			   <img src="http://www.tenders.co.il/images/home/banner.png" alt="" />
+              </Link>
         		</div>
         	</div>
         </section>
@@ -245,8 +247,8 @@ export default class Home extends Component {
               imgSrc={this.article3.image}
             />}
 
-            <div className="large-12 columns">
-              <a href="#/articles" styleName="more">{t('home.allArticles')}</a>
+            <div className="large-12 columns">              
+              <Link to="/articles" styleName="more">{t('home.allArticles')}</Link>
             </div>
           </div>
 

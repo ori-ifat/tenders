@@ -8,6 +8,7 @@ import {setReminder, getReminder, clearCache} from 'common/services/apiService'
 import {getCookie, setCookie} from 'common/utils/cookies'
 import Calendar from 'common/components/Calendar'
 import Confirm from 'common/components/Confirm'
+import { Link } from 'react-router-dom'
 import ReactModal from 'react-modal'
 import CSSModules from 'react-css-modules'
 import styles from './Reminder.scss'
@@ -225,8 +226,8 @@ export default class Reminder extends Component {
             </div>
 
             <div className="grid-x grid-margin-x" styleName="pb">
-              <div className="small-12 cell">
-                <a target="_blank" href={`#/tender/${encodeURIComponent(encryptedID)}`}>{t('reminder.linkToItem')}</a>
+              <div className="small-12 cell">                
+                <Link to={`/tender/${encodeURIComponent(encryptedID)}`} target='_blank'>{t('reminder.linkToItem')}</Link>
               </div>
             </div>
 

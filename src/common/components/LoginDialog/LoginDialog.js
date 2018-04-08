@@ -5,6 +5,7 @@ import {observable, toJS} from 'mobx'
 import { translate } from 'react-polyglot'
 import {clearCache} from 'common/services/apiService'
 import ReactModal from 'react-modal'
+import { Link } from 'react-router-dom'
 import {fixTopMenu} from 'common/utils/topMenu'
 import CSSModules from 'react-css-modules'
 import styles from './LoginDialog.scss'
@@ -117,7 +118,7 @@ export default class LoginDialog extends React.Component {
               </div>
             </div>
             <div styleName="sign_up">
-              <a href="#/contact" target="_blank">
+              <Link to='/contact' target='_blank'>
                 <h3>{t('login.buy')}</h3>
                 <p>{t('login.subscribe')}</p>
                 <ul className="no-bullet">
@@ -125,7 +126,7 @@ export default class LoginDialog extends React.Component {
                   <li>{t('login.benefit2')}</li>
                 </ul>
                 <button styleName="button-submit">{t('login.register')}</button>
-              </a>
+              </Link>              
             </div>
           </div>
         </div>

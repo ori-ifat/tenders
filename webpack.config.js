@@ -12,6 +12,7 @@ const NODE_ENV = process.env.NODE_ENV || 'development'
 const isTestEnv = NODE_ENV === 'test'
 const isProductionCode = NODE_ENV === 'production'
 const isDevelopmentServer = NPM_EVENT === 'start'
+const ASSET_PATH = process.env.ASSET_PATH || '/'
 
 const paths = {
   dist: relpath(`./dist/${NODE_ENV}`),
@@ -29,7 +30,7 @@ module.exports = {
   output: {
     path: paths.dist,
     filename: '[name].[hash].bundle.js',
-    publicPath: '/'
+    publicPath: ASSET_PATH
   },
   plugins: getPlugins(),
   resolve: {
@@ -148,7 +149,8 @@ function getPlugins() {
     }),
     new webpack.DefinePlugin({
       'process.env': {
-        'NODE_ENV': JSON.stringify(NODE_ENV)
+        'NODE_ENV': JSON.stringify(NODE_ENV),
+        'ASSET_PATH': JSON.stringify(ASSET_PATH)
       }
     })
   ]

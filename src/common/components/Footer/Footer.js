@@ -1,5 +1,5 @@
 import React, {Component, PropTypes} from 'react'
-import {/*inject,*/ observer} from 'mobx-react'
+import {inject, observer} from 'mobx-react'
 import {observable} from 'mobx'
 import {translate} from 'react-polyglot'
 import LoginDialog from 'common/components/LoginDialog'
@@ -30,7 +30,7 @@ const navbar = [{
 }]
 
 @translate()
-//@inject('routingStore')
+@inject('routingStore')
 @CSSModules(styles)
 @observer
 export default class Footer extends React.Component {
@@ -43,7 +43,7 @@ export default class Footer extends React.Component {
       this.publishers = res
     )
   }
-  /*
+
   navigate = (title, route) => {
     if (title != 'login') {
       this.goTo(route)
@@ -53,18 +53,16 @@ export default class Footer extends React.Component {
     }
   }
 
-  navigate2 = (id, shortName) => {
-    const url = `Category/${id}/${shortName}`
+  navigate2 = (id, shortName, cat = false) => {
+    const url = cat ? `/Category/${id}/${shortName}/cat` :`/Category/${id}/${shortName}`
     this.goTo(url)
   }
 
   goTo = (route) => {
-    const { routingStore: { push } } = this.props
-    push(route)
-  }*/
-
-  login = () => {
-    this.showLoginDialog = true
+    const { routingStore: { push, location: { pathname: path } } } = this.props
+    if (path !== route) {
+      push(route)
+    }
   }
 
   continueUnlogged = () => {
@@ -80,13 +78,7 @@ export default class Footer extends React.Component {
           <ul className="no-bullet">
             {
               navbar.map((nav, index) => {
-                //return <li key={index}><a onClick={() => this.navigate(nav.title, nav.link)}>{t(`footer.${nav.title}`)}</a></li>
-                if (nav.title != 'login') {
-                  return <li key={index}><a href={`#${nav.link}`}>{t(`footer.${nav.title}`)}</a></li>
-                }
-                else {
-                  return <li key={index}><a onClick={this.login}>{t(`footer.${nav.title}`)}</a></li>
-                }
+                return <li key={index}><a onClick={() => this.navigate(nav.title, nav.link)}>{t(`footer.${nav.title}`)}</a></li>
               })
             }
           </ul>
@@ -96,9 +88,9 @@ export default class Footer extends React.Component {
           <p styleName="link_ttl">{t('footer.publishers')}</p>
           <ul className="no-bullet">
             {
-              this.publishers && this.publishers.length > 0 && take(this.publishers, 5).map((publisher, index) =>
-                <li key={index}><a target="_blank" href={`#/Category/${publisher.id}/${publisher.shortName}`}>{publisher.name}</a></li>
-              )
+              this.publishers && this.publishers.length > 0 && take(this.publishers, 5).map((publisher, index) => {
+                return <li key={index}><a onClick={() => this.navigate2(publisher.id, publisher.shortName)}>{publisher.name}</a></li>
+              })
             }
           </ul>
         </div>
@@ -107,9 +99,9 @@ export default class Footer extends React.Component {
           <p styleName="link_ttl">&nbsp;</p>
           <ul className="no-bullet">
             {
-              this.publishers && this.publishers.length > 0 && takeRight(this.publishers, 5).map((publisher, index) =>
-                <li key={index}><a target="_blank" href={`#/Category/${publisher.id}/${publisher.shortName}`}>{publisher.name}</a></li>
-              )
+              this.publishers && this.publishers.length > 0 && takeRight(this.publishers, 5).map((publisher, index) => {
+                return <li key={index}><a onClick={() => this.navigate2(publisher.id, publisher.shortName)}>{publisher.name}</a></li>
+              })
             }
           </ul>
         </div>
@@ -117,12 +109,12 @@ export default class Footer extends React.Component {
         <div className="medium-3 small-12  columns">
           <p styleName="link_ttl">{t('footer.categories')}</p>
           <ul className="no-bullet">
-            <li><a target="_blank" href="#/Category/2/building/cat">{t('footer.building')}</a></li>
-            <li><a target="_blank" href="#/Category/5/land/cat">{t('footer.land')}</a></li>
-            <li><a target="_blank" href="#/Category/14/assets/cat">{t('footer.assets')}</a></li>
-            <li><a target="_blank" href="#/Category/40/electricity/cat">{t('footer.electricity')}</a></li>
-            <li><a target="_blank" href="#/Category/26/transport/cat">{t('footer.transport')}</a></li>
-            <li><a target="_blank" href="#/Category/24/cars/cat">{t('footer.cars')}</a></li>
+            <li><a onClick={() => this.navigate2(2, 'building', true)}>{t('footer.building')}</a></li>
+            <li><a onClick={() => this.navigate2(5, 'land', true)}>{t('footer.land')}</a></li>
+            <li><a onClick={() => this.navigate2(14, 'assets', true)}>{t('footer.assets')}</a></li>
+            <li><a onClick={() => this.navigate2(40, 'electricity', true)}>{t('footer.electricity')}</a></li>
+            <li><a onClick={() => this.navigate2(26, 'transport', true)}>{t('footer.transport')}</a></li>
+            <li><a onClick={() => this.navigate2(24, 'cars', true)}>{t('footer.cars')}</a></li>
           </ul>
         </div>
       </div>
