@@ -104,7 +104,8 @@ export default class SubSearch extends React.Component {
     //subsubject -> tag crap
     //subsubjects: act like a search, not like a filter ...
     const tags = this.selected.map((item, index) => {
-      return {ID: item, Name: encodeURIComponent(this.itemLabels[index]), ResType: field, UniqueID: parseFloat(`${item}.1`)}
+      //return {ID: item, Name: encodeURIComponent(this.itemLabels[index]), ResType: field, UniqueID: parseFloat(`${item}.1`)}
+      return {I: item, R: field, U: parseFloat(`${item}.1`)}  //minified version
     })
     //route list SearchInput, to enable a new search
     const { routingStore } = this.props
