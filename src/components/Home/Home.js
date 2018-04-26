@@ -17,6 +17,7 @@ import {getHomeJSON} from 'common/services/apiService'
 import {getMetaData} from 'common/utils/meta'
 import {fixTopMenu} from 'common/utils/topMenu'
 import DocumentMeta from 'react-document-meta'
+import ContactAction from 'common/components/ContactAction'
 import CSSModules from 'react-css-modules'
 import styles from './home.scss'
 import 'common/style/home.css'
@@ -251,6 +252,7 @@ export default class Home extends Component {
           </div>
 
         </section>
+        <ContactAction />
         <Footer />
       </div>
     )
