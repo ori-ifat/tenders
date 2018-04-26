@@ -6,7 +6,7 @@ import {translate} from 'react-polyglot'
 import {getHomeJSON, getSampleTenders2, getSampleTendersBySub} from 'common/services/apiService'
 import moment from 'moment'
 import ContactUs from 'common/components/ContactUs'
-import TenderItem from 'common/components/TenderItem/TenderItem'
+import CatRecord from './CatRecord'
 import Footer from 'common/components/Footer'
 import DocumentMeta from 'react-document-meta'
 import {getMetaData} from 'common/utils/meta'
@@ -73,7 +73,7 @@ export default class Category extends Component {
           <div className="row">
             <div className="large-12 columns">
               {this.tenders && this.tenders.length > 0 && this.tenders.map((tender, index) =>
-                <TenderItem
+                <CatRecord
                   key={index}
                   date={moment(tender.releaseDate).format('DD/MM/YYYY')}
                   title={tender.title}
