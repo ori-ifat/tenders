@@ -9,6 +9,9 @@ import ReactModal from 'react-modal'
 import CSSModules from 'react-css-modules'
 import styles from './ContactAction.scss'
 
+const req = require.context('common/style/icons/', false)
+const contact = req('./mail_w.svg')
+
 @translate()
 @inject('routingStore')
 @observer
@@ -117,9 +120,9 @@ export default class ContactAction extends React.Component {
           <div styleName="container">
             <div className="row">
               <div className="column large-12">
-                <div className="column medium-12">
-                  <h3 styleName="message">{t('contact.title')}</h3>
-                </div>
+
+                <h3 styleName="message">{t('contact.title')}</h3>
+
                 {!this.sent && this.status != '' &&
                 <div className="callout alert" styleName={style}>
                   <p styleName={style} dangerouslySetInnerHTML={{__html: this.status}}></p>
@@ -149,7 +152,7 @@ export default class ContactAction extends React.Component {
             </div>
           </div>
         </ReactModal>
-        <button onClick={this.onOpen} styleName="button-call">CALL</button>
+        <a onClick={this.onOpen} styleName="button-call"><img src={contact}/></a>
       </div>
     )
   }

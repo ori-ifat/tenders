@@ -1,10 +1,21 @@
 //@import '~common/style/_settings.scss';
 .button-call {
-  border: solid 1px;
-  border-radius: 12px;
-  padding: 10px;
-  margin: 5px;
+  position: fixed;
+  display: block;
+  bottom: 1rem;
+  right: 1rem;
+  height: 3rem;
+  width: 3rem;
+  border-radius: 50%;
+  /* Rectangle 15: */
+  background: #44C960;
+  border: 1px solid #A1F2B3;
+  box-shadow: 0 6px 14px -4px rgba(0,0,0,0.50);
+  display: flex;
+  justify-content: center;
 }
+
+
 
 .container {
   padding: 1.5rem 2rem;
