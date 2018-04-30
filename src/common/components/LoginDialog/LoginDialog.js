@@ -23,7 +23,7 @@ export default class LoginDialog extends React.Component {
 
   @observable userName = ''
   @observable password = ''
-  @observable rememberMe = true
+  @observable rememberMe = false
 
   componentWillMount() {
     ReactModal.setAppElement('#root')
@@ -126,7 +126,7 @@ export default class LoginDialog extends React.Component {
                   <li>{t('login.benefit2')}</li>
                 </ul>
                 <button styleName="button-submit">{t('login.register')}</button>
-              </Link>              
+              </Link>
             </div>
           </div>
         </div>
