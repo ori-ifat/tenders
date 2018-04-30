@@ -24,6 +24,17 @@
 
 }
 
+.reset_container {
+	display: flex;
+	position: absolute;
+	bottom: -2rem;
+	
+	a {
+		color: #8a8a8a;
+		font-size: 0.875rem;
+	}
+}
+
 .wrapper {
 	position: relative;
 }
@@ -46,8 +57,13 @@
 	}
 }
 
+.cont {
+	position: relative;
+}
+
 .subsubjects {
-	width: 150px;
-	margin-right: 17px;
-	margin-top: 15px;
+	width: auto;
+}
+.clear_s {
+	margin-right: 1rem;
 }
