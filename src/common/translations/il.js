@@ -44,7 +44,11 @@ export default {
     testemonials: 'לקוחות מספרים',
     lastTenders: 'מכרזים אחרונים',
     articles: 'כתבות',
-    allArticles: 'לכל הכתבות'
+    allArticles: 'לכל הכתבות',
+    movies: 'סרטונים',
+    movie1: 'הזדמנות עסקית חדשה: הדרך להשתלב כקבלן משנה בענף',
+    movie2: 'המכרז הזה יכול להתאים לי? לא מתלבטים - שואלים!',
+    movie3: 'פיתרון לעסק קטן שרוצה גדול- איך להגיע לעבודות פרטיות בענף שלך?'
   },
   meta: {
     homeTitle: 'יפעת מכרזים: פרסום מכרזים והזדמנויות עסקיות | מאגר מכרזים המוביל בישראל!',
@@ -342,7 +346,7 @@ export default {
   },
   footer: {
     rights: 'כל הזכויות שמורות ליפעת מכרזים',
-    service: 'לשרות ותמיכה: 03-5635000',
+    serviceTitle: 'לשרות ותמיכה: 03-5635000',
     about: 'אודות',
     subscriptions: 'מסלולים',
     services: 'מוצרים ושירותים',
@@ -369,7 +373,11 @@ export default {
     transport: 'מכרזי הסעות',
     cars: 'מכרזי רכב',
     sitemap: 'מפת אתר',
-    tenders: 'מכרזי'
+    tenders: 'מכרזי',
+    contact: 'צור קשר',
+    sales: 'מכירות',
+    service: 'שירות לקוחות',
+    support: 'תמיכה טכנית'
   },
   sitemap: {
     publishers: 'מכרזים לפי גופים',

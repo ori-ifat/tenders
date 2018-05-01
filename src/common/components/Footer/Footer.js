@@ -130,11 +130,11 @@ export default class Footer extends React.Component {
             </div>
 
             <div styleName="footer_coll">
-              <p styleName="link_ttl">צור קשר</p>
+              <p styleName="link_ttl">{t('footer.contact')}</p>
               <ul className="no-bullet">
-                <li><span>מכירות: 03-5635000</span></li>
-                <li><span>שירות לקוחות: 03-5635070/3</span></li>
-                <li><span>תמיכה טכנית: 03-5635031/7</span></li>
+                <li><span>{t('footer.sales')}: 03-5635000</span></li>
+                <li><span>{t('footer.service')}: 03-5635070/3</span></li>
+                <li><span>{t('footer.support')}: 03-5635031/7</span></li>
 
               </ul>
             </div>
@@ -155,7 +155,7 @@ export default class Footer extends React.Component {
         </div>
 
         <div className="medium-6 small-12 columns">
-          <p className="medium-text-left">{t('footer.service')}</p>
+          <p className="medium-text-left">{t('footer.serviceTitle')}</p>
         </div>
       </div>
       {this.showLoginDialog &&

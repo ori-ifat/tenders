@@ -262,7 +262,7 @@ export default class Home extends Component {
         <section id="videos" styleName="videos">
           <div className="row">
             <div className="large-12 columns">
-              <h2 styleName="acticles-title">סרטונים</h2>
+              <h2 styleName="acticles-title">{t('home.movies')}</h2>
             </div>
           </div>
 
@@ -270,21 +270,21 @@ export default class Home extends Component {
             <div className="large-4 columns">
               <a href="https://www.youtube.com/watch?v=Zo6f6rQfFS4" target="_blank">
                 <img src={videos_1} />
-                <h3>הזדמנות עסקית חדשה: הדרך להשתלב כקבלן משנה בענף</h3>
+                <h3>{t('home.movie1')}</h3>
               </a>
             </div>
 
             <div className="large-4 columns">
               <a href="https://www.youtube.com/watch?v=2xDpfiqn1ig" target="_blank">
                 <img src={videos_2} />
-                <h3>המכרז הזה יכול להתאים לי? לא מתלבטים - שואלים!</h3>
+                <h3>{t('home.movie2')}</h3>
               </a>
             </div>
 
             <div className="large-4 columns">
               <a href="https://www.youtube.com/watch?v=1HCso90x494" target="_blank">
                 <img src={videos_3} />
-                <h3>פיתרון לעסק קטן שרוצה גדול- איך להגיע לעבודות פרטיות בענף שלך?</h3>
+                <h3>{t('home.movie3')}</h3>
               </a>
             </div>
 
