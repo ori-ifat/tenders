@@ -128,7 +128,7 @@ export default class SearchInput extends Component {
       }
       else {
         //just encode
-        tag.Name = encodeURIComponent(tag.Name)
+        //tag.Name = encodeURIComponent(tag.Name)
       }
       //add back to the copied array
       copied.push(tag)
@@ -139,8 +139,8 @@ export default class SearchInput extends Component {
     //minify the url:
     payload = payload.replace(/"ID"/g, '"I"').replace(/"Name"/g, '"N"').replace(/"ResType"/g, '"R"').replace(/"subsubject"/g, '"s"').replace(/"OrderBy"/g, '"O"').replace(/"UniqueID"/g, '"U"')
     //note: on new search, filters should be empty
-    //routingStore.push(`/results/${sort}/${encodeURIComponent(payload)}/[]`)    
-    routingStore.push(`/results/${sort}/${payload}/[]`)
+    routingStore.push(`/results/${sort}/${encodeURIComponent(payload)}/[]`)
+    //routingStore.push(`/results/${sort}/${payload}/[]`)   //without full encode, stange bug occurs on items with quotes on the name
   }
 
   onSearchClick = () => {
