@@ -170,7 +170,7 @@ export default class SearchInput extends Component {
     const {searchStore, t} = this.props
 
     return (
-      <div>
+      <div styleName="cont">
         <div className="row">
           <div className="medium-12 columns">
             <div id="searchbox_wrapper" styleName="wrapper">
@@ -204,21 +204,19 @@ export default class SearchInput extends Component {
           </div>
         </div>
 
-        <div className="row">
-          <div className="medium-1 columns">
-            <div styleName="subsubjects">
-              <SubSearch
-                items={searchStore.subSubjects}
-              />
-            </div>
-          </div>
-          <div className="medium-2 columns">
-            <div style={{marginTop: '15px'}}>
-              <a style={{paddingRight: '20px'}} onClick={this.onClear}>{t('search.cleanSearch')}</a>
-            </div>
-          </div>
+      <div styleName="reset_container">
+        <div styleName="subsubjects">
+          <SubSearch
+            items={searchStore.subSubjects}
+          />
+        </div>
+        <div styleName="clear_s">
+          <a onClick={this.onClear}>{t('search.cleanSearch')}</a>
         </div>
       </div>
+
+    </div>
+
     )
   }
 }
