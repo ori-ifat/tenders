@@ -118,6 +118,7 @@ export default class ContactAction extends React.Component {
           className="reveal-custom"
           overlayClassName="reveal-overlay-custom">
           <div styleName="container">
+            <button styleName="button-cancel" onClick={this.onClose}>×</button>
             <div className="row">
               <div className="column large-12">
 
