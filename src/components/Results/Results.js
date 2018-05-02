@@ -83,7 +83,7 @@ export default class Results extends Component {
     const {recordStore: {checkedItems}} = this.props
     const divStyle = resultsLoading && searchStore.fromRoute ? 'loading' : ''
     const meta = this.getMeta()
-    const subSubject = this.isHomeResults ? tags[0].Name : ''
+    const subSubject = this.isHomeResults && tags && tags.length > 0 ? tags[0].Name : ''
     const saleText = this.isHomeResults ? t('results.saleText', {subSubject}) : ''
 
     //console.log('tags', toJS(tags))

@@ -11,6 +11,7 @@ import Row from './Row'
 import Reminder from 'common/components/Reminder'
 import Feedback from './Feedback'
 import Loading from 'common/components/Loading/Loading'
+import { Link } from 'react-router-dom'
 import CSSModules from 'react-css-modules'
 import styles from './ResultsItemDetails.scss'
 
@@ -125,7 +126,7 @@ export default class ResultsItemDetails extends React.Component {
         const link = arr[1].split('[[SEP]]')  //it is built as ID[[SEP]]Title
         title = link[1]  //set the title
         //concat the url as is (regexp will fix it to be a link)
-        text = `${arr[0]}<br />${t('tender.originalTitle')}<br />http://www.tenders.co.il/#/tender/${link[0]}`
+        text = `${arr[0]}<br />${t('tender.originalTitle')}<br />http://www.tenders.co.il/tender/${link[0]}`
       }
 
       //with http
@@ -315,8 +316,8 @@ export default class ResultsItemDetails extends React.Component {
 
                   </ul>
                   {item.TenderType == t('tender.tenderPublicLabel') &&
-                  <div>
-                    <a styleName="radar-link" className="button" href={`#/radar/${encryptedID}`} target="_blank">{t('tender.radar')}</a>
+                  <div>                    
+                    <Link to={`/radar/${encryptedID}`} target='_blank' className="button" styleName="radar-link">{t('tender.radar')}</Link>
                   </div>
                   }
                 </div>
@@ -337,6 +338,7 @@ export default class ResultsItemDetails extends React.Component {
         {this.remindMe &&
           <Reminder
             tenderID={item.TenderID}
+            encryptedID={encryptedID}
             onClose={() => this.remind(false)}
             setReminderData={this.setReminderData}
             title={item.Title}

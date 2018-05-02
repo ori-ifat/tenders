@@ -22,6 +22,7 @@ import RadarPage from 'pages/radar'
 import AboutPage from 'pages/about'
 import SiteMapPage from 'pages/sitemap'
 import LoginPage from 'pages/login'
+import DistAgent from 'pages/distagent'
 import NotFound404 from 'pages/notFound404'
 
 class Pages extends React.Component {
@@ -117,6 +118,9 @@ class Pages extends React.Component {
           </Route>
           <Route path="/login/:user/:pass">
             <LoginPage />
+          </Route>
+          <Route path="/distagent/:uid">
+            <DistAgent />
           </Route>
           <Route>
             <NotFound404 />

@@ -8,6 +8,8 @@ import Select from 'react-select'
 import SubSearch from './SubSearch'
 import SavedSearches from './SavedSearches'
 import {observable, toJS} from 'mobx'
+import forEach from 'lodash/forEach'
+import remove from 'lodash/remove'
 import {autocomplete} from 'common/services/apiService'
 import enhanceWithClickOutside from 'react-click-outside'
 
@@ -112,9 +114,33 @@ export default class SearchInput extends Component {
   onSearch = () => {
     const { routingStore } = this.props
     const sort = 'publishDate'  //default sort. note, means that on every search action, sort will reset here
-    const payload = JSON.stringify(this.selectedValues)
+    /* remove the subSubjectName - to shorten url */
+    //create a shallow copy of selectedValues - to avoid unneeded recursive operation upon change...
+    const copied = this.selectedValues.slice()
+    forEach(this.selectedValues, value => {
+      //remove the current from the copied array
+      remove(copied, val => val.UniqueID == value.UniqueID)
+      //create a shallow copy of current tag - so original selectedValues will not change
+      const tag = Object.assign({}, value)
+      if (value.ResType == 'subsubject') {
+        //remove the name property
+        Reflect.deleteProperty(tag, 'Name')
+      }
+      else {
+        //just encode
+        //tag.Name = encodeURIComponent(tag.Name)
+      }
+      //add back to the copied array
+      copied.push(tag)
+    })
+    //revert back to copied
+    this.selectedValues = copied
+    let payload = JSON.stringify(this.selectedValues)
+    //minify the url:
+    payload = payload.replace(/"ID"/g, '"I"').replace(/"Name"/g, '"N"').replace(/"ResType"/g, '"R"').replace(/"subsubject"/g, '"s"').replace(/"OrderBy"/g, '"O"').replace(/"UniqueID"/g, '"U"')
     //note: on new search, filters should be empty
     routingStore.push(`/results/${sort}/${encodeURIComponent(payload)}/[]`)
+    //routingStore.push(`/results/${sort}/${payload}/[]`)   //without full encode, stange bug occurs on items with quotes on the name
   }
 
   onSearchClick = () => {
@@ -122,7 +148,7 @@ export default class SearchInput extends Component {
     const sort = 'publishDate'  //default sort - see above
     const tags = JSON.stringify(this.selectedValues)
     searchStore.applySort(sort)
-    searchStore.applyTags(tags)
+    searchStore.applyTags(tags, false)
     searchStore.clearFilterLabels()
     searchStore.applyFilters('[]')
     recordStore.cleanChecked()
