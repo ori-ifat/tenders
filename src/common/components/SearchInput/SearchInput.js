@@ -200,20 +200,20 @@ export default class SearchInput extends Component {
                 <SavedSearches />
               }
             </div>
-
+            <div styleName="reset_container">
+              <div styleName="subsubjects">
+                <SubSearch
+                  items={searchStore.subSubjects}
+                />
+              </div>
+              <div styleName="clear_s">
+                <a onClick={this.onClear}>{t('search.cleanSearch')}</a>
+              </div>
+            </div>
           </div>
         </div>
 
-      <div styleName="reset_container">
-        <div styleName="subsubjects">
-          <SubSearch
-            items={searchStore.subSubjects}
-          />
-        </div>
-        <div styleName="clear_s">
-          <a onClick={this.onClear}>{t('search.cleanSearch')}</a>
-        </div>
-      </div>
+
 
     </div>
 
