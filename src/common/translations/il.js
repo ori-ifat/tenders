@@ -44,7 +44,11 @@ export default {
     testemonials: 'לקוחות מספרים',
     lastTenders: 'מכרזים אחרונים',
     articles: 'כתבות',
-    allArticles: 'לכל הכתבות'
+    allArticles: 'לכל הכתבות',
+    movies: 'טיפים מיפעת מכרזים',
+    movie1: 'הזדמנות עסקית חדשה: הדרך להשתלב כקבלן משנה בענף',
+    movie2: 'המכרז הזה יכול להתאים לי? לא מתלבטים - שואלים!',
+    movie3: 'פיתרון לעסק קטן שרוצה גדול- איך להגיע לעבודות פרטיות בענף שלך?'
   },
   meta: {
     homeTitle: 'יפעת מכרזים: פרסום מכרזים והזדמנויות עסקיות | מאגר מכרזים המוביל בישראל!',
@@ -73,7 +77,7 @@ export default {
     name: 'שם',
     email: 'אימייל',
     phone: 'מספר טלפון',
-    subTitle: 'רוצים להיחשף בזמן אמת לכל סוגי המכרזים המתקיימים ע"י %{short}? רוצים להגדיל את סיכוייכם לקבלת מכרז? <br />זה הזמן לדעת הכל על רשימת מכרזים %{short}',
+    subTitle: 'רוצים להיחשף בזמן אמת לכל סוגי המכרזים המתקיימים ע"י %{short}? רוצים להגדיל את סיכוייכם לקבלת מכרז? זה הזמן לדעת הכל על רשימת מכרזים %{short}',
     contactTitle: 'לפרטים נוספים אודות שירותי יפעת מכרזים בתחום %{title}'
   },
   main: {
@@ -215,7 +219,7 @@ export default {
     printBig: 'הדפס מודעות מכרזים',
     fav: 'הוסף למועדפים',
     emailSubject: 'משלוח עבורך מיפעת מכרזים',
-    emailBody: 'לצפיה במכרזים, לחצו כאן: http://www.tenders.co.il/DistAgent/DistAgent.aspx?uid=%{uid}'
+    emailBody: 'לצפיה במכרזים, לחצו כאן: http://www.tenders.co.il/distagent/%{uid}'
   },
   reminder: {
     title: 'הוספת תזכורת',
@@ -307,6 +311,9 @@ export default {
     compareTo: 'טקסט להשוואה',
     submitText: 'בדוק'
   },
+  distagent: {
+    wait: 'אנא המתן...'
+  },
   searches: {
     title: 'חיפושים אחרונים:'
   },
@@ -342,7 +349,7 @@ export default {
   },
   footer: {
     rights: 'כל הזכויות שמורות ליפעת מכרזים',
-    service: 'לשרות ותמיכה: 03-5635000',
+    serviceTitle: 'לשרות ותמיכה: 03-5635000',
     about: 'אודות',
     subscriptions: 'מסלולים',
     services: 'מוצרים ושירותים',
@@ -369,7 +376,11 @@ export default {
     transport: 'מכרזי הסעות',
     cars: 'מכרזי רכב',
     sitemap: 'מפת אתר',
-    tenders: 'מכרזי'
+    tenders: 'מכרזי',
+    contact: 'צור קשר',
+    sales: 'מכירות',
+    service: 'שירות לקוחות',
+    support: 'תמיכה טכנית'
   },
   sitemap: {
     publishers: 'מכרזים לפי גופים',

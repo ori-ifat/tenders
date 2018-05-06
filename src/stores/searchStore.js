@@ -2,6 +2,8 @@ import { action, computed, observable, toJS } from 'mobx'
 import isObject from 'lodash/isObject'
 import map from 'lodash/map'
 import filter from 'lodash/filter'
+import forEach from 'lodash/forEach'
+import find from 'lodash/find'
 import moment from 'moment'
 import {extractLabel} from 'common/utils/util'
 import {/*search*/ fetchResultsPage, fetchFilters, getSubSubjects } from 'common/services/apiService'
@@ -102,8 +104,45 @@ class Search {
   }
 
   @action.bound
-  applyTags(queryTags) {
-    const tags = JSON.parse(decodeURIComponent(queryTags))
+  applyTags(queryTags, minified = true) {
+    let tags
+    if (minified) {
+      //implement - get subSubjectName from json
+      tags = decodeURIComponent(queryTags).replace(/"I"/g, '"ID"').replace(/"N"/g, '"Name"').replace(/"R"/g, '"ResType"').replace(/"s"/g, '"subsubject"').replace(/"O"/g, '"OrderBy"').replace(/"U"/g, '"UniqueID"')
+      tags = JSON.parse(tags)
+      if (this.subSubjects.length == 0) {   //ex. on reload from url ...
+        this.loadSubSubjects().then(() => this.fixTags(tags))
+      }
+      else {
+        this.fixTags(tags)
+      }
+    }
+    else {
+      tags = JSON.parse(decodeURIComponent(queryTags))
+      if (isObject(tags)) {
+        this.tags.replace(tags)
+      } else {
+        //implement error handle
+        console.error('[searchStore]applyTags', 'could not load tags from query')
+      }
+    }
+  }
+
+  @action.bound
+  fixTags(tags) {
+    //iterate on tags, and for subSubject, extract name from the subSubjects array by id    
+    forEach(tags, tag => {
+      if (tag.ResType == 'subsubject') {
+        //find the name on the subSubjects array
+        const found = find(this.subSubjects, item => {
+          return item.SubSubjectID == tag.ID
+        })
+        if (found) {
+          //set the name property to the current tag
+          Reflect.set(tag, 'Name', found.SubSubjectName)
+        }
+      }
+    })
     if (isObject(tags)) {
       this.tags.replace(tags)
     } else {

@@ -8,7 +8,7 @@ import SubCatItem from './Items/SubCatItem'
 import ContactUs from 'common/components/ContactUs'
 import Opportunity from './Items/Opportunity'
 import Testemonial from './Items/Testemonial'
-import TenderItem from 'common/components/TenderItem/TenderItem'
+import TenderItem from './Items/TenderItem/TenderItem'
 import Article from './Items/Article'
 import Footer from 'common/components/Footer'
 import Loading from 'common/components/Loading/Loading'
@@ -16,10 +16,17 @@ import moment from 'moment'
 import {getHomeJSON} from 'common/services/apiService'
 import {getMetaData} from 'common/utils/meta'
 import {fixTopMenu} from 'common/utils/topMenu'
+import { Link } from 'react-router-dom'
 import DocumentMeta from 'react-document-meta'
+import ContactAction from 'common/components/ContactAction'
 import CSSModules from 'react-css-modules'
 import styles from './home.scss'
 import 'common/style/home.css'
+
+const req = require.context('common/style/icons/', false)
+const videos_1 = req('./video_1.jpg')
+const videos_2 = req('./video_2.jpg')
+const videos_3 = req('./video_3.jpg')
 
 @translate()
 @inject('homeStore')
@@ -206,8 +213,9 @@ export default class Home extends Component {
         <section className="banner show-for-medium">
         	<div className="row">
         		<div className="large-12 columns">
-              <a href="#/publish">
-        			<img src="http://www.tenders.co.il/images/home/banner.png" alt="" /></a>
+              <Link to="/publish">
+        			   <img src="http://www.tenders.co.il/images/home/banner.png" alt="" />
+              </Link>
         		</div>
         	</div>
         </section>
@@ -245,12 +253,48 @@ export default class Home extends Component {
               imgSrc={this.article3.image}
             />}
 
-            <div className="large-12 columns">
-              <a href="#/articles" styleName="more">{t('home.allArticles')}</a>
+            <div className="large-12 columns">              
+              <Link to="/articles" styleName="more">{t('home.allArticles')}</Link>
             </div>
           </div>
 
         </section>
+
+
+        <section id="videos" styleName="videos">
+          <div className="row">
+            <div className="large-12 columns">
+              <h2 styleName="acticles-title">{t('home.movies')}</h2>
+            </div>
+          </div>
+
+          <div className="row">
+            <div className="large-4 columns">
+              <a href="https://www.youtube.com/watch?v=Zo6f6rQfFS4" target="_blank">
+                <img src={videos_1} />
+                <h3>{t('home.movie1')}</h3>
+              </a>
+            </div>
+
+            <div className="large-4 columns">
+              <a href="https://www.youtube.com/watch?v=2xDpfiqn1ig" target="_blank">
+                <img src={videos_2} />
+                <h3>{t('home.movie2')}</h3>
+              </a>
+            </div>
+
+            <div className="large-4 columns">
+              <a href="https://www.youtube.com/watch?v=1HCso90x494" target="_blank">
+                <img src={videos_3} />
+                <h3>{t('home.movie3')}</h3>
+              </a>
+            </div>
+
+          </div>
+
+        </section>
+
+        <ContactAction />
         <Footer />
       </div>
     )

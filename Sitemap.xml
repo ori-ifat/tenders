@@ -1,243 +1,276 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"> 
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 	<url>
-		<loc>http://www.tenders.co.il/#/home</loc>
+		<loc>http://www.tenders.co.il/home</loc>
 	</url>
 	<url>
-		<loc>http://www.tenders.co.il/#/subscriptions</loc>
+		<loc>http://www.tenders.co.il/subscriptions</loc>
 	</url>
 	<url>
-		<loc>http://www.tenders.co.il/#/services</loc>
+		<loc>http://www.tenders.co.il/services</loc>
 	</url>
 	<url>
-		<loc>http://www.tenders.co.il/#/contact</loc>
+		<loc>http://www.tenders.co.il/contact</loc>
 	</url>
 	<url>
-		<loc>http://www.tenders.co.il/#/publish</loc>
+		<loc>http://www.tenders.co.il/publish</loc>
 	</url>
 	<url>
-		<loc>http://www.tenders.co.il/#/articles</loc>
+		<loc>http://www.tenders.co.il/articles</loc>
 	</url>
 	<url>
-		<loc>http://www.tenders.co.il/#/results/publishDate/[{%22ID%22%3A1%2C%22Name%22%3A%22%D7%91%D7%99%D7%95%D7%91%22%2C%22ResType%22%3A%22subsubject%22}]/[]</loc>
+		<loc>http://www.tenders.co.il/results/publishDate/[{%22I%22%3A1%2C%22R%22%3A%22s%22%2C%22U%22%3A1.1}]/[]/true</loc>
 	</url>
 	<url>
-		<loc>http://www.tenders.co.il/#/results/publishDate/[{%22ID%22%3A2%2C%22Name%22%3A%22%D7%91%D7%A0%D7%99%D7%94%22%2C%22ResType%22%3A%22subsubject%22}]/[]</loc>
+		<loc>http://www.tenders.co.il/results/publishDate/[{%22I%22%3A2%2C%22R%22%3A%22s%22%2C%22U%22%3A2.1}]/[]/true</loc>
 	</url>
 	<url>
-		<loc>http://www.tenders.co.il/#/results/publishDate/[{%22ID%22%3A3%2C%22Name%22%3A%22%D7%97%D7%95%D7%9E%D7%A8%D7%99%20%D7%91%D7%A0%D7%99%D7%94%22%2C%22ResType%22%3A%22subsubject%22}]/[]</loc>
+		<loc>http://www.tenders.co.il/results/publishDate/[{%22I%22%3A3%2C%22R%22%3A%22s%22%2C%22U%22%3A3.1}]/[]/true</loc>
 	</url>
 	<url>
-		<loc>http://www.tenders.co.il/#/results/publishDate/[{%22ID%22%3A4%2C%22Name%22%3A%22%D7%9E%D7%A2%D7%9C%D7%99%D7%95%D7%AA%22%2C%22ResType%22%3A%22subsubject%22}]/[]</loc>
+		<loc>http://www.tenders.co.il/results/publishDate/[{%22I%22%3A4%2C%22R%22%3A%22s%22%2C%22U%22%3A4.1}]/[]/true</loc>
 	</url>
 	<url>
-		<loc>http://www.tenders.co.il/#/results/publishDate/[{%22ID%22%3A5%2C%22Name%22%3A%22%D7%9E%D7%A7%D7%A8%D7%A7%D7%A2%D7%99%D7%9F%22%2C%22ResType%22%3A%22subsubject%22}]/[]</loc>
+		<loc>http://www.tenders.co.il/results/publishDate/[{%22I%22%3A5%2C%22R%22%3A%22s%22%2C%22U%22%3A5.1}]/[]/true</loc>
 	</url>
 	<url>
-		<loc>http://www.tenders.co.il/#/results/publishDate/[{%22ID%22%3A6%2C%22Name%22%3A%22%D7%A8%D7%99%D7%A6%D7%95%D7%A3%22%2C%22ResType%22%3A%22subsubject%22}]/[]</loc>
+		<loc>http://www.tenders.co.il/results/publishDate/[{%22I%22%3A6%2C%22R%22%3A%22s%22%2C%22U%22%3A6.1}]/[]/true</loc>
 	</url>
 	<url>
-		<loc>http://www.tenders.co.il/#/results/publishDate/[{%22ID%22%3A7%2C%22Name%22%3A%22%D7%A9%D7%99%D7%A4%D7%95%D7%A6%D7%99%D7%9D%22%2C%22ResType%22%3A%22subsubject%22}]/[]</loc>
+		<loc>http://www.tenders.co.il/results/publishDate/[{%22I%22%3A7%2C%22R%22%3A%22s%22%2C%22U%22%3A7.1}]/[]/true</loc>
 	</url>
 	<url>
-		<loc>http://www.tenders.co.il/#/results/publishDate/[{%22ID%22%3A8%2C%22Name%22%3A%22%D7%AA%D7%A9%D7%AA%D7%99%D7%AA%22%2C%22ResType%22%3A%22subsubject%22}]/[]</loc>
+		<loc>http://www.tenders.co.il/results/publishDate/[{%22I%22%3A8%2C%22R%22%3A%22s%22%2C%22U%22%3A8.1}]/[]/true</loc>
 	</url>
 	<url>
-		<loc>http://www.tenders.co.il/#/results/publishDate/[{%22ID%22%3A9%2C%22Name%22%3A%22%D7%9E%D7%99%D7%96%D7%95%D7%92%20%D7%90%D7%95%D7%95%D7%99%D7%A8%22%2C%22ResType%22%3A%22subsubject%22}]/[]</loc>
+		<loc>http://www.tenders.co.il/results/publishDate/[{%22I%22%3A9%2C%22R%22%3A%22s%22%2C%22U%22%3A9.1}]/[]/true</loc>
 	</url>
 	<url>
-		<loc>http://www.tenders.co.il/#/results/publishDate/[{%22ID%22%3A10%2C%22Name%22%3A%22%D7%A6%D7%99%D7%95%D7%93%20%D7%90%D7%99%D7%A0%D7%A1%D7%98%D7%9C%D7%A6%D7%99%D7%94%22%2C%22ResType%22%3A%22subsubject%22}]/[]</loc>
+		<loc>http://www.tenders.co.il/results/publishDate/[{%22I%22%3A10%2C%22R%22%3A%22s%22%2C%22U%22%3A10.1}]/[]/true</loc>
 	</url>
 	<url>
-		<loc>http://www.tenders.co.il/#/results/publishDate/[{%22ID%22%3A11%2C%22Name%22%3A%22%D7%92%D7%A9%D7%A8%D7%99%D7%9D%22%2C%22ResType%22%3A%22subsubject%22}]/[]</loc>
+		<loc>http://www.tenders.co.il/results/publishDate/[{%22I%22%3A11%2C%22R%22%3A%22s%22%2C%22U%22%3A11.1}]/[]/true</loc>
 	</url>
 	<url>
-		<loc>http://www.tenders.co.il/#/results/publishDate/[{%22ID%22%3A12%2C%22Name%22%3A%22%D7%9B%D7%9C%D7%9C%D7%99%22%2C%22ResType%22%3A%22subsubject%22}]/[]</loc>
+		<loc>http://www.tenders.co.il/results/publishDate/[{%22I%22%3A12%2C%22R%22%3A%22s%22%2C%22U%22%3A12.1}]/[]/true</loc>
 	</url>
 	<url>
-		<loc>http://www.tenders.co.il/#/results/publishDate/[{%22ID%22%3A13%2C%22Name%22%3A%22%D7%9E%D7%9B%D7%99%D7%A8%D7%94%20%D7%A4%D7%95%D7%9E%D7%91%D7%99%D7%AA%22%2C%22ResType%22%3A%22subsubject%22}]/[]</loc>
+		<loc>http://www.tenders.co.il/results/publishDate/[{%22I%22%3A13%2C%22R%22%3A%22s%22%2C%22U%22%3A13.1}]/[]/true</loc>
 	</url>
 	<url>
-		<loc>http://www.tenders.co.il/#/results/publishDate/[{%22ID%22%3A14%2C%22Name%22%3A%22%D7%A0%D7%9B%D7%A1%22%2C%22ResType%22%3A%22subsubject%22}]/[]</loc>
+		<loc>http://www.tenders.co.il/results/publishDate/[{%22I%22%3A14%2C%22R%22%3A%22s%22%2C%22U%22%3A14.1}]/[]/true</loc>
 	</url>
 	<url>
-		<loc>http://www.tenders.co.il/#/results/publishDate/[{%22ID%22%3A15%2C%22Name%22%3A%22%D7%9B%D7%9C%D7%99%20%D7%A2%D7%91%D7%95%D7%93%D7%94%22%2C%22ResType%22%3A%22subsubject%22}]/[]</loc>
+		<loc>http://www.tenders.co.il/results/publishDate/[{%22I%22%3A15%2C%22R%22%3A%22s%22%2C%22U%22%3A15.1}]/[]/true</loc>
 	</url>
 	<url>
-		<loc>http://www.tenders.co.il/#/results/publishDate/[{%22ID%22%3A16%2C%22Name%22%3A%22%D7%A6%D7%99%D7%95%D7%93%20%D7%9B%D7%91%D7%93%22%2C%22ResType%22%3A%22subsubject%22}]/[]</loc>
+		<loc>http://www.tenders.co.il/results/publishDate/[{%22I%22%3A16%2C%22R%22%3A%22s%22%2C%22U%22%3A16.1}]/[]/true</loc>
 	</url>
 	<url>
-		<loc>http://www.tenders.co.il/#/results/publishDate/[{%22ID%22%3A17%2C%22Name%22%3A%22%D7%A6%D7%99%D7%95%D7%93%20%D7%A6%D7%91%D7%90%D7%99%22%2C%22ResType%22%3A%22subsubject%22}]/[]</loc>
+		<loc>http://www.tenders.co.il/results/publishDate/[{%22I%22%3A17%2C%22R%22%3A%22s%22%2C%22U%22%3A17.1}]/[]/true</loc>
 	</url>
 	<url>
-		<loc>http://www.tenders.co.il/#/results/publishDate/[{%22ID%22%3A18%2C%22Name%22%3A%22%D7%A0%D7%92%D7%A8%D7%95%D7%AA%22%2C%22ResType%22%3A%22subsubject%22}]/[]</loc>
+		<loc>http://www.tenders.co.il/results/publishDate/[{%22I%22%3A18%2C%22R%22%3A%22s%22%2C%22U%22%3A18.1}]/[]/true</loc>
 	</url>
 	<url>
-		<loc>http://www.tenders.co.il/#/results/publishDate/[{%22ID%22%3A19%2C%22Name%22%3A%22%D7%9E%D7%AA%D7%9B%D7%95%D7%AA%22%2C%22ResType%22%3A%22subsubject%22}]/[]</loc>
+		<loc>http://www.tenders.co.il/results/publishDate/[{%22I%22%3A19%2C%22R%22%3A%22s%22%2C%22U%22%3A19.1}]/[]/true</loc>
 	</url>
 	<url>
-		<loc>http://www.tenders.co.il/#/results/publishDate/[{%22ID%22%3A20%2C%22Name%22%3A%22%D7%A4%D7%9C%D7%A1%D7%98%D7%99%D7%A7%22%2C%22ResType%22%3A%22subsubject%22}]/[]</loc>
+		<loc>http://www.tenders.co.il/results/publishDate/[{%22I%22%3A20%2C%22R%22%3A%22s%22%2C%22U%22%3A20.1}]/[]/true</loc>
 	</url>
 	<url>
-		<loc>http://www.tenders.co.il/#/results/publishDate/[{%22ID%22%3A21%2C%22Name%22%3A%22%D7%96%D7%9B%D7%95%D7%9B%D7%99%D7%AA%22%2C%22ResType%22%3A%22subsubject%22}]/[]</loc>
+		<loc>http://www.tenders.co.il/results/publishDate/[{%22I%22%3A21%2C%22R%22%3A%22s%22%2C%22U%22%3A21.1}]/[]/true</loc>
 	</url>
 	<url>
-		<loc>http://www.tenders.co.il/#/results/publishDate/[{%22ID%22%3A22%2C%22Name%22%3A%22%D7%94%D7%95%D7%91%D7%9C%D7%95%D7%AA%22%2C%22ResType%22%3A%22subsubject%22}]/[]</loc>
+		<loc>http://www.tenders.co.il/results/publishDate/[{%22I%22%3A22%2C%22R%22%3A%22s%22%2C%22U%22%3A22.1}]/[]/true</loc>
 	</url>
 	<url>
-		<loc>http://www.tenders.co.il/#/results/publishDate/[{%22ID%22%3A23%2C%22Name%22%3A%22%D7%97%D7%A0%D7%99%D7%95%D7%A0%D7%99%D7%9D%22%2C%22ResType%22%3A%22subsubject%22}]/[]</loc>
+		<loc>http://www.tenders.co.il/results/publishDate/[{%22I%22%3A23%2C%22R%22%3A%22s%22%2C%22U%22%3A23.1}]/[]/true</loc>
 	</url>
 	<url>
-		<loc>http://www.tenders.co.il/#/results/publishDate/[{%22ID%22%3A24%2C%22Name%22%3A%22%D7%A8%D7%9B%D7%91%22%2C%22ResType%22%3A%22subsubject%22}]/[]</loc>
+		<loc>http://www.tenders.co.il/results/publishDate/[{%22I%22%3A24%2C%22R%22%3A%22s%22%2C%22U%22%3A24.1}]/[]/true</loc>
 	</url>
 	<url>
-		<loc>http://www.tenders.co.il/#/results/publishDate/[{%22ID%22%3A25%2C%22Name%22%3A%22%D7%AA%D7%97%D7%96%D7%95%D7%A7%D7%AA%20%D7%A8%D7%9B%D7%91%22%2C%22ResType%22%3A%22subsubject%22}]/[]</loc>
+		<loc>http://www.tenders.co.il/results/publishDate/[{%22I%22%3A25%2C%22R%22%3A%22s%22%2C%22U%22%3A25.1}]/[]/true</loc>
 	</url>
 	<url>
-		<loc>http://www.tenders.co.il/#/results/publishDate/[{%22ID%22%3A26%2C%22Name%22%3A%22%D7%94%D7%A1%D7%A2%D7%95%D7%AA%22%2C%22ResType%22%3A%22subsubject%22}]/[]</loc>
+		<loc>http://www.tenders.co.il/results/publishDate/[{%22I%22%3A26%2C%22R%22%3A%22s%22%2C%22U%22%3A26.1}]/[]/true</loc>
 	</url>
 	<url>
-		<loc>http://www.tenders.co.il/#/results/publishDate/[{%22ID%22%3A27%2C%22Name%22%3A%22%D7%A9%D7%99%D7%9C%D7%95%D7%98%20%D7%95%D7%AA%D7%9E%D7%A8%D7%95%D7%A8%22%2C%22ResType%22%3A%22subsubject%22}]/[]</loc>
+		<loc>http://www.tenders.co.il/results/publishDate/[{%22I%22%3A27%2C%22R%22%3A%22s%22%2C%22U%22%3A27.1}]/[]/true</loc>
 	</url>
 	<url>
-		<loc>http://www.tenders.co.il/#/results/publishDate/[{%22ID%22%3A28%2C%22Name%22%3A%22%D7%94%D7%A9%D7%A7%D7%A2%D7%95%D7%AA%22%2C%22ResType%22%3A%22subsubject%22}]/[]</loc>
+		<loc>http://www.tenders.co.il/results/publishDate/[{%22I%22%3A28%2C%22R%22%3A%22s%22%2C%22U%22%3A28.1}]/[]/true</loc>
 	</url>
 	<url>
-		<loc>http://www.tenders.co.il/#/results/publishDate/[{%22ID%22%3A29%2C%22Name%22%3A%22%D7%93%D7%A4%D7%95%D7%A1%22%2C%22ResType%22%3A%22subsubject%22}]/[]</loc>
+		<loc>http://www.tenders.co.il/results/publishDate/[{%22I%22%3A29%2C%22R%22%3A%22s%22%2C%22U%22%3A29.1}]/[]/true</loc>
 	</url>
 	<url>
-		<loc>http://www.tenders.co.il/#/results/publishDate/[{%22ID%22%3A30%2C%22Name%22%3A%22%D7%9E%D7%97%D7%A9%D7%91%D7%99%D7%9D%22%2C%22ResType%22%3A%22subsubject%22}]/[]</loc>
+		<loc>http://www.tenders.co.il/results/publishDate/[{%22I%22%3A30%2C%22R%22%3A%22s%22%2C%22U%22%3A30.1}]/[]/true</loc>
 	</url>
 	<url>
-		<loc>http://www.tenders.co.il/#/results/publishDate/[{%22ID%22%3A31%2C%22Name%22%3A%22%D7%AA%D7%A7%D7%A9%D7%95%D7%A8%D7%AA%22%2C%22ResType%22%3A%22subsubject%22}]/[]</loc>
+		<loc>http://www.tenders.co.il/results/publishDate/[{%22I%22%3A31%2C%22R%22%3A%22s%22%2C%22U%22%3A31.1}]/[]/true</loc>
 	</url>
 	<url>
-		<loc>http://www.tenders.co.il/#/results/publishDate/[{%22ID%22%3A32%2C%22Name%22%3A%22%D7%A4%D7%A8%D7%A1%D7%95%D7%9D%22%2C%22ResType%22%3A%22subsubject%22}]/[]</loc>
+		<loc>http://www.tenders.co.il/results/publishDate/[{%22I%22%3A32%2C%22R%22%3A%22s%22%2C%22U%22%3A32.1}]/[]/true</loc>
 	</url>
 	<url>
-		<loc>http://www.tenders.co.il/#/results/publishDate/[{%22ID%22%3A33%2C%22Name%22%3A%22%D7%9E%D7%99%D7%9B%D7%95%D7%9F%20%D7%95%D7%A6%D7%99%D7%95%D7%93%20%D7%9E%D7%A9%D7%A8%D7%93%D7%99%22%2C%22ResType%22%3A%22subsubject%22}]/[]</loc>
+		<loc>http://www.tenders.co.il/results/publishDate/[{%22I%22%3A33%2C%22R%22%3A%22s%22%2C%22U%22%3A33.1}]/[]/true</loc>
 	</url>
 	<url>
-		<loc>http://www.tenders.co.il/#/results/publishDate/[{%22ID%22%3A34%2C%22Name%22%3A%22%D7%A8%D7%99%D7%94%D7%95%D7%98%22%2C%22ResType%22%3A%22subsubject%22}]/[]</loc>
+		<loc>http://www.tenders.co.il/results/publishDate/[{%22I%22%3A34%2C%22R%22%3A%22s%22%2C%22U%22%3A34.1}]/[]/true</loc>
 	</url>
 	<url>
-		<loc>http://www.tenders.co.il/#/results/publishDate/[{%22ID%22%3A35%2C%22Name%22%3A%22%D7%A9%D7%99%20%D7%95%D7%9E%D7%AA%D7%A0%D7%95%D7%AA%22%2C%22ResType%22%3A%22subsubject%22}]/[]</loc>
+		<loc>http://www.tenders.co.il/results/publishDate/[{%22I%22%3A35%2C%22R%22%3A%22s%22%2C%22U%22%3A35.1}]/[]/true</loc>
 	</url>
 	<url>
-		<loc>http://www.tenders.co.il/#/results/publishDate/[{%22ID%22%3A36%2C%22Name%22%3A%22%D7%A9%D7%9C%D7%99%D7%97%D7%95%D7%99%D7%95%D7%AA%22%2C%22ResType%22%3A%22subsubject%22}]/[]</loc>
+		<loc>http://www.tenders.co.il/results/publishDate/[{%22I%22%3A36%2C%22R%22%3A%22s%22%2C%22U%22%3A36.1}]/[]/true</loc>
 	</url>
 	<url>
-		<loc>http://www.tenders.co.il/#/results/publishDate/[{%22ID%22%3A37%2C%22Name%22%3A%22%D7%99%D7%99%D7%A2%D7%95%D7%A5%2F%D7%A0%D7%99%D7%94%D7%95%D7%9C%22%2C%22ResType%22%3A%22subsubject%22}]/[]</loc>
+		<loc>http://www.tenders.co.il/results/publishDate/[{%22I%22%3A37%2C%22R%22%3A%22s%22%2C%22U%22%3A37.1}]/[]/true</loc>
 	</url>
 	<url>
-		<loc>http://www.tenders.co.il/#/results/publishDate/[{%22ID%22%3A38%2C%22Name%22%3A%22%D7%91%D7%A8%D7%99%D7%90%D7%95%D7%AA%20%D7%95%D7%A1%D7%99%D7%A2%D7%95%D7%93%22%2C%22ResType%22%3A%22subsubject%22}]/[]</loc>
+		<loc>http://www.tenders.co.il/results/publishDate/[{%22I%22%3A38%2C%22R%22%3A%22s%22%2C%22U%22%3A38.1}]/[]/true</loc>
 	</url>
 	<url>
-		<loc>http://www.tenders.co.il/#/results/publishDate/[{%22ID%22%3A39%2C%22Name%22%3A%22%D7%97%D7%99%D7%A0%D7%95%D7%9A%20%D7%95%D7%AA%D7%A8%D7%91%D7%95%D7%AA%22%2C%22ResType%22%3A%22subsubject%22}]/[]</loc>
+		<loc>http://www.tenders.co.il/results/publishDate/[{%22I%22%3A39%2C%22R%22%3A%22s%22%2C%22U%22%3A39.1}]/[]/true</loc>
 	</url>
 	<url>
-		<loc>http://www.tenders.co.il/#/results/publishDate/[{%22ID%22%3A40%2C%22Name%22%3A%22%D7%97%D7%A9%D7%9E%D7%9C%22%2C%22ResType%22%3A%22subsubject%22}]/[]</loc>
+		<loc>http://www.tenders.co.il/results/publishDate/[{%22I%22%3A40%2C%22R%22%3A%22s%22%2C%22U%22%3A40.1}]/[]/true</loc>
 	</url>
 	<url>
-		<loc>http://www.tenders.co.il/#/results/publishDate/[{%22ID%22%3A41%2C%22Name%22%3A%22%D7%9B%D7%99%D7%91%D7%95%D7%99%20%D7%90%D7%A9%22%2C%22ResType%22%3A%22subsubject%22}]/[]</loc>
+		<loc>http://www.tenders.co.il/results/publishDate/[{%22I%22%3A41%2C%22R%22%3A%22s%22%2C%22U%22%3A41.1}]/[]/true</loc>
 	</url>
 	<url>
-		<loc>http://www.tenders.co.il/#/results/publishDate/[{%22ID%22%3A42%2C%22Name%22%3A%22%D7%A0%D7%A7%D7%99%D7%95%D7%9F%22%2C%22ResType%22%3A%22subsubject%22}]/[]</loc>
+		<loc>http://www.tenders.co.il/results/publishDate/[{%22I%22%3A42%2C%22R%22%3A%22s%22%2C%22U%22%3A42.1}]/[]/true</loc>
 	</url>
 	<url>
-		<loc>http://www.tenders.co.il/#/results/publishDate/[{%22ID%22%3A43%2C%22Name%22%3A%22%D7%9E%D7%99%D7%A4%D7%95%D7%99%20%D7%95%D7%9E%D7%93%D7%99%D7%93%D7%94%22%2C%22ResType%22%3A%22subsubject%22}]/[]</loc>
+		<loc>http://www.tenders.co.il/results/publishDate/[{%22I%22%3A43%2C%22R%22%3A%22s%22%2C%22U%22%3A43.1}]/[]/true</loc>
 	</url>
 	<url>
-		<loc>http://www.tenders.co.il/#/results/publishDate/[{%22ID%22%3A44%2C%22Name%22%3A%22%D7%A9%D7%9E%D7%99%D7%A8%D7%94%22%2C%22ResType%22%3A%22subsubject%22}]/[]</loc>
+		<loc>http://www.tenders.co.il/results/publishDate/[{%22I%22%3A44%2C%22R%22%3A%22s%22%2C%22U%22%3A44.1}]/[]/true</loc>
 	</url>
 	<url>
-		<loc>http://www.tenders.co.il/#/results/publishDate/[{%22ID%22%3A45%2C%22Name%22%3A%22%D7%9E%D7%97%D7%A7%D7%A8%D7%99%D7%9D%22%2C%22ResType%22%3A%22subsubject%22}]/[]</loc>
+		<loc>http://www.tenders.co.il/results/publishDate/[{%22I%22%3A45%2C%22R%22%3A%22s%22%2C%22U%22%3A45.1}]/[]/true</loc>
 	</url>
 	<url>
-		<loc>http://www.tenders.co.il/#/results/publishDate/[{%22ID%22%3A46%2C%22Name%22%3A%22%D7%91%D7%99%D7%98%D7%95%D7%97%22%2C%22ResType%22%3A%22subsubject%22}]/[]</loc>
+		<loc>http://www.tenders.co.il/results/publishDate/[{%22I%22%3A46%2C%22R%22%3A%22s%22%2C%22U%22%3A46.1}]/[]/true</loc>
 	</url>
 	<url>
-		<loc>http://www.tenders.co.il/#/results/publishDate/[{%22ID%22%3A47%2C%22Name%22%3A%22%D7%9B%D7%97%20%D7%90%D7%93%D7%9D%22%2C%22ResType%22%3A%22subsubject%22}]/[]</loc>
+		<loc>http://www.tenders.co.il/results/publishDate/[{%22I%22%3A47%2C%22R%22%3A%22s%22%2C%22U%22%3A47.1}]/[]/true</loc>
 	</url>
 	<url>
-		<loc>http://www.tenders.co.il/#/results/publishDate/[{%22ID%22%3A48%2C%22Name%22%3A%22%D7%92%D7%99%D7%96%D7%95%D7%9D%20%D7%95%D7%9B%D7%A8%D7%99%D7%AA%D7%94%22%2C%22ResType%22%3A%22subsubject%22}]/[]</loc>
+		<loc>http://www.tenders.co.il/results/publishDate/[{%22I%22%3A48%2C%22R%22%3A%22s%22%2C%22U%22%3A48.1}]/[]/true</loc>
 	</url>
 	<url>
-		<loc>http://www.tenders.co.il/#/results/publishDate/[{%22ID%22%3A49%2C%22Name%22%3A%22%D7%92%D7%99%D7%A0%D7%95%D7%9F%22%2C%22ResType%22%3A%22subsubject%22}]/[]</loc>
+		<loc>http://www.tenders.co.il/results/publishDate/[{%22I%22%3A49%2C%22R%22%3A%22s%22%2C%22U%22%3A49.1}]/[]/true</loc>
 	</url>
 	<url>
-		<loc>http://www.tenders.co.il/#/results/publishDate/[{%22ID%22%3A50%2C%22Name%22%3A%22%D7%94%D7%93%D7%91%D7%A8%D7%94%22%2C%22ResType%22%3A%22subsubject%22}]/[]</loc>
+		<loc>http://www.tenders.co.il/results/publishDate/[{%22I%22%3A50%2C%22R%22%3A%22s%22%2C%22U%22%3A50.1}]/[]/true</loc>
 	</url>
 	<url>
-		<loc>http://www.tenders.co.il/#/results/publishDate/[{%22ID%22%3A51%2C%22Name%22%3A%22%D7%97%D7%A7%D7%9C%D7%90%D7%95%D7%AA%22%2C%22ResType%22%3A%22subsubject%22}]/[]</loc>
+		<loc>http://www.tenders.co.il/results/publishDate/[{%22I%22%3A51%2C%22R%22%3A%22s%22%2C%22U%22%3A51.1}]/[]/true</loc>
 	</url>
 	<url>
-		<loc>http://www.tenders.co.il/#/results/publishDate/[{%22ID%22%3A52%2C%22Name%22%3A%22%D7%A1%D7%9B%D7%9B%D7%95%D7%AA%22%2C%22ResType%22%3A%22subsubject%22}]/[]</loc>
+		<loc>http://www.tenders.co.il/results/publishDate/[{%22I%22%3A52%2C%22R%22%3A%22s%22%2C%22U%22%3A52.1}]/[]/true</loc>
 	</url>
 	<url>
-		<loc>http://www.tenders.co.il/#/results/publishDate/[{%22ID%22%3A53%2C%22Name%22%3A%22%D7%92%D7%99%D7%93%D7%95%D7%A8%22%2C%22ResType%22%3A%22subsubject%22}]/[]</loc>
+		<loc>http://www.tenders.co.il/results/publishDate/[{%22I%22%3A53%2C%22R%22%3A%22s%22%2C%22U%22%3A53.1}]/[]/true</loc>
 	</url>
 	<url>
-		<loc>http://www.tenders.co.il/#/results/publishDate/[{%22ID%22%3A54%2C%22Name%22%3A%22%D7%9E%D7%AA%D7%A7%D7%A0%D7%99%20%D7%9E%D7%A9%D7%97%D7%A7%22%2C%22ResType%22%3A%22subsubject%22}]/[]</loc>
+		<loc>http://www.tenders.co.il/results/publishDate/[{%22I%22%3A54%2C%22R%22%3A%22s%22%2C%22U%22%3A54.1}]/[]/true</loc>
 	</url>
 	<url>
-		<loc>http://www.tenders.co.il/#/results/publishDate/[{%22ID%22%3A55%2C%22Name%22%3A%22%D7%A4%D7%99%D7%A0%D7%95%D7%99%20%D7%A4%D7%A1%D7%95%D7%9C%D7%AA%22%2C%22ResType%22%3A%22subsubject%22}]/[]</loc>
+		<loc>http://www.tenders.co.il/results/publishDate/[{%22I%22%3A55%2C%22R%22%3A%22s%22%2C%22U%22%3A55.1}]/[]/true</loc>
 	</url>
 	<url>
-		<loc>http://www.tenders.co.il/#/results/publishDate/[{%22ID%22%3A56%2C%22Name%22%3A%22%D7%90%D7%99%D7%9B%D7%95%D7%AA%20%D7%94%D7%A1%D7%91%D7%99%D7%91%D7%94%22%2C%22ResType%22%3A%22subsubject%22}]/[]</loc>
+		<loc>http://www.tenders.co.il/results/publishDate/[{%22I%22%3A56%2C%22R%22%3A%22s%22%2C%22U%22%3A56.1}]/[]/true</loc>
 	</url>
 	<url>
-		<loc>http://www.tenders.co.il/#/results/publishDate/[{%22ID%22%3A57%2C%22Name%22%3A%22%D7%90%D7%A0%D7%A8%D7%92%D7%99%D7%94%22%2C%22ResType%22%3A%22subsubject%22}]/[]</loc>
+		<loc>http://www.tenders.co.il/results/publishDate/[{%22I%22%3A57%2C%22R%22%3A%22s%22%2C%22U%22%3A57.1}]/[]/true</loc>
 	</url>
 	<url>
-		<loc>http://www.tenders.co.il/#/results/publishDate/[{%22ID%22%3A58%2C%22Name%22%3A%22%D7%94%D7%A1%D7%A2%D7%93%D7%94%22%2C%22ResType%22%3A%22subsubject%22}]/[]</loc>
+		<loc>http://www.tenders.co.il/results/publishDate/[{%22I%22%3A58%2C%22R%22%3A%22s%22%2C%22U%22%3A58.1}]/[]/true</loc>
 	</url>
 	<url>
-		<loc>http://www.tenders.co.il/#/results/publishDate/[{%22ID%22%3A59%2C%22Name%22%3A%22%D7%AA%D7%99%D7%99%D7%A8%D7%95%D7%AA%22%2C%22ResType%22%3A%22subsubject%22}]/[]</loc>
+		<loc>http://www.tenders.co.il/results/publishDate/[{%22I%22%3A59%2C%22R%22%3A%22s%22%2C%22U%22%3A59.1}]/[]/true</loc>
 	</url>
 	<url>
-		<loc>http://www.tenders.co.il/#/results/publishDate/[{%22ID%22%3A60%2C%22Name%22%3A%22%D7%9E%D7%96%D7%95%D7%9F%22%2C%22ResType%22%3A%22subsubject%22}]/[]</loc>
+		<loc>http://www.tenders.co.il/results/publishDate/[{%22I%22%3A60%2C%22R%22%3A%22s%22%2C%22U%22%3A60.1}]/[]/true</loc>
 	</url>
 	<url>
-		<loc>http://www.tenders.co.il/#/results/publishDate/[{%22ID%22%3A62%2C%22Name%22%3A%22%D7%9B%D7%99%D7%9E%D7%99%D7%94%22%2C%22ResType%22%3A%22subsubject%22}]/[]</loc>
+		<loc>http://www.tenders.co.il/results/publishDate/[{%22I%22%3A62%2C%22R%22%3A%22s%22%2C%22U%22%3A62.1}]/[]/true</loc>
 	</url>
 	<url>
-		<loc>http://www.tenders.co.il/#/results/publishDate/[{%22ID%22%3A63%2C%22Name%22%3A%22%D7%98%D7%A7%D7%A1%D7%98%D7%99%D7%9C%22%2C%22ResType%22%3A%22subsubject%22}]/[]</loc>
+		<loc>http://www.tenders.co.il/results/publishDate/[{%22I%22%3A63%2C%22R%22%3A%22s%22%2C%22U%22%3A63.1}]/[]/true</loc>
 	</url>
 	<url>
-		<loc>http://www.tenders.co.il/#/results/publishDate/[{%22ID%22%3A64%2C%22Name%22%3A%22%D7%A6%D7%99%D7%95%D7%93%20%D7%9E%D7%98%D7%91%D7%97%22%2C%22ResType%22%3A%22subsubject%22}]/[]</loc>
+		<loc>http://www.tenders.co.il/results/publishDate/[{%22I%22%3A64%2C%22R%22%3A%22s%22%2C%22U%22%3A64.1}]/[]/true</loc>
 	</url>
 	<url>
-		<loc>http://www.tenders.co.il/#/results/publishDate/[{%22ID%22%3A65%2C%22Name%22%3A%22%D7%9E%D7%9B%D7%A9%D7%99%D7%A8%D7%99%20%D7%97%D7%A9%D7%9E%D7%9C%22%2C%22ResType%22%3A%22subsubject%22}]/[]</loc>
+		<loc>http://www.tenders.co.il/results/publishDate/[{%22I%22%3A65%2C%22R%22%3A%22s%22%2C%22U%22%3A65.1}]/[]/true</loc>
 	</url>
 	<url>
-		<loc>http://www.tenders.co.il/#/results/publishDate/[{%22ID%22%3A81%2C%22Name%22%3A%22%D7%90%D7%A8%D7%9B%D7%99%D7%95%D7%A0%D7%99%D7%9D%22%2C%22ResType%22%3A%22subsubject%22}]/[]</loc>
+		<loc>http://www.tenders.co.il/results/publishDate/[{%22I%22%3A66%2C%22R%22%3A%22s%22%2C%22U%22%3A66.1}]/[]/true</loc>
 	</url>
 	<url>
-		<loc>http://www.tenders.co.il/#/results/publishDate/[{%22ID%22%3A82%2C%22Name%22%3A%22%D7%AA%D7%A9%D7%9E%D7%99%D7%A9%D7%99%20%D7%A7%D7%93%D7%95%D7%A9%D7%94%22%2C%22ResType%22%3A%22subsubject%22}]/[]</loc>
+		<loc>http://www.tenders.co.il/results/publishDate/[{%22I%22%3A67%2C%22R%22%3A%22s%22%2C%22U%22%3A67.1}]/[]/true</loc>
 	</url>
 	<url>
-		<loc>http://www.tenders.co.il/#/results/publishDate/[{%22ID%22%3A85%2C%22Name%22%3A%22%D7%98%D7%9C%D7%95%D7%99%D7%96%D7%99%D7%94%20%D7%91%D7%9E%D7%A2%D7%92%D7%9C%20%D7%A1%D7%92%D7%95%D7%A8%22%2C%22ResType%22%3A%22subsubject%22}]/[]</loc>
+		<loc>http://www.tenders.co.il/results/publishDate/[{%22I%22%3A68%2C%22R%22%3A%22s%22%2C%22U%22%3A68.1}]/[]/true</loc>
 	</url>
 	<url>
-		<loc>http://www.tenders.co.il/#/results/publishDate/[{%22ID%22%3A86%2C%22Name%22%3A%22%D7%90%D7%97%D7%96%D7%A7%D7%AA%20%D7%9E%D7%91%D7%A0%D7%99%D7%9D%22%2C%22ResType%22%3A%22subsubject%22}]/[]</loc>
+		<loc>http://www.tenders.co.il/results/publishDate/[{%22I%22%3A69%2C%22R%22%3A%22s%22%2C%22U%22%3A69.1}]/[]/true</loc>
 	</url>
 	<url>
-		<loc>http://www.tenders.co.il/#/results/publishDate/[{%22ID%22%3A87%2C%22Name%22%3A%22%D7%A9%D7%99%D7%A8%D7%95%D7%AA%D7%99%D7%9D%20%D7%9E%D7%A9%D7%A4%D7%98%D7%99%D7%99%D7%9D%22%2C%22ResType%22%3A%22subsubject%22}]/[]</loc>
+		<loc>http://www.tenders.co.il/results/publishDate/[{%22I%22%3A70%2C%22R%22%3A%22s%22%2C%22U%22%3A70.1}]/[]/true</loc>
 	</url>
 	<url>
-		<loc>http://www.tenders.co.il/#/results/publishDate/[{%22ID%22%3A88%2C%22Name%22%3A%22%D7%A8%D7%90%D7%99%D7%99%D7%AA%20%D7%97%D7%A9%D7%91%D7%95%D7%9F%20%D7%95%D7%9B%D7%A1%D7%A4%D7%99%D7%9D%22%2C%22ResType%22%3A%22subsubject%22}]/[]</loc>
+		<loc>http://www.tenders.co.il/results/publishDate/[{%22I%22%3A71%2C%22R%22%3A%22s%22%2C%22U%22%3A71.1}]/[]/true</loc>
 	</url>
 	<url>
-		<loc>http://www.tenders.co.il/#/results/publishDate/[{%22ID%22%3A89%2C%22Name%22%3A%22%D7%AA%D7%9B%D7%A0%D7%95%D7%9F%20%D7%99%D7%A2%D7%95%D7%A5%20%D7%90%D7%93%D7%A8%D7%99%D7%9B%D7%9C%D7%99%22%2C%22ResType%22%3A%22subsubject%22}]/[]</loc>
+		<loc>http://www.tenders.co.il/results/publishDate/[{%22I%22%3A72%2C%22R%22%3A%22s%22%2C%22U%22%3A72.1}]/[]/true</loc>
 	</url>
 	<url>
-		<loc>http://www.tenders.co.il/#/results/publishDate/[{%22ID%22%3A90%2C%22Name%22%3A%22%D7%91%D7%98%D7%99%D7%97%D7%95%D7%AA%20%D7%95%D7%92%D7%99%D7%94%D7%95%D7%AA%22%2C%22ResType%22%3A%22subsubject%22}]/[]</loc>
+		<loc>http://www.tenders.co.il/results/publishDate/[{%22I%22%3A73%2C%22R%22%3A%22s%22%2C%22U%22%3A73.1}]/[]/true</loc>
 	</url>
 	<url>
-		<loc>http://www.tenders.co.il/#/results/publishDate/[{%22ID%22%3A91%2C%22Name%22%3A%22%D7%9E%D7%A2%D7%A8%D7%9B%D7%95%D7%AA%20%D7%91%D7%A7%D7%A8%D7%94%22%2C%22ResType%22%3A%22subsubject%22}]/[]</loc>
+		<loc>http://www.tenders.co.il/results/publishDate/[{%22I%22%3A74%2C%22R%22%3A%22s%22%2C%22U%22%3A74.1}]/[]/true</loc>
 	</url>
 	<url>
-		<loc>http://www.tenders.co.il/#/results/publishDate/[{%22ID%22%3A92%2C%22Name%22%3A%22%D7%AA%D7%A8%D7%92%D7%95%D7%9D%20%D7%95%D7%AA%D7%9E%D7%9C%D7%95%D7%9C%22%2C%22ResType%22%3A%22subsubject%22}]/[]</loc>
+		<loc>http://www.tenders.co.il/results/publishDate/[{%22I%22%3A76%2C%22R%22%3A%22s%22%2C%22U%22%3A76.1}]/[]/true</loc>
+	</url>
+	<url>
+		<loc>http://www.tenders.co.il/results/publishDate/[{%22I%22%3A80%2C%22R%22%3A%22s%22%2C%22U%22%3A80.1}]/[]/true</loc>
+	</url>
+	<url>
+		<loc>http://www.tenders.co.il/results/publishDate/[{%22I%22%3A81%2C%22R%22%3A%22s%22%2C%22U%22%3A81.1}]/[]/true</loc>
+	</url>
+	<url>
+		<loc>http://www.tenders.co.il/results/publishDate/[{%22I%22%3A82%2C%22R%22%3A%22s%22%2C%22U%22%3A82.1}]/[]/true</loc>
+	</url>
+	<url>
+		<loc>http://www.tenders.co.il/results/publishDate/[{%22I%22%3A85%2C%22R%22%3A%22s%22%2C%22U%22%3A85.1}]/[]/true</loc>
+	</url>
+	<url>
+		<loc>http://www.tenders.co.il/results/publishDate/[{%22I%22%3A86%2C%22R%22%3A%22s%22%2C%22U%22%3A86.1}]/[]/true</loc>
+	</url>
+	<url>
+		<loc>http://www.tenders.co.il/results/publishDate/[{%22I%22%3A87%2C%22R%22%3A%22s%22%2C%22U%22%3A87.1}]/[]/true</loc>
+	</url>
+	<url>
+		<loc>http://www.tenders.co.il/results/publishDate/[{%22I%22%3A88%2C%22R%22%3A%22s%22%2C%22U%22%3A88.1}]/[]/true</loc>
+	</url>
+	<url>
+		<loc>http://www.tenders.co.il/results/publishDate/[{%22I%22%3A89%2C%22R%22%3A%22s%22%2C%22U%22%3A89.1}]/[]/true</loc>
+	</url>
+	<url>
+		<loc>http://www.tenders.co.il/results/publishDate/[{%22I%22%3A90%2C%22R%22%3A%22s%22%2C%22U%22%3A90.1}]/[]/true</loc>
+	</url>
+	<url>
+		<loc>http://www.tenders.co.il/results/publishDate/[{%22I%22%3A91%2C%22R%22%3A%22s%22%2C%22U%22%3A91.1}]/[]/true</loc>
+	</url>
+	<url>
+		<loc>http://www.tenders.co.il/results/publishDate/[{%22I%22%3A92%2C%22R%22%3A%22s%22%2C%22U%22%3A92.1}]/[]/true</loc>
 	</url>
 </urlset>

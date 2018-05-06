@@ -1,0 +1,65 @@
+//@import '~common/style/_settings.scss';
+.button-call {
+  position: fixed;
+  display: block;
+  bottom: 1rem;
+  right: 1rem;
+  height: 3rem;
+  width: 3rem;
+  border-radius: 50%;
+  /* Rectangle 15: */
+  background: #44C960;
+  border: 1px solid #A1F2B3;
+  box-shadow: 0 6px 14px -4px rgba(0,0,0,0.50);
+  display: flex;
+  justify-content: center;
+}
+
+.button-cancel {
+  position: absolute;
+  top: 1rem;
+  left: 1rem;
+  font-size: 1.5rem;
+}
+
+.container {
+  padding: 1.5rem 2rem;
+}
+
+.btn_container {
+  text-align: left;
+}
+
+.button-submit {
+
+  background-color: #34b44f;
+  color: white;
+  padding: 0.75rem 1.5rem;
+  border-radius: 4px;
+  font-family: 'Rubik', sans-serif;
+  font-weight: 600;
+  font-size: 1rem;
+}
+
+.message {
+  margin-bottom: 0.5rem;
+}
+
+.input-value {
+  display: block;
+  margin-bottom: 1.5rem;
+}
+
+.pl {
+  display: block;
+}
+
+.errors {
+  font-size: 1rem;
+  font-weight: 400;
+  color: #e02113;
+  padding-bottom: 0.5rem;
+  line-height: 1.2;
+  display: block;
+  margin-bottom: 0 !important;
+}

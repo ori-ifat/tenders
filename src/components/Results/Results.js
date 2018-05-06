@@ -16,6 +16,7 @@ import NoData from 'components/NoData'
 import filter from 'lodash/filter'
 import DocumentMeta from 'react-document-meta'
 import {getMetaData} from 'common/utils/meta'
+import {fixTopMenu} from 'common/utils/topMenu'
 import CSSModules from 'react-css-modules'
 import styles from './results.scss'
 
@@ -50,6 +51,9 @@ export default class Results extends Component {
     const { match: {params: { isHome }} } = this.props
     //console.log('isHome', isHome)
     this.isHomeResults = isHome
+    if (isHome) {    
+      fixTopMenu()
+    }
   }
 
   componentWillReceiveProps(nextProps) {
@@ -83,7 +87,7 @@ export default class Results extends Component {
     const {recordStore: {checkedItems}} = this.props
     const divStyle = resultsLoading && searchStore.fromRoute ? 'loading' : ''
     const meta = this.getMeta()
-    const subSubject = this.isHomeResults ? tags[0].Name : ''
+    const subSubject = this.isHomeResults && tags && tags.length > 0 ? tags[0].Name : ''
     const saleText = this.isHomeResults ? t('results.saleText', {subSubject}) : ''
 
     //console.log('tags', toJS(tags))
