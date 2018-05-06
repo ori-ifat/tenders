@@ -16,7 +16,7 @@ export default class DistAgent extends Component {
     const { match: {params: { uid }} } = this.props
     console.log(uid)
     //temp patch: redirect to old site page
-    location.href = `http://192.118.60.10/DistAgent/DistAgent.aspx?uid=${uid}`
+    location.href = `http://info.tenders.co.il/DistAgent/DistAgent.aspx?uid=${uid}`
   }
 
 
