@@ -273,4 +273,52 @@
 	<url>
 		<loc>http://www.tenders.co.il/results/publishDate/[{%22I%22%3A92%2C%22R%22%3A%22s%22%2C%22U%22%3A92.1}]/[]/true</loc>
 	</url>
+	<url>
+		<loc>http://www.tenders.co.il/Category/1/gov</loc>
+	</url>
+	<url>
+		<loc>http://www.tenders.co.il/Category/2/security</loc>
+	</url>
+	<url>
+		<loc>http://www.tenders.co.il/Category/3/kkl</loc>
+	</url>
+	<url>
+		<loc>http://www.tenders.co.il/Category/4/edu</loc>
+	</url>
+	<url>
+		<loc>http://www.tenders.co.il/Category/5/elc</loc>
+	</url>
+	<url>
+		<loc>http://www.tenders.co.il/Category/6/police</loc>
+	</url>
+	<url>
+		<loc>http://www.tenders.co.il/Category/7/nezivut</loc>
+	</url>
+	<url>
+		<loc>http://www.tenders.co.il/Category/8/helth</loc>
+	</url>
+	<url>
+		<loc>http://www.tenders.co.il/Category/9/welfare</loc>
+	</url>
+	<url>
+		<loc>http://www.tenders.co.il/Category/10/house</loc>
+	</url>
+	<url>
+		<loc>http://www.tenders.co.il/Category/2/building/cat</loc>
+	</url>
+	<url>
+		<loc>http://www.tenders.co.il/Category/5/land/cat</loc>
+	</url>
+	<url>
+		<loc>http://www.tenders.co.il/Category/14/assets/cat</loc>
+	</url>
+	<url>
+		<loc>http://www.tenders.co.il/Category/40/electricity/cat</loc>
+	</url>
+	<url>
+		<loc>http://www.tenders.co.il/Category/26/transport/cat</loc>
+	</url>
+	<url>
+		<loc>http://www.tenders.co.il/Category/24/cars/cat</loc>
+	</url>
 </urlset>
