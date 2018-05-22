@@ -29,13 +29,19 @@ export default class Login extends Component {
   }
 
   login = () => {
-    const { accountStore, match: {params: { user, pass }}, routingStore: { push } } = this.props
+    const { accountStore, match: {params: { user, pass, tender }}, routingStore: { push } } = this.props
     accountStore.login(decodeURIComponent(user), decodeURIComponent(pass), false).then(() => {
       if (accountStore.error == null && accountStore.profile != null) {
         //successful login made
+        //console.log('tender', tender)
         clearCache()
         fixTopMenu()
-        push('/main')
+        if (!tender) {
+          push('/main')
+        }
+        else {
+          push(`/tender/${tender}`)
+        }
       }
     }).catch(error => {
       console.error('[Login] Error:', error)
