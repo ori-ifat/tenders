@@ -30,7 +30,9 @@ export default class Banners extends React.Component {
             <Banner
               key={index}
               id={banner.id}
+              type={banner.type}
               url={banner.url}
+              landingPage={banner.landingPage}
               width={banner.width}
               height={banner.height}
               cache={cache}
@@ -41,14 +43,29 @@ export default class Banners extends React.Component {
   }
 }
 
-const Banner = ({id, url, width, height, cache}) => {
-  return <iframe
-    id={`Banner${id}`}
-    width={width}
-    height={height}
-    src={`${url}?cache=${cache}`}
-    style={{border: 'none'}}
-  ></iframe>
+const Banner = ({id, type, url, landingPage, width, height, cache}) => {
+  if (type == 'html') {
+    return <iframe
+      id={`Banner${id}`}
+      width={width}
+      height={height}
+      src={`${url}?cache=${cache}`}
+      style={{border: 'none'}}
+    ></iframe>
+  }
+  else {
+    return <div id={`Banner${id}`}
+      width={width}
+      height={height}>
+      <a href={landingPage} target="_blank">
+        <img
+          src={`${url}?cache=${cache}`}
+          width={width}
+          height={height}
+        />
+      </a>
+    </div>
+  }
 }
 /*
 const Banner = ({url}) => {
