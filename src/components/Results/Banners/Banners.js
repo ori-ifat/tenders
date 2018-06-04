@@ -50,13 +50,14 @@ const Banner = ({id, type, url, landingPage, width, height, cache}) => {
       width={width}
       height={height}
       src={`${url}?cache=${cache}`}
-      style={{border: 'none'}}
+      style={{border: 'none', marginBottom: '10px'}}
     ></iframe>
   }
   else {
     return <div id={`Banner${id}`}
       width={width}
-      height={height}>
+      height={height}
+      style={{marginBottom: '10px'}}>
       <a href={landingPage} target="_blank">
         <img
           src={`${url}?cache=${cache}`}
