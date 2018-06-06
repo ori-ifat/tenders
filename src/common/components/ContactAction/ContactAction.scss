@@ -15,6 +15,15 @@
   justify-content: center;
 }
 
+.button-call-desktop {
+  position: fixed;
+  display: block;
+  bottom: 1rem;
+  right: 1rem;
+  display: flex;
+  justify-content: center;
+}
+
 .button-cancel {
   position: absolute;
   top: 1rem;
@@ -23,22 +32,28 @@
 }
 
 .container {
-  padding: 1.5rem 2rem;
+  /*padding: 1.5rem 2rem;*/
+  padding:0 0 1.5rem 0;
+  overflow: hidden;
+}
+
+.input-label {
+  color: #16b657;
 }
 
 .btn_container {
+  padding-top: 0.5rem;
   text-align: left;
 }
 
 .button-submit {
-
-  background-color: #34b44f;
-  color: white;
+  background-color: #fcdc34;
+  color: #666666;
   padding: 0.75rem 1.5rem;
   border-radius: 4px;
   font-family: 'Rubik', sans-serif;
-  font-weight: 600;
-  font-size: 1rem;
+  font-weight: 500;
+  font-size: 1.2rem;
 }
 
 .message {

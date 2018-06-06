@@ -210,7 +210,10 @@ export default {
     success: 'הודעתך נשלחה בהצלחה!',
     willCall: 'ניצור איתך קשר בהקדם',
     toHome: 'לעמוד הבית',
-    radar: 'פניה מדף רדאר'
+    radar: 'פניה מדף רדאר',
+    subscribe: 'הצטרפות וחידוש מנוי',
+    service: 'שירות לקוחות ותמיכה טכנית',
+    other: 'אחר'
   },
   toolbar: {
     selectedTenders: 'מכרזים נבחרו',
