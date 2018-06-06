@@ -141,6 +141,10 @@ export default class ResultsItemDetails extends React.Component {
       fixedText = fixedText.replace(/([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)/,
         '<a href="mailto:\$&">\$&</a>')
 
+      //tel
+      fixedText = fixedText.replace(/0((5[012345678]){1}|[23456789]{1}|(7[5678]){1})(\-)?[^0\D]{1}\d{6}/,
+        '<a href="tel:\$&">\$&</a>')
+
       return {__html: fixedText}
     }
     else {
@@ -316,7 +320,7 @@ export default class ResultsItemDetails extends React.Component {
 
                   </ul>
                   {item.TenderType == t('tender.tenderPublicLabel') &&
-                  <div>                    
+                  <div>
                     <Link to={`/radar/${encryptedID}`} target='_blank' className="button" styleName="radar-link">{t('tender.radar')}</Link>
                   </div>
                   }
