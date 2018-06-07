@@ -29,16 +29,24 @@
   top: 1rem;
   left: 1rem;
   font-size: 1.5rem;
+  color: white;
+  cursor: pointer;
 }
 
 .container {
   /*padding: 1.5rem 2rem;*/
   padding:0 0 1.5rem 0;
   overflow: hidden;
+  background-color: #f9f9f9;
 }
 
 .input-label {
   color: #16b657;
+}
+
+.combo {
+  -webkit-appearance: none;
+  -moz-appearance: none;
 }
 
 .btn_container {

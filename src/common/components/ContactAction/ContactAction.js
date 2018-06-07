@@ -156,7 +156,7 @@ export default class ContactAction extends React.Component {
                 <div styleName="pl" >
                   <span styleName="input-label">{t('contact.why')}:</span>
                   {/*<textarea name="comment" styleName="input-value" onChange={this.onChange} />*/}
-                  <select name="comment" onChange={this.onChange}>
+                  <select name="comment" onChange={this.onChange} styleName="combo">
                     <option>{t('contact.subscribe')}</option>
                     <option>{t('contact.service')}</option>
                     <option>{t('contact.other')}</option>
