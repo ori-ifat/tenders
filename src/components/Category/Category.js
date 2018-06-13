@@ -8,6 +8,7 @@ import moment from 'moment'
 import ContactUs from 'common/components/ContactUs'
 import CatRecord from './CatRecord'
 import Footer from 'common/components/Footer'
+import ContactAction from 'common/components/ContactAction'
 import DocumentMeta from 'react-document-meta'
 import {getMetaData} from 'common/utils/meta'
 import CSSModules from 'react-css-modules'
@@ -110,6 +111,7 @@ export default class Category extends Component {
         {data &&
           <Footer />
         }
+        <ContactAction />
       </div>
     )
   }

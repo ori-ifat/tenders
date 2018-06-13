@@ -6,6 +6,7 @@ import {getHomeJSON} from 'common/services/apiService'
 import ArticleItem from './ArticleItem'
 import SmallContactForm from 'common/components/SmallContactForm'
 import Footer from 'common/components/Footer'
+import ContactAction from 'common/components/ContactAction'
 import DocumentMeta from 'react-document-meta'
 import {getMetaData} from 'common/utils/meta'
 import CSSModules from 'react-css-modules'
@@ -64,6 +65,7 @@ export default class Article extends Component {
           </div>
         </section>
         <Footer />
+        <ContactAction />
       </div>
     )
   }
