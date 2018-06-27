@@ -6,7 +6,7 @@ import moment from 'moment'
 import {checkEmail, checkPhone} from 'common/utils/validation'
 import {publishTender} from 'common/services/apiService'
 import Calendar from 'common/components/Calendar'
-import ContactAction from 'common/components/ContactAction'
+//import ContactAction from 'common/components/ContactAction'
 import CSSModules from 'react-css-modules'
 import styles from './publish.scss'
 
@@ -260,7 +260,7 @@ export default class Publish extends Component {
             </div>
           </div>
         </div>
-        <ContactAction />
+        {/*<ContactAction />*/}
       </div>
     )
   }

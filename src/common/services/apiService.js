@@ -5,8 +5,8 @@ import cache from 'common/utils/cache'
 let apiBaseUrl
 let baseUrl
 if (process.env.NODE_ENV === 'development' || location.href.indexOf('iis-test') > -1) {
-  apiBaseUrl = '//iis-test/TendersSiteApi/api'
-  baseUrl = '//iis-test/TendersSiteApi'
+  apiBaseUrl = '//iis-test:8081/Data/api'
+  baseUrl = '//iis-test:8081/Data'
   //apiBaseUrl = 'http://192.118.60.25/TendersDevApi/api'
   //baseUrl = 'http://192.118.60.25/TendersDevApi'
 }

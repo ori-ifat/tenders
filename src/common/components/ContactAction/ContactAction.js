@@ -11,7 +11,7 @@ import CSSModules from 'react-css-modules'
 import styles from './ContactAction.scss'
 
 const req = require.context('common/style/icons/', false)
-const contact = req('./mail_w.png')
+const contact = req('./contact_action.svg') //mail_w.png
 const contactMobile = req('./mail_w.svg')
 const contactTitle = req('./contact.png')
 
@@ -121,6 +121,7 @@ export default class ContactAction extends React.Component {
     const style = this.sent ? 'sent' : 'errors'
     const linkStyle = this.isMobile ? 'button-call' : 'button-call-desktop'
     const imgSrc = this.isMobile ? contactMobile : contact
+    const imgStyle = this.isMobile ? '' : 'image-button'
     return (
       <div>
         <ReactModal
@@ -170,7 +171,7 @@ export default class ContactAction extends React.Component {
             </div>
           </div>
         </ReactModal>
-        <a onClick={this.onOpen} styleName={linkStyle}><img src={imgSrc}/></a>
+        <a onClick={this.onOpen} styleName={linkStyle}><img src={imgSrc} styleName={imgStyle} /></a>
       </div>
     )
   }

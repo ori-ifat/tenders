@@ -5,7 +5,7 @@ import {translate} from 'react-polyglot'
 import {getHomeJSON} from 'common/services/apiService'
 import Footer from 'common/components/Footer'
 import SmallContactForm from 'common/components/SmallContactForm'
-import ContactAction from 'common/components/ContactAction'
+//import ContactAction from 'common/components/ContactAction'
 import DocumentMeta from 'react-document-meta'
 import {getMetaData} from 'common/utils/meta'
 import CSSModules from 'react-css-modules'
@@ -63,7 +63,7 @@ export default class About extends Component {
           </div>
         </section>
         <Footer />
-        <ContactAction />
+        {/*<ContactAction />*/}
       </div>
     )
   }

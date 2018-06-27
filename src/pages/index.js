@@ -2,7 +2,7 @@ import React from 'react'
 import { Redirect, Route, Switch } from 'react-router-dom'
 import { accountStore } from 'stores'
 import Topbar from 'app/components/Topbar'
-//import ContactAction from 'common/components/ContactAction' <ContactAction />
+import ContactAction from 'common/components/ContactAction'
 import HomePage from 'pages/home'
 import SearchPage from 'pages/search'
 import ResultsPage from 'pages/results'
@@ -127,7 +127,7 @@ class Pages extends React.Component {
             <NotFound404 />
           </Route>
         </Switch>
-        {/*<ContactAction />*/}
+        <ContactAction />
       </section>
     )
   }

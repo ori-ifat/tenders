@@ -7,7 +7,7 @@ import takeRight from 'lodash/takeRight'
 import {getHomeJSON} from 'common/services/apiService'
 import ServiceItem from './ServiceItem'
 import Footer from 'common/components/Footer'
-import ContactAction from 'common/components/ContactAction'
+//import ContactAction from 'common/components/ContactAction'
 import DocumentMeta from 'react-document-meta'
 import {getMetaData} from 'common/utils/meta'
 import CSSModules from 'react-css-modules'
@@ -69,7 +69,7 @@ export default class Services extends Component {
         {this.services && this.services.length > 0 &&
           <Footer />
         }
-        <ContactAction />
+        {/*<ContactAction />*/}
       </div>
     )
   }
