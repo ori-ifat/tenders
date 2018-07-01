@@ -10,9 +10,9 @@ import {fixTopMenu} from 'common/utils/topMenu'
 import ReactInterval from 'react-interval'
 import NotificationBadge from 'react-notification-badge'
 import {Effect} from 'react-notification-badge'
-import {getCookie, setCookie} from 'common/utils/cookies'
-import Welcome from './Welcome'
-import mobile from 'is-mobile'
+//import {getCookie, setCookie} from 'common/utils/cookies'
+//import Welcome from './Welcome'
+//import mobile from 'is-mobile'
 
 const req = require.context('common/style/icons/', false)
 const logoSrc = req('./logo.png')
@@ -45,15 +45,15 @@ export default class Topbar extends Component {
 
   @observable showLoginDialog = false
   @observable messageCount = 0
-  @observable isMobile = false
-  @observable isWelcomeOpen = false
-  cookVal;
+  //@observable isMobile = false
+  //@observable isWelcomeOpen = false
+  //cookVal;
 
   componentWillMount() {
     //fix top nav foundation creation bug
     fixTopMenu()
     //handle cookie for 'Welcome' component...
-
+    /*
     this.isMobile = mobile()
     if (!this.isMobile) {
       this.cookVal = getCookie('WelcomeShown-050618')
@@ -63,7 +63,7 @@ export default class Topbar extends Component {
       else {
         this.isWelcomeOpen = true
       }
-    }
+    }*/
   }
 
   componentWillReceiveProps(nextProps) {
@@ -120,13 +120,13 @@ export default class Topbar extends Component {
   continueUnlogged = () => {
     this.showLoginDialog = false
   }
-
+  /*
   closeWelcomeDialog = () => {
     //console.log('closeWelcomeDialog')
     this.isWelcomeOpen = false
     const cnt = this.cookVal || 0
     setCookie('WelcomeShown-050618', parseInt(cnt) + 1)
-  }
+  }*/
 
   render() {
     const {accountStore, t} = this.props
@@ -139,10 +139,10 @@ export default class Topbar extends Component {
           callback={() => this.validate()} />
         <nav className="column row">
           <div className="top-bar" styleName="top-bar">
-            {<Welcome
+            {/*<Welcome
               isDialogOpened={this.isWelcomeOpen}
               closeDialog={this.closeWelcomeDialog}
-            />}
+            />*/}
 
             <div className="top-bar-right">
               <a onClick={this.goToHome}>
