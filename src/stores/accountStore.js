@@ -1,5 +1,5 @@
 import { action, computed, observable, toJS } from 'mobx'
-import { me, login, logout, validateAccount } from 'common/services/apiService'
+import { me, login, logout, validateAccount, tokenLogin } from 'common/services/apiService'
 
 class Account {
 
@@ -53,6 +53,23 @@ class Account {
       this.error = null
       this.errorMessage = null
       this.profile = await login(userName, password, rememberMe)
+    }
+    catch(e) {
+      this.error = `[accountStore] login error: ${e.message} http status code ${e.error.status}`
+      this.errorMessage = e.message   //friendly message returns from api
+    }
+
+    if (this.error != null) {
+      console.error(this.error)
+    }
+  }
+
+  @action.bound
+  async tokenLogin(token) {
+    try {
+      this.error = null
+      this.errorMessage = null
+      this.profile = await tokenLogin(token)
     }
     catch(e) {
       this.error = `[accountStore] login error: ${e.message} http status code ${e.error.status}`

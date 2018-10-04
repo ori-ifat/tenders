@@ -117,7 +117,10 @@ class Pages extends React.Component {
           <Route path="/sitemap">
             <SiteMapPage />
           </Route>
-          <Route path="/login/:user/:pass/:tender?">
+          {/*<Route path="/login/:user/:pass/:tender?">
+            <LoginPage />
+          </Route>*/}
+          <Route path="/al/:token/:tender?">
             <LoginPage />
           </Route>
           <Route path="/distagent/:uid">

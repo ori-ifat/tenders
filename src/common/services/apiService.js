@@ -160,6 +160,10 @@ export function validateAccount() {
   return apiFetch('Account/Validate', {}, true)
 }
 
+export function tokenLogin(token) {
+  return apiFetch('Account/Login', {searchParams: { token }}, true)
+}
+
 export function isIfatUser() {
   return apiFetch('Account/IsIfat')
 }

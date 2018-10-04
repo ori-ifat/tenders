@@ -29,8 +29,10 @@ export default class Login extends Component {
   }
 
   login = () => {
-    const { accountStore, match: {params: { user, pass, tender }}, routingStore: { push } } = this.props
-    accountStore.login(decodeURIComponent(user), decodeURIComponent(pass), false).then(() => {
+    //const { accountStore, match: {params: { user, pass, tender }}, routingStore: { push } } = this.props
+    const { accountStore, match: {params: { token, tender }}, routingStore: { push } } = this.props
+    //accountStore.login(decodeURIComponent(user), decodeURIComponent(pass), false).then(() => {
+    accountStore.tokenLogin(decodeURIComponent(token)).then(() => {
       if (accountStore.error == null && accountStore.profile != null) {
         //successful login made
         //console.log('tender', tender)
