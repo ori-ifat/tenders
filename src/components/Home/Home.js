@@ -214,7 +214,7 @@ export default class Home extends Component {
         	<div className="row">
         		<div className="large-12 columns">
               <Link to="/publish">
-        			   <img src="http://www.tenders.co.il/images/home/banner.png" alt="" />
+        			   <img src="https://www.tenders.co.il/images/home/banner.png" alt="" />
               </Link>
         		</div>
         	</div>

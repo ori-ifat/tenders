@@ -1,5 +1,5 @@
 import React from 'react'
-import { bool, object, func } from 'prop-types'
+import { string, func } from 'prop-types'
 import { inject, observer } from 'mobx-react'
 import {observable, toJS} from 'mobx'
 import { translate } from 'react-polyglot'
@@ -18,7 +18,8 @@ import styles from './LoginDialog.scss'
 export default class LoginDialog extends React.Component {
 
   static propTypes = {
-    onCancel: func
+    onCancel: func,
+    fromItem: string
   }
 
   @observable userName = ''
@@ -57,14 +58,20 @@ export default class LoginDialog extends React.Component {
 
   login = () => {
     const {accountStore, onCancel} = this.props
-    const { routingStore: { push } } = this.props
+    const { routingStore: { push }, fromItem } = this.props
     if (!accountStore.profile) {
       accountStore.login(this.userName, this.password, this.rememberMe).then(() => {
         if (accountStore.error == null && accountStore.profile != null) {
           //successful login made
           clearCache()
           fixTopMenu()
-          push('/main')
+          //push('/main')
+          if (fromItem) {
+            push(`/tender/${fromItem}`)
+          }
+          else {
+            push('/main')
+          }
           onCancel()  //close modal
         }
       }).catch(error => {

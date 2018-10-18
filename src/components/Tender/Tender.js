@@ -5,7 +5,7 @@ import { observable } from 'mobx'
 import {getImageUrl, setFavStatus} from 'common/utils/util'
 import ResultsItemDetails from 'common/components/ResultsItemDetails'
 import ImageView from 'common/components/ImageView'
-import NotLogged from 'common/components/NotLogged'
+import LoginDialog from 'common/components/LoginDialog'
 import CSSModules from 'react-css-modules'
 import styles from './tender.scss'
 
@@ -73,7 +73,10 @@ export default class Tender extends Component {
             </div>
           </div>
           :
-          <NotLogged />
+          <LoginDialog
+            onCancel={f => f}
+            fromItem={this.encryptedID}
+          />
         }
       </div>
     )

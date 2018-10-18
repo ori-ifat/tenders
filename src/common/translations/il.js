@@ -222,7 +222,7 @@ export default {
     printBig: 'הדפס מודעות מכרזים',
     fav: 'הוסף למועדפים',
     emailSubject: 'משלוח עבורך מיפעת מכרזים',
-    emailBody: 'לצפיה במכרזים, לחצו כאן: http://www.tenders.co.il/distagent/%{uid}'
+    emailBody: 'לצפיה במכרזים, לחצו כאן: https://www.tenders.co.il/distagent/%{uid}'
   },
   reminder: {
     title: 'הוספת תזכורת',
