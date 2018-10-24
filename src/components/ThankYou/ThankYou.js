@@ -4,6 +4,7 @@ import {translate} from 'react-polyglot'
 //import SearchInput from 'common/components/SearchInput'
 import DocumentMeta from 'react-document-meta'
 import {getMetaData} from 'common/utils/meta'
+import GTAG from 'common/utils/gtag'
 import CSSModules from 'react-css-modules'
 import styles from './thankYou.scss'
 
@@ -12,6 +13,10 @@ import styles from './thankYou.scss'
 @CSSModules(styles)
 //@observer
 export default class ThankYou extends Component {
+
+  componentWillMount() {
+    GTAG.sendEvent()
+  }
 
   goToHome = () => {
     const { routingStore: { push } } = this.props
