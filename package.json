@@ -75,6 +75,7 @@
   "dependencies": {
     "babel-eslint": "^7.2.3",
     "babel-polyfill": "^6.26.0",
+    "caesar-encrypt": "0.0.2",
     "classnames": "^2.2.5",
     "es6-promise": "^4.1.1",
     "foundation-sites": "^6.4.3",

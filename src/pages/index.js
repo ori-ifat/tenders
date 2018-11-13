@@ -23,7 +23,7 @@ import RadarPage from 'pages/radar'
 import AboutPage from 'pages/about'
 import SiteMapPage from 'pages/sitemap'
 import LoginPage from 'pages/login'
-import DistAgent from 'pages/distagent'
+import DistAgentPage from 'pages/distagent'
 import NotFound404 from 'pages/notFound404'
 
 class Pages extends React.Component {
@@ -123,8 +123,9 @@ class Pages extends React.Component {
           <Route path="/al/:token/:tender?">
             <LoginPage />
           </Route>
-          <Route path="/distagent/:uid">
-            <DistAgent />
+          <Route path="/distagent/:uid/:type?">
+            <DistAgentPage
+              showNotification={this.showNotification}/>
           </Route>
           <Route>
             <NotFound404 />

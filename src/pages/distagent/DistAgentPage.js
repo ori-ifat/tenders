@@ -1,9 +1,14 @@
 import React, {Component} from 'react'
-import DistAgentComponent from 'components/DistAgent'
+import WrapperComponent from 'components/Wrapper'
 
 export default class DistAgent extends Component {
 
   render(){
-    return <div><DistAgentComponent/></div>
+    return <div>
+      <WrapperComponent
+        use="distagent"
+        showNotification={this.props.showNotification}
+      />
+    </div>
   }
 }

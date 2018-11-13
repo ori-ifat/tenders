@@ -4,6 +4,8 @@ import { observable } from 'mobx'
 import { translate } from 'react-polyglot'
 import remove from 'lodash/remove'
 import find from 'lodash/find'
+import moment from 'moment'
+import { encrypt, decrypt } from 'caesar-encrypt'
 import {createUrl, addToFavorites, getEmailData, clearCache} from 'common/services/apiService'
 import LoginDialog from 'common/components/LoginDialog'
 import ReactTooltip from 'react-tooltip'
@@ -29,10 +31,12 @@ export default class Toolbar extends React.Component {
     /* send email with url to selected tenders */
     const {accountStore, recordStore, t} = this.props
     if (accountStore.profile) {
+      const type = encrypt(moment().format('YYYY-MM-DD'), 20)   //encrypted pseudo token-like 'type' - from moment date()
+
       const itemsToAdd = recordStore.extractItems()
       getEmailData(itemsToAdd).then(uid =>
-        //console.log('email', uid)
-        location.href = `mailto:someone@email.com?subject=${t('toolbar.emailSubject')}&body=${encodeURIComponent(t('toolbar.emailBody', {uid}))}`
+        //console.log('email', uid, type, moment(decrypt(type, 20), 'YYYY-MM-DD'), moment(type, 'YYYY-MM-DD'))
+        location.href = `mailto:someone@email.com?subject=${t('toolbar.emailSubject')}&body=${encodeURIComponent(t('toolbar.emailBody', {uid, type}))}`
       )
       //onClose()
       recordStore.cleanChecked()
