@@ -8,19 +8,19 @@ import {translate} from 'react-polyglot'
 import { distAgentStore } from 'stores'
 import moment from 'moment'
 import { decrypt } from 'caesar-encrypt'
-import List from 'common/components/List'
+import DistList from './DistList'
 import NoData from 'components/NoData'
 import NotLogged from 'common/components/NotLogged'
 import Loading from 'common/components/Loading/Loading'
-import ResultsItem from 'common/components/ResultsItem'
 import find from 'lodash/find'
+import findIndex from 'lodash/findIndex'
 import CSSModules from 'react-css-modules'
 import styles from './distagent.scss'
 
 @withRouter
 @whenRouted(({ params: { uid, type } }) => {
   distAgentStore.clearResults()
-  distAgentStore.loadNextResults(uid, type)
+  distAgentStore.loadNextResults(uid, !type)
 })
 @translate()
 @inject('accountStore')
@@ -35,7 +35,7 @@ export default class DistAgent extends Component {
     onFav: func
   }
 
-  @observable allowCheck = true
+  @observable allowCheck = false
 
   componentWillMount() {
     //const { match: {params: { uid }} } = this.props
@@ -46,9 +46,10 @@ export default class DistAgent extends Component {
     showNotification(true)
     if (type) {
       const decrypted = decrypt(type, 20)
+      //console.log(moment(decrypted, 'YYYY-MM-DD'))
       if (moment(decrypted, 'YYYY-MM-DD')._isValid) {
         //_isValid - means that the encrypted string is originated from a moment date format
-        this.allowCheck = false   //if 'type' param was sent, hide checkboxes
+        this.allowCheck = true   //if 'type' param was sent, hide checkboxes
       }
     }
   }
@@ -57,29 +58,14 @@ export default class DistAgent extends Component {
   render() {
     const {accountStore, distAgentStore, distAgentStore: {results, resultsLoading, resultsCount}, t} = this.props
     const {onCheck, onFav, recordStore: {checkedItems}} = this.props
-    const items = results.map((item, index) => {
-      //const { checkedItems } = this.props
-      const found = find(checkedItems, chk => {
-        return chk.TenderID == item.TenderID
-      })
-      const checked = found ? found.checked : false
-      const fav = found ? found.IsFavorite : item.IsFavorite
-
-      return <ResultsItem
-        key={index}
-        item={item}
-        onCheck={this.allowCheck ? onCheck : undefined}
-        onFav={onFav}
-        checked={checked}
-        fav={fav}
-      />
-    })
+    const fixedRes = fixedResults(resultsLoading, results)
+    //console.log(fixedRes)
 
     return (
       <div style={{marginTop: '50px'}}>
         {resultsLoading && <Loading />}
         {resultsCount == 0 && !resultsLoading && <NoData error={distAgentStore.searchError} />}
-        {resultsCount > 0 &&
+        {resultsCount > 0 && !resultsLoading &&
           <div>
             <div className="row">
               <div className="large-12 columns">
@@ -89,11 +75,38 @@ export default class DistAgent extends Component {
             <div className="row">
               <div className="columns large-12">
                 <hr />
-                {items}
+                <DistList
+                  catResults={fixedRes}
+                  checkedItems={checkedItems}
+                  allowCheck={this.allowCheck}
+                  onCheck={onCheck}
+                  onFav={onFav}
+                />
               </div>
             </div>
           </div>
         }
       </div>)
   }
+}
+
+const fixedResults = (loading, results) => {
+  /* add tendertype to the results - create a new array with 'cat' and items */
+  //create a new array
+  const arrRes = []
+  if (!loading) {
+    //iterate over results for tendertype
+    if (results && results.length > 0) {
+      results.map((res) => {
+        const index = findIndex(arrRes, item => item.tendertype == res.TenderType)
+        if (index == -1) {
+          arrRes.push({tendertype: res.TenderType, items: [res]})
+        }
+        else {
+          arrRes[index].items.push(res)
+        }
+      })
+    }
+  }
+  return arrRes
 }

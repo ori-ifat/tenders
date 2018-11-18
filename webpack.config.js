@@ -86,7 +86,8 @@ module.exports = {
           paths.src,
           /* note! add here all modules that dist es6, because IE won't load them ... */
           path.resolve(__dirname, 'node_modules/foundation-sites'),  //needed for production - for IE mainly
-          path.resolve(__dirname, 'node_modules/react-image-viewer-zoom')
+          path.resolve(__dirname, 'node_modules/react-image-viewer-zoom'),
+          path.resolve(__dirname, 'node_modules/caesar-encrypt')
         ]
       }, /*{
         test: /\.jsx?$/,
