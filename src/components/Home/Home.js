@@ -18,6 +18,7 @@ import {getMetaData} from 'common/utils/meta'
 import {fixTopMenu} from 'common/utils/topMenu'
 import { Link } from 'react-router-dom'
 import DocumentMeta from 'react-document-meta'
+//import {randomNumber} from 'common/utils/util'
 //import ContactAction from 'common/components/ContactAction'
 import CSSModules from 'react-css-modules'
 import styles from './home.scss'
@@ -50,13 +51,15 @@ export default class Home extends Component {
     })
     homeStore.loadSampleTenders()
     //json data for hard-coded stuff:
-    getHomeJSON('Articles', 'article-preview1').then(res => {
+    //const cache = randomNumber(100000, 1000000)
+    const cache = 100000  //if needed, use the random number when articles change
+    getHomeJSON('Articles', 'article-preview1', cache).then(res => {
       this.article1 = res
     })
-    getHomeJSON('Articles', 'article-preview2').then(res => {
+    getHomeJSON('Articles', 'article-preview2', cache).then(res => {
       this.article2 = res
     })
-    getHomeJSON('Articles', 'article-preview3').then(res => {
+    getHomeJSON('Articles', 'article-preview3', cache).then(res => {
       this.article3 = res
     })
     getHomeJSON('Opportunities', 'opportunities').then(res => {
