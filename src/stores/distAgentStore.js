@@ -22,7 +22,7 @@ class DistAgent {
       this.searchError = null
 
       try {
-        if (type) {
+        if (!type) {
           this.request = await agentMark(id)
         }
         else {
@@ -38,7 +38,7 @@ class DistAgent {
       }
 
       if (this.searchError == null) {
-        const {data, total} = this.request        
+        const {data, total} = this.request
         console.info('[loadNextResults]')
         this.results = [...this.results, ...data.map(d => ({ ...d, key: d.TenderID }))]
         this.resultsCount = total

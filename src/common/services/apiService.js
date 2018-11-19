@@ -390,7 +390,7 @@ export function agentMail(mid) {
 }
 
 export function agentMark(uid) {
-  return apiFetch('DistributedAgent/AgentMail', {searchParams: {
+  return apiFetch('DistributedAgent/AgentMailSent', {searchParams: {
     uid
   }}, true).then(res => {
     return {

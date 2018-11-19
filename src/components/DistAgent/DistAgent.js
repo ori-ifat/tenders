@@ -6,8 +6,6 @@ import {inject, observer} from 'mobx-react'
 import {observable, toJS} from 'mobx'
 import {translate} from 'react-polyglot'
 import { distAgentStore } from 'stores'
-import moment from 'moment'
-import { decrypt } from 'caesar-encrypt'
 import DistList from './DistList'
 import NoData from 'components/NoData'
 import NotLogged from 'common/components/NotLogged'
@@ -20,7 +18,7 @@ import styles from './distagent.scss'
 @withRouter
 @whenRouted(({ params: { uid, type } }) => {
   distAgentStore.clearResults()
-  distAgentStore.loadNextResults(uid, !type)
+  distAgentStore.loadNextResults(uid, type)
 })
 @translate()
 @inject('accountStore')
@@ -44,13 +42,8 @@ export default class DistAgent extends Component {
     //location.href = `http://info.tenders.co.il/DistAgent/DistAgent.aspx?uid=${uid}`
     const {showNotification, match: { params: { uid, type } }} = this.props
     showNotification(true)
-    if (type) {
-      const decrypted = decrypt(type, 20)
-      //console.log(moment(decrypted, 'YYYY-MM-DD'))
-      if (moment(decrypted, 'YYYY-MM-DD')._isValid) {
-        //_isValid - means that the encrypted string is originated from a moment date format
-        this.allowCheck = true   //if 'type' param was sent, hide checkboxes
-      }
+    if (type && type == 'Mail') {
+      this.allowCheck = true   //if 'type' param was sent, show checkboxes      
     }
   }
 
