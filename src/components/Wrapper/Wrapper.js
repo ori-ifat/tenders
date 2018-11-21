@@ -7,9 +7,29 @@ import {translate} from 'react-polyglot'
 import Main from 'components/Main'
 import Results from 'components/Results'
 import Favorites from 'components/Favorites'
+import DistAgent from 'components/DistAgent'
 import Toolbar from 'common/components/Toolbar'
 import CSSModules from 'react-css-modules'
 import styles from './wrapper.scss'
+
+const relevantComponent = (use) => {
+  let Component = null
+  switch (use) {
+  case 'results':
+    Component = Results
+    break
+  case 'favorites':
+    Component = Favorites
+    break
+  case 'distagent':
+    Component = DistAgent
+    break
+  default:
+    Component = Main
+    break
+  }
+  return Component
+}
 
 @translate()
 @inject('searchStore')
@@ -36,12 +56,12 @@ export default class Wrapper extends Component {
 
   render() {
     const {use} = this.props
-    const Component = use == 'results' ?
+    /*const Component = use == 'results' ?
       Results :
       use == 'favorites' ?
         Favorites :
-        Main
-
+        Main*/
+    const Component = relevantComponent(use)
     return (
       <div>
         <Component

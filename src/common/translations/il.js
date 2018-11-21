@@ -315,7 +315,9 @@ export default {
     submitText: 'בדוק'
   },
   distagent: {
-    wait: 'אנא המתן...'
+    wait: 'אנא המתן...',
+    titlePart1: 'מצאנו עבורך',
+    titlePart2: 'פרטי מידע חדשים'
   },
   searches: {
     title: 'חיפושים אחרונים:'

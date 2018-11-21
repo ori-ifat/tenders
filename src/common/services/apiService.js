@@ -377,6 +377,30 @@ export function delSearch(searchID) {
   }}, true)
 }
 
+export function agentMail(mid) {
+  return apiFetch('DistributedAgent/AgentMail', {searchParams: {
+    mid
+  }}, true).then(res => {
+    return {
+      total: res.info.count,
+      page: res.info.page,
+      data: res.data
+    }
+  })
+}
+
+export function agentMark(uid) {
+  return apiFetch('DistributedAgent/AgentMailSent', {searchParams: {
+    uid
+  }}, true).then(res => {
+    return {
+      total: res.info.count,
+      page: res.info.page,
+      data: res.data
+    }
+  })
+}
+
 function fetchData(url) {
   /* fetch a url that is not in api controllers, such as a json file */
 
