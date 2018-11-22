@@ -401,6 +401,18 @@ export function agentMark(uid) {
   })
 }
 
+export function welcomeMessage() {
+  /*return Promise.resolve(
+    {
+      active: true,
+      url: 'https://www.tenders.co.il/Messages/msg-112018.png',
+      landingPage: '',
+      date: '21-11-2018'
+    }
+  )*/
+  return apiFetch('FrontPage/stupidpop', {}, true)
+}
+
 function fetchData(url) {
   /* fetch a url that is not in api controllers, such as a json file */
 

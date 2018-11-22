@@ -334,8 +334,17 @@ export default class ResultsItemDetails extends React.Component {
             </div>
         }
         {this.loadError &&
-          <div styleName="errors">
-            {itemStore.searchError.statusCode == 401 ?  t('login.subscribeTitle') : t('tender.errors')}
+          <div>
+            <div styleName="errors">
+              {itemStore.searchError.statusCode == 401 ?  t('login.subscribeTitle') : t('tender.errors')}
+            </div>
+            {itemStore.searchError.statusCode == 401 &&
+              <div styleName="errors-sub">
+                {t('tender.subscribeText1')}<br />{t('tender.subscribeText2')}
+                <br /><br />
+                <Link to='/contact/' target='_blank' styleName="contact-link">{t('tender.contact')}</Link>
+              </div>
+            }
           </div>
         }
         {itemStore.resultsLoading && <Loading />}

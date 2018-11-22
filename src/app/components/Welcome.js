@@ -1,10 +1,10 @@
 import React from 'react'
-import { object, bool, func } from 'prop-types'
+import { string, object, bool, func } from 'prop-types'
 import ReactModal from 'react-modal'
 
-const req = require.context('common/style/icons/', false)
+//const req = require.context('common/style/icons/', false)
 //const logoSrc = req('./Welcome.png')
-const logoSrc = req('./message_0618.png')
+//const logoSrc = req('./message_0618.png')
 
 export default class Welcome extends React.Component {
   /* that component is used to show a 'welcome' image to clients. open status of dialog is set on callee (Topbar.js) */
@@ -12,7 +12,9 @@ export default class Welcome extends React.Component {
   static propTypes = {
     isDialogOpened: bool,
     closeDialog: func,
-    message: object
+    message: object,
+    imageUrl: string,
+    landingPage: string
   }
 
   componentWillMount() {
@@ -20,7 +22,12 @@ export default class Welcome extends React.Component {
   }
 
   render() {
-    const {message, isDialogOpened, closeDialog} = this.props
+    const {message, imageUrl, isDialogOpened, closeDialog} = this.props
+    let {landingPage} = this.props
+    if (!landingPage || landingPage == '') {
+      landingPage = 'javascript:;'
+    }
+
     return (
       <ReactModal
         isOpen={isDialogOpened}
@@ -35,8 +42,8 @@ export default class Welcome extends React.Component {
           >
             &nbsp;
           </div>
-          <a href="http://ifatgroup.inwise.net/kenes_tenders" target="_blank">
-            <img src={logoSrc} />
+          <a href={landingPage} target="_blank">
+            <img src={imageUrl} style={{border: 'none'}} />
           </a>
           {/* text message */}
           {/*message &&

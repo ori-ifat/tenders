@@ -159,7 +159,10 @@ export default {
     sentFeedback: 'תודה על פנייתך',
     errors: 'חלה שגיאה בטעינת פרטי המכרז.',
     radar: 'לליווי אישי ומקצועי ועזרה בהגשת המכרז',
-    tenderPublicLabel: 'פומבי/כללי'
+    tenderPublicLabel: 'פומבי/כללי',
+    subscribeText1: 'אינך מחובר למערכת, או שהמכרז אינו משוייך אליך.',
+    subscribeText2: 'אנא נסה להתחבר למערכת. אם הינך מחובר כבר, אנא צור קשר אם ברצונך לצפות במכרז.',
+    contact: 'ליצירת קשר'
   },
   publish: {
     titleSection1: 'פרטי המכרז',
