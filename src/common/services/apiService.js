@@ -203,6 +203,10 @@ export async function getMoreTenders() {
   return apiFetch('Tender/GetTop5', {}, true)
 }
 
+export function getBanners2() {
+  return apiFetch('FrontPage/GetBanners', {}, true)
+}
+
 export function addToFavorites(action, infoList) {
   return apiFetch('Favorites/AddRemoveFavorite', {searchParams: {
     Action: action,

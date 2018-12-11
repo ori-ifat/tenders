@@ -8,6 +8,7 @@ import SmallContactForm from 'common/components/SmallContactForm'
 //import ContactAction from 'common/components/ContactAction'
 import DocumentMeta from 'react-document-meta'
 import {getMetaData} from 'common/utils/meta'
+import GTAG from 'common/utils/gtag'
 import CSSModules from 'react-css-modules'
 import styles from './about.scss'
 
@@ -25,6 +26,7 @@ export default class About extends Component {
     getHomeJSON('About', 'about').then(res => {
       this.data = res
     })
+    GTAG.trackPage('About', 'about')
   }
 
   render() {

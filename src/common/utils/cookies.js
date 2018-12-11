@@ -24,5 +24,5 @@ export function setCookie(cookName, val) {
   //set a cookie value by name
   const _date = new Date
   _date.setFullYear(_date.getFullYear( ) + 1)
-  document.cookie = `${cookName}=${val}; expires=${_date.toGMTString()};`
+  document.cookie = `${cookName}=${val}; path=/; expires=${_date.toGMTString()};`
 }

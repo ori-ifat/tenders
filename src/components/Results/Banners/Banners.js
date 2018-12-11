@@ -1,7 +1,7 @@
 import React from 'react'
 import {observer} from 'mobx-react'
 import {observable} from 'mobx'
-import {getHomeJSON} from 'common/services/apiService'
+import {getBanners2 /*, getHomeJSON*/} from 'common/services/apiService'
 import {randomNumber} from 'common/utils/util'
 import CSSModules from 'react-css-modules'
 import styles from './Banners.scss'
@@ -14,9 +14,12 @@ export default class Banners extends React.Component {
 
   componentWillMount() {
     //json data for hard-coded stuff:
-    const cache = randomNumber(100000, 1000000)
+    /*const cache = randomNumber(100000, 1000000)
     getHomeJSON('Banners', 'banners', cache).then(res => {
       this.banners = res.banners
+    })*/
+    getBanners2().then(res => {
+      this.banners = res
     })
   }
 

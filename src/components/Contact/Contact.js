@@ -7,6 +7,7 @@ import {contactUs} from 'common/services/apiService'
 import Footer from 'common/components/Footer'
 import DocumentMeta from 'react-document-meta'
 import {getMetaData} from 'common/utils/meta'
+import GTAG from 'common/utils/gtag'
 import CSSModules from 'react-css-modules'
 import styles from './contact.scss'
 
@@ -31,6 +32,7 @@ export default class Contact extends Component {
   componentWillMount() {
     const {showNotification} = this.props
     showNotification(true)
+    GTAG.trackPage('Contact', 'contact')
   }
 
   onChange = e => {

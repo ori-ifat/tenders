@@ -18,6 +18,7 @@ import {getMetaData} from 'common/utils/meta'
 import {fixTopMenu} from 'common/utils/topMenu'
 import { Link } from 'react-router-dom'
 import DocumentMeta from 'react-document-meta'
+import GTAG from 'common/utils/gtag'
 //import {randomNumber} from 'common/utils/util'
 //import ContactAction from 'common/components/ContactAction'
 import CSSModules from 'react-css-modules'
@@ -75,6 +76,7 @@ export default class Home extends Component {
       this.testemonial3 = res
     })
     fixTopMenu()
+    GTAG.trackPage('Home', 'home')
   }
 
   showAllCats = () => {

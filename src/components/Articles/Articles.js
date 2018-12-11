@@ -7,6 +7,7 @@ import ArticleItem from './ArticleItem'
 import SmallContactForm from 'common/components/SmallContactForm'
 import Footer from 'common/components/Footer'
 //import ContactAction from 'common/components/ContactAction'
+import GTAG from 'common/utils/gtag'
 import DocumentMeta from 'react-document-meta'
 import {getMetaData} from 'common/utils/meta'
 import CSSModules from 'react-css-modules'
@@ -23,6 +24,7 @@ export default class Article extends Component {
     getHomeJSON('Articles', 'allArticles').then(res => {
       this.articles = res
     })
+    GTAG.trackPage('Articles', 'articles')
   }
 
   componentDidMount () {
