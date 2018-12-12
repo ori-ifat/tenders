@@ -14,7 +14,7 @@ const GTAG  = {
   },
   trackPage(pageName, path) {
     try {
-      console.log('trackPage', pageName, path)
+      //console.log('trackPage', pageName, path)
       gtag('config', 'AW-1067174628', {
         'page_title' : `${pageName}`,
         'page_path': `/${path}`
