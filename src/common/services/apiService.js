@@ -417,6 +417,11 @@ export function welcomeMessage() {
   return apiFetch('FrontPage/stupidpop', {}, true)
 }
 
+export function logClick(url) {
+  //hard coded: may send url to log - needs implementation
+  return apiFetch('Tender/LogNextep', {}, true)
+}
+
 function fetchData(url) {
   /* fetch a url that is not in api controllers, such as a json file */
 

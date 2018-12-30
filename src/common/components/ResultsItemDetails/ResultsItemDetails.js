@@ -319,9 +319,20 @@ export default class ResultsItemDetails extends React.Component {
                       {this.IsFavorite ? t('tender.removeFromFav') : t('tender.addToFav')}</a></li>
 
                   </ul>
-                  {item.TenderType == t('tender.tenderPublicLabel') &&
+                  {item.IsIso &&
                   <div>
-                    <Link to={`/radar/${encryptedID}`} target='_blank' className="button" styleName="radar-link">{t('tender.radar')}</Link>
+                    <Link
+                      to="/redirector"
+                      target="_blank"
+                      className="button"
+                      styleName="radar-link"
+                      dangerouslySetInnerHTML={{__html: t('tender.iso')}}>
+                    </Link>                    
+                  </div>
+                  }
+                  {!item.IsIso && item.TenderType == t('tender.tenderPublicLabel') &&
+                  <div>
+                    <Link to={`/radar/${encryptedID}`} target="_blank" className="button" styleName="radar-link">{t('tender.radar')}</Link>
                   </div>
                   }
                 </div>
