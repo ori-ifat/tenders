@@ -1,4 +1,5 @@
 import React, {Component, PropTypes} from 'react'
+import find from 'lodash/find'
 import ResultsItem from 'common/components/ResultsItem'
 import CSSModules from 'react-css-modules'
 import styles from './distagent.scss'
