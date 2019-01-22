@@ -19,16 +19,12 @@ import {getMetaData} from 'common/utils/meta'
 import {fixTopMenu} from 'common/utils/topMenu'
 import { Link } from 'react-router-dom'
 import DocumentMeta from 'react-document-meta'
+import GTAG from 'common/utils/gtag'
 //import {randomNumber} from 'common/utils/util'
 //import ContactAction from 'common/components/ContactAction'
 import CSSModules from 'react-css-modules'
 import styles from './home.scss'
 import 'common/style/home.css'
-
-/*const req = require.context('common/style/icons/', false)
-const videos_1 = req('./video_1.jpg')
-const videos_2 = req('./video_2.jpg')
-const videos_3 = req('./video_3.jpg')*/
 
 @translate()
 @inject('homeStore')
@@ -38,13 +34,7 @@ export default class Home extends Component {
 
   @observable allCats = false
   @observable opportunities = []
-  //@observable testemonial1;
-  //@observable testemonial2;
-  //@observable testemonial3;
   @observable testemonials = []
-  //@observable article1;
-  //@observable article2;
-  //@observable article3;
   @observable articles = []
   @observable movies = []
 
@@ -57,30 +47,12 @@ export default class Home extends Component {
     //json data for hard-coded stuff:
     //const cache = randomNumber(100000, 1000000)
     const cache = 100000  //if needed, use the random number when articles change
-    /*getHomeJSON('Articles', 'article-preview1', cache).then(res => {
-      this.article1 = res
-    })
-    getHomeJSON('Articles', 'article-preview2', cache).then(res => {
-      this.article2 = res
-    })
-    getHomeJSON('Articles', 'article-preview3', cache).then(res => {
-      this.article3 = res
-    })*/
     getHomeJSON('Articles', 'articles-preview', cache).then(res => {
       this.articles = res
     })
     getHomeJSON('Opportunities', 'opportunities').then(res => {
       this.opportunities = res
     })
-    /*getHomeJSON('Testemonials', 'testemonial1').then(res => {
-      this.testemonial1 = res
-    })
-    getHomeJSON('Testemonials', 'testemonial2').then(res => {
-      this.testemonial2 = res
-    })
-    getHomeJSON('Testemonials', 'testemonial3').then(res => {
-      this.testemonial3 = res
-    })*/
     getHomeJSON('Testemonials', 'testemonials').then(res => {
       this.testemonials = res
     })
@@ -88,6 +60,7 @@ export default class Home extends Component {
       this.movies = res
     })
     fixTopMenu()
+    GTAG.trackPage('Home', 'home')
   }
 
   showAllCats = () => {
@@ -187,18 +160,6 @@ export default class Home extends Component {
             </div>
           </div>
           <div className="row">
-            {/*this.testemonial1 && <Testemonial
-              name={this.testemonial1.title}
-              desc={this.testemonial1.text}
-            />*/}
-            {/*this.testemonial2 && <Testemonial
-              name={this.testemonial2.title}
-              desc={this.testemonial2.text}
-            />*/}
-            {/*this.testemonial3 && <Testemonial
-              name={this.testemonial3.title}
-              desc={this.testemonial3.text}
-            />*/}
             {this.testemonials && this.testemonials.length > 0 &&
               this.testemonials.map((testemonial, index) =>
                 <Testemonial
@@ -258,24 +219,6 @@ export default class Home extends Component {
           </div>
 
           <div className="row">
-
-            {/*this.article1 && <Article
-              articleID={this.article1.articleID}
-              title={this.article1.title}
-              imgSrc={this.article1.image}
-            />*/}
-
-            {/*this.article2 && <Article
-              articleID={this.article2.articleID}
-              title={this.article2.title}
-              imgSrc={this.article2.image}
-            />*/}
-
-            {/*this.article3 && <Article
-              articleID={this.article3.articleID}
-              title={this.article3.title}
-              imgSrc={this.article3.image}
-            />*/}
             {this.articles && this.articles.length > 0 &&
               this.articles.map((article, index) =>
                 <Article
@@ -302,26 +245,6 @@ export default class Home extends Component {
           </div>
 
           <div className="row">
-            {/*<div className="large-4 columns">
-              <a href="https://www.youtube.com/watch?v=Zo6f6rQfFS4" target="_blank">
-                <img src={videos_1} />
-                <h3>{t('home.movie1')}</h3>
-              </a>
-            </div>
-
-            <div className="large-4 columns">
-              <a href="https://www.youtube.com/watch?v=2xDpfiqn1ig" target="_blank">
-                <img src={videos_2} />
-                <h3>{t('home.movie2')}</h3>
-              </a>
-            </div>
-
-            <div className="large-4 columns">
-              <a href="https://www.youtube.com/watch?v=1HCso90x494" target="_blank">
-                <img src={videos_3} />
-                <h3>{t('home.movie3')}</h3>
-              </a>
-            </div>*/}
             {this.movies && this.movies.length > 0 &&
               this.movies.map((movie, index) =>
                 <YouTubeTip
@@ -331,7 +254,6 @@ export default class Home extends Component {
                   url={movie.url}
                 />)
             }
-
           </div>
 
         </section>

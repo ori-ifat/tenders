@@ -203,6 +203,10 @@ export async function getMoreTenders() {
   return apiFetch('Tender/GetTop5', {}, true)
 }
 
+export function getBanners2() {
+  return apiFetch('FrontPage/GetBanners', {}, true)
+}
+
 export function addToFavorites(action, infoList) {
   return apiFetch('Favorites/AddRemoveFavorite', {searchParams: {
     Action: action,
@@ -411,6 +415,11 @@ export function welcomeMessage() {
     }
   )*/
   return apiFetch('FrontPage/stupidpop', {}, true)
+}
+
+export function logClick(url) {
+  //hard coded: may send url to log - needs implementation
+  return apiFetch('Tender/LogNextep', {}, true)
 }
 
 function fetchData(url) {

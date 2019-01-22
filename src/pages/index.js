@@ -24,6 +24,7 @@ import AboutPage from 'pages/about'
 import SiteMapPage from 'pages/sitemap'
 import LoginPage from 'pages/login'
 import DistAgentPage from 'pages/distagent'
+import RedirectorPage from 'pages/redirector'
 import NotFound404 from 'pages/notFound404'
 
 class Pages extends React.Component {
@@ -126,6 +127,9 @@ class Pages extends React.Component {
           <Route path="/distagent/:uid/:type?">
             <DistAgentPage
               showNotification={this.showNotification}/>
+          </Route>
+          <Route path='/redirector/:where?'>
+            <RedirectorPage />
           </Route>
           <Route>
             <NotFound404 />

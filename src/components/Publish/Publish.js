@@ -7,6 +7,7 @@ import {checkEmail, checkPhone} from 'common/utils/validation'
 import {publishTender} from 'common/services/apiService'
 import Calendar from 'common/components/Calendar'
 //import ContactAction from 'common/components/ContactAction'
+import GTAG from 'common/utils/gtag'
 import CSSModules from 'react-css-modules'
 import styles from './publish.scss'
 
@@ -37,6 +38,7 @@ export default class Publish extends Component {
   componentWillMount() {
     const {showNotification} = this.props
     showNotification(true)
+    GTAG.trackPage('Publish', 'publish')
   }
 
   selectDate = (date, field) => {

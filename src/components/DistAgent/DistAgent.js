@@ -9,8 +9,8 @@ import { distAgentStore } from 'stores'
 import DistList from './DistList'
 import NoData from 'components/NoData'
 import NotLogged from 'common/components/NotLogged'
+//import LoginDialog from 'common/components/LoginDialog'
 import Loading from 'common/components/Loading/Loading'
-import find from 'lodash/find'
 import findIndex from 'lodash/findIndex'
 import CSSModules from 'react-css-modules'
 import styles from './distagent.scss'
@@ -43,13 +43,13 @@ export default class DistAgent extends Component {
     const {showNotification, match: { params: { uid, type } }} = this.props
     showNotification(true)
     if (type && type == 'Mail') {
-      this.allowCheck = true   //if 'type' param was sent, show checkboxes      
+      this.allowCheck = true   //if 'type' param was sent, show checkboxes
     }
   }
 
 
   render() {
-    const {accountStore, distAgentStore, distAgentStore: {results, resultsLoading, resultsCount}, t} = this.props
+    const {accountStore, distAgentStore, distAgentStore: {results, resultsLoading, resultsCount}, match: { params: { type } }, t} = this.props
     const {onCheck, onFav, recordStore: {checkedItems}} = this.props
     const fixedRes = fixedResults(resultsLoading, results)
     //console.log(fixedRes)
@@ -57,6 +57,7 @@ export default class DistAgent extends Component {
     return (
       <div style={{marginTop: '50px'}}>
         {resultsLoading && <Loading />}
+        {/*!accountStore.profile && !resultsLoading && type == 'Mail' && <LoginDialog onCancel={f => f} />*/}
         {resultsCount == 0 && !resultsLoading && <NoData error={distAgentStore.searchError} />}
         {resultsCount > 0 && !resultsLoading &&
           <div>

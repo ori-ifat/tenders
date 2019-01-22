@@ -36,11 +36,13 @@ export default class ThankYou extends Component {
         </div>*/}
         <div className="row">
           <div className="column large-12" style={{marginTop: '5rem'}}>
-            <div styleName="wrapper">
-              <div styleName="sent">
-                <b>{t('contact.success')}</b><br />
-                <p>{t('contact.willCall')}</p>
-                <button className="left" styleName="button-submit" onClick={this.goToHome}>{t('contact.toHome')}</button>
+            <div className="thankyou-page">
+              <div styleName="wrapper" className="thankyou-page">
+                <div styleName="sent">
+                  <b>{t('contact.success')}</b><br />
+                  <p>{t('contact.willCall')}</p>
+                  <button className="left" styleName="button-submit" onClick={this.goToHome}>{t('contact.toHome')}</button>
+                </div>
               </div>
             </div>
           </div>

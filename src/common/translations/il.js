@@ -45,7 +45,7 @@ export default {
     lastTenders: 'מכרזים אחרונים',
     articles: 'כתבות',
     allArticles: 'לכל הכתבות',
-    movies: 'טיפים מיפעת מכרזים'
+    movies: 'יפעת מכרזים מלווה אותך בעסקים'
   },
   meta: {
     homeTitle: 'יפעת מכרזים: פרסום מכרזים והזדמנויות עסקיות | מאגר מכרזים המוביל בישראל!',
@@ -156,6 +156,8 @@ export default {
     sentFeedback: 'תודה על פנייתך',
     errors: 'חלה שגיאה בטעינת פרטי המכרז.',
     radar: 'לליווי אישי ומקצועי ועזרה בהגשת המכרז',
+    iso_del: '<span style="color: #4848f3">שימו לב</span>במכרז זה הנכם נדרשים ל<span style="color: #4848f3">תקן ISO.</span>להתייעצות ועזרה מקצועית לקבלת תקן ה-ISO לחצו כאן,<br /> או התקשרו ל-073-7760010',
+    iso: '<span style="color: #4848f3;font-weight: bold">שימו לב </span>במכרז זה הנכם נדרשים <br /><span style="color: #4848f3;font-weight: bold">לתקן ISO. </span><br />להתייעצות ועזרה מקצועית לקבלת ה-ISO לחצו כאן, <br />או התקשרו ל-073-7760010',
     tenderPublicLabel: 'פומבי/כללי',
     subscribeText1: 'אינך מחובר למערכת, או שהמכרז אינו משוייך אליך.',
     subscribeText2: 'אנא נסה להתחבר למערכת. אם הינך מחובר כבר, אנא צור קשר אם ברצונך לצפות במכרז.',
@@ -351,6 +353,9 @@ export default {
   radar: {
     title: 'יפעת רדאר מכרזים',
     subTitle: 'תסייע לך להגדיל את סיכוייך לזכות במכרז!'
+  },
+  redirector: {
+    pleaseWait: 'אנא המתינו...'
   },
   footer: {
     rights: 'כל הזכויות שמורות ליפעת מכרזים',
