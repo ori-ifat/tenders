@@ -45,7 +45,7 @@ class Pages extends React.Component {
           <Route exact path="/">
             <Redirect to="/home" />
           </Route>
-          <Route path="/home">
+          <Route path="/home/:opencats?">
             <HomePage />
           </Route>
           <Route path="/main">
@@ -59,7 +59,7 @@ class Pages extends React.Component {
           <Route path="/results/:sort/:tags/:filters/:isHome?">
             <ResultsPage />
           </Route>
-          <Route path="/tender/:itemId">
+          <Route path="/tender/:itemId/:mode?">
             <TenderPage />
           </Route>
           <Route path="/smartagent">

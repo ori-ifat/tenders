@@ -2,6 +2,7 @@ import React, {Component} from 'react'
 import {inject, observer} from 'mobx-react'
 import {observable} from 'mobx'
 import {translate} from 'react-polyglot'
+import { withRouter } from 'react-router'
 import SearchInput from 'common/components/SearchInput'
 import CatItem from './Items/CatItem'
 import SubCatItem from './Items/SubCatItem'
@@ -26,6 +27,7 @@ import CSSModules from 'react-css-modules'
 import styles from './home.scss'
 import 'common/style/home.css'
 
+@withRouter
 @translate()
 @inject('homeStore')
 @CSSModules(styles)
@@ -39,7 +41,7 @@ export default class Home extends Component {
   @observable movies = []
 
   componentWillMount() {
-    const {homeStore} = this.props
+    const {homeStore,  match: {params: { opencats }}} = this.props
     homeStore.loadCatResults().then(() => {
       homeStore.loadSubCatResults()
     })
@@ -60,6 +62,9 @@ export default class Home extends Component {
       this.movies = res
     })
     fixTopMenu()
+    if (opencats && opencats == 'open') {
+      this.allCats = true //open all cats by default
+    }
     GTAG.trackPage('Home', 'home')
   }
 

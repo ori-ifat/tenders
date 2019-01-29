@@ -21,11 +21,15 @@ export default class Tender extends Component {
   @observable showImage = false
   @observable imageUrl = ''
   @observable imageTitle = ''
+  @observable mode = 'singleItem'
 
   componentWillMount() {
-    const { match: {params: { itemId }} } = this.props
+    const { match: {params: { itemId, mode }} } = this.props
     //this.itemID = parseInt(itemId)
     this.encryptedID = itemId
+    if (mode) {
+      this.mode = mode
+    }
   }
 
   showViewer = (fileName, title) => {
@@ -59,7 +63,7 @@ export default class Tender extends Component {
                   itemID={this.itemID}
                   encryptedID={this.encryptedID}
                   showViewer={this.showViewer}
-                  mode="singleItem"
+                  mode={this.mode}
                   onFav={this.onFav}
                 />
                 :

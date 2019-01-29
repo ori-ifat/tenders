@@ -189,8 +189,9 @@ export async function getAgentResults({page, pageSize}) {
   })
 }
 
-export function getTender(tenderID) {
-  return apiFetch('Tender/GetTender', {searchParams: {
+export function getTender(tenderID, mode) {
+  const endPoint = mode && mode == 'sample' ? 'GetSampleTender' : 'GetTender'
+  return apiFetch(`Tender/${endPoint}`, {searchParams: {
     tenderID
   }})
 }

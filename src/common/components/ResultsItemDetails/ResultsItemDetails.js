@@ -57,8 +57,8 @@ export default class ResultsItemDetails extends React.Component {
   }
 
   loadItem = (props) => {
-    const {itemStore, encryptedID} = props
-    itemStore.loadTender(decodeURIComponent(encryptedID)).then(() => {
+    const {itemStore, encryptedID, mode} = props
+    itemStore.loadTender(decodeURIComponent(encryptedID), mode).then(() => {
       if (!itemStore.item.TenderID) {
         //something went wrong
         this.loadError = true
@@ -327,7 +327,7 @@ export default class ResultsItemDetails extends React.Component {
                       className="button"
                       styleName="radar-link"
                       dangerouslySetInnerHTML={{__html: t('tender.iso')}}>
-                    </Link>                    
+                    </Link>
                   </div>
                   }
                   {!item.IsIso && item.TenderType == t('tender.tenderPublicLabel') &&

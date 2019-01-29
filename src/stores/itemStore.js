@@ -7,9 +7,9 @@ class Item {
   @observable searchError = null
 
   @action.bound
-  async loadTender(tenderID) {
+  async loadTender(tenderID, mode) {
     return new Promise((resolve, reject) => {
-      getTender(tenderID).then(item => {
+      getTender(tenderID, mode).then(item => {
         this.item = item
         this.searchError = null
         console.info('[loadTender]', tenderID)
@@ -35,7 +35,7 @@ class Item {
         this.item = await getTender(tenderID)
       }
       catch(e) {
-        //an error occured on search      
+        //an error occured on search
         this.searchError = {
           message: `[loadTender] error: ${e.message} http status code ${e.error && e.error.status ? e.error.status : -1}`,
           statusCode: e.error && e.error.status ? e.error.status : -1
