@@ -51,10 +51,10 @@ export default class Tender extends Component {
   }
 
   render() {
-    const {accountStore: {profile}} = this.props
+    const {accountStore: {profile}, match: {params: {mode}}} = this.props
     return (
       <div className="row">
-        {profile ?
+        {profile || (mode && mode == 'sample') ?
           <div className="column large-12">
             <div>
               {!this.showImage ?
