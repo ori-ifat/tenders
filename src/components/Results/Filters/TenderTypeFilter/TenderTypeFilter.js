@@ -88,7 +88,7 @@ export default class TenderTypeFilter extends React.Component {
         {/*!searchStore.resultsLoading &&*/
           <div styleName={divStyle} style={{paddingBottom: '20px'}}>
             {
-              this.items.map(((item, index) =>
+              this.items && this.items.map(((item, index) =>
                 <div className="checkbox" key={index}>
                   <input type="checkbox"
                     className="checkbox"

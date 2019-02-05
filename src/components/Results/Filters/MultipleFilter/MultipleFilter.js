@@ -51,7 +51,7 @@ export default class MultipleFilter extends React.Component {
     const {type, items, label} = props
     this.type = type
     this.label = label
-    this.items = items  //init for checkSubsubjects()...
+    this.items = items || []  //init for checkSubsubjects()...
     //this.checkSubsubjects()   //subsubject -> tag crap
     this.sortChecked(items)
   }
@@ -218,7 +218,7 @@ export default class MultipleFilter extends React.Component {
                 </div>}
                 <div style={{height: '300px', overflow: 'auto'}}>
                   {
-                    this.items.map(((item, index) => {
+                    this.items && this.items.map(((item, index) => {
                       const id = this.type == 'subsubjects' ? item.SubSubjectID : item.PublisherID
                       const name = this.type == 'subsubjects' ? item.SubSubjectName : item.PublisherName
                       return <div styleName="checkbox" key={index}>
@@ -237,12 +237,12 @@ export default class MultipleFilter extends React.Component {
                 </div>
                 <div styleName="selected">
                   {
-                    take(this.itemLabels, 2).map((item, index) =>
+                    this.itemLabels && take(this.itemLabels, 2).map((item, index) =>
                       <div key={index} styleName="selected-tile" style={tileStyle}>{item}</div>
                     )
                   }
                   {
-                    this.itemLabels.length > 2 &&
+                    this.itemLabels && this.itemLabels.length > 2 &&
                       <div styleName="selected-tile">{`${t('filter.more')} ${this.itemLabels.length - 2}`}</div>
                   }
                 </div>

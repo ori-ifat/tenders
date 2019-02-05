@@ -23,15 +23,19 @@ import styles from './results.scss'
 @translate()
 @withRouter
 @whenRouted(({ params: { sort, tags, filters } }) => {
-  searchStore.applySort(sort)
-  searchStore.applyTags(tags)
-  searchStore.clearFilterLabels()
-  searchStore.applyFilters(filters)
-  recordStore.cleanChecked()
-  //searchStore.clearResults()
-  searchStore.fromRoute = true  //raise route flag
-  searchStore.loadNextResults()
-  searchStore.loadNextFilters()
+  searchStore.loadSubSubjects2().then(() => {
+    //wait for subsubjects load.
+    //when routed from url, if applyTags will not have subsubjects, tags array will be empty and results will not be correct
+    searchStore.applySort(sort)
+    searchStore.applyTags(tags)
+    searchStore.clearFilterLabels()
+    searchStore.applyFilters(filters)
+    recordStore.cleanChecked()
+    //searchStore.clearResults()
+    searchStore.fromRoute = true  //raise route flag
+    searchStore.loadNextResults()
+    searchStore.loadNextFilters()
+  })
 })
 @inject('searchStore')
 @inject('accountStore')
@@ -51,7 +55,7 @@ export default class Results extends Component {
     const { match: {params: { isHome }} } = this.props
     //console.log('isHome', isHome)
     this.isHomeResults = isHome
-    if (isHome) {    
+    if (isHome) {
       fixTopMenu()
     }
   }

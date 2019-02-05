@@ -107,15 +107,12 @@ class Search {
   applyTags(queryTags, minified = true) {
     let tags
     if (minified) {
-      //implement - get subSubjectName from json
+      //get subSubjectName from json
       tags = decodeURIComponent(queryTags).replace(/"I"/g, '"ID"').replace(/"N"/g, '"Name"').replace(/"R"/g, '"ResType"').replace(/"s"/g, '"subsubject"').replace(/"O"/g, '"OrderBy"').replace(/"U"/g, '"UniqueID"')
       tags = JSON.parse(tags)
-      if (this.subSubjects.length == 0) {   //ex. on reload from url ...
-        this.loadSubSubjects().then(() => this.fixTags(tags))
-      }
-      else {
-        this.fixTags(tags)
-      }
+      //note: fixTags relys on this.subSubjects. if this.subSubjects will be empty, this will not work
+      //applied a fix for that matter - see Results.js - wait for loadSubSubjects2
+      this.fixTags(tags)
     }
     else {
       tags = JSON.parse(decodeURIComponent(queryTags))
@@ -130,7 +127,7 @@ class Search {
 
   @action.bound
   fixTags(tags) {
-    //iterate on tags, and for subSubject, extract name from the subSubjects array by id    
+    //iterate on tags, and for subSubject, extract name from the subSubjects array by id
     forEach(tags, tag => {
       if (tag.ResType == 'subsubject') {
         //find the name on the subSubjects array
@@ -326,6 +323,31 @@ class Search {
       }
       this.subSubjectsLoading = false
     }
+  }
+
+  @action.bound
+  async loadSubSubjects2() {
+    //same as above with promise - to enable loading before all other async actions begin
+    if (this.subSubjects.length > 0) {
+      return Promise.resolve()
+    }
+    let searchError = null
+    return new Promise((resolve, reject) => {
+      getSubSubjects().then(res => {
+        this.subSubjects = res
+        searchError = null
+        console.info('[loadSubSubjects]')
+        resolve()
+      }).catch(error => {
+        //console.log('error', error)
+        searchError = {
+          message: `[loadSubSubjects] search error: ${e.message} http status code ${e.error.status}`,
+          statusCode: e.error.status
+        }
+        this.subSubjects = []
+        reject(error)   //bubble the error up - will result catch() in callee
+      })
+    })
   }
 }
 
