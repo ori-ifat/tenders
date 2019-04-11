@@ -4,7 +4,7 @@ export function checkEmail(email, allowEmpty) {
     return true
   }
 
-  const filter=/^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/i
+  const filter=/^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,9}(?:\.[a-z]{2})?)$/i
   const arr = email.split(';')
   for (let i =0; i < arr.length; i++) {
     if (!(filter.test(arr[i].trim()))) {
