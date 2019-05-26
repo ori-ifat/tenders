@@ -29,6 +29,7 @@ export function apiFetch(relUrl, {body, method, searchParams = {}} = {}, noCache
 
   //return on next tick, letting  mobx show loading indicator
   if (cache.has(url) && !noCache) {
+    //console.log('found on cache', url)
     return new Promise((resolve) => setTimeout(() => resolve(cache.get(url)), 0))
   }
 
@@ -123,7 +124,7 @@ export async function fetchFilters({tags, filters, sort}) {
     searchParams: {
       tags, filters, sort
     }
-  })
+  }, true)
 }
 
 export async function fetchResultsPage({tags, filters, page, pageSize, sort}) {
@@ -135,7 +136,7 @@ export async function fetchResultsPage({tags, filters, page, pageSize, sort}) {
       sort,
       filters
     }
-  }).then(res => {
+  }, true).then(res => {
     return {
       total: res.info.count,
       page: res.info.page,
@@ -180,7 +181,7 @@ export async function getAgentResults({page, pageSize}) {
       page,
       pageSize
     }
-  }).then(res => {
+  }, true).then(res => {
     return {
       total: res.info.count,
       page: res.info.page,
