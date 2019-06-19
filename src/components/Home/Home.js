@@ -48,7 +48,7 @@ export default class Home extends Component {
     homeStore.loadSampleTenders()
     //json data for hard-coded stuff:
     //const cache = randomNumber(100000, 1000000)
-    const cache = 100000  //if needed, use the random number when articles change
+    const cache = 100001  //if needed, use the random number when articles change
     getHomeJSON('Articles', 'articles-preview', cache).then(res => {
       this.articles = res
     })
@@ -58,7 +58,7 @@ export default class Home extends Component {
     getHomeJSON('Testemonials', 'testemonials').then(res => {
       this.testemonials = res
     })
-    getHomeJSON('Movies', 'movies').then(res => {
+    getHomeJSON('Movies', 'movies', cache).then(res => {
       this.movies = res
     })
     fixTopMenu()
