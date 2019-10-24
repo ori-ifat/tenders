@@ -188,110 +188,108 @@ export default class ResultsItem extends React.Component {
 
     return (
       <div styleName={tenderStyle} >
-        <div >
-          <div >
-            {onCheck && <Checkbox checked={checked} item={cbItem} onChange={onCheck} />}
-            <div styleName="tender_txt_wraper">
-              {item.TenderType == t('tender.exclusive') && <span styleName="label" className="label">{t('tender.exclusive')}</span>}
-              {twoDaysLeft && !oneDayLeft && !noDaysLeft && <span styleName="label alert">{t('tender.twoDaysLeft')}</span>}
-              {oneDayLeft && !noDaysLeft && <span styleName="label alert">{t('tender.oneDayLeft')}</span>}
-              {noDaysLeft && <span styleName="label alert">{t('tender.noDaysLeft')}</span>}
-              {twoDaysLeftTour && !oneDayLeftTour && !tourToday && <span styleName="label alert">{`${t('tender.twoDaysLeftTour')}${mustDoTourLabel}`}</span>}
-              {oneDayLeftTour && !tourToday  && <span styleName="label alert">{`${t('tender.oneDayLeftTour')}${mustDoTourLabel}`}</span>}
-              {tourToday && <span styleName="label alert">{`${t('tender.noDaysLeftTour')}${mustDoTourLabel}`}</span>}
-              {item.MustDoTour && !twoDaysLeftTour && !oneDayLeftTour && !tourToday && <span styleName="label alert">{t('tender.mustDoTour')}</span>}
-              <h3
-                onClick={() => this.viewDetails(item.TenderID)}
-                styleName={`item-title${visitedStyle}`}
-                dangerouslySetInnerHTML={this.markUpText(item.Title)}></h3>
-              <Link to={`/tender/${item.EncID}`} target='_blank' styleName="new_tab"><img src={newTabSrc} /></Link>
-              { logged &&
-                <div styleName="tender_desc">
-                  <p dangerouslySetInnerHTML={this.markUpText(item.Summery)}></p>
-                </div>
-              }
-              <div styleName="tender_meta">
-                {tourDate &&
-                  <span>
-                    <span>{t('tender.tourAt')}: {tourDate}</span>
-                    <span styleName="divider">•</span>
-                  </span>
-                }
-                { logged &&
-                  <span>
-                    {infoDate &&
-                      <span>
-                        <span>{t('tender.deliveryAt')}: {infoDate}</span>
-                        <span styleName="divider">•</span>
-                      </span>
-                    }
-                    <span>{item.Publisher}</span>
-                    <span styleName="divider">•</span>
-                  </span>
-                }
-                <span>{item.TenderType}</span>
-                {/*<span styleName="divider">•</span>
-                <span>#{item.TenderID}</span>*/}
+        <div styleName="item_continer" >
+          {onCheck && <Checkbox checked={checked} item={cbItem} onChange={onCheck} />}
+          <div styleName="content_continer">
+          <div styleName="tender_txt_wraper">
+            {item.TenderType == t('tender.exclusive') && <span styleName="label" className="label">{t('tender.exclusive')}</span>}
+            {twoDaysLeft && !oneDayLeft && !noDaysLeft && <span styleName="label alert">{t('tender.twoDaysLeft')}</span>}
+            {oneDayLeft && !noDaysLeft && <span styleName="label alert">{t('tender.oneDayLeft')}</span>}
+            {noDaysLeft && <span styleName="label alert">{t('tender.noDaysLeft')}</span>}
+            {twoDaysLeftTour && !oneDayLeftTour && !tourToday && <span styleName="label alert">{`${t('tender.twoDaysLeftTour')}${mustDoTourLabel}`}</span>}
+            {oneDayLeftTour && !tourToday  && <span styleName="label alert">{`${t('tender.oneDayLeftTour')}${mustDoTourLabel}`}</span>}
+            {tourToday && <span styleName="label alert">{`${t('tender.noDaysLeftTour')}${mustDoTourLabel}`}</span>}
+            {item.MustDoTour && !twoDaysLeftTour && !oneDayLeftTour && !tourToday && <span styleName="label alert">{t('tender.mustDoTour')}</span>}
+            <h3
+              onClick={() => this.viewDetails(item.TenderID)}
+              styleName={`item-title${visitedStyle}`}
+              dangerouslySetInnerHTML={this.markUpText(item.Title)}></h3>
+            <Link to={`/tender/${item.EncID}`} target='_blank' styleName="new_tab"><img src={newTabSrc} /></Link>
+            { logged &&
+              <div styleName="tender_desc">
+                <p dangerouslySetInnerHTML={this.markUpText(item.Summery)}></p>
               </div>
+            }
+            <div styleName="tender_meta">
+              {tourDate &&
+                <span>
+                  <span>{t('tender.tourAt')}: {tourDate}</span>
+                  <span styleName="divider">•</span>
+                </span>
+              }
+              { logged &&
+                <span>
+                  {infoDate &&
+                    <span>
+                      <span>{t('tender.deliveryAt')}: {infoDate}</span>
+                      <span styleName="divider">•</span>
+                    </span>
+                  }
+                  <span>{item.Publisher}</span>
+                  <span styleName="divider">•</span>
+                </span>
+              }
+              <span>{item.TenderType}</span>
+              {/*<span styleName="divider">•</span>
+              <span>#{item.TenderID}</span>*/}
             </div>
-
           </div>
-          <div >
-            <div styleName="tender_action_wraper">
-              <ul className="no-bullet">
+
+          <div styleName="tender_action_wraper">
+            <ul className="no-bullet">
+              <li>
+                <a onClick={() => this.remind(true)}>
+                  <img src={item.ReminderDate && this.newReminderDate == '' || hasReminder ? timeActSrc : timeSrc} alt="" />
+                  {item.ReminderDate && this.newReminderDate == '' ?
+                    moment(item.ReminderDate).format('DD-MM-YYYY') :
+                    hasReminder ?
+                      this.newReminderDate
+                      : t('tender.addReminder')}
+                </a>
+              </li>
+              {onFav &&
                 <li>
-                  <a onClick={() => this.remind(true)}>
-                    <img src={item.ReminderDate && this.newReminderDate == '' || hasReminder ? timeActSrc : timeSrc} alt="" />
-                    {item.ReminderDate && this.newReminderDate == '' ?
-                      moment(item.ReminderDate).format('DD-MM-YYYY') :
-                      hasReminder ?
-                        this.newReminderDate
-                        : t('tender.addReminder')}
+                  <a onClick={this.addFav}>
+                    <img src={this.IsFavorite ? favActSrc : favSrc} alt="" />{this.IsFavorite ? t('tender.removeFromFav') : t('tender.addToFav')}
                   </a>
-                </li>
-                {onFav &&
-                  <li>
-                    <a onClick={this.addFav}>
-                      <img src={this.IsFavorite ? favActSrc : favSrc} alt="" />{this.IsFavorite ? t('tender.removeFromFav') : t('tender.addToFav')}
-                    </a>
-                  </li>}
-              </ul>
-            </div>
+                </li>}
+            </ul>
           </div>
         </div>
-        {this.viewBig && !this.showImage && logged &&
-          <ItemDetailsModal
-            itemID={item.TenderID}
-            encryptedID={item.EncID}
-            onClose={this.closeDetails}
-            showViewer={this.showViewer}
-            setReminderData={this.setReminderData}
-            onFav={onFav}
-          />}
-        {this.viewBig && this.showImage && logged &&
-          <ImageView
-            onClose={this.closeViewer}
-            url={this.imageUrl}
-            title={this.imageTitle}
-            tenderID={item.TenderID}
-          />
-        }
-        {this.remindMe && logged &&
-          <Reminder
-            tenderID={item.TenderID}
-            encryptedID={item.EncID}
-            onClose={() => this.remind(false)}
-            setReminderData={this.setReminderData}
-            title={item.Title}
-            infoDate={item.InfoDate}
-            reminderID={this.reminderID}
-          />
-        }
-        {this.showLoginMsg &&
-          <LoginDialog
-            onCancel={this.continueUnlogged}
-          />
-        }
+      </div>
+      {this.viewBig && !this.showImage && logged &&
+        <ItemDetailsModal
+          itemID={item.TenderID}
+          encryptedID={item.EncID}
+          onClose={this.closeDetails}
+          showViewer={this.showViewer}
+          setReminderData={this.setReminderData}
+          onFav={onFav}
+        />}
+      {this.viewBig && this.showImage && logged &&
+        <ImageView
+          onClose={this.closeViewer}
+          url={this.imageUrl}
+          title={this.imageTitle}
+          tenderID={item.TenderID}
+        />
+      }
+      {this.remindMe && logged &&
+        <Reminder
+          tenderID={item.TenderID}
+          encryptedID={item.EncID}
+          onClose={() => this.remind(false)}
+          setReminderData={this.setReminderData}
+          title={item.Title}
+          infoDate={item.InfoDate}
+          reminderID={this.reminderID}
+        />
+      }
+      {this.showLoginMsg &&
+        <LoginDialog
+          onCancel={this.continueUnlogged}
+        />
+      }
       </div>
     )
   }
