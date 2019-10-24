@@ -13,6 +13,7 @@ const isTestEnv = NODE_ENV === 'test'
 const isProductionCode = NODE_ENV === 'production'
 const isDevelopmentServer = NPM_EVENT === 'start'
 const ASSET_PATH = process.env.ASSET_PATH || '/'
+const API_BASEURL = process.env.API_BASEURL
 
 const paths = {
   dist: relpath(`./dist/${NODE_ENV}`),
@@ -150,7 +151,8 @@ function getPlugins() {
     new webpack.DefinePlugin({
       'process.env': {
         'NODE_ENV': JSON.stringify(NODE_ENV),
-        'ASSET_PATH': JSON.stringify(ASSET_PATH)
+        'ASSET_PATH': JSON.stringify(ASSET_PATH),
+        'API_BASEURL': JSON.stringify(API_BASEURL)
       }
     })
   ]
