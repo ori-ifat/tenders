@@ -188,8 +188,8 @@ export default class ResultsItem extends React.Component {
 
     return (
       <div styleName={tenderStyle} >
-        <div className="grid-x">
-          <div className="medium-9 cell">
+        <div >
+          <div >
             {onCheck && <Checkbox checked={checked} item={cbItem} onChange={onCheck} />}
             <div styleName="tender_txt_wraper">
               {item.TenderType == t('tender.exclusive') && <span styleName="label" className="label">{t('tender.exclusive')}</span>}
@@ -203,7 +203,7 @@ export default class ResultsItem extends React.Component {
               <h3
                 onClick={() => this.viewDetails(item.TenderID)}
                 styleName={`item-title${visitedStyle}`}
-                dangerouslySetInnerHTML={this.markUpText(item.Title)}></h3>              
+                dangerouslySetInnerHTML={this.markUpText(item.Title)}></h3>
               <Link to={`/tender/${item.EncID}`} target='_blank' styleName="new_tab"><img src={newTabSrc} /></Link>
               { logged &&
                 <div styleName="tender_desc">
@@ -236,7 +236,7 @@ export default class ResultsItem extends React.Component {
             </div>
 
           </div>
-          <div className="medium-3 cell">
+          <div >
             <div styleName="tender_action_wraper">
               <ul className="no-bullet">
                 <li>
