@@ -6,11 +6,11 @@
   "scripts": {
     "__build": "webpack --progress --config webpack.config.js",
     "rebuild:watch": "concurrently \"lite-server --config bs-config.js\" \"npm run rebuild -- -- --watch\"",
-    "rebuild": "cross-env NODE_ENV=production ASSET_PATH=/ API_BASEURL=//www.tenders.co.il/Data npm run __build",
+    "rebuild": "cross-env NODE_ENV=production ASSET_PATH=/ npm run __build",
     "devbuild": "cross-env NODE_ENV=production ASSET_PATH=/TendersDev webpack --progress --config webpack.config.js",
     "rebuild:dev": "cross-env NODE_ENV=development npm run __build",
     "__start": "node devServer.js --port 5015 --search-free-port",
-    "start": "cross-env NODE_ENV=development ASSET_PATH=/ API_BASEURL=http://192.118.61.100/TendersDevApi node devServer.js --port 5015 --search-free-port",
+    "start": "cross-env NODE_ENV=development ASSET_PATH=/ node devServer.js --port 5015 --search-free-port",
     "go": "cross-env NODE_ENV=development ASSET_PATH=/ API_BASEURL=http://192.118.61.100/TendersDevApi node devServer.js --port 5015 --search-free-port",
     "lint": "eslint src",
     "test": "cross-env NODE_ENV=test mocha -r mock-local-storage --compilers js:babel-core/register --recursive --require ./test/setup.js",
