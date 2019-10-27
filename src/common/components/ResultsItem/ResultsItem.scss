@@ -1,6 +1,22 @@
 //@import '~app/global.scss';
 @import '~common/style/_settings.scss';
 
+.item_continer{
+	display: flex;
+	.content_continer {
+		width: 100%;
+		display: flex;
+		flex-flow: row;
+		.tender_txt_wraper {
+			width: 100%;
+		}
+		.tender_action_wraper {
+			margin: 0px auto 0px 0px;
+			width: 220px;
+		}
+	}
+
+}
 
 .item-title {
 	display: inline;
@@ -75,7 +91,8 @@
 }
 
 .tender_txt_wraper {
-	margin: 0.75rem 3.5rem 1rem 2rem;
+	margin: 0.75rem 1rem 1rem 2rem;
+
 	h3 {
 		font-size: 1.25rem;
 		color: $black;
@@ -98,9 +115,21 @@
 }
 
 @media screen and (max-width: 39.9375em) {
-	.tender_action_wraper {
-		padding: 0 3.5rem !important;
+	.item_continer {
+		.content_continer {
+			flex-flow: column;
+			.tender_txt_wraper {
+				width: auto;
+			}
+			.tender_action_wraper {
+				width: 100% !important;
+				padding-top: 0;
+		    border: 0px solid transparent;
+			}
+		}
+
 	}
+
 	li {
     display: inline-block;
     margin-left: 1.5rem !important;

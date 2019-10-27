@@ -7,14 +7,16 @@ let baseUrl
 if (process.env.NODE_ENV === 'development' || location.href.indexOf('iis-test') > -1) {
   apiBaseUrl = '//iis-test:8081/Data/api'
   baseUrl = '//iis-test:8081/Data'
-  //apiBaseUrl = 'http://192.118.60.25/TendersDevApi/api'
-  //baseUrl = 'http://192.118.60.25/TendersDevApi'
+  //apiBaseUrl = 'http://192.118.61.100/TendersDevApi/api'
+  //baseUrl = 'http://192.118.61.100/TendersDevApi'
 }
 else {
   apiBaseUrl = '//www.tenders.co.il/Data/api'
   baseUrl = '//www.tenders.co.il/Data'
 }
-
+/*const baseUrl = process.env.API_BASEURL
+const apiBaseUrl = `${baseUrl}/api` //had some problems to implement
+*/
 /// important notes for POST (added by ori):
 /// 1. need to create an equivalent object on javascript, to the api request parameter;
 /// 2. on POST, need to add 'Content-Type: application/json' header to request;

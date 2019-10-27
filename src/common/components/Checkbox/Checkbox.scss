@@ -3,9 +3,9 @@
 
 .checkbox_continer {
 	width: rem-calc(40);
-	height: 100%;
+
 	background-color: $xlight-gray;
-	position: absolute;
+	width: 44px;
 	display: flex;
   justify-content: center;
   transition: all 0.25s;
