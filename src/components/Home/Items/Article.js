@@ -1,7 +1,7 @@
 import React, {Component, PropTypes} from 'react'
 import { Link } from 'react-router-dom'
 import CSSModules from 'react-css-modules'
-import styles from '../Home.scss'
+import styles from '../home.scss'
 
 const Article = ({articleID, title, imgSrc}) => {
   const url = `/article/${articleID}`

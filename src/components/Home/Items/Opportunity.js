@@ -1,6 +1,6 @@
 import React, {Component, PropTypes} from 'react'
 import CSSModules from 'react-css-modules'
-import styles from '../Home.scss'
+import styles from '../home.scss'
 
 const Opportunity = ({title, desc, imgSrc}) => {
   return <div className="large-3 medium-6 small-12 columns">

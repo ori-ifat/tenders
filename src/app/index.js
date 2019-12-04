@@ -24,6 +24,6 @@ function mount() {
 }
 
 if (module.hot) {
-  module.hot.accept('App', mount)
+  module.hot.accept('./components/App', mount)
 }
 mount()

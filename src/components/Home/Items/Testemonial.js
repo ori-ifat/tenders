@@ -1,6 +1,6 @@
 import React, {Component, PropTypes} from 'react'
 import CSSModules from 'react-css-modules'
-import styles from '../Home.scss'
+import styles from '../home.scss'
 
 const Testemonial = ({name, desc}) => {
   return  <div className="large-4 medium-4 small-12 columns">

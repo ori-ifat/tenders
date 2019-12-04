@@ -1,6 +1,4 @@
 import React, {Component, PropTypes} from 'react'
-//import CSSModules from 'react-css-modules'
-//import styles from '../Home.scss'
 
 const YouTubeTip = ({title, thumbnail, url}) => {
   return <div className="large-4 columns">

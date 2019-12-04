@@ -2,7 +2,7 @@ import React, {Component, PropTypes} from 'react'
 import { Link } from 'react-router-dom'
 import {getSrc} from './imageResolver'
 import CSSModules from 'react-css-modules'
-import styles from '../Home.scss'
+import styles from '../home.scss'
 
 
 const CatItem = ({count, subSubjectID, catName}) => {
