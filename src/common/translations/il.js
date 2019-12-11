@@ -13,7 +13,21 @@ export default {
     buy: 'רכישת מנוי',
     benefit1: 'הטבות בלעדיות לנרשמים דרך האתר',
     benefit2: 'מגוון מסלולים רחב המתואם לכל עסק',
-    register: 'להרשמה'
+    register: 'להרשמה',
+    forgotPassword: 'שכחת סיסמא?',
+    forgotPasswordEx: 'לא מצליח להיכנס? נשלח לך מייל עם לינק לשחזור',
+    emailLabel: 'כתובת מייל לשחזור',
+    restore: 'שחזר',
+    backToLogin: 'חזרה למסך התחברות',
+    sent: 'שלחנו מייל לשחזור סיסמה לכתובת %{email}',
+    noSuchUser: 'הכתובת לא נמצאת במערכת, אנא פנה לשרות לקוחות 03-5635070/3',
+    restoreTitle: 'עדכון סיסמה',
+    confirmPassword: 'אישור סיסמה',
+    missingPassword: 'יש להזין סיסמה',
+    missingConfirmation: 'יש לאשר את הסיסמה שהוזנה',
+    noPasswordMatch: 'הסיסמאות שהוזנו לא תואמות',
+    restored: 'הסיסמה שוחזרה',
+    notRestored: 'חלה תקלה בתהליך השיחזור. אנא פנה לשרות לקוחות 03-5635070/3'
   },
   nav: {
     logoAlt: 'יפעת מכרזים - פרסום מכרזים והזדמנות עסקיות',
@@ -60,7 +74,8 @@ export default {
     subscriptions: 'מסלולים ומחירים',
     services: 'מוצרים ושרותים',
     contact: 'צור קשר',
-    articles: 'כתבות'
+    articles: 'כתבות',
+    restore: 'שחזור סיסמה'
   },
   about: {
     title: 'יפעת מכרזים',
