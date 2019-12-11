@@ -3,7 +3,7 @@ import { withRouter } from 'react-router'
 import { inject, observer } from 'mobx-react'
 import { observable } from 'mobx'
 import {translate} from 'react-polyglot'
-import {restorePassword} from 'common/services/apiService'
+import {viewRestorePassword, restorePassword} from 'common/services/apiService'
 import Footer from 'common/components/Footer'
 import DocumentMeta from 'react-document-meta'
 import {getMetaData} from 'common/utils/meta'
@@ -29,11 +29,23 @@ export default class Restore extends Component {
   @observable password = ''
   @observable password2 = ''
 
-  componentWillMount() {
+  componentDidMount() {
     const {showNotification, match: { params: { token } }} = this.props
-    this.userToken = token
+    viewRestorePassword(token).then(res => {
+      if (res.ok) {
+        this.userToken = token
+      }
+      else {
+        if (res.errors == 'user token is not valid.') {
+          this.userToken = 'not_valid'
+        }
+        else {
+          this.userToken = ''
+        }
+      }
+    })
     showNotification(true)
-    //console.log('userToken', token)
+    console.log('userToken', token)
   }
 
   onChange = e => {
@@ -116,27 +128,31 @@ export default class Restore extends Component {
                   <b>{t('login.restored')}</b>
                 </div>
                 :
-                <div>
-                  <div styleName="pl" className="medium-12 medium-centered cell">
-                    <span>{t('login.usernameLabel')}:</span>
-                    <input type="text" name="userName" styleName="input-value" onChange={this.onChange} />
-                  </div>
+                this.userToken == 'not_valid' ?
+                  <div styleName="errors">{t('login.tokenNotValid')}</div>
+                  :
+                  this.userToken == '' ?
+                    <div styleName="errors">{t('login.badToken')}</div>
+                    :
+                    <div>
+                      <div styleName="pl" className="medium-12 medium-centered cell">
+                        <span>{t('login.usernameLabel')}:</span>
+                        <input type="text" name="userName" styleName="input-value" onChange={this.onChange} />
+                      </div>
 
+                      <div styleName="pl" >
+                        <span>{t('login.passwordLabel')}:</span>
+                        <input type="password" name="password" styleName="input-value" onChange={this.onChange} />
+                      </div>
+                      <div styleName="pr" >
+                        <span>{t('login.confirmPassword')}:</span>
+                        <input type="password" name="password2" styleName="input-value" onChange={this.onChange} />
+                      </div>
 
-
-                  <div styleName="pl" >
-                    <span>{t('login.passwordLabel')}:</span>
-                    <input type="password" name="password" styleName="input-value" onChange={this.onChange} />
-                  </div>
-                  <div styleName="pr" >
-                    <span>{t('login.confirmPassword')}:</span>
-                    <input type="password" name="password2" styleName="input-value" onChange={this.onChange} />
-                  </div>
-
-                  <div styleName="btn_container">
-                    <button className="left" styleName="button-submit" onClick={this.restorePassword}>{t('login.restore')}</button>
-                  </div>
-                </div>
+                      <div styleName="btn_container">
+                        <button className="left" styleName="button-submit" onClick={this.restorePassword}>{t('login.restore')}</button>
+                      </div>
+                    </div>
               }
             </div>
           </div>

@@ -3,7 +3,7 @@ import { string, func } from 'prop-types'
 import { inject, observer } from 'mobx-react'
 import {observable, toJS} from 'mobx'
 import { translate } from 'react-polyglot'
-import {clearCache, requestRestorePass} from 'common/services/apiService'
+import {clearCache, requestRestorePassword} from 'common/services/apiService'
 import ReactModal from 'react-modal'
 import { Link } from 'react-router-dom'
 import {fixTopMenu} from 'common/utils/topMenu'
@@ -93,7 +93,7 @@ export default class LoginDialog extends React.Component {
   restorePassword = () => {
     //console.log('restore')
     const {onCancel, t} = this.props
-    requestRestorePass(this.userName, this.email).then(res => {
+    requestRestorePassword(this.userName, this.email).then(res => {
       console.log(res)
       if (res.sent) {
         this.sentMessage = t('login.sent', {email: this.email})

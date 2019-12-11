@@ -171,8 +171,14 @@ export function isIfatUser() {
   return apiFetch('Account/IsIfat')
 }
 
-export function requestRestorePass(userName, email) {
+export function requestRestorePassword(userName, email) {
   return apiFetch('Account/RequestPasswordRestore', {body: {userName, email}, method: 'POST' }, true)
+  //debug
+  //return Promise.resolve({sent: true})
+}
+
+export function viewRestorePassword(userToken) {
+  return apiFetch('Account/ViewRestorePage', {searchParams: {userToken}}, true)
   //debug
   //return Promise.resolve({sent: true})
 }
