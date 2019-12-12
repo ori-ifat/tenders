@@ -97,6 +97,7 @@ export default class LoginDialog extends React.Component {
       console.log(res)
       if (res.sent) {
         this.sentMessage = t('login.sent', {email: this.email})
+        this.sentError = false
       }
       else {
         this.sentMessage = t('login.noSuchUser')

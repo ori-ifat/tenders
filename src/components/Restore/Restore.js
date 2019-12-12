@@ -19,7 +19,7 @@ const sales = req('./sales.png')
 @withRouter
 @inject('routingStore')
 @observer
-@CSSModules(styles)
+@CSSModules(styles, {allowMultiple: true})
 export default class Restore extends Component {
 
   @observable sent = false
@@ -34,6 +34,7 @@ export default class Restore extends Component {
     viewRestorePassword(token).then(res => {
       if (res.ok) {
         this.userToken = token
+        this.userName = res.userName
       }
       else {
         if (res.errors == 'user token is not valid.') {
@@ -129,15 +130,15 @@ export default class Restore extends Component {
                 </div>
                 :
                 this.userToken == 'not_valid' ?
-                  <div styleName="errors">{t('login.tokenNotValid')}</div>
+                  <div styleName="errors bad-token">{t('login.tokenNotValid')}</div>
                   :
                   this.userToken == '' ?
-                    <div styleName="errors">{t('login.badToken')}</div>
+                    <div styleName="errors bad-token">{t('login.badToken')}</div>
                     :
                     <div>
                       <div styleName="pl" className="medium-12 medium-centered cell">
                         <span>{t('login.usernameLabel')}:</span>
-                        <input type="text" name="userName" styleName="input-value" onChange={this.onChange} />
+                        <input type="text" name="userName" styleName="input-value" onChange={this.onChange} value={this.userName} />
                       </div>
 
                       <div styleName="pl" >
