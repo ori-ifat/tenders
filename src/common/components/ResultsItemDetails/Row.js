@@ -1,4 +1,4 @@
-import React, {Component, PropTypes} from 'react'
+import React, {Component} from 'react'
 import CSSModules from 'react-css-modules'
 import styles from './ResultsItemDetails.scss'
 
@@ -6,7 +6,7 @@ const Row = ({label, data, html, dir, align, table}) => {
   const itemStyle = dir ?
     align && align == 'left' ? 'item_key item_ltr item_left' :
       dir == 'ltr' ? 'item_key item_ltr' :
-        'item_key' : 
+        'item_key' :
     'item_key'
 
   return <div className="grid-x">

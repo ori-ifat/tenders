@@ -1,4 +1,4 @@
-import React, {Component, PropTypes} from 'react'
+import React, {Component} from 'react'
 import { Link } from 'react-router-dom'
 import {getSrc} from './imageResolver'
 import CSSModules from 'react-css-modules'

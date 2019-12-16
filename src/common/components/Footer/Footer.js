@@ -1,4 +1,4 @@
-import React, {Component, PropTypes} from 'react'
+import React, {Component} from 'react'
 import {inject, observer} from 'mobx-react'
 import {observable} from 'mobx'
 import {translate} from 'react-polyglot'
