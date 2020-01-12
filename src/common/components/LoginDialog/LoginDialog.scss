@@ -39,7 +39,7 @@
   flex-direction: row;
   .sign_up {
     background-color: $green;
-    width: 300px;
+    width: 302px;
     padding: 2.5rem 2rem 3rem 2rem;
     h3 {
       color: #fff;
@@ -50,6 +50,9 @@
     color: #fff;
     padding: 0.25rem 0.5rem;
     margin-bottom: 1rem;
+    &.green {
+      background-color: #4caf50 !important;
+    }
   }
   .login_container {
     display: block;

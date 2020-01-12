@@ -3,11 +3,13 @@ import { string, func } from 'prop-types'
 import { inject, observer } from 'mobx-react'
 import {observable, toJS} from 'mobx'
 import { translate } from 'react-polyglot'
-import {clearCache} from 'common/services/apiService'
+import {clearCache, requestRestorePassword} from 'common/services/apiService'
 import ReactModal from 'react-modal'
 import { Link } from 'react-router-dom'
 import {fixTopMenu} from 'common/utils/topMenu'
 import CSSModules from 'react-css-modules'
+import LoginForm from './LoginForm'
+import ForgotPassword from './ForgotPassword'
 import styles from './LoginDialog.scss'
 
 @translate()
@@ -25,6 +27,10 @@ export default class LoginDialog extends React.Component {
   @observable userName = ''
   @observable password = ''
   @observable rememberMe = false
+  @observable email = ''
+  @observable restore = false
+  @observable sentMessage = ''
+  @observable sentError = false
 
   componentWillMount() {
     ReactModal.setAppElement('#root')
@@ -46,13 +52,16 @@ export default class LoginDialog extends React.Component {
     case 'rememberMe':
       this.rememberMe = e.target.checked
       break
+    case 'email':
+      this.email = e.target.value
+      break
     }
   }
 
-  onKeyDown = e => {
+  onKeyDown = (e, which) => {
     if (e.keyCode === 13) {
       e.stopPropagation()
-      this.login()
+      which == 'login' ? this.login() : this.restorePassword()
     }
   }
 
@@ -81,6 +90,26 @@ export default class LoginDialog extends React.Component {
     }
   }
 
+  restorePassword = () => {
+    //console.log('restore')
+    const {onCancel, t} = this.props
+    requestRestorePassword(this.userName, this.email).then(res => {
+      console.log(res)
+      if (res.sent) {
+        this.sentMessage = t('login.sent', {email: this.email})
+        this.sentError = false
+      }
+      else {
+        this.sentMessage = t('login.noSuchUser')
+        this.sentError = true
+      }
+    })
+  }
+
+  toggleRestore = () => {
+    this.restore = !this.restore
+  }
+
   render() {
     const {accountStore, onCancel, t} = this.props
     return (
@@ -94,35 +123,26 @@ export default class LoginDialog extends React.Component {
           <div styleName="pb">
             <div styleName="login_container">
               <h3 styleName="login_ttl">{t('login.subscribeTitle')}</h3>
-              <p styleName="subttl">{t('login.subscribeSubTitle')}</p>
-              {accountStore.error != null && accountStore.profile == null &&
-                <div styleName="error_box">{accountStore.errorMessage}</div>
-              }
-              <div styleName="input-placeholder">
-                <input
-                  type="text"
-                  name="userName"
-                  placeholder={t('login.usernameLabel')}
-                  value={this.userName}
-                  onChange={this.updateField}
+              {!this.restore ? <LoginForm
+                accountStore={accountStore}
+                userName={this.userName}
+                password={this.password}
+                updateField={this.updateField}
+                onKeyDown={this.onKeyDown}
+                login={this.login}
+                toggleRestore={this.toggleRestore}
+                t={t} /> :
+                <ForgotPassword
+                  accountStore={accountStore}
+                  userName={this.userName}
+                  email={this.email}
+                  updateField={this.updateField}
                   onKeyDown={this.onKeyDown}
-                />
-              </div>
-              <div styleName="input-placeholder">
-                <input
-                  type="password"
-                  name="password"
-                  placeholder={t('login.passwordLabel')}
-                  value={this.password}
-                  onChange={this.updateField}
-                  onKeyDown={this.onKeyDown}
-                />
-              </div>
-              <input type="checkbox" name="rememberMe" onChange={this.updateField}/>
-              {t('login.rememberMe')}
-              <div>
-                <button styleName="button-submit" onClick={this.login}>{t('login.login')}</button>
-              </div>
+                  restore={this.restorePassword}
+                  toggleRestore={this.toggleRestore}
+                  sentMessage={this.sentMessage}
+                  sentError={this.sentError}
+                  t={t} />}
             </div>
             <div styleName="sign_up">
               <Link to='/contact' target='_blank'>

@@ -1,4 +1,4 @@
-import React, {Component, PropTypes} from 'react'
+import React, {Component} from 'react'
 import { PulseLoader } from 'react-spinners'
 import CSSModules from 'react-css-modules'
 import styles from './Loading.scss'

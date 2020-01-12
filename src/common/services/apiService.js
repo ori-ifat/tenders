@@ -171,6 +171,24 @@ export function isIfatUser() {
   return apiFetch('Account/IsIfat')
 }
 
+export function requestRestorePassword(userName, email) {
+  return apiFetch('Account/RequestPasswordRestore', {body: {userName, email}, method: 'POST' }, true)
+  //debug
+  //return Promise.resolve({sent: true})
+}
+
+export function viewRestorePassword(userToken) {
+  return apiFetch('Account/ViewRestorePage', {searchParams: {userToken}}, true)
+  //debug
+  //return Promise.resolve({sent: true})
+}
+
+export function restorePassword(userToken, password) {
+  return apiFetch('Account/RestorePassword', {body: {userToken, password}, method: 'POST' }, true)
+  //debug
+  //return Promise.resolve({restored: true})
+}
+
 export async function getLastTenders(lastSeenTenderID) {
   return apiFetch('Tender/GetLastTenders', {searchParams: {
     LastSeenTenderID: lastSeenTenderID
