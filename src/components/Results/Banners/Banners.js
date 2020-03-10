@@ -74,13 +74,19 @@ const ImageBanner = ({id, url, landingPage, width, height, cache}) => {
     width={width}
     height={height}
     style={{marginBottom: '10px'}}>
-    <a href={landingPage} target="_blank">
+    {landingPage && landingPage !== '' ?
+      <a href={landingPage} target="_blank">
+        <img
+          src={`${url}?cache=${cache}`}
+          width={width}
+          height={height}
+        />
+      </a> :
       <img
         src={`${url}?cache=${cache}`}
         width={width}
         height={height}
-      />
-    </a>
+      />}
   </div>
 }
 /*
