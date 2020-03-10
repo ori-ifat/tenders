@@ -125,6 +125,7 @@ export default class LoginDialog extends React.Component {
               <h3 styleName="login_ttl">{t('login.subscribeTitle')}</h3>
               {!this.restore ? <LoginForm
                 accountStore={accountStore}
+                error={accountStore.errorMessage}
                 userName={this.userName}
                 password={this.password}
                 updateField={this.updateField}

@@ -2,11 +2,12 @@ import React, {Component} from 'react'
 import CSSModules from 'react-css-modules'
 import styles from './LoginDialog.scss'
 
-const LoginForm = ({accountStore, userName, password, updateField, onKeyDown, login, toggleRestore, t}) => {
+const LoginForm = ({accountStore, error, userName, password, updateField, onKeyDown, login, toggleRestore, t}) => {
+  const errorMessage = error && error == 'username or password are not correct' ? t('login.badUserPass') : error
   return <div>
     <p styleName="subttl">{t('login.subscribeSubTitle')}</p>
-    {accountStore.error != null && accountStore.profile == null &&
-      <div styleName="error_box">{accountStore.errorMessage}</div>
+    {error != null && accountStore.profile == null &&
+      <div styleName="error_box">{errorMessage}</div>
     }
     <div styleName="input-placeholder">
       <input
